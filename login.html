@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SUPE - Login</title>
     <link rel="stylesheet" href="/css/global.css">
+    <link rel="stylesheet" href="/extras/FontAwesome/css/all.min.css">
 </head>
 
 <body>
@@ -18,10 +19,22 @@
                 <form action="" method="post" autocomplete="off">
                     <div class="lbl">
                         <label for="login">Usuário: </label>
-                        <input type="text" id="login" placeholder="Usuário">
+                        <input type="text" id="login" placeholder="Usuário" spellcheck="false">
                     </div>
                     <div class="lbl">
                         <label for="pass">Senha: </label>
+                        <input type="password" name="" id="pass" placeholder="Senha">
+                    </div>
+                    <div class="lbl-icon">
+                        <label for="login">
+                            <i class="fas fa-address-card"></i>
+                        </label>
+                        <input type="text" id="login" placeholder="Usuário" spellcheck="false">
+                    </div>
+                    <div class="lbl-icon">
+                        <label for="pass"> 
+                            <i class="fas fa-key"></i>
+                        </label>
                         <input type="password" name="" id="pass" placeholder="Senha">
                     </div>
                     <input type="submit" class="btn-accent" value="Entrar">
