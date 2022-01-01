@@ -19,17 +19,18 @@ body{
 
 .container{
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
-    min-height: 85vh;
+    min-height: 95vh;
 }
 .login-form{
     padding: 50px;
-    width: 400px;
-    border-radius: 10px;
+    min-width: 400px;
+    border-radius: 15px;
     background:#fcfcfc;
     border: 1px solid var(--outline-color);
-    box-shadow: 0 6px 6px 0 rgba(0, 0, 0, 0.1);
+    box-shadow: 0 6px 6px 0 rgba(0, 0, 0, 0.2);
 }
 .login-form form{
     display: flex;
@@ -38,7 +39,31 @@ body{
 .login-form form > *{
     margin-top: 20px;
 }
+.pwrst-link{
+    width: 100%;
+    text-align: center;
+    color: var(--accent-color);
+    text-decoration: none;
+    font-size: 10pt;
+}
+.pwrst-link:hover{
+    text-decoration: underline;
+}
+.bt-cadse{
+    background: transparent;
+    padding: 10px;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    margin-top: 10px;
+}
 /*Componentes*/
+.txt-input, input, input[text], input[password]{
+    border: 1px solid var(--outline-color);
+    border-radius: 5px;
+    padding: 8px;
+}
+
 .lbl{
     display: flex;
     flex-direction: column;
@@ -54,23 +79,24 @@ body{
     flex-direction: row;
 }
 .lbl-icon label{
-    width: 40px;
+    width: 40px; 
     text-align: center;
 }
 .lbl-icon label:first-child{
-    border: 1px solid var(--outline-color);
-    border-radius: 5px 0 0 5px;
     padding: 5px 0;
+    color: #070707;
     background: #e4e4e4;
+    border: 1px solid var(--outline-color);
+    border-right: none;
+    border-radius: 5px 0 0 5px;
 }
+
+
 .lbl-icon input{
     border-radius: 0 5px 5px 0;
     width: calc(100% - 18px);
-}
-.txt-input, input, input[text], input[password]{
-    border: 1px solid var(--outline-color);
-    border-radius: 5px;
-    padding: 8px;
+    border-left: none;
+    outline-color: var(--accent-color);
 }
 .btn-accent{
     border-radius: 30px;
