@@ -1,0 +1,45 @@
+:root{
+    --bg-body:linear-gradient(45deg, rgba(6,52,15,1) 0%, rgba(28,136,50,1) 50%, rgba(147,255,169,1) 100%) ;
+}
+
+.login-form{
+    padding: 30px;
+    min-width: 250px;
+    width: 90vw;
+    border-radius: 15px;
+    background:#fcfcfc;
+    border: 1px solid var(--outline-color);
+    box-shadow: 0 6px 6px 0 rgba(0, 0, 0, 0.2);
+}
+.login-form form{
+    display: flex;
+    flex-direction: column;
+}
+.login-form form > *{
+    margin-top: 20px;
+}
+.pwrst-link{
+    width: 100%;
+    text-align: center;
+    color: var(--accent-color);
+    text-decoration: none;
+    font-size: 10pt;
+}
+.pwrst-link:hover{
+    text-decoration: underline;
+}
+.bt-cadse{
+    background: transparent;
+    padding: 10px;
+    color: var(--outline-color);
+    border: none;
+    cursor: pointer;
+    margin-top: 10px;
+}
+@media (min-width:766px) {
+    .login-form{
+        padding: 50px;
+        min-width: 300px;
+        width: 400px;
+    }
+}

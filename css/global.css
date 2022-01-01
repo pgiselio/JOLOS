@@ -1,8 +1,11 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 :root{
-    --bg-body:linear-gradient(45deg, rgba(6,52,15,1) 0%, rgba(28,136,50,1) 50%, rgba(147,255,169,1) 100%) ;
+    --bg-body:#fff;
     --accent-color:#2d9041;
     --outline-color: #e4e4e4;
+    --info-msg-bg:#e6e6e69a;
+    --info-msg-color: #363636;
+    --info-msg-icon:#a0a0a0;
 }
 
 *{
@@ -23,45 +26,15 @@ body{
     justify-content: center;
     align-items: center;
     min-height: 95vh;
+    padding: 10px 0;
 }
-.login-form{
-    padding: 50px;
-    min-width: 400px;
-    border-radius: 15px;
-    background:#fcfcfc;
-    border: 1px solid var(--outline-color);
-    box-shadow: 0 6px 6px 0 rgba(0, 0, 0, 0.2);
-}
-.login-form form{
-    display: flex;
-    flex-direction: column;
-}
-.login-form form > *{
-    margin-top: 20px;
-}
-.pwrst-link{
-    width: 100%;
-    text-align: center;
-    color: var(--accent-color);
-    text-decoration: none;
-    font-size: 10pt;
-}
-.pwrst-link:hover{
-    text-decoration: underline;
-}
-.bt-cadse{
-    background: transparent;
-    padding: 10px;
-    color: #fff;
-    border: none;
-    cursor: pointer;
-    margin-top: 10px;
-}
+
 /*Componentes*/
 .txt-input, input, input[text], input[password]{
     border: 1px solid var(--outline-color);
     border-radius: 5px;
     padding: 8px;
+    outline-color: var(--accent-color);
 }
 
 .lbl{
@@ -108,4 +81,32 @@ body{
 }
 .btn-accent:hover{
     box-shadow: inset 0 100rem 0 0 rgba(0, 0, 0, 0.1);
+}
+.info-message{
+    background: var(--info-msg-bg) ;
+    padding: 10px;
+    font-size: 13px;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: row;
+    color: var(--info-msg-color);
+    text-align: justify;
+}
+.info-message::before{
+    content: "\f05a";
+    font-family: "Font Awesome 5 Free";
+    font-weight: 900;
+    -webkit-font-smoothing: antialiased;
+    display: inline-block;
+    font-style: normal;
+    font-variant: normal;
+    text-rendering: auto;
+    line-height: 1;
+
+    padding-right: 10px;
+    padding-top: 3px;
+    min-height: 40px;
+    color: var(--info-msg-icon);
+    height: 100%;
+    font-size: 30px;
 }
