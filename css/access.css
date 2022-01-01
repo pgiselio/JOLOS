@@ -4,8 +4,8 @@
 
 .login-form{
     padding: 30px;
-    min-width: 250px;
     width: 90vw;
+    max-width: 400px;
     border-radius: 15px;
     background:#fcfcfc;
     border: 1px solid var(--outline-color);
