@@ -1,13 +1,16 @@
 :root{
-    --bg-body:linear-gradient(45deg, rgba(6,52,15,1) 0%, rgba(28,136,50,1) 50%, rgba(147,255,169,1) 100%) ;
+    --bg-body:linear-gradient(45deg, rgba(6,52,15,1) 0%, rgba(28,136,50,1) 50%, rgba(147,255,169,1) 100%), rgb(6,52,15);
+    --bg-login: #fcfcfc;
 }
-
+body{
+    background-attachment: fixed;
+}
 .login-form{
     padding: 30px;
     width: 90vw;
     max-width: 400px;
     border-radius: 15px;
-    background:#fcfcfc;
+    background:var(--bg-login);
     border: 1px solid var(--outline-color);
     box-shadow: 0 6px 6px 0 rgba(0, 0, 0, 0.2);
 }
@@ -42,7 +45,7 @@
 }
 .access-logo{
     width: 100%;
-    max-width: 150px;
+    max-width: 140px;
 }
 .progress{
     display: flex;
@@ -50,15 +53,21 @@
 }
 .progress > span{
     display: inline-block;
-    width: 10px;
-    height: 10px;
+    width: 8px;
+    height: 8px;
     border-radius: 10px;
     background: var(--outline-color);
     margin-right: 12px;
 }
+.progress > span:last-child{
+    margin-right: 0;
+}
 .progress > span.active{
     background: var(--accent-color);
     width: 20px;
+}
+.progress > span.done{
+    background: var(--accent-color);
 }
 .input-group{
     display: flex;
@@ -70,10 +79,7 @@
 .input-group :nth-child(1){
     margin-right: 8px;
 }
-.group2{
-    display: flex;
-    flex-direction: row;
-}
+
 .imagem-destaque{
     display: none;
 }
@@ -82,11 +88,18 @@
     .login-form{
         padding: 50px;
     }
+    .group2{
+        display: flex;
+        flex-direction: row;
+    }
     .signup-form{
         max-width: 750px;
     }
     .signup-form form{
         flex-grow: 3;
+    }
+    .access-logo{
+        max-width: 150px;
     }
     .imagem-destaque{
         display: flex;
