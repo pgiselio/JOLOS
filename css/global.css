@@ -5,7 +5,7 @@
     --outline-color: #e4e4e4;
     --info-msg-bg:#e6e6e69a;
     --info-msg-color: #363636;
-    --info-msg-icon:#a0a0a0;
+    --info-msg-icon:#72727294;
 }
 
 *{
@@ -30,7 +30,7 @@ body{
 }
 
 /*Componentes*/
-.txt-input, input, input[text], input[password]{
+.txt-input, input, input[type="text"], input[type="password"]{
     border: 2px solid var(--outline-color);
     border-radius: 5px;
     padding: 8px;
@@ -109,4 +109,9 @@ body{
     color: var(--info-msg-icon);
     height: 100%;
     font-size: 30px;
+}
+
+.chk{
+    font-size: 14px;
+    color: #070707;
 }

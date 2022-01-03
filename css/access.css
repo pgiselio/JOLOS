@@ -36,8 +36,66 @@
     cursor: pointer;
     margin-top: 10px;
 }
+.header-signup{
+    display: flex;
+    justify-content: space-between;
+}
+.access-logo{
+    width: 100%;
+    max-width: 150px;
+}
+.progress{
+    display: flex;
+    align-items: center;
+}
+.progress > span{
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    border-radius: 10px;
+    background: var(--outline-color);
+    margin-right: 12px;
+}
+.progress > span.active{
+    background: var(--accent-color);
+    width: 20px;
+}
+.input-group{
+    display: flex;
+    justify-content: space-between;
+}
+.input-group > *{
+    flex-grow: 1;
+}
+.input-group :nth-child(1){
+    margin-right: 8px;
+}
+.group2{
+    display: flex;
+    flex-direction: row;
+}
+.imagem-destaque{
+    display: none;
+}
+
 @media (min-width:766px) {
     .login-form{
         padding: 50px;
     }
+    .signup-form{
+        max-width: 750px;
+    }
+    .signup-form form{
+        flex-grow: 3;
+    }
+    .imagem-destaque{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-grow: 1;
+    }
+    .imagem-destaque img{
+        width: 80%;
+    }
 }
+
