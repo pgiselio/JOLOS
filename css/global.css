@@ -1,27 +1,28 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
-:root{
-    --bg-body:#fff;
-    --accent-color:#2d9041;
+
+:root {
+    --bg-body: #fff;
+    --accent-color: #2d9041;
     --accent-color-active: #1d5c2a;
     --outline-color: #e4e4e4;
-    --info-msg-bg:#e6e6e69a;
+    --info-msg-bg: #e6e6e69a;
     --info-msg-color: #363636;
-    --info-msg-icon:#72727294;
+    --info-msg-icon: #72727294;
 }
 
-*{
+* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
     font-family: 'Poppins', sans-serif;
 }
 
-body{
+body {
     min-height: 100vh;
-    background: var(--bg-body);    
+    background: var(--bg-body);
 }
 
-.container{
+.container {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -31,32 +32,78 @@ body{
 }
 
 /*Componentes*/
-.txt-input, input, input[type="text"], input[type="password"]{
+.txt-input, input, input[type="text"], input[type="password"] {
     border: 2px solid var(--outline-color);
     border-radius: 5px;
     padding: 8px;
     outline-color: var(--accent-color);
 }
 
-.lbl{
+input[type="checkbox"] {
+    all: unset;
+    border: 1px solid #cccc;
+    border-radius: 5px;
+    width: 15px;
+    height: 15px;
+    display: inline-block;
+    cursor: pointer;
+    transition: 0.1s linear;
+}
+
+input[type="checkbox"]:checked {
+    background: var(--accent-color);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+input[type="checkbox"]:checked::before{
+    content: "\f00c";
+    font-family: "Font Awesome 5 Free";
+    font-weight: 900;
+    -webkit-font-smoothing: antialiased;
+    display: inline-block;
+    font-style: normal;
+    font-variant: normal;
+    text-rendering: auto;
+    line-height: 1;
+    color: #fff;
+    font-size: 9px;
+
+}
+.chk{
+    display: flex;
+    align-items: center;
+}
+.chk label{
+    font-size: 13px;
+    margin-left: 8px;
+    user-select: none;
+    cursor: pointer;
+}
+
+.lbl {
     display: flex;
     flex-direction: column;
 }
-.lbl label{
+
+.lbl label {
     font-size: 9pt;
     font-weight: 500;
     color: #070707;
     padding: 2px 0;
 }
-.lbl-icon{
+
+.lbl-icon {
     display: flex;
     flex-direction: row;
 }
-.lbl-icon label{
-    width: 40px; 
+
+.lbl-icon label {
+    width: 40px;
     text-align: center;
 }
-.lbl-icon label:first-child{
+
+.lbl-icon label:first-child {
     padding: 5px 0;
     color: #070707;
     background: #e4e4e4;
@@ -66,13 +113,14 @@ body{
 }
 
 
-.lbl-icon input{
+.lbl-icon input {
     border-radius: 0 5px 5px 0;
     width: calc(100% - 18px);
     border-left: none;
     outline-color: var(--accent-color);
 }
-.btn-accent{
+
+.btn-accent {
     border-radius: 30px;
     background: var(--accent-color);
     padding: 10px;
@@ -80,12 +128,14 @@ body{
     color: #fff;
     cursor: pointer;
 }
-.btn-accent:hover{
+
+.btn-accent:hover {
     /* box-shadow: inset 0 100rem 0 0 rgba(0, 0, 0, 0.1); */
     background: var(--accent-color-active);
 }
-.info-message{
-    background: var(--info-msg-bg) ;
+
+.info-message {
+    background: var(--info-msg-bg);
     padding: 10px;
     font-size: 13px;
     border-radius: 10px;
@@ -94,7 +144,8 @@ body{
     color: var(--info-msg-color);
     text-align: justify;
 }
-.info-message::before{
+
+.info-message::before {
     content: "\f05a";
     font-family: "Font Awesome 5 Free";
     font-weight: 900;
@@ -113,7 +164,7 @@ body{
     font-size: 30px;
 }
 
-.chk{
+.chk {
     font-size: 14px;
     color: #070707;
 }
