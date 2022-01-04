@@ -133,8 +133,11 @@ body{
 .btn-next:hover{
     color:var(--accent-color-active);
 }
+.btn-next:hover::after{
+    background: var(--accent-color-active);
+}
 .btn-next:active{
-    color: var(--accent-color);
+    color: var(--accent-color-active);
 }
 .btn-next:active::after{
     transform: translateX(3px);
