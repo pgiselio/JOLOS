@@ -2,6 +2,7 @@
 :root{
     --bg-body:#fff;
     --accent-color:#2d9041;
+    --accent-color-active: #1d5c2a;
     --outline-color: #e4e4e4;
     --info-msg-bg:#e6e6e69a;
     --info-msg-color: #363636;
@@ -80,7 +81,8 @@ body{
     cursor: pointer;
 }
 .btn-accent:hover{
-    box-shadow: inset 0 100rem 0 0 rgba(0, 0, 0, 0.1);
+    /* box-shadow: inset 0 100rem 0 0 rgba(0, 0, 0, 0.1); */
+    background: var(--accent-color-active);
 }
 .info-message{
     background: var(--info-msg-bg) ;

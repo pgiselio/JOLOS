@@ -7,19 +7,19 @@ body{
 }
 .login-form{
     padding: 30px;
-    width: 90vw;
+    width: 95vw;
     max-width: 400px;
     border-radius: 15px;
     background:var(--bg-login);
     border: 1px solid var(--outline-color);
     box-shadow: 0 6px 6px 0 rgba(0, 0, 0, 0.2);
 }
-.login-form form{
+.group3, .login-form form{
     display: flex;
     flex-direction: column;
 }
-.login-form form > *{
-    margin-top: 20px;
+.group3 > *, .login-form form > *{
+    margin-top: 16px;
 }
 .pwrst-link{
     width: 100%;
@@ -39,11 +39,15 @@ body{
     cursor: pointer;
     margin-top: 10px;
 }
+.logo-login{
+    display: flex;
+    padding: 10px 25px;
+}
 .header-signup{
     display: flex;
     justify-content: space-between;
 }
-.access-logo{
+.logo-signup{
     width: 100%;
     max-width: 140px;
 }
@@ -74,7 +78,8 @@ body{
     justify-content: space-between;
 }
 .input-group > *{
-    flex-grow: 1;
+    display: flex;
+    width: 100%;
 }
 .input-group :nth-child(1){
     margin-right: 8px;
@@ -83,7 +88,68 @@ body{
 .imagem-destaque{
     display: none;
 }
-
+.flex-btn-next{
+    display: flex;
+}
+.btn-next{
+    display: flex;
+    align-items: center;
+    height: 50px;
+    font-size: 20px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 600;
+    transition: 100ms linear;
+    user-select: none;
+}
+.btn-next::after{
+    content: "\f061";
+    font-family: "Font Awesome 5 Free";
+    font-weight: 900;
+    -webkit-font-smoothing: antialiased;
+    display: inline-block;
+    font-style: normal;
+    font-variant: normal;
+    text-rendering: auto;
+    line-height: 1;
+    
+    color: #000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 30px;
+    margin-left: 5px;
+    background: var(--accent-color);
+    transition: 100ms linear;
+}
+.btn-next:hover{
+    color:var(--accent-color);
+}
+.btn-next:active{
+    color: var(--accent-color-active);
+}
+.btn-next:active::after{
+    transform: translateX(3px);
+}
+.flex-btn-login{
+    display: flex;
+}
+.btn-login{
+    padding: 10px;
+    color: var(--accent-color);
+    font-size: 14px;
+    text-decoration: none;
+}
+.group5{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
 @media (min-width:766px) {
     .login-form{
         padding: 50px;
@@ -98,14 +164,17 @@ body{
     .signup-form form{
         flex-grow: 3;
     }
-    .access-logo{
+    .logo-signup{
         max-width: 150px;
     }
-    .imagem-destaque{
+    .imagem-destaque, .group4{
         display: flex;
         align-items: center;
+        flex-direction: column;
         justify-content: center;
-        flex-grow: 1;
+    }
+    .group4{
+        max-width: 280px;
     }
     .imagem-destaque img{
         width: 80%;

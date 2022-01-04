@@ -15,39 +15,51 @@
 
     </header>
     <main>
-        <div class="container">
+        <section class="container">
             <div class="login-form signup-form">
                 <div class="header-signup">
-                    <a href="/"><img src="src/AAAAAA.svg" alt="" srcset="" class="access-logo"></a>
+                    <a href="/"><img src="src/AAAAAA.svg" alt="" srcset="" class="logo-signup"></a>
                     <div class="progress">
                         <span class="active" title="Cadastro básico"></span>
                         <span></span>
                         <span></span>
                     </div>
                 </div>
-                <div class="group2">
-                    <form action="" method="post">
-                        <h2 class="desc">Crie a sua conta</h2>
-                        <input type="text" id="fullname" placeholder="Nome completo">
-                        <input type="text" id="email" placeholder="E-mail">
-                        <input type="text" id="cpf" placeholder="CPF">
-                        <div class="input-group">
-                            <input type="password" name="" id="pass" placeholder="Senha">
-                            <input type="password" name="" id="confirm-pass" placeholder="Confirmar senha">
+
+                <form action="" method="post">
+                    <div class="group2">
+                        <div class="group3">
+                            <h2 class="desc">Crie a sua conta</h2>
+                            <input type="text" id="fullname" placeholder="Nome completo">
+                            <input type="text" id="email" placeholder="E-mail">
+                            <input type="text" id="cpf" placeholder="CPF">
+                            <div class="input-group">
+                                <input type="password" name="" id="pass" placeholder="Senha">
+                                <input type="password" name="" id="confirm-pass" placeholder="Confirmar senha">
+                            </div>
+                            <div class="info-message">
+                                <span>O cadastro continuará após a confirmação do e-mail, então certifique-se de
+                                    informar um
+                                    e-mail válido</span>
+                            </div>
                         </div>
-                        <div class="info-message">
-                            <span>O cadastro continuará após a confirmação do e-mail, então certifique-se de informar um
-                                e-mail válido</span>
+                        <div class="group4">
+                            <div class="imagem-destaque">
+                                <img src="/src/undraw_typewriter_re_u9i2.svg" alt="">
+                            </div>
                         </div>
-                        <input type="submit" class="btn-accent" value="Confirmar">
-                    </form>
-                    <div class="imagem-destaque">
-                        <img src="/src/undraw_typewriter_re_u9i2.svg" alt="">
                     </div>
-                </div>
+                    <div class="group5">
+                        <div class="flex-btn-login">
+                            <a href="login.html" class="btn-login" title="Já tem uma conta? Faça Login!">Ou... faça login</a>
+                        </div>
+                        <div class="flex-btn-next">
+                            <button type="submit" class="btn-next" title="Confirmar cadastro">Próximo</button>
+                        </div>
+                    </div>
+                </form>
             </div>
-            <a href="login.html" title="Já tem uma conta? Faça Login!"><button class="bt-cadse">Login</button></a>
-        </div>
+        </section>
     </main>
 </body>
 
