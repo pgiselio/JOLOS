@@ -18,6 +18,7 @@
 }
 
 body {
+    overflow-x: hidden;
     min-height: 100vh;
     background: var(--bg-body);
 }
@@ -31,6 +32,9 @@ body {
     padding: 10px 0;
 }
 
+.section{
+    text-align: center;
+}
 /*Componentes*/
 .txt-input, input, input[type="text"], input[type="password"] {
     border: 2px solid var(--outline-color);

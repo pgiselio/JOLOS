@@ -1,0 +1,34 @@
+@import url('./global.css');
+@import url('./access.css');
+
+@media(min-width:766px) {
+    .login-form{
+        padding: 50px;
+        padding-bottom: 30px;
+    }
+    .group2{
+        display: flex;
+        flex-direction: row;
+    }
+    .signup-form{
+        max-width: 750px;
+    }
+    .signup-form form{
+        flex-grow: 3;
+    }
+    .logo-signup{
+        max-width: 150px;
+    }
+    .imagem-destaque, .group4{
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        justify-content: center;
+    }
+    .group4{
+        max-width: 280px;
+    }
+    .imagem-destaque img{
+        width: 80%;
+    }
+}
