@@ -8,7 +8,7 @@
 .logo-index{
     display: flex;
     align-items: center;
-
+    margin-left: 12px;
 }
 .navigate {
     display: flex;
@@ -29,21 +29,21 @@
 
 .menu {
     display: flex;
-    padding-top: 30px;
     flex-direction: column;
     position: absolute;
     background: #ffffff;
-    box-shadow: 5px 2px 6px 0 rgba(0, 0, 0, 0.1);
-    width: 100vw;
+    box-shadow: 5px 5px 6px 0 rgba(0, 0, 0, 0.1);
+    width: 100%;
     padding: 30px;
     top: 78px;
     left: 0;
-    z-index: 1;
     transition: transform 0.5s cubic-bezier(0.77, 0.2, 0.05, 1.0);
     transform: translateY(-100vh);
+    pointer-events: none;
 }
 .menu.active{
     transform: none;
+    pointer-events: initial;
 }
 
 .menu li {
@@ -57,7 +57,7 @@
     text-align: center;
     width: 100%;
     padding: 15px;
-    border-radius: 15px;
+    border-radius: 10px;
     border: 2px solid #f1f1f1;
     text-decoration: none;
     font-size: 18px;
@@ -73,6 +73,38 @@
 .acesso{
     display: none;
 }
+.acesso-mobile{
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    justify-content: center;
+    background: #ffffff;
+    box-shadow: 5px 5px 6px 0 rgba(0, 0, 0, 0.1);
+    width: 100%;
+    padding: 30px;
+    top: 78px;
+    left: 0;
+    transition: transform 0.5s cubic-bezier(0.77, 0.2, 0.05, 1.0);
+    transform: translateY(-100vh);
+    pointer-events: none;
+}
+.acesso-mobile a{
+    text-align: center;
+    width: 100%;
+    padding: 20px;
+    border-radius: 10px;
+    text-decoration: none;
+    font-size: 18px;
+    font-weight: 500;
+    color: var(--accent-color);
+    margin-left: initial;
+    margin-bottom: 10px;
+}
+.acesso-mobile.active{
+    transform:none;
+    pointer-events: initial;
+}
+
 .mobile-access{
     display: flex;
 }
@@ -100,6 +132,10 @@
     border: 2px solid #000;
     border-radius: 30px;
     color: #000;
+}
+.access-bt.active::before{
+    color: var(--accent-color-active);
+    border-color: var(--accent-color-active);
 }
 .logo-index img {
     height: 40px;
@@ -192,10 +228,12 @@ footer {
 }
 
 @media (min-width:766px) {
+    .logo-index{
+        margin-left: initial;
+    }
     .mobile-access {
         display: none;
     }
-
     .menu {
         transform: none;
         padding-top: 30px;
@@ -207,6 +245,7 @@ footer {
         padding: initial;
         top: initial;
         left: initial;
+        pointer-events: initial;
     }
 
     .menu, .acesso {
