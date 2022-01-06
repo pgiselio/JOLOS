@@ -5,10 +5,16 @@
     width: 100%;
     margin-bottom: 200px;
 }
-.logo-index{
+.logo-nav{
     display: flex;
     align-items: center;
     margin-left: 12px;
+}
+.logo-nav:hover{
+    filter: grayscale(0.5);
+}
+.logo-nav img {
+    height: 40px;
 }
 .navigate {
     display: flex;
@@ -40,6 +46,7 @@
     transition: transform 0.5s cubic-bezier(0.77, 0.2, 0.05, 1.0);
     transform: translateY(-100vh);
     pointer-events: none;
+    user-select: none;
 }
 .menu.active{
     transform: none;
@@ -87,6 +94,7 @@
     transition: transform 0.5s cubic-bezier(0.77, 0.2, 0.05, 1.0);
     transform: translateY(-100vh);
     pointer-events: none;
+    user-select: none;
 }
 .acesso-mobile a{
     text-align: center;
@@ -137,9 +145,7 @@
     color: var(--accent-color-active);
     border-color: var(--accent-color-active);
 }
-.logo-index img {
-    height: 40px;
-}
+
 
 .login-bt, .signup-bt {
     text-decoration: none;
