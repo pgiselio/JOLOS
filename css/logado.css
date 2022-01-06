@@ -28,6 +28,8 @@
     min-height: 100%;
     position: relative;
     width: 100%;
+    grid-template-columns: auto 1fr;
+    grid-template-rows: 1fr auto;
 }
 .header{
     display: grid;
@@ -52,6 +54,7 @@
     position: relative;
     /* border-right: 1px solid #cccc; */
     overflow: auto;
+    width: 300px;
 }
 .perfil{
     display: flex;
