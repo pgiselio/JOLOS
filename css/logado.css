@@ -1,5 +1,6 @@
 @import url('global.css');
-.main { 
+
+.main {
     grid-area: main;
     display: flex;
     flex-direction: column;
@@ -12,18 +13,20 @@
     box-shadow: inset 0px 0px 11px 0px rgb(0 0 0 / 15%);
     height: calc(100vh - 60px);
 }
-.main-container{
+
+.main-container {
     width: 100%;
     height: 100%;
     overflow: auto;
     padding-top: 30px;
     padding-left: 30px;
 }
-.grid-container{
+
+.grid-container {
     display: grid;
     grid-template-areas:
-    "header header header header header header"
-    "menu main main main main main";
+        "header header header header header header"
+        "menu main main main main main";
     height: 100%;
     min-height: 100%;
     position: relative;
@@ -31,10 +34,12 @@
     grid-template-columns: auto 1fr;
     grid-template-rows: 1fr auto;
 }
-.header{
+
+.header {
     display: grid;
     grid-area: header;
 }
+
 .navigate {
     display: flex;
     align-items: center;
@@ -46,7 +51,7 @@
     /* box-shadow: 19px 8px 2px 0 rgb(0 0 0 / 10%);*/
 }
 
-.side-bar{
+.side-bar {
     grid-area: menu;
     height: calc(100vh - 60px);
     background-color: white;
@@ -56,16 +61,20 @@
     overflow: auto;
     width: 300px;
 }
-.side-bar-container{
+
+.side-bar-container {
     padding: 0 10px;
+    padding-right: 0;
 }
-.perfil{
+
+.perfil {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
 }
-.img-perfil{
+
+.img-perfil {
     width: 7rem;
     height: 7rem;
     object-fit: cover;
@@ -73,54 +82,75 @@
     border: 2px solid #ccc;
 }
 
-.name-perfil{
+.name-perfil {
     color: #000;
 }
 
-.data{
+.data {
     margin-top: 30px;
 }
 
-.data-items{
-    width:100%;
+.data-items {
+    width: 100%;
 }
 
-.item{
+.data-items li {
     display: flex;
     align-items: center;
     justify-content: center;
     margin-bottom: 5px;
 }
-.item i{
+
+.data-items li i {
     width: 30px;
     color: rgb(156, 156, 156);
     text-align: center;
+    margin-right: .5rem;
 }
-.item a{
+
+.data-items li a {
     width: 100%;
     text-decoration: none;
     font-weight: 500;
     color: rgb(43, 43, 43);
     padding: 10px;
     border-radius: 10px;
+    margin-right: 10px;
 }
-.item a:hover{
+
+.data-items li a:hover {
     background: #dfdfdf;
 }
-.sair a:hover i{
-    color: #810016;;
+
+.data-items li a.active {
+    background: var(--accent-color);
+    color: #fff;
+    border-bottom-right-radius: 0;
+    border-top-right-radius: 0;
+    margin-right: 0;
 }
 
-.fas{
-    margin-right: .5rem;
-    color: white;
+.data-items li a.active i {
+    color: #fff;
 }
 
-.hide{
+.data-items li a:hover.active i {
+    color: #fff;
+}
+
+.data-items li a:hover i {
+    color: rgb(95, 95, 95);
+}
+
+.sair a:hover i {
+    color: #b3001e !important;
+}
+
+.hide {
     display: none;
 }
 
-.card{
+.card {
     background-color: aquamarine;
     padding: 20px;
     border-radius: 10px;
