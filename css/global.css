@@ -138,6 +138,22 @@ input[type="checkbox"]:checked::before{
     background: var(--accent-color-active);
 }
 
+.btn-outlined{
+    text-decoration: none;
+    color: var(--accent-color);
+    font-size: 15px;
+    padding: 8px 15px;
+    font-weight: 500;
+    transition: 0.1s linear;
+    border: 2px solid var(--accent-color);
+    border-radius: 6px;
+    cursor: pointer;
+}
+.btn-outlined:hover {
+    color: #fff;
+    background: var(--accent-color);
+}
+
 .info-message {
     background: var(--info-msg-bg);
     padding: 10px;
