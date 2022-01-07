@@ -40,9 +40,13 @@ body {
     border: 2px solid var(--outline-color);
     border-radius: 5px;
     padding: 8px;
-    outline-color: var(--accent-color);
+    outline: 0;
+    transition: 0.1s linear;
 }
-
+.txt-input:focus, input:focus, input[type="text"]:focus, input[type="password"]:focus{
+    border-color: var(--accent-color);
+    box-shadow: 0 0 0 0.20rem rgba(45, 143, 65, 0.308)
+}
 input[type="checkbox"] {
     all: unset;
     border: 1px solid #cccc;
@@ -108,7 +112,10 @@ input[type="checkbox"]:checked::before{
 }
 
 .lbl-icon label:first-child {
-    padding: 5px 0;
+    /* padding: 5px 0; */
+    display: flex;
+    align-items: center;
+    justify-content: center;
     color: #070707;
     background: #e4e4e4;
     border: 1px solid var(--outline-color);
@@ -120,7 +127,6 @@ input[type="checkbox"]:checked::before{
 .lbl-icon input {
     border-radius: 0 5px 5px 0;
     width: calc(100% - 18px);
-    border-left: none;
     outline-color: var(--accent-color);
 }
 

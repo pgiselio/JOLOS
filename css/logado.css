@@ -210,6 +210,7 @@
     padding: 20px;
     border-radius: 10px;
     border: 1px solid #cccc;
+    margin-bottom: 20px;
 }
 .main {
     grid-area: main;
@@ -258,4 +259,22 @@
     text-rendering: auto;
     line-height: 1;
     padding-right: 12px;
+}
+
+.content-grid{
+    display: grid;
+    grid-template-areas:"content filter";
+    grid-template-columns:1fr auto ;
+    grid-template-rows: 1fr auto;
+        
+}
+.content{
+    grid-area: content;
+    display: flex;
+    flex-direction: column;
+    padding: 0 20px;
+}
+.filters{
+    grid-area: filter;
+    width: 250px;
 }

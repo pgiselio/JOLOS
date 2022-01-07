@@ -18,6 +18,7 @@
     }
     .logo-signup{
         max-width: 150px;
+        height: 40px;
     }
     .imagem-destaque, .group4{
         display: flex;
