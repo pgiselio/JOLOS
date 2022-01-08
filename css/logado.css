@@ -27,8 +27,8 @@
     width: 100%;
     height: 60px;
     background: #fff;
-    border-bottom: 1px solid #cccc;
-    box-shadow: 0 4px 6px 0 rgb(0 0 0 / 8%);
+    /* border-bottom: 1px solid #cccc; */
+    /* box-shadow: 0 4px 6px 0 rgb(0 0 0 / 8%); */
 }
 .menu-container{
     display: flex;
@@ -96,14 +96,14 @@
     width: 4px;
 }
 #btn-collapse-sidemenu.active:hover .lines-btn span:first-child{
-    width: 8px;
+    width: 14px;
 }
 
 #btn-collapse-sidemenu.active:hover .lines-btn span:nth-last-child(2) {
     width: 12px;
 }
 #btn-collapse-sidemenu.active:hover .lines-btn span:nth-last-child(1) {
-    width: 18px;
+    width: 16px;
 }
 
 .side-bar {
@@ -114,9 +114,15 @@
     position: relative;
     /* border-right: 1px solid #cccc; */
     overflow: auto;
-    width: 270px;
+    overflow-x: hidden;
+    width: 0;
+    transition: all 0.2s ease;
 }
-
+.side-bar.active{
+    width: 280px;
+    padding: 0;
+    padding-right: 10px;
+}
 .side-bar-container {
     padding-top: 30px;
 }
@@ -163,6 +169,8 @@
 }
 
 .data-items li a {
+    display: flex;
+    align-items: center;
     width: 100%;
     text-decoration: none;
     font-weight: 500;
@@ -206,7 +214,6 @@
 
 }
 .card {
-    background-color: aquamarine;
     padding: 20px;
     border-radius: 10px;
     border: 1px solid #cccc;
@@ -230,6 +237,7 @@
     width: 100%;
     height: 100%;
     overflow: auto;
+    overflow-x: hidden;
 }
 .header-section{
     display: flex;
@@ -242,11 +250,11 @@
     position: sticky;
     top: 0;
     margin-top: 30px;
-    background: #ffffffed;
-    backdrop-filter: blur(20px);
+    background: #fffffff5;
 }
 .header-section h2{
     color: var(--accent-color);
+    font-size: 20px;
 }
 .btn-criar-nova::before{
     content: "\f067";
@@ -266,7 +274,7 @@
     grid-template-areas:"content filter";
     grid-template-columns:1fr auto ;
     grid-template-rows: 1fr auto;
-        
+    margin-top: 30px;
 }
 .content{
     grid-area: content;
@@ -277,4 +285,115 @@
 .filters{
     grid-area: filter;
     width: 250px;
+}
+
+.vaga-header{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+.vaga-titles span{
+    font-size: 14px;
+}
+.vaga-city::before{
+    content: "";
+    background: #000;
+    display: inline-block;
+    vertical-align: middle;
+    margin-right: 4px;
+    width: 2px;
+    height: 2px;
+    border-radius: 50%;
+}
+.vaga-date::before{
+    content: "";
+    background: #000;
+    display: inline-block;
+    vertical-align: middle;
+    margin-right: 4px;
+    width: 2px;
+    height: 2px;
+    border-radius: 50%;
+}
+.vaga-status{
+    padding-left: 10px;
+}
+.vaga-status.enabled{
+    color: green;
+}
+.vaga-status.disabled{
+    color: #b3001e;
+}
+.vagas-bottom{
+    display: flex;
+    align-items: center;
+    margin-top: 10px;
+    justify-content: space-between;
+    
+}
+.vagas-bottom span{
+    background: #f1f1f1;
+    padding: 8px;
+    border-radius: 5px;
+    margin-right: 10px;
+}
+.vagas-candidatos{
+    font-size: 14px;
+    font-weight: 500;
+}
+.vagas-candidatos i{
+    color: var(--accent-color);
+    padding: 0 5px;
+}
+
+.vagas-detalhes-btn {
+    text-decoration: none;
+    color: var(--accent-color);
+    font-size: 15px;
+    padding: 8px 8px;
+    font-weight: 500;
+    transition: 0.1s linear;
+    text-align: center;
+}
+
+.vagas-detalhes-btn:hover {
+    color: var(--accent-color-active);
+}
+
+footer{
+    height: 400px;
+    margin-top: 50px;
+    background: #ccc;
+}
+
+@media(min-width:766px){
+    .side-bar{
+        width: 280px;
+        padding-right: 10px;
+    }
+    .side-bar.active{
+        width: 80px;
+        padding: 0 10px;
+    }
+    .side-bar.active .data-items li a{
+        padding: 15px 15px;
+        border-radius: 30px;
+        justify-content: center;
+    }
+    .side-bar.active .data-items li a span{
+        display: none;
+    }
+    
+    .side-bar.active .data-items li i{
+        margin-right: 0;
+    }
+    .side-bar.active .img-perfil{
+        width: 3.25rem;
+        height: 3.25rem;
+    }
+    .side-bar.active .name-perfil{
+        display: none;
+    }
+
 }

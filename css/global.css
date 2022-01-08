@@ -154,6 +154,7 @@ input[type="checkbox"]:checked::before{
     border: 2px solid var(--accent-color);
     border-radius: 6px;
     cursor: pointer;
+    background: transparent;
 }
 .btn-outlined:hover {
     color: #fff;
