@@ -36,6 +36,9 @@
     justify-content: space-between;
     width: 95%;
 }
+.menu-container .logo{
+    height: 35px;
+}
 
 .btn-notify {
     background: #f1f1f1;
@@ -108,69 +111,6 @@
 
 #btn-collapse-sidemenu.active::before {
     transform: rotate(180deg);
-}
-
-
-.dots-btn span {
-  display: block;
-  width: 2px;
-  height: 2px;
-  margin-bottom: 5px;
-  position: relative;
-  background: #000;
-  border-radius: 3px;
-  z-index: 1;
-}
-
-.lines-btn {
-    margin-left: 2px;
-}
-
-.lines-btn span {
-    display: block;
-    width: 18px;
-    height: 2px;
-    margin-bottom: 5px;
-    position: relative;
-    background: #000;
-    border-radius: 3px;
-    transition: 0.1s linear;
-}
-
-#btn-collapse-sidemenu:hover .lines-btn span:first-child {
-    width: 8px;
-}
-
-#btn-collapse-sidemenu:hover .lines-btn span:nth-last-child(2) {
-  width: 10px;
-}
-
-#btn-collapse-sidemenu:hover .lines-btn span:nth-last-child(1) {
-  width: 5px;
-}
-
-.dots-btn span:nth-last-child(1) {
-  margin-bottom: 0;
-}
-
-.lines-btn span:nth-last-child(1) {
-  margin-bottom: 0;
-}
-
-#btn-collapse-sidemenu.active .lines-btn span {
-    width: 4px;
-}
-
-#btn-collapse-sidemenu.active:hover .lines-btn span:first-child {
-    width: 14px;
-}
-
-#btn-collapse-sidemenu.active:hover .lines-btn span:nth-last-child(2) {
-  width: 12px;
-}
-
-#btn-collapse-sidemenu.active:hover .lines-btn span:nth-last-child(1) {
-  width: 16px;
 }
 
 .side-bar {
