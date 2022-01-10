@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Empresa logada</title>
+    <link rel="stylesheet" href="/extras/FontAwesome/css/all.min.css">
+    <link rel="stylesheet" href="/css/create-vagas.css">
+</head>
+
+<body>
+    <div class="grid-container">
+        <header class="header">
+            <nav class="navigate">
+                <div class="menu-container">
+                    <button id="btn-collapse-sidemenu">
+                        <!-- <div class="dots-btn hide">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </div>
+                        <div class="lines-btn hide">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </div> -->
+
+                    </button>
+                    <img src="/images/AAAAAA.svg" alt="logo projeto" height="35" />
+                    <button class="btn-notify">
+                        <i class="fas fa-bell"></i>
+                        <span></span>
+                    </button>
+                </div>
+            </nav>
+        </header>
+        <section class="side-bar">
+            <div class="side-bar-container">
+                <div class="perfil">
+                    <img class="img-perfil" src="/images/default-image.png" alt="imagem perfil" />
+                    <h3 class="name-perfil">Visão da empresa</h3>
+                </div>
+
+                <div class="data">
+                    <ul class="data-items">
+                        <li>
+                            <a href="logado.html">
+                                <i class="fas fa-home"></i>
+                                <span>Início</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="">
+                                <i class="fas fa-user"></i>
+                                <span>Dados</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="logado-vagas.html" class="active">
+                                <i class="fas fa-briefcase"></i>
+                                <span>Vagas</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="">
+                                <i class="fas fa-comments"></i>
+                                <span>Fórum</span>
+                            </a>
+                        </li>
+                        <li class="sair">
+                            <a href="">
+                                <i class="fas fa-sign-out-alt"></i>
+                                <span>Sair</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+        <div class="main">
+            <div class="main-container">
+                <main>
+                    <section>
+                        <div class="header-section">
+                            <h2>Criando vaga</h2>
+                        </div>
+                        <div class="content-grid">
+                            <form class="content form-create-vaga" action="" method="post">
+                                <input type="text" placeholder="Nome da empresa..."/>
+                                <textarea 
+                                style="resize: vertical;min-height: 200px;max-height: 300px;" 
+                                placeholder="Descrição da vaga..." 
+                                class="txt-input" 
+                                name="description" 
+                                id="desc" 
+                                rows="10"></textarea>
+                                <div class="profissional-level">
+                                    <p>Limite de caracteres: <span id="count">255</span></p>
+                                </div>
+                            </form>
+                        </div>
+                    </section>
+                </main>
+                <footer>
+
+                </footer>
+            </div>
+        </div>
+    </div>
+    <script src="/js/logado.js"></script>
+    <script>
+        const descriptionVaga = document.querySelector('#desc');
+        var countChar = document.querySelector('#count');
+
+        /** 
+         * TÁ FALTANDO EU CONSERTAR O BAGULHO QUANDO CHEGA NO LIMITE!!
+        */
+        descriptionVaga.addEventListener('keyup', () => {
+            let charsRestantes = 255;
+            let charsDigitados = descriptionVaga.value.length;
+            charsRestantes -= charsDigitados;
+
+            if(charsRestantes < 0){
+
+            } else {
+                countChar.innerHTML = charsRestantes;
+            }
+        });
+    </script>
+</body>
+
+</html>

@@ -85,7 +85,7 @@
                     <section>
                         <div class="header-section">
                             <h2>Vagas criadas</h2>
-                            <button class="btn-outlined btn-criar-nova">Criar nova</button>
+                            <button class="btn-outlined btn-criar-nova" id="newVaga" onclick="redirectCreateVagas()">Criar nova</button>
                         </div>
                         <div class="content-grid">
                             <div class="content">
@@ -304,6 +304,11 @@
         </div>
     </div>
     <script src="/js/logado.js"></script>
+    <script>
+        function redirectCreateVagas() {
+            window.location.href="/pages/criar-vagas.html";
+        }
+    </script>
 </body>
 
 </html>

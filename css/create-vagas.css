@@ -1,0 +1,6 @@
+@import url("acess.css");
+@import url("logado.css");
+
+.form-create-vaga input {
+  margin: 15px 0;
+}
