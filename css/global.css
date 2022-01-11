@@ -28,7 +28,6 @@ a{
 }
 a:hover{
     color: var(--accent-color-active);
-    text-decoration: underline;
 }
 .container {
     display: flex;

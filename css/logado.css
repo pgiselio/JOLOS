@@ -698,6 +698,7 @@ footer {
   }
   .tabs-menu .spacer{
     display: block;
+    height: 20px;
   }
   .tabs-menu-container{
     margin: 0 30px;    
