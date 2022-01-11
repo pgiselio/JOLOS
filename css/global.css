@@ -167,6 +167,14 @@ input[type="checkbox"]:checked::before{
     color: #fff;
     background: var(--accent-color);
 }
+.btn-outlined.red{
+    border: 2px solid #ac0000;
+    color: #ac0000;
+}
+.btn-outlined.red:hover{
+    color: #fff;
+    background: #ac0000;
+}
 
 .info-message {
     background: var(--info-msg-bg);
