@@ -57,18 +57,16 @@ input[type="checkbox"] {
     all: unset;
     border: 1px solid #cccc;
     border-radius: 5px;
-    width: 15px;
-    height: 15px;
+    width: 20px;
+    height: 20px;
     display: inline-block;
     cursor: pointer;
     transition: 0.1s linear;
+    position: relative;
 }
 
 input[type="checkbox"]:checked {
     background: var(--accent-color);
-    display: flex;
-    justify-content: center;
-    align-items: center;
 }
 input[type="checkbox"]:checked::before{
     content: "\f00c";
@@ -76,6 +74,10 @@ input[type="checkbox"]:checked::before{
     font-weight: 900;
     -webkit-font-smoothing: antialiased;
     display: inline-block;
+    line-height: 20px !important;
+    width: 20px;
+    position: absolute;
+    text-align: center;
     font-style: normal;
     font-variant: normal;
     text-rendering: auto;

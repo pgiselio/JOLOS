@@ -485,7 +485,7 @@ footer {
 }
 .vaga-page-header h2{
   color: #222;
-  font-weight: 400;
+  font-weight: 500;
 }
 .vaga-page-info{
   display: flex;
@@ -518,8 +518,10 @@ footer {
 }
 .vaga-page-info-item i{
   width: 20px;
+  line-height: 25px;
   text-align: center;
   margin-right: 5px;
+  color: #333;
 }
 .vaga-page-info-item span{
   overflow: hidden;
@@ -595,9 +597,22 @@ footer {
 .box-title{
   width: 100%;
   padding: 15px 30px;
+  background: #fff;
   border-bottom: 1px solid rgb(241, 241, 241);
+  position: relative;
+}
+.box-title.check{
+  padding: 15px;
+}
+.box-title.sticky{
+  position: sticky;
+  top: 65px;
+  z-index: 3;
 }
 .box-title h3{
+  display: flex;
+  align-items: center;
+  font-size: 17px;
   font-weight: 500;
   color: #4e5860;
 }
@@ -617,6 +632,76 @@ footer {
 }
 .vaga-page-actions > *{
   width: 100%;
+}
+.lista-candidatos .candidato{
+  display: flex;
+  width: 100%;
+  position: relative;
+  margin-top: 5px;
+}
+
+.candidato-group{
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  padding: 10px;
+  padding-left: 50px;
+  position: relative;
+  color: #333;
+  width: 100%;
+}
+#candidato-checkall{
+  margin-right: 10px;
+}
+.candidato-list-check{
+  display: flex !important;
+  position: absolute !important;
+  z-index: 2 !important;
+  left: 15px !important;
+  top: 35% !important;
+}
+.candidato-list-check:checked ~ .candidato-group{
+  background: #f4fff6;
+  color: var(--accent-color);
+}
+.candidato-group:hover{
+  background: #f1f1f1 !important;
+}
+.candidato-pic{
+  height: 50px;
+  width: 50px;
+  background-color:#fff ;
+  object-fit: cover;
+  border-radius: 100%;
+  border: 2px solid #333;
+}
+.candidato-pic.default{
+  padding: 10px;
+  background-color: #333;
+}
+.candidato-info{
+  display: flex;
+  padding-left: 10px;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.candidato-info h3{
+  font-size: 16px;
+  font-weight: 600;
+  width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.candidato-info span{
+  font-weight: 300;
+  font-size: 12px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 
@@ -702,6 +787,15 @@ footer {
   }
   .tabs-menu-container{
     margin: 0 30px;    
+  }
+  .box-title.sticky{
+    top: 85px;
+  }
+  .candidato-info h3{
+    font-size: 18px;
+  }
+  .candidato-info span{
+    font-size: 14px;
   }
 }
 @media (min-width: 1000px) {
