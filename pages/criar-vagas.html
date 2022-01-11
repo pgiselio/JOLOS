@@ -76,16 +76,26 @@
                         <div class="content-grid">
                             <form class="content form-create-vaga" action="" method="post">
                                 <input type="text" placeholder="Título da vaga"/>
+                                <input type="text" name="courses" id="change-courses" placeholder="Curso alvo..." list="courses" >
+                                <datalist id="courses">
+                                    <option value="info">Informática</option>
+                                    <option value="energias">Energias Renováveis</option>
+                                    <option value="eletro">Eletrotécnica</option>
+                                    <option value="adm">Administração</option>
+                                    <option value="fisica">Física</option>
+                                </datalist>
                                 <textarea 
                                 style="resize: vertical;min-height: 200px;max-height: 300px;" 
                                 placeholder="Descrição da vaga..." 
                                 class="txt-input" 
                                 name="description" 
                                 id="desc" 
-                                rows="10"></textarea>
+                                rows="10"
+                                onkeyup="counter()"></textarea>
                                 <div class="profissional-level">
-                                    <p>Limite de caracteres: <span id="count">255</span></p>
+                                    <p>Limite de caracteres: <span id="count">1000</span></p>
                                 </div>
+                                <input type="submit" value="Criar" id="submit-form" class="btn-outlined"/>
                             </form>
                         </div>
                     </section>
@@ -98,23 +108,20 @@
     </div>
     <script src="/js/logado.js"></script>
     <script>
-        const descriptionVaga = document.querySelector('#desc');
-        var countChar = document.querySelector('#count');
+        function counter() {
+            const descriptionVaga = document.querySelector('#desc');
+            let countChar = document.querySelector('#count');
+            
+            const maxChars = 1000;
+            let currentValue = maxChars - (descriptionVaga.value.length);
 
-        /** 
-         * TÁ FALTANDO EU CONSERTAR O BAGULHO QUANDO CHEGA NO LIMITE!!
-        */
-        descriptionVaga.addEventListener('keyup', () => {
-            let charsRestantes = 255;
-            let charsDigitados = descriptionVaga.value.length;
-            charsRestantes -= charsDigitados;
-
-            if(charsRestantes < 0){
-
-            } else {
-                countChar.innerHTML = charsRestantes;
+            if(currentValue <= 0){
+                currentValue = "0";
+                descriptionVaga.setAttribute('maxlength', maxChars);
             }
-        });
+
+            countChar.innerHTML = currentValue;
+        }
     </script>
 </body>
 
