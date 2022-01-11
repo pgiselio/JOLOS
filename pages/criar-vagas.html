@@ -15,7 +15,7 @@
             <nav class="navigate">
                 <div class="menu-container">
                     <button id="btn-collapse-sidemenu"></button>
-                    <img src="/images/AAAAAA.svg" class="logo" alt="logo projeto"/>
+                    <img src="/images/AAAAAA.svg" class="logo" alt="logo projeto" />
                     <button class="btn-notify">
                         <i class="fas fa-bell"></i>
                         <span></span>
@@ -70,34 +70,57 @@
             <div class="main-container">
                 <main>
                     <section>
-                        <div class="header-section">
-                            <h2>Criando vaga</h2>
+                        <div class="tree-links">
+                            <ul>
+                                <li><a href="logado-vagas.html">Vagas criadas</a></li>
+                                <li><a href="#">Criar nova</a></li>
+                            </ul>
                         </div>
-                        <div class="content-grid">
-                            <form class="content form-create-vaga" action="" method="post">
-                                <input type="text" placeholder="Título da vaga"/>
-                                <input type="text" name="courses" id="change-courses" placeholder="Curso alvo..." list="courses" >
-                                <datalist id="courses">
-                                    <option value="info">Informática</option>
-                                    <option value="energias">Energias Renováveis</option>
-                                    <option value="eletro">Eletrotécnica</option>
-                                    <option value="adm">Administração</option>
-                                    <option value="fisica">Física</option>
-                                </datalist>
-                                <textarea 
-                                style="resize: vertical;min-height: 200px;max-height: 300px;" 
-                                placeholder="Descrição da vaga..." 
-                                class="txt-input" 
-                                name="description" 
-                                id="desc" 
-                                rows="10"
-                                onkeyup="counter()"></textarea>
-                                <div class="profissional-level">
-                                    <p>Limite de caracteres: <span id="count">1000</span></p>
+
+                        <div class="content">
+                            <form class="form-create-vaga" action="" method="post">
+                                <div class="form-title">
+                                    <h3>Criar nova vaga</h3>
                                 </div>
-                                <input type="submit" value="Criar" id="submit-form" class="btn-outlined"/>
+                                <div class="form-items">
+                                    <div class="lbl">
+                                        <label for="vaga-title">Título:</label>
+                                        <input type="text" name="vaga-title" id="vaga-title"
+                                            placeholder="Jovem aprendiz na área de manutenção" />
+                                    </div>
+                                    <div class="lbl">
+                                        <label for="vaga-location">Localidade da vaga: </label>
+                                        <input type="text" name="location" id="vaga-location"
+                                            placeholder="ex.: João Câmara, RN">
+                                    </div>
+                                    <div class="lbl">
+                                        <label for="change-courses">Curso alvo: </label>
+                                        <input type="text" name="courses" id="change-courses"
+                                            placeholder="Administração, Informática etc" list="courses">
+                                        <datalist id="courses">
+                                            <option value="Informática"></option>
+                                            <option value="Energias Renováveis"></option>
+                                            <option value="Eletrotécnica"></option>
+                                            <option value="Administração"></option>
+                                            <option value="Física"></option>
+                                        </datalist>
+                                    </div>
+                                    <div class="lbl">
+                                        <label for="desc">Sobre a vaga: </label>
+                                        <textarea style="resize: vertical;min-height: 200px;max-height: 300px;"
+                                            placeholder="Descrição da vaga..." class="txt-input" name="description"
+                                            id="desc" rows="10" onkeyup="counter()"></textarea>
+                                        <div class="profissional-level">
+                                            <p>Limite de caracteres: <span id="count">1000</span></p>
+                                        </div>
+                                    </div>
+
+                                    <input type="submit" value="Criar" id="submit-form" class="btn-outlined" />
+                                </div>
+
                             </form>
                         </div>
+
                     </section>
                 </main>
                 <footer>
@@ -111,11 +134,11 @@
         function counter() {
             const descriptionVaga = document.querySelector('#desc');
             let countChar = document.querySelector('#count');
-            
+
             const maxChars = 1000;
             let currentValue = maxChars - (descriptionVaga.value.length);
 
-            if(currentValue <= 0){
+            if (currentValue <= 0) {
                 currentValue = "0";
                 descriptionVaga.setAttribute('maxlength', maxChars);
             }

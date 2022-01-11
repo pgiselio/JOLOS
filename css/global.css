@@ -22,7 +22,14 @@ body {
     min-height: 100vh;
     background: var(--bg-body);
 }
-
+a{
+    text-decoration: none;
+    color: var(--accent-color);
+}
+a:hover{
+    color: var(--accent-color-active);
+    text-decoration: underline;
+}
 .container {
     display: flex;
     flex-direction: column;
@@ -95,7 +102,7 @@ input[type="checkbox"]:checked::before{
 }
 
 .lbl label {
-    font-size: 9pt;
+    font-size: 10pt;
     font-weight: 500;
     color: #070707;
     padding: 2px 0;

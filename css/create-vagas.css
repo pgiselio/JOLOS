@@ -1,6 +1,32 @@
 @import url("acess.css");
 @import url("logado.css");
+.content{
+  margin-top: 10px;
+}
 
-.form-create-vaga input {
-  margin: 15px 0;
+.form-create-vaga{
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  background: #fff;
+  border-radius: 5px;  
+  box-shadow: 0 1px 2px rgb(0 0 0 / 10%);
+}
+.form-create-vaga .form-title{
+  width: 100%;
+  padding: 15px 30px;
+  border-bottom: 1px solid rgb(241, 241, 241);
+}
+.form-create-vaga .form-title h3{
+  color: var(--accent-color);
+  font-weight: 500;
+}
+.form-create-vaga .form-items{
+  display: flex;
+  flex-direction: column;
+  padding: 30px;
+  padding-top: 10px;
+}
+.form-create-vaga .form-items > * {
+  margin-bottom: 10px;
 }
