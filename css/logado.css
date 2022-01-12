@@ -1,6 +1,6 @@
 @import url("global.css");
-:root{
-  --bg-body:#f7f7f7;
+:root {
+  --bg-body: #f7f7f7;
 }
 .grid-container {
   display: grid;
@@ -232,7 +232,8 @@
   margin: 0 1rem;
   padding: 20px;
   border-radius: 10px;
-  border: 1px solid #cccc;
+  box-shadow: 0 1px 2px rgb(0 0 0 / 10%);
+  background-color: #fff;
   margin-bottom: 20px;
   display: flex;
   justify-content: space-between;
@@ -280,7 +281,7 @@
   padding: 0 15px;
 }
 
-.spacer{
+.spacer {
   height: 30px;
   width: 100%;
   background: #fff;
@@ -299,7 +300,7 @@
 }
 
 /* Tree menu links  */
-.tree-links{
+.tree-links {
   display: flex;
   height: 30px;
   width: 100%;
@@ -308,19 +309,19 @@
   position: relative;
   z-index: 11;
 }
-.tree-links ul{
+.tree-links ul {
   list-style: none;
   display: flex;
 }
-.tree-links ul li{
+.tree-links ul li {
   display: flex;
   align-items: center;
 }
-.tree-links a{
+.tree-links a {
   /* color: var(--accent-color); */
   font-size: 14px;
 }
-.tree-links ul li::before{
+.tree-links ul li::before {
   content: ">";
   padding: 0 5px;
   text-decoration: none;
@@ -359,8 +360,6 @@
   line-height: 1;
   padding-right: 12px;
 }
-
-
 
 /* Vaga cards */
 .vaga {
@@ -480,19 +479,19 @@ footer {
 }
 
 /* Página para detalhar vaga */
-.vaga-page-header{
+.vaga-page-header {
   padding: 20px 20px;
 }
-.vaga-page-header h2{
+.vaga-page-header h2 {
   color: #222;
   font-weight: 500;
 }
-.vaga-page-info{
+.vaga-page-info {
   display: flex;
   margin-top: 20px;
   width: 100%;
 }
-.vaga-page-info ul{
+.vaga-page-info ul {
   list-style: none;
   display: flex;
   flex-wrap: wrap;
@@ -500,35 +499,35 @@ footer {
   align-items: flex-start;
   width: 100%;
 }
-.vaga-page-info ul li{
+.vaga-page-info ul li {
   margin-top: 10px;
   max-width: 100%;
 }
-.vaga-page-info-item{
+.vaga-page-info-item {
   display: flex;
   align-items: center;
   padding: 15px 20px;
   margin-right: 10px;
   background: #ffffffb9;
-  border-radius: 50px;  
+  border-radius: 50px;
   box-shadow: 0 1px 2px rgb(0 0 0 / 10%);
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
-.vaga-page-info-item i{
+.vaga-page-info-item i {
   width: 20px;
   line-height: 25px;
   text-align: center;
   margin-right: 5px;
   color: #333;
 }
-.vaga-page-info-item span{
+.vaga-page-info-item span {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
-.tabs-menu{
+.tabs-menu {
   display: flex;
   flex-direction: column;
   width: 100%;
@@ -536,11 +535,11 @@ footer {
   z-index: 20;
   top: 0;
 }
-.tabs-menu .spacer{
+.tabs-menu .spacer {
   background: var(--bg-body);
   display: none;
 }
-.tabs-menu-container{
+.tabs-menu-container {
   display: flex;
   padding: 0 10px;
   border-radius: 5px;
@@ -549,98 +548,98 @@ footer {
   background: #fff;
   box-shadow: 0 1px 2px rgb(0 0 0 / 10%);
 }
-.tabs-menu ul{
+.tabs-menu ul {
   display: flex;
   list-style: none;
   height: 100%;
 }
-.tabs-menu ul li{
+.tabs-menu ul li {
   display: flex;
   align-items: center;
   margin-right: 10px;
   height: 100%;
 }
-.tabs-menu ul li a{
+.tabs-menu ul li a {
   padding: 8px 15px;
   border-radius: 8px;
   text-decoration: none;
   border: 2px solid transparent;
 }
-.tabs-menu ul li a span{
+.tabs-menu ul li a span {
   padding: 2px 6px;
   background: #f1f1f1;
   color: var(--accent-color);
   border-radius: 5px;
   font-weight: 500;
 }
-.tabs-menu ul li a.active{
+.tabs-menu ul li a.active {
   background: #f7f7f7;
   color: var(--accent-color);
 }
-.tabs-menu ul li a.active span{
+.tabs-menu ul li a.active span {
   background: var(--accent-color);
   color: #fff;
 }
-.tabs-menu ul li a:hover{
+.tabs-menu ul li a:hover {
   border-color: #f1f1f1;
 }
 
-.box{
+.box {
   display: flex;
   flex-direction: column;
   width: 100%;
   background: #fff;
-  border-radius: 5px;  
+  border-radius: 5px;
   box-shadow: 0 1px 2px rgb(0 0 0 / 10%);
   margin-top: 20px;
 }
-.box-title{
+.box-title {
   width: 100%;
   padding: 15px 30px;
   background: #fff;
   border-bottom: 1px solid rgb(241, 241, 241);
   position: relative;
 }
-.box-title.check{
+.box-title.check {
   padding: 15px;
 }
-.box-title.sticky{
+.box-title.sticky {
   position: sticky;
   top: 65px;
   z-index: 3;
 }
-.box-title h3{
+.box-title h3 {
   display: flex;
   align-items: center;
   font-size: 17px;
   font-weight: 500;
   color: #4e5860;
 }
-.box-content{
+.box-content {
   display: flex;
   flex-direction: column;
   padding: 30px;
   padding-top: 10px;
   text-align: justify;
 }
-.vaga-page-actions{
+.vaga-page-actions {
   display: flex;
   align-items: center;
 }
-.vaga-page-actions button:nth-child(1){
+.vaga-page-actions button:nth-child(1) {
   margin-right: 10px;
 }
-.vaga-page-actions > *{
+.vaga-page-actions > * {
   width: 100%;
 }
-.lista-candidatos .candidato{
+.lista-candidatos .candidato {
   display: flex;
   width: 100%;
   position: relative;
   margin-top: 5px;
 }
 
-.candidato-group{
+.candidato-group {
   display: flex;
   align-items: center;
   cursor: pointer;
@@ -650,36 +649,36 @@ footer {
   color: #333;
   width: 100%;
 }
-#candidato-checkall{
+#candidato-checkall {
   margin-right: 10px;
 }
-.candidato-list-check{
+.candidato-list-check {
   display: flex !important;
   position: absolute !important;
   z-index: 2 !important;
   left: 15px !important;
   top: 35% !important;
 }
-.candidato-list-check:checked ~ .candidato-group{
+.candidato-list-check:checked ~ .candidato-group {
   background: #f4fff6;
   color: var(--accent-color);
 }
-.candidato-group:hover{
+.candidato-group:hover {
   background: #f1f1f1 !important;
 }
-.candidato-pic{
+.candidato-pic {
   height: 50px;
   width: 50px;
-  background-color:#fff ;
+  background-color: #fff;
   object-fit: cover;
   border-radius: 100%;
   border: 2px solid #333;
 }
-.candidato-pic.default{
+.candidato-pic.default {
   padding: 10px;
   background-color: #333;
 }
-.candidato-info{
+.candidato-info {
   display: flex;
   padding-left: 10px;
   display: flex;
@@ -688,7 +687,7 @@ footer {
   text-overflow: ellipsis;
   white-space: nowrap;
 }
-.candidato-info h3{
+.candidato-info h3 {
   font-size: 16px;
   font-weight: 600;
   width: 100%;
@@ -696,7 +695,7 @@ footer {
   text-overflow: ellipsis;
   white-space: nowrap;
 }
-.candidato-info span{
+.candidato-info span {
   font-weight: 300;
   font-size: 12px;
   overflow: hidden;
@@ -704,13 +703,12 @@ footer {
   white-space: nowrap;
 }
 
-
 @media (min-width: 766px) {
   .main-container::-webkit-scrollbar {
     width: 15px;
     border-radius: 20px;
   }
-  .main-container::-webkit-scrollbar-track{
+  .main-container::-webkit-scrollbar-track {
     border-radius: 20px;
     background-color: #f5f5f5;
   }
@@ -718,7 +716,7 @@ footer {
     background-color: #dddddd;
     border-radius: 20px;
   }
-  
+
   .main-container::-webkit-scrollbar-thumb:hover {
     background-color: #ccc;
   }
@@ -762,39 +760,39 @@ footer {
   .side-bar.active .name-perfil {
     display: none;
   }
-  .header-section{
+  .header-section {
     height: 80px;
   }
-  .header-section h2{
+  .header-section h2 {
     font-size: 20px;
   }
-  .content{
+  .content {
     padding: 0 30px;
   }
-  .tree-links{
+  .tree-links {
     padding: 5px 32px;
   }
-  .vaga-page-header{
+  .vaga-page-header {
     padding: 20px 32px;
     padding-bottom: 0;
   }
-  .tabs-menu{
+  .tabs-menu {
     z-index: 4;
   }
-  .tabs-menu .spacer{
+  .tabs-menu .spacer {
     display: block;
     height: 20px;
   }
-  .tabs-menu-container{
-    margin: 0 30px;    
+  .tabs-menu-container {
+    margin: 0 30px;
   }
-  .box-title.sticky{
+  .box-title.sticky {
     top: 85px;
   }
-  .candidato-info h3{
+  .candidato-info h3 {
     font-size: 18px;
   }
-  .candidato-info span{
+  .candidato-info span {
     font-size: 14px;
   }
 }
