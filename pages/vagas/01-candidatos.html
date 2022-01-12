@@ -70,14 +70,14 @@
         <div class="main">
             <div class="main-container">
                 <main>
+                    <div class="tree-links">
+                        <ul>
+                            <li><a href="../logado-vagas.html">Vagas</a></li>
+                            <li><a href="#">Vaga #01</a></li>
+                            <li><a href="#">Candidatos</a></li>
+                        </ul>
+                    </div>
                     <section>
-                        <div class="tree-links">
-                            <ul>
-                                <li><a href="../logado-vagas.html">Vagas</a></li>
-                                <li><a href="#">Vaga #01</a></li>
-                                <li><a href="#">Candidatos</a></li>
-                            </ul>
-                        </div>
                         <div class="vaga-page-header">
                             <h2>Estágiário na área especificada </h2>
                             <span class="vaga-status enabled">ATIVO</span>
@@ -101,7 +101,7 @@
                                     <div class="lista-candidatos">
                                         <div class="candidato">
                                             <input type="checkbox" name="" class="candidato-list-check">
-                                            <a href="#" class="candidato-group">
+                                            <a href="../perfil/pessoa/jose-nascimento.html" class="candidato-group">
                                                 <img src="../../images/male-avatar-3.png" alt="Imagem de Perfil"
                                                     class="candidato-pic">
                                                 <div class="candidato-info">
@@ -231,54 +231,14 @@
                                                 </div>
                                             </a>
                                         </div>
-                                        <div class="candidato">
-                                            <input type="checkbox" name="" class="candidato-list-check">
-                                            <a href="#" class="candidato-group">
-                                                <img src="../../images/default_profile_pic.svg" alt="Imagem de Perfil"
-                                                    class="candidato-pic default">
-                                                <div class="candidato-info">
-                                                    <h3>Nome do candidato</h3>
-                                                    <span>emaildocandidato@email.com</span>
-                                                </div>
-                                            </a>
-                                        </div>
-                                        <div class="candidato">
-                                            <input type="checkbox" name="" class="candidato-list-check">
-                                            <a href="#" class="candidato-group">
-                                                <img src="../../images/default_profile_pic.svg" alt="Imagem de Perfil"
-                                                    class="candidato-pic default">
-                                                <div class="candidato-info">
-                                                    <h3>Nome do candidato</h3>
-                                                    <span>emaildocandidato@email.com</span>
-                                                </div>
-                                            </a>
-                                        </div>
-                                        <div class="candidato">
-                                            <input type="checkbox" name="" class="candidato-list-check">
-                                            <a href="#" class="candidato-group">
-                                                <img src="../../images/default_profile_pic.svg" alt="Imagem de Perfil"
-                                                    class="candidato-pic default">
-                                                <div class="candidato-info">
-                                                    <h3>Nome do candidato</h3>
-                                                    <span>emaildocandidato@email.com</span>
-                                                </div>
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="box">
-                                <div class="box-title">
-                                    <h3><i class="fas fa-exclamation-triangle"></i> Ações</h3>
-                                </div>
-                                <div class="box-content">
-                                    <div class="vaga-page-actions">
-                                        <button class="btn-outlined red">Fechar inscrições</button>
-                                        <button class="btn-outlined">Editar informações</button>
-                                    </div>
-                                </div>
-                            </div>
 
+
+                                        <div class="lista-candidatos-actions">
+                                            <button class="btn-down-curriculo">Baixar currículos</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                     </section>
                 </main>
                 <footer>
@@ -288,11 +248,6 @@
         </div>
     </div>
     <script src="/js/logado.js"></script>
-    <script>
-        function redirectCreateVagas() {
-            window.location.href = "/pages/criar-vagas.html";
-        }
-    </script>
 </body>
 
 </html>

@@ -302,9 +302,9 @@
 /* Tree menu links  */
 .tree-links {
   display: flex;
-  height: 30px;
-  width: 100%;
+  flex-wrap: wrap;
   margin-top: 30px;
+  width: 100%;
   padding: 5px 12px;
   position: relative;
   z-index: 11;
@@ -312,6 +312,9 @@
 .tree-links ul {
   list-style: none;
   display: flex;
+  width: 100%;
+  overflow-x: auto;
+  white-space: nowrap;
 }
 .tree-links ul li {
   display: flex;
@@ -382,9 +385,24 @@
   flex-direction: column;
   margin-bottom: 10px;
 }
-
+.vaga-titles{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+.vaga-titles h3{
+  padding-left: 2px;
+  width: 100%;
+  margin-bottom: 2px;
+}
 .vaga-titles span {
   font-size: 14px;
+  margin-right: 5px;
+  /* background: #f7f7f7;
+  color: #222;
+  padding: 2px 5px;
+  border-radius: 20px;
+  margin-bottom: 5px; */
 }
 
 .vaga-city::before {
@@ -488,7 +506,7 @@ footer {
 }
 .vaga-page-info {
   display: flex;
-  margin-top: 20px;
+  margin-top: 15px;
   width: 100%;
 }
 .vaga-page-info ul {
@@ -514,6 +532,7 @@ footer {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+  font-size: 15px;
 }
 .vaga-page-info-item i {
   width: 20px;
@@ -597,6 +616,8 @@ footer {
   width: 100%;
   padding: 15px 30px;
   background: #fff;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
   border-bottom: 1px solid rgb(241, 241, 241);
   position: relative;
 }
@@ -621,6 +642,30 @@ footer {
   padding: 30px;
   padding-top: 10px;
   text-align: justify;
+}
+.box-message{
+  display: flex;
+  justify-content: center;
+  padding: 40px;
+  background: #fcfcfc;
+  align-items: center;
+  color: #555;
+}
+.box-message::before{
+  content: "\f05a";
+    font-family: "Font Awesome 5 Free";
+    font-weight: 900;
+    -webkit-font-smoothing: antialiased;
+    display: inline-block;
+    font-style: normal;
+    font-variant: normal;
+    text-rendering: auto;
+    line-height: 1;
+
+    padding-right: 10px;
+    color: var(--info-msg-icon);
+    height: 100%;
+    font-size: 30px;
 }
 .vaga-page-actions {
   display: flex;
@@ -672,7 +717,7 @@ footer {
   background-color: #fff;
   object-fit: cover;
   border-radius: 100%;
-  border: 2px solid #333;
+  border: 2px solid #ccc;
 }
 .candidato-pic.default {
   padding: 10px;
@@ -702,7 +747,75 @@ footer {
   text-overflow: ellipsis;
   white-space: nowrap;
 }
+.lista-candidatos-actions{
+  padding: 10px;
+  border-top: 1px solid rgb(241, 241, 241);
+  display: flex;
+  justify-content: end;
+}
+.lista-candidatos-actions > *{
+  margin-right: 5px;
+}
+.lista-candidatos-actions button{
+  border: none;
+  padding: 6px 10px;
+  cursor: pointer;
+  background: #f1f1f1;
+  color: #333;
+  border-radius: 5px;
+}
+.lista-candidatos-actions .btn-down-curriculo{
+  background: var(--accent-color);
+  color: #fff;
+}
 
+.profile-page-header{
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  padding:20px 15px;
+  margin-top: 30px;
+  position: sticky;
+  top: 0;
+  z-index: 5;
+  justify-content: space-between;
+  background: #fcfcfc;
+  box-shadow: 0 1px 2px rgb(0 0 0 / 10%);
+}
+.user-info{
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.user-actions{
+  display: flex;
+  margin-top: 15px;
+  width: 100%;
+  min-width: 169px;
+}
+.user-actions button{
+  width: 100%;
+}
+.profile-names{
+  margin-left: 10px;
+  font-size: 12px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.profile-names h2{
+  font-size: 20px;
+  font-weight: 500;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.profile-pic{
+  height: 50px;
+  border-radius: 100%;
+}
 @media (min-width: 766px) {
   .main-container::-webkit-scrollbar {
     width: 15px;
@@ -794,6 +907,23 @@ footer {
   }
   .candidato-info span {
     font-size: 14px;
+  }
+  .profile-names{
+    font-size: 14px;
+  }
+  .profile-names h2{
+    font-size: 25px;
+  }
+  .profile-page-header{
+    flex-wrap: nowrap;
+    padding:30px;
+  }
+  .user-actions{
+    width: initial;
+    margin-top: 0;
+  }
+  .profile-pic{
+    height: 100px;
   }
 }
 @media (min-width: 1000px) {
