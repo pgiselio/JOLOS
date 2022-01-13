@@ -1,7 +1,14 @@
 const btnCollpseSidemenu = document.getElementById('btn-collapse-sidemenu');
-const sideMenu = document.querySelector('.side-bar');
+const btnHam = document.querySelector('.botao-ham');
+const mainContent = document.querySelector('.main');
+const bodyDOM = document.getElementsByTagName("body")[0];
 
 btnCollpseSidemenu.addEventListener('click', () =>{
-    btnCollpseSidemenu.classList.toggle('active');
-    sideMenu.classList.toggle('active');
+    bodyDOM.classList.toggle('expand-sidemenu');
+    btnHam.classList.toggle('active');
+});
+
+mainContent.addEventListener('click', () =>{
+    bodyDOM.classList.remove('expand-sidemenu');
+    btnHam.classList.remove('active'); 
 });
