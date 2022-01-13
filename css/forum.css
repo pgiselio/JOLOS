@@ -4,6 +4,10 @@
   justify-content: space-between;
 }
 
+.ask:hover {
+  background: #f1f1f1;
+}
+
 .pessoa-forum-group {
   display: flex;
   align-items: center;
@@ -33,6 +37,7 @@
   text-overflow: ellipsis;
   white-space: nowrap;
 }
+
 .pessoa-forum-info span {
   font-weight: 300;
   font-size: 12px;
@@ -56,4 +61,10 @@
 
 .answered {
   background-color: rgb(10, 196, 10);
+}
+
+.chk {
+  display: flex;
+  align-items: center;
+  padding: 1% 5px;
 }
