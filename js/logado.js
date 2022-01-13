@@ -1,7 +1,8 @@
 const btnCollpseSidemenu = document.getElementById('btn-collapse-sidemenu');
-const sideMenu = document.querySelector('.side-bar');
+const btnHam = document.querySelector('.botao-ham');
+const bodyDOM = document.getElementsByTagName("body")[0];
 
 btnCollpseSidemenu.addEventListener('click', () =>{
-    btnCollpseSidemenu.classList.toggle('active');
-    sideMenu.classList.toggle('active');
+    bodyDOM.classList.toggle('expand-sidemenu');
+    btnHam.classList.toggle('active');
 });
