@@ -16,8 +16,8 @@
     <main>
         <div class="container">
             <div class="login-form">
-                <a href="/"><img src="/images/logo.svg" class="logo-login" alt="" srcset=""></a>
-                <form action="logado.html" method="post" autocomplete="off">
+                <a href="/"><img src="/images/logo.svg" class="logo-login" alt="Logo do IF Jobs" title="Logo IF Jobs"></a>
+                <form method="post" autocomplete="off">
                     <div class="lbl-icon">
                         <label for="login">
                             <i class="fas fa-user"></i>
@@ -34,7 +34,7 @@
                         <input type="checkbox" name="checkbox" id="checkbox" class="checkbox" />
                         <label for="checkbox">Mostrar senha</label>
                     </div>
-                    <input type="submit" class="btn-accent" value="Entrar">
+                    <input type="submit" class="btn-accent" value="Entrar" onclick="userValidation()"/>
                     <a href="/password-reset/" class="pwrst-link">Esqueceu a senha?</a>
                 </form>
             </div>
@@ -45,6 +45,20 @@
     </main>
 
     <script src="/js/checkedValidationButton.js"></script>
+    <script>
+        async function userValidation() {
+            let user = document.querySelector('#login');
+            let pass = document.querySelector('#pass');
+
+            if(user.value == "admin" && pass.value =="ADMIN"){
+                window.location.href="/pages/logado.html";
+            } else {
+                alert("Usuário inválido");
+            }
+
+            event.preventDefault();
+        }
+    </script>
 </body>
 
 </html>
