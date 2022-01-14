@@ -1,4 +1,4 @@
-@import url("acess.css");
+@import url("access.css");
 @import url("logado.css");
 .content{
   margin-top: 10px;
@@ -11,6 +11,7 @@
   background: #fff;
   border-radius: 5px;  
   box-shadow: 0 1px 2px rgb(0 0 0 / 10%);
+  border: 1px solid #ececec;
 }
 .form-create-vaga .form-title{
   width: 100%;
@@ -29,4 +30,30 @@
 }
 .form-create-vaga .form-items > * {
   margin-bottom: 10px;
+}
+.counter-box{
+  font-size: 14px;
+  padding: 5px;
+  color: #333;
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+  background: #fff;
+}
+.counter-box span{
+  color: var(--accent-color);
+  font-weight: 600;
+}
+
+#descriptionVaga {
+  height: 300px;
+}
+
+@media(max-width:766px){
+  .form-create-vaga .form-title{
+    padding: 15px ;
+  }
+  .form-create-vaga .form-items{
+    padding: 15px;
+  } 
+
 }

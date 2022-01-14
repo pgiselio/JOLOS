@@ -22,6 +22,7 @@
   position: relative;
   z-index: 5;
   max-width: 100vw;
+  height: 60px;
 }
 
 .navigate {
@@ -392,24 +393,24 @@ body.expand-sidemenu .main-container{
 
 /* Vaga cards */
 .vaga {
-  padding: 20px;
   border-radius: 10px;
   box-shadow: 0 1px 2px rgb(0 0 0 / 10%);
   background: #fff;
   margin-bottom: 20px;
   display: flex;
   justify-content: space-between;
+  border: 1px solid #e5e5e5;
 }
 
 .vaga-data {
   position: relative;
   height: 100%;
-  padding-bottom: 55px;
+  padding-bottom: 95px;
 }
 .vaga-header {
   display: flex;
   flex-direction: column;
-  margin-bottom: 10px;
+  padding: 20px;
 }
 .vaga-titles{
   display: flex;
@@ -417,7 +418,6 @@ body.expand-sidemenu .main-container{
   flex-wrap: wrap;
 }
 .vaga-titles h3{
-  padding-left: 2px;
   width: 100%;
   margin-bottom: 2px;
 }
@@ -463,6 +463,7 @@ body.expand-sidemenu .main-container{
 
 .vaga-mid {
   position: relative;
+  padding: 0 20px;
 }
 
 .vaga-mid p {
@@ -483,18 +484,20 @@ body.expand-sidemenu .main-container{
   position: absolute;
   width: 100%;
   bottom: 0;
-}
-
-.vagas-bottom span {
-  background: #f1f1f1;
-  padding: 8px;
-  border-radius: 5px;
-  margin-right: 10px;
+  padding: 20px;
+  background: #f9f9f9;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+  border-top: 1px solid #ededed;
 }
 
 .vagas-candidatos {
   font-size: 14px;
   font-weight: 500;
+  background: #f1f1f1;
+  padding: 8px;
+  border-radius: 5px;
+  margin-right: 10px;
 }
 
 .vagas-candidatos i {
@@ -506,7 +509,7 @@ body.expand-sidemenu .main-container{
   text-decoration: none;
   color: var(--accent-color);
   font-size: 15px;
-  padding: 8px 8px;
+  padding: 8px;
   font-weight: 500;
   transition: 0.1s linear;
   text-align: center;
