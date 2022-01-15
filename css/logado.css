@@ -138,7 +138,7 @@ body.expand-sidemenu #btn-collapse-sidemenu::before {
   overflow-x: hidden;
   z-index: 12;
   width: 0;
-  transition: width 0.5s, padding 0.5s ease;
+  transition: width 0.5s ease;
 }
 
 body.expand-sidemenu .side-bar {
@@ -255,25 +255,113 @@ body.expand-sidemenu .side-bar {
   display: none;
 }
 
-.cards-container {
+.notification-container {
   margin-top: 20px;
 }
-
-.card {
-  margin: 0 1rem;
-  padding: 20px;
+.notification-cards{
+  overflow: auto;
   border-radius: 10px;
-  box-shadow: 0 1px 2px rgb(0 0 0 / 10%);
-  background-color: #fff;
-  margin-bottom: 20px;
+  padding-right: 5px;
+}
+.notification-container .notification-header{
   display: flex;
+  flex-direction: row;
+  align-items: center;
   justify-content: space-between;
+  padding: 20px 5px;
+}
+.notification-header .buttons button{
+  background: #f7f7f7;
+  padding: 5px 15px;
+  border: 1px solid rgb(221, 221, 221);
+  float: left;
+  cursor: pointer;
+  color: #666;
+}
+.notification-header .buttons button.active{
+  background: #fff;
+}
+.notification-header .buttons button:hover{
+  color: #333;
+  border-color: rgb(172, 172, 172);
+}
+.notification-header .buttons button:first-child{
+  border-top-left-radius: 5px;
+  border-bottom-left-radius: 5px;
+  border-right: none;
+}
+.notification-header .buttons button:last-child{
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
 }
 
+.notification-card {
+  padding: 20px;
+  box-shadow: 0 1px 2px rgb(0 0 0 / 10%);
+  background-color: #fff;
+  margin-bottom: 1px;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  cursor: pointer;
+}
+.notification-card:hover{
+  background-color: #fcfcfc;
+}
+.notification-card:first-child{
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+}
+.notification-card:last-child{
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+}
+
+.card-date{
+  color: rgb(122, 122, 122);
+  font-size: 13px;
+  font-weight: 500;
+  padding-top: 20px;
+}
 .card-data {
   position: relative;
   height: 100%;
-  padding-bottom: 55px;
+}
+.card-data p{
+  word-break: break-all;
+  font-size: 15px;
+  color: #444;
+}
+.card-options{
+  position: absolute;
+  right: 30px;
+  top: 50%;
+  transform:translateY(-50%);
+  opacity: 0;
+  transition: 0.1s linear;
+}
+.notification-card:hover .card-options{
+  opacity: 1;
+}
+.card-options .btn-markasread{
+  border-radius: 100%;
+  width: 35px;
+  height: 35px;
+  border: 2px solid #ccc;
+  background:#f1f1f1ef;
+  color: #666;
+  cursor: pointer;
+}
+.card-options .btn-markasread:hover{
+  border-color: var(--accent-color);
+  color: var(--accent-color);
+}
+.card-options .btn-markasread::before{
+  content:"\f06e";
+  font-family: "Font Awesome 5 Free";
+  font-weight: 900;
+  -webkit-font-smoothing: antialiased;
+  font-size: 13px;
 }
 
 /* Main content */
@@ -946,22 +1034,22 @@ footer {
 }
 
 @media (min-width: 766px) {
-  .main-container::-webkit-scrollbar {
+  .main-container::-webkit-scrollbar{
     width: 15px;
     border-radius: 20px;
   }
 
-  .main-container::-webkit-scrollbar-track {
+  .main-container::-webkit-scrollbar-track{
     border-radius: 20px;
     background-color: #f5f5f5;
   }
 
-  .main-container::-webkit-scrollbar-thumb {
+  .main-container::-webkit-scrollbar-thumb{
     background-color: #dddddd;
     border-radius: 20px;
   }
 
-  .main-container::-webkit-scrollbar-thumb:hover {
+  .main-container::-webkit-scrollbar-thumb:hover{
     background-color: #ccc;
   }
 
@@ -1035,6 +1123,25 @@ footer {
 
   .content {
     padding: 0 30px;
+  }
+
+  .notification-cards::-webkit-scrollbar{
+    width: 10px;
+    border-radius: 20px;
+  }
+
+  .notification-cards::-webkit-scrollbar-track{
+    border-radius: 20px;
+    background-color: #0000000a;
+  }
+
+  .notification-cards::-webkit-scrollbar-thumb{
+    background-color: #dddddd;
+    border-radius: 20px;
+  }
+
+  .notification-cards::-webkit-scrollbar-thumb:hover{
+    background-color: #ccc;
   }
 
   .tree-links {
