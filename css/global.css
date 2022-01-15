@@ -169,12 +169,13 @@ input[type="checkbox"]:checked::before{
     background: var(--accent-color);
 }
 .btn-outlined.red{
-    border: 2px solid #ac0000;
+    border: 2px solid #c91f1f;
     color: #ac0000;
 }
 .btn-outlined.red:hover{
-    color: #fff;
-    background: #ac0000;
+    /* color: #fff; */
+    /* background: #ac0000; */
+    background: #ac000026;
 }
 
 .info-message {

@@ -7,7 +7,7 @@
 .ql-container {
   box-sizing: border-box;
   font-family: 'Poppins', sans-serif;
-  font-size: 13px;
+  font-size: 14px;
   height: 100%;
   margin: 0px;
   position: relative;
@@ -62,7 +62,9 @@
 }
 .ql-editor ol,
 .ql-editor ul {
-  padding-left: 1.5em;
+  margin-block-start: 15px;
+  margin-block-end: 15px;
+  padding-left: 18px;
 }
 .ql-editor ol > li,
 .ql-editor ul > li {
@@ -107,7 +109,7 @@
 }
 .ql-editor ol li:not(.ql-direction-rtl),
 .ql-editor ul li:not(.ql-direction-rtl) {
-  padding-left: 1.5em;
+  padding-left: 16px;
 }
 .ql-editor ol li.ql-direction-rtl,
 .ql-editor ul li.ql-direction-rtl {
@@ -820,15 +822,15 @@
 }
 .ql-snow .ql-picker.ql-size .ql-picker-label[data-value=small]::before,
 .ql-snow .ql-picker.ql-size .ql-picker-item[data-value=small]::before {
-  content: 'Small';
+  content: 'Pequeno';
 }
 .ql-snow .ql-picker.ql-size .ql-picker-label[data-value=large]::before,
 .ql-snow .ql-picker.ql-size .ql-picker-item[data-value=large]::before {
-  content: 'Large';
+  content: 'Grande';
 }
 .ql-snow .ql-picker.ql-size .ql-picker-label[data-value=huge]::before,
 .ql-snow .ql-picker.ql-size .ql-picker-item[data-value=huge]::before {
-  content: 'Huge';
+  content: 'Enorme';
 }
 .ql-snow .ql-picker.ql-size .ql-picker-item[data-value=small]::before {
   font-size: 10px;

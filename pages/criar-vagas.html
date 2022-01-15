@@ -120,8 +120,7 @@
                                         <div class="counter-box">
                                             <p>Limite de caracteres: <span id="count">1000</span></p>
                                         </div>
-                                        <textarea
-                                            style="resize: vertical;min-height: 200px;max-height: 300px; "
+                                        <textarea style="resize: vertical;min-height: 200px;max-height: 300px; "
                                             placeholder="Descrição da vaga..." class="txt-input" name="description"
                                             id="desc" rows="10" onkeyup="counter()"></textarea>
                                     </div>
@@ -160,10 +159,20 @@
     <script src="/extras/quilljs/quill.min.js"></script>
 
     <script>
+        var toolbarOptions = [
+            [{ 'header': [1, 2, 3, false] }],
+
+            ['bold', 'italic', 'underline', 'strike'],        // toggled buttons
+
+            [{ 'list': 'ordered' }, { 'list': 'bullet' }],
+
+            ['clean']                                         // remove formatting button
+        ];
         var quill = new Quill('#descriptionVaga', {
             placeholder: 'Descrição da vaga...',
             theme: 'snow',
             modules: {
+                'toolbar': toolbarOptions,
                 'history': {          // Enable with custom configurations
                     'delay': 2500,
                     'userOnly': true
