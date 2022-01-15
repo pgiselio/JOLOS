@@ -1,7 +1,9 @@
 @import url("global.css");
+
 :root {
   --bg-body: #f7f7f7;
 }
+
 .grid-container {
   display: grid;
   grid-template-areas:
@@ -19,9 +21,11 @@
 .header {
   display: grid;
   grid-area: header;
-  position: relative;
+  position: fixed;
+  width: 100%;
   z-index: 5;
   max-width: 100vw;
+  height: 60px;
 }
 
 .navigate {
@@ -41,6 +45,7 @@
   justify-content: space-between;
   width: 95%;
 }
+
 .menu-container .logo {
   height: 35px;
 }
@@ -126,11 +131,12 @@ body.expand-sidemenu #btn-collapse-sidemenu::before {
   background-color: white;
   /* box-shadow: 8px 20px 20px 0px rgb(0 0 0 / 15%); */
   box-shadow: 1px 10px 10px rgb(0 0 0 / 8%);
-  position: relative;
+  position: fixed;
+  top: 60px;
   /* border-right: 1px solid #cccc; */
   overflow: auto;
   overflow-x: hidden;
-  z-index: 10;
+  z-index: 12;
   width: 0;
   transition: width 0.5s, padding 0.5s ease;
 }
@@ -195,11 +201,13 @@ body.expand-sidemenu .side-bar {
   margin-right: 0.5rem;
   position: absolute;
 }
+
 .data-items li a span {
   opacity: 1;
   transition: opacity 0.5s ease;
   margin-left: 44px;
 }
+
 .data-items li a {
   display: flex;
   align-items: center;
@@ -282,16 +290,24 @@ body.expand-sidemenu .side-bar {
   /* box-shadow: inset 0px 0px 11px 0px rgb(0 0 0 / 15%); */
   height: calc(100vh - 60px);
   min-width: 100vw;
+  margin-top: 60px;
 }
-body.expand-sidemenu .main-container{
-  overflow-y:hidden;
+
+body.expand-sidemenu .main {
+  pointer-events: none;
 }
+
+body.expand-sidemenu .main-container {
+  overflow-y: hidden;
+}
+
 .main-container {
   width: 100%;
   height: 100%;
   overflow: auto;
   overflow-x: hidden;
 }
+
 .content-grid {
   display: grid;
   grid-template-areas: "content filter";
@@ -305,6 +321,8 @@ body.expand-sidemenu .main-container{
   display: flex;
   flex-direction: column;
   padding: 0 15px;
+  max-width: 1280px;
+  margin: 0 auto;
 }
 
 .spacer {
@@ -314,6 +332,7 @@ body.expand-sidemenu .main-container{
   position: relative;
   z-index: 11;
 }
+
 .cards-container {
   display: grid;
   grid-template-columns: 1fr;
@@ -333,8 +352,8 @@ body.expand-sidemenu .main-container{
   width: 100%;
   padding: 5px 12px;
   position: relative;
-  z-index: 11;
 }
+
 .tree-links ul {
   list-style: none;
   display: flex;
@@ -342,14 +361,17 @@ body.expand-sidemenu .main-container{
   overflow-x: auto;
   white-space: nowrap;
 }
+
 .tree-links ul li {
   display: flex;
   align-items: center;
 }
+
 .tree-links a {
   /* color: var(--accent-color); */
   font-size: 14px;
 }
+
 .tree-links ul li::before {
   content: ">";
   padding: 0 5px;
@@ -368,7 +390,7 @@ body.expand-sidemenu .main-container{
   box-shadow: 0 1px 10px rgb(0 0 0 / 8%);
   position: sticky;
   z-index: 10;
-  top: 0;
+  top: -1px;
   background: #fffffff5;
 }
 
@@ -392,35 +414,39 @@ body.expand-sidemenu .main-container{
 
 /* Vaga cards */
 .vaga {
-  padding: 20px;
   border-radius: 10px;
   box-shadow: 0 1px 2px rgb(0 0 0 / 10%);
   background: #fff;
   margin-bottom: 20px;
   display: flex;
   justify-content: space-between;
+  border: 1px solid #e5e5e5;
 }
 
 .vaga-data {
   position: relative;
   height: 100%;
-  padding-bottom: 55px;
+  padding-bottom: 95px;
 }
+
 .vaga-header {
   display: flex;
   flex-direction: column;
-  margin-bottom: 10px;
+  padding: 20px;
 }
-.vaga-titles{
+
+.vaga-titles {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
+  word-break: break-word;
 }
-.vaga-titles h3{
-  padding-left: 2px;
+
+.vaga-titles h3 {
   width: 100%;
   margin-bottom: 2px;
 }
+
 .vaga-titles span {
   font-size: 14px;
   margin-right: 5px;
@@ -463,6 +489,7 @@ body.expand-sidemenu .main-container{
 
 .vaga-mid {
   position: relative;
+  padding: 0 20px;
 }
 
 .vaga-mid p {
@@ -483,18 +510,20 @@ body.expand-sidemenu .main-container{
   position: absolute;
   width: 100%;
   bottom: 0;
-}
-
-.vagas-bottom span {
-  background: #f1f1f1;
-  padding: 8px;
-  border-radius: 5px;
-  margin-right: 10px;
+  padding: 20px;
+  background: #f9f9f9;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+  border-top: 1px solid #ededed;
 }
 
 .vagas-candidatos {
   font-size: 14px;
   font-weight: 500;
+  background: #f1f1f1;
+  padding: 8px;
+  border-radius: 5px;
+  margin-right: 10px;
 }
 
 .vagas-candidatos i {
@@ -506,7 +535,7 @@ body.expand-sidemenu .main-container{
   text-decoration: none;
   color: var(--accent-color);
   font-size: 15px;
-  padding: 8px 8px;
+  padding: 8px;
   font-weight: 500;
   transition: 0.1s linear;
   text-align: center;
@@ -526,15 +555,18 @@ footer {
 .vaga-page-header {
   padding: 20px 20px;
 }
+
 .vaga-page-header h2 {
   color: #222;
   font-weight: 500;
 }
+
 .vaga-page-info {
   display: flex;
   margin-top: 15px;
   width: 100%;
 }
+
 .vaga-page-info ul {
   list-style: none;
   display: flex;
@@ -543,10 +575,12 @@ footer {
   align-items: flex-start;
   width: 100%;
 }
+
 .vaga-page-info ul li {
   margin-top: 10px;
   max-width: 100%;
 }
+
 .vaga-page-info-item {
   display: flex;
   align-items: center;
@@ -560,6 +594,7 @@ footer {
   white-space: nowrap;
   font-size: 15px;
 }
+
 .vaga-page-info-item i {
   width: 20px;
   line-height: 25px;
@@ -567,11 +602,13 @@ footer {
   margin-right: 5px;
   color: #333;
 }
+
 .vaga-page-info-item span {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
+
 .tabs-menu {
   display: flex;
   flex-direction: column;
@@ -580,10 +617,12 @@ footer {
   z-index: 20;
   top: 0;
 }
+
 .tabs-menu .spacer {
   background: var(--bg-body);
   display: none;
 }
+
 .tabs-menu-container {
   display: flex;
   padding: 0 10px;
@@ -593,23 +632,27 @@ footer {
   background: #fff;
   box-shadow: 0 1px 2px rgb(0 0 0 / 10%);
 }
+
 .tabs-menu ul {
   display: flex;
   list-style: none;
   height: 100%;
 }
+
 .tabs-menu ul li {
   display: flex;
   align-items: center;
   margin-right: 10px;
   height: 100%;
 }
+
 .tabs-menu ul li a {
   padding: 8px 15px;
   border-radius: 8px;
   text-decoration: none;
   border: 2px solid transparent;
 }
+
 .tabs-menu ul li a span {
   padding: 2px 6px;
   background: #f1f1f1;
@@ -617,17 +660,21 @@ footer {
   border-radius: 5px;
   font-weight: 500;
 }
+
 .tabs-menu ul li a.active {
   background: #f7f7f7;
   color: var(--accent-color);
 }
+
 .tabs-menu ul li a.active span {
   background: var(--accent-color);
   color: #fff;
 }
+
 .tabs-menu ul li a:hover {
   border-color: #f1f1f1;
 }
+
 
 .box {
   display: flex;
@@ -638,6 +685,7 @@ footer {
   box-shadow: 0 1px 2px rgb(0 0 0 / 10%);
   margin-top: 20px;
 }
+
 .box-title {
   width: 100%;
   padding: 15px 30px;
@@ -647,14 +695,17 @@ footer {
   border-bottom: 1px solid rgb(241, 241, 241);
   position: relative;
 }
+
 .box-title.check {
   padding: 15px;
 }
+
 .box-title.sticky {
   position: sticky;
   top: 65px;
   z-index: 3;
 }
+
 .box-title h3 {
   display: flex;
   align-items: center;
@@ -662,14 +713,21 @@ footer {
   font-weight: 500;
   color: #4e5860;
 }
+
+.box-title h3 i {
+  margin-right: 5px;
+  font-size: 15px;
+}
+
 .box-content {
   display: flex;
   flex-direction: column;
   padding: 30px;
-  padding-top: 10px;
+  padding-top: 15px;
   text-align: justify;
 }
-.box-message{
+
+.box-message {
   display: flex;
   justify-content: center;
   padding: 40px;
@@ -677,32 +735,57 @@ footer {
   align-items: center;
   color: #555;
 }
-.box-message::before{
-  content: "\f05a";
-    font-family: "Font Awesome 5 Free";
-    font-weight: 900;
-    -webkit-font-smoothing: antialiased;
-    display: inline-block;
-    font-style: normal;
-    font-variant: normal;
-    text-rendering: auto;
-    line-height: 1;
 
-    padding-right: 10px;
-    color: var(--info-msg-icon);
-    height: 100%;
-    font-size: 30px;
+.box-message::before {
+  content: "\f05a";
+  font-family: "Font Awesome 5 Free";
+  font-weight: 900;
+  -webkit-font-smoothing: antialiased;
+  display: inline-block;
+  font-style: normal;
+  font-variant: normal;
+  text-rendering: auto;
+  line-height: 1;
+
+  padding-right: 10px;
+  color: var(--info-msg-icon);
+  height: 100%;
+  font-size: 30px;
 }
+
+
+.vaga-page-description {
+  font-size: 14px;
+  display: flex;
+  flex-direction: column;
+  word-break: break-all;
+}
+
+.vaga-page-description ul, ol {
+  margin-block-start: 15px;
+  margin-block-end: 15px;
+  padding-left: 18px;
+}
+
+.vaga-page-description ul li, ol li {
+  margin-left: 16px;
+}
+
+
 .vaga-page-actions {
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
 }
+
 .vaga-page-actions button:nth-child(1) {
-  margin-right: 10px;
+  margin-bottom: 10px;
 }
-.vaga-page-actions > * {
+
+.vaga-page-actions>* {
   width: 100%;
 }
+
 .lista-candidatos .candidato {
   display: flex;
   width: 100%;
@@ -720,9 +803,11 @@ footer {
   color: #333;
   width: 100%;
 }
+
 #candidato-checkall {
   margin-right: 10px;
 }
+
 .candidato-list-check {
   display: flex !important;
   position: absolute !important;
@@ -730,13 +815,16 @@ footer {
   left: 15px !important;
   top: 35% !important;
 }
-.candidato-list-check:checked ~ .candidato-group {
+
+.candidato-list-check:checked~.candidato-group {
   background: #f4fff6;
   color: var(--accent-color);
 }
+
 .candidato-group:hover {
   background: #f1f1f1 !important;
 }
+
 .candidato-pic {
   height: 50px;
   width: 50px;
@@ -745,10 +833,12 @@ footer {
   border-radius: 100%;
   border: 2px solid #ccc;
 }
+
 .candidato-pic.default {
   padding: 10px;
   background-color: #333;
 }
+
 .candidato-info {
   display: flex;
   padding-left: 10px;
@@ -758,6 +848,7 @@ footer {
   text-overflow: ellipsis;
   white-space: nowrap;
 }
+
 .candidato-info h3 {
   font-size: 16px;
   font-weight: 600;
@@ -766,6 +857,7 @@ footer {
   text-overflow: ellipsis;
   white-space: nowrap;
 }
+
 .candidato-info span {
   font-weight: 300;
   font-size: 12px;
@@ -773,16 +865,19 @@ footer {
   text-overflow: ellipsis;
   white-space: nowrap;
 }
-.lista-candidatos-actions{
+
+.lista-candidatos-actions {
   padding: 10px;
   border-top: 1px solid rgb(241, 241, 241);
   display: flex;
   justify-content: end;
 }
-.lista-candidatos-actions > *{
+
+.lista-candidatos-actions>* {
   margin-right: 5px;
 }
-.lista-candidatos-actions button{
+
+.lista-candidatos-actions button {
   border: none;
   padding: 6px 10px;
   cursor: pointer;
@@ -790,16 +885,17 @@ footer {
   color: #333;
   border-radius: 5px;
 }
-.lista-candidatos-actions .btn-down-curriculo{
+
+.lista-candidatos-actions .btn-down-curriculo {
   background: var(--accent-color);
   color: #fff;
 }
 
-.profile-page-header{
+.profile-page-header {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  padding:20px 15px;
+  padding: 20px 15px;
   margin-top: 30px;
   position: sticky;
   top: 0;
@@ -808,49 +904,58 @@ footer {
   background: #fcfcfc;
   box-shadow: 0 1px 2px rgb(0 0 0 / 10%);
 }
-.user-info{
+
+.user-info {
   display: flex;
   align-items: center;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
-.user-actions{
+
+.user-actions {
   display: flex;
   margin-top: 15px;
   width: 100%;
   min-width: 169px;
 }
-.user-actions button{
+
+.user-actions button {
   width: 100%;
 }
-.profile-names{
+
+.profile-names {
   margin-left: 10px;
   font-size: 12px;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
-.profile-names h2{
+
+.profile-names h2 {
   font-size: 20px;
   font-weight: 500;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
-.profile-pic{
+
+.profile-pic {
   height: 50px;
   border-radius: 100%;
 }
+
 @media (min-width: 766px) {
   .main-container::-webkit-scrollbar {
     width: 15px;
     border-radius: 20px;
   }
+
   .main-container::-webkit-scrollbar-track {
     border-radius: 20px;
     background-color: #f5f5f5;
   }
+
   .main-container::-webkit-scrollbar-thumb {
     background-color: #dddddd;
     border-radius: 20px;
@@ -859,28 +964,37 @@ footer {
   .main-container::-webkit-scrollbar-thumb:hover {
     background-color: #ccc;
   }
+
   .menu-container {
     width: 98%;
   }
-  .main{
+
+  .main {
     min-width: initial;
   }
 
-  body.expand-sidemenu .main-container{
-    overflow-y:initial;
+  body.expand-sidemenu .main {
+    pointer-events: all;
+  }
+
+  body.expand-sidemenu .main-container {
+    overflow-y: initial;
   }
 
   #btn-collapse-sidemenu::before {
     content: "\f060";
     display: inline-block;
   }
- .botao-ham{
+
+  .botao-ham {
     display: none;
   }
 
   .side-bar {
     width: 280px;
     padding-right: 10px;
+    position: relative;
+    z-index: 10;
   }
 
   body.expand-sidemenu .side-bar {
@@ -910,61 +1024,110 @@ footer {
     opacity: 0;
     height: 0;
   }
+
   .header-section {
     height: 80px;
   }
+
   .header-section h2 {
     font-size: 20px;
   }
+
   .content {
     padding: 0 30px;
   }
+
   .tree-links {
     padding: 5px 32px;
   }
+
+  .flex-colums-2 {
+    flex-flow: row nowrap;
+  }
+
+  .box.vaga-page-actions {
+    max-width: 300px;
+    margin-left: 30px;
+    height: 100%;
+  }
+
   .vaga-page-header {
     padding: 20px 32px;
     padding-bottom: 0;
   }
+
   .tabs-menu {
     z-index: 4;
   }
+
   .tabs-menu .spacer {
     display: block;
     height: 20px;
   }
+
   .tabs-menu-container {
     margin: 0 30px;
   }
+
   .box-title.sticky {
     top: 85px;
   }
+
   .candidato-info h3 {
     font-size: 18px;
   }
+
   .candidato-info span {
     font-size: 14px;
   }
-  .profile-names{
+
+  .profile-names {
     font-size: 14px;
   }
-  .profile-names h2{
+
+  .profile-names h2 {
     font-size: 25px;
   }
-  .profile-page-header{
+
+  .profile-page-header {
     flex-wrap: nowrap;
-    padding:30px;
+    padding: 30px;
   }
-  .user-actions{
+
+  .user-actions {
     width: initial;
     margin-top: 0;
   }
-  .profile-pic{
+
+  .profile-pic {
     height: 100px;
   }
 }
+
 @media (min-width: 1000px) {
   .cards-container {
     grid-template-columns: 1fr 1fr;
+  }
+
+  .vaga-columns-2 {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-between;
+  }
+
+  .vaga-columns-2 .column-1 {
+    display: flex;
+    flex: 0 1 70%;
+    padding-right: 20px;
+  }
+
+  .vaga-columns-2 .column-2 {
+    display: flex;
+    flex: 0 1 30%;
+    height: 100%;
+  }
+
+  .vaga-columns-2 .column-2 .box {
+    height: 100%;
   }
 }

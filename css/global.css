@@ -4,7 +4,7 @@
     --bg-body: #fff;
     --accent-color: #2d9041;
     --accent-color-active: #1d5c2a;
-    --outline-color: #e4e4e4;
+    --outline-color: #ced4da;
     --info-msg-bg: #e6e6e69a;
     --info-msg-color: #363636;
     --info-msg-icon: #72727294;
@@ -43,7 +43,7 @@ a:hover{
 }
 /*Componentes*/
 .txt-input, input, input[type="text"], input[type="password"] {
-    border: 2px solid var(--outline-color);
+    border: 1px solid var(--outline-color);
     border-radius: 5px;
     padding: 8px;
     outline: 0;
@@ -104,9 +104,9 @@ input[type="checkbox"]:checked::before{
 
 .lbl label {
     font-size: 10pt;
-    font-weight: 500;
+    font-weight: 400;
     color: #070707;
-    padding: 2px 0;
+    padding: 3px 0;
 }
 
 .lbl-icon {
@@ -169,12 +169,13 @@ input[type="checkbox"]:checked::before{
     background: var(--accent-color);
 }
 .btn-outlined.red{
-    border: 2px solid #ac0000;
+    border: 2px solid #c91f1f;
     color: #ac0000;
 }
 .btn-outlined.red:hover{
-    color: #fff;
-    background: #ac0000;
+    /* color: #fff; */
+    /* background: #ac0000; */
+    background: #ac000026;
 }
 
 .info-message {
