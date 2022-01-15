@@ -71,25 +71,21 @@ input[type="checkbox"] {
   all: unset;
   border: 1px solid #cccc;
   border-radius: 5px;
-  width: 20px;
-  height: 20px;
+  width: 15px;
+  height: 15px;
   display: inline-block;
   cursor: pointer;
-  transition: 0.1s linear;
+  transition: 0.1s linear 0.2s;
   position: relative;
 }
-
-input[type="checkbox"]:checked {
-  background: var(--accent-color);
-}
-input[type="checkbox"]:checked::before {
+input[type="checkbox"]::before {
   content: "\f00c";
   font-family: "Font Awesome 5 Free";
   font-weight: 900;
   -webkit-font-smoothing: antialiased;
   display: inline-block;
-  line-height: 20px !important;
-  width: 20px;
+  line-height: 15px !important;
+  width: 100%;
   position: absolute;
   text-align: center;
   font-style: normal;
@@ -98,6 +94,17 @@ input[type="checkbox"]:checked::before {
   line-height: 1;
   color: #fff;
   font-size: 9px;
+  clip-path: circle(0px at 2px 50%);
+  transition: clip-path 0.5s ease;
+}
+
+input[type="checkbox"]:checked {
+  background: var(--accent-color);
+  transition: 0.1s linear;
+}
+input[type="checkbox"]:checked::before {
+  clip-path: circle(100% at 2px 50%);
+  transition: clip-path 0.5s ease;
 }
 .chk {
   display: flex;
@@ -275,3 +282,14 @@ input[type="checkbox"]:checked::before {
   transform: rotate(-45deg) translate(-5.5px, 3px);
   -webkit-transform: rotate(-45deg) translate(-5.5px, 3px);
 }
+@media(max-width: 766px){
+  input[type="checkbox"] { 
+    width: 20px;
+    height: 20px;
+  }
+  input[type="checkbox"]::before {
+    line-height: 20px !important;
+    font-size: 11px;
+  }
+}
+
