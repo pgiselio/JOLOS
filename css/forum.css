@@ -66,5 +66,56 @@
 .chk {
   display: flex;
   align-items: center;
-  padding: 1% 5px;
+}
+
+.mt-and-mb-10px {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.mt-and-mb-5px {
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+.modal-container {
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.5);
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  z-index: 100;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal {
+  padding: 20px 30px;
+  border-radius: 10px;
+  background: white;
+}
+
+.header-modal {
+  display: flex;
+  justify-content: space-between;
+}
+
+.icon-close {
+  transition: 0.3s;
+  cursor: pointer;
+  font-size: 18px;
+}
+
+.icon-close:hover {
+  color: rgb(230, 15, 15);
+}
+
+.ml-15px {
+  margin-left: 15px;
+}
+
+.form-filtro {
+  padding: 0;
 }

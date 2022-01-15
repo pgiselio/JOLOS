@@ -132,30 +132,55 @@
 
     <div class="modal-container" id="modal-filtro">
         <div class="modal">
-            <h3>Filtros</h3>
-            <form method="post">
-                <div class="chk">
+            <div class="header-modal">
+                <h3>Filtros</h3>
+                <i class="fas fa-times icon-close"></i>
+            </div>
+            <form method="post" class="form-filtro">
+                <div class="chk mt-and-mb-10px">
                     <div class="assuntos">
-                        <div class="check-estagio chk">
+                        <div class="check-estagio chk mt-and-mb-5px">
                             <input type="checkbox" name="check-estagio" id="check-estagio"/>
                             <label for="check-estagio">Estágio</label>
                         </div>
-                        <div class="check-jovem-ap chk">
+                        <div class="check-jovem-ap chk mt-and-mb-5px">
                             <input type="checkbox" name="check-ja" id="check-ja"/>
                             <label for="check-ja">Jovem Aprendiz</label>
                         </div>
-                        <div class="check-bolsa chk">
+                        <div class="check-bolsa chk mt-and-mb-5px">
                             <input type="checkbox" name="check-bolsa" id="check-bolsa"/>
                             <label for="check-bolsa">Bolsa</label>
                         </div>
                     </div>
-                    <button type="submit" ></button>
+                    <div class="assuntos ml-15px">
+                        <div class="check-estagio chk mt-and-mb-5px">
+                            <input type="checkbox" name="check-estagio" id="check-estagio"/>
+                            <label for="check-estagio">Estágio</label>
+                        </div>
+                        <div class="check-jovem-ap chk mt-and-mb-5px">
+                            <input type="checkbox" name="check-ja" id="check-ja"/>
+                            <label for="check-ja">Jovem Aprendiz</label>
+                        </div>
+                        <div class="check-bolsa chk mt-and-mb-5px">
+                            <input type="checkbox" name="check-bolsa" id="check-bolsa"/>
+                            <label for="check-bolsa">Bolsa</label>
+                        </div>
+                    </div>
                 </div>
+                <button type="submit" class="btn-accent">Filtrar</button>
             </form>
         </div>
     </div>
 
     <script src="/js/logado.js"></script>
+    <script>
+        const iconClose = document.querySelector('.icon-close');
+        const modalContainer = document.querySelector('.modal-container');
+
+        iconClose.addEventListener('click', () => {
+            modalContainer.style.display='none';
+        });
+    </script>
 </body>
 
 </html>
