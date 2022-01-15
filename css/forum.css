@@ -53,18 +53,69 @@
   margin-right: 20px;
   color: #fff;
   border-radius: 5px;
+  font-size: 25px;
 }
 
 .pendding {
-  background-color: rgb(199, 199, 23);
+  color: rgb(199, 199, 23);
 }
 
 .answered {
-  background-color: rgb(10, 196, 10);
+  color: rgb(10, 196, 10);
 }
 
-.chk {
-  display: flex;
+.mt-and-mb-10px {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.mt-and-mb-5px {
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+.modal-container {
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.5);
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  z-index: 100;
+  display: none;
+  justify-content: center;
   align-items: center;
-  padding: 1% 5px;
+}
+
+.modal {
+  padding: 20px 30px;
+  border-radius: 10px;
+  background: white;
+}
+
+.header-modal {
+  display: flex;
+  justify-content: space-between;
+}
+
+.icon-close {
+  transition: 0.3s;
+  cursor: pointer;
+  font-size: 18px;
+}
+
+.icon-close:hover {
+  color: rgb(230, 15, 15);
+}
+
+.ml-15px {
+  margin-left: 15px;
+}
+
+.form-filtro {
+  padding: 0;
+}
+
+.btn-filter {
+  padding: 8px 20px;
 }
