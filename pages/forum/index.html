@@ -85,8 +85,9 @@
                         <div class="content">
 
                             <div class="box">
-                                <div class="box-title">
+                                <div class="box-title flex justify-content-between">
                                     <h3>Perguntas</h3>
+                                    <button class="btn-outlined" id="filtro">Filtros <i class="fas fa-filter"></i></button>
                                 </div>
                                 <div>
                                     <div class="ask-box">
@@ -99,8 +100,8 @@
                                                     <span>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</span>
                                                 </div>
                                             </a>
-                                            <div class="situation-ask pendding">
-                                                <span>PENDENTE</span>
+                                            <div class="situation-ask">
+                                                <i class="fas fa-exclamation-circle pendding"></i>
                                             </div>
                                         </div>
                                         <div class="ask">
@@ -113,7 +114,7 @@
                                                 </div>
                                             </a>
                                             <div class="situation-ask answered">
-                                                <span>ENVIADO</span>
+                                                <i class="fas fa-check-circle"></i>
                                             </div>
                                         </div>
                                     </div>
@@ -153,21 +154,17 @@
                         </div>
                     </div>
                     <div class="assuntos ml-15px">
-                        <div class="check-estagio chk mt-and-mb-5px">
-                            <input type="checkbox" name="check-estagio" id="check-estagio"/>
-                            <label for="check-estagio">Estágio</label>
+                        <div class="check-respondidas chk mt-and-mb-5px">
+                            <input type="checkbox" name="check-respondidas" id="check-respondidas"/>
+                            <label for="check-respondidas">Respondidas</label>
                         </div>
-                        <div class="check-jovem-ap chk mt-and-mb-5px">
-                            <input type="checkbox" name="check-ja" id="check-ja"/>
-                            <label for="check-ja">Jovem Aprendiz</label>
-                        </div>
-                        <div class="check-bolsa chk mt-and-mb-5px">
-                            <input type="checkbox" name="check-bolsa" id="check-bolsa"/>
-                            <label for="check-bolsa">Bolsa</label>
+                        <div class="check-pendentes chk mt-and-mb-5px">
+                            <input type="checkbox" name="check-pendentes" id="check-pendente"/>
+                            <label for="check-pendentes">Pendentes</label>
                         </div>
                     </div>
                 </div>
-                <button type="submit" class="btn-accent">Filtrar</button>
+                <button type="submit" class="btn-accent btn-filter">Filtrar</button>
             </form>
         </div>
     </div>
@@ -175,11 +172,17 @@
     <script src="/js/logado.js"></script>
     <script>
         const iconClose = document.querySelector('.icon-close');
-        const modalContainer = document.querySelector('.modal-container');
+        const modalContainer = document.querySelector('#modal-filtro');
+        const btnFilter = document.querySelector('#filtro');
 
         iconClose.addEventListener('click', () => {
             modalContainer.style.display='none';
         });
+
+        btnFilter.addEventListener('click', () => {
+            modalContainer.style.display='flex';
+        })
+
     </script>
 </body>
 

@@ -53,19 +53,15 @@
   margin-right: 20px;
   color: #fff;
   border-radius: 5px;
+  font-size: 25px;
 }
 
 .pendding {
-  background-color: rgb(199, 199, 23);
+  color: rgb(199, 199, 23);
 }
 
 .answered {
-  background-color: rgb(10, 196, 10);
-}
-
-.chk {
-  display: flex;
-  align-items: center;
+  color: rgb(10, 196, 10);
 }
 
 .mt-and-mb-10px {
@@ -86,7 +82,7 @@
   top: 0px;
   left: 0px;
   z-index: 100;
-  display: flex;
+  display: none;
   justify-content: center;
   align-items: center;
 }
@@ -118,4 +114,8 @@
 
 .form-filtro {
   padding: 0;
+}
+
+.btn-filter {
+  padding: 8px 20px;
 }
