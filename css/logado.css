@@ -138,7 +138,9 @@ body.expand-sidemenu #btn-collapse-sidemenu::before {
   overflow-x: hidden;
   z-index: 12;
   width: 0;
-  transition: width 0.5s ease;
+}
+body.transbar .side-bar{
+  transition: width 0.5s, padding 0.5s ease;
 }
 
 body.expand-sidemenu .side-bar {
@@ -164,6 +166,8 @@ body.expand-sidemenu .side-bar {
   object-fit: cover;
   border-radius: 100%;
   border: 2px solid #ccc;
+}
+body.transbar .side-bar .img-perfil{
   transition: height 0.5s, width 0.5s ease;
 }
 
@@ -176,6 +180,8 @@ body.expand-sidemenu .side-bar {
   text-overflow: ellipsis;
   height: 29px;
   opacity: 1;
+}
+body.transbar .side-bar .name-perfil{
   transition: height 0.2s, opacity 0.2s ease-out;
 }
 
@@ -221,7 +227,9 @@ body.expand-sidemenu .side-bar {
   border-top-right-radius: 30px;
   border-bottom-right-radius: 30px;
   overflow: hidden;
-  overflow-wrap: break-word;
+  overflow-wrap: break-word; 
+}
+body.transbar .side-bar .data-items li a{
   transition: border-radius 0.5s, margin 0.5s ease;
 }
 
@@ -290,6 +298,9 @@ body.expand-sidemenu .side-bar {
   border-bottom-left-radius: 5px;
   border-right: none;
 }
+.notification-header .buttons button:first-child:hover ~ button{
+  border-left-color: rgb(172, 172, 172);
+}
 .notification-header .buttons button:last-child{
   border-top-right-radius: 5px;
   border-bottom-right-radius: 5px;
@@ -304,6 +315,8 @@ body.expand-sidemenu .side-bar {
   flex-direction: column;
   position: relative;
   cursor: pointer;
+  border-right: 1px solid #e3e3e3;
+  border-left: 1px solid #e3e3e3;
 }
 .notification-card:hover{
   background-color: #fcfcfc;
@@ -311,10 +324,12 @@ body.expand-sidemenu .side-bar {
 .notification-card:first-child{
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
+  border-top:1px solid #e3e3e3;
 }
 .notification-card:last-child{
   border-bottom-left-radius: 10px;
   border-bottom-right-radius: 10px;
+  border-bottom: 1px solid #e3e3e3;
 }
 
 .card-date{
@@ -338,10 +353,10 @@ body.expand-sidemenu .side-bar {
   top: 50%;
   transform:translateY(-50%);
   opacity: 0;
-  transition: 0.1s linear;
 }
 .notification-card:hover .card-options{
   opacity: 1;
+  transition: 0.1s linear;
 }
 .card-options .btn-markasread{
   border-radius: 100%;

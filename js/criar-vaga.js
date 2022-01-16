@@ -3,9 +3,15 @@ let countChar = document.querySelector('#count');
 const descriptionVaga = document.querySelector('#desc');
 
 quill.on('text-change', function (delta, old, source) {
+    descriptionVaga.value = document.querySelector('.ql-editor').innerHTML;
     let currentValue = limit - (quill.getLength());
     countChar.innerHTML = currentValue;
-    descriptionVaga.value = document.querySelector('.ql-editor').innerHTML;
+    if(currentValue < 0){
+        countChar.classList.add('limit-exceeded');
+    } else{
+        countChar.classList.remove('limit-exceeded');
+    }
+        
     if (quill.getLength() <= limit) {
         return;
     }

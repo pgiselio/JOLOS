@@ -4,6 +4,7 @@
   --bg-body: #fff;
   --accent-color: #2d9041;
   --accent-color-active: #1d5c2a;
+  --accent-color-opacity: #4abe6228;
   --outline-color: #ced4da;
   --info-msg-bg: #e6e6e69a;
   --info-msg-color: #363636;
@@ -177,15 +178,15 @@ input[type="checkbox"]:checked::before {
   font-size: 15px;
   padding: 8px 15px;
   font-weight: 500;
-  transition: 0.1s linear;
   border: 2px solid var(--accent-color);
   border-radius: 6px;
   cursor: pointer;
   background: transparent;
 }
 .btn-outlined:hover {
-  color: #fff;
-  background: var(--accent-color);
+  /* color: #fff; */
+  background: var(--accent-color-opacity);
+  transition: 0.1s linear;
 }
 .btn-outlined.red {
   border: 2px solid #c91f1f;

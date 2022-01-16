@@ -43,10 +43,14 @@
   color: var(--accent-color);
   font-weight: 600;
 }
+#count.limit-exceeded{
+  color: #ac0000;
+}
 
 #descriptionVaga {
   height: 300px;
 }
+
 
 @media(max-width:766px){
   .form-create-vaga .form-title{
