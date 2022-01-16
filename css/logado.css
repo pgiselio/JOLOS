@@ -43,11 +43,13 @@
 .menu-container {
   display: flex;
   justify-content: space-between;
+  align-items: center;
   width: 95%;
+  height: 100%;
 }
 
 .menu-container .logo {
-  height: 35px;
+  height: 58%;
 }
 
 .btn-notify {
@@ -409,6 +411,9 @@ body.expand-sidemenu .main-container {
   height: 100%;
   overflow: auto;
   overflow-x: hidden;
+}
+.main-container main{
+  min-height: 100%;
 }
 
 .content-grid {

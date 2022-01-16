@@ -59,7 +59,6 @@ input[type="password"] {
   border-radius: 5px;
   padding: 8px;
   outline: 0;
-  transition: 0.1s linear;
 }
 .txt-input:focus,
 input:focus,
@@ -67,6 +66,7 @@ input[type="text"]:focus,
 input[type="password"]:focus {
   border-color: var(--accent-color);
   box-shadow: 0 0 0 0.2rem rgba(45, 143, 65, 0.308);
+  transition: 0.2s linear;
 }
 input[type="checkbox"] {
   all: unset;
