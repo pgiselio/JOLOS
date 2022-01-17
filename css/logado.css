@@ -118,13 +118,14 @@
   text-rendering: auto;
   line-height: 35px;
   font-size: 15px;
-  transition: transform 0.2s ease;
   display: none;
 }
-
-body.expand-sidemenu #btn-collapse-sidemenu::before {
+body.toggle-sidemenu #btn-collapse-sidemenu::before {
   transform: rotate(180deg);
   -webkit-transform: rotate(180deg);
+}
+body.transbar #btn-collapse-sidemenu::before{
+  transition: transform 0.5s ease;
 }
 
 .side-bar {
@@ -145,7 +146,7 @@ body.transbar .side-bar{
   transition: width 0.5s, padding 0.5s ease;
 }
 
-body.expand-sidemenu .side-bar {
+body.toggle-sidemenu .side-bar {
   width: 280px;
   padding: 0;
   padding-right: 10px;
@@ -398,11 +399,11 @@ body.transbar .side-bar .data-items li a{
   margin-top: 60px;
 }
 
-body.expand-sidemenu .main {
+body.toggle-sidemenu .main {
   pointer-events: none;
 }
 
-body.expand-sidemenu .main-container {
+body.toggle-sidemenu .main-container {
   overflow-y: hidden;
 }
 
@@ -722,7 +723,7 @@ footer {
   flex-direction: column;
   width: 100%;
   position: sticky;
-  z-index: 20;
+  z-index: 10;
   top: 0;
 }
 
@@ -1085,11 +1086,11 @@ footer {
     min-width: initial;
   }
 
-  body.expand-sidemenu .main {
+  body.toggle-sidemenu .main {
     pointer-events: all;
   }
 
-  body.expand-sidemenu .main-container {
+  body.toggle-sidemenu .main-container {
     overflow-y: initial;
   }
 
@@ -1109,30 +1110,30 @@ footer {
     z-index: 10;
   }
 
-  body.expand-sidemenu .side-bar {
+  body.toggle-sidemenu .side-bar {
     width: 80px;
     padding: 0 10px;
   }
 
-  body.expand-sidemenu .side-bar .data-items li a {
+  body.toggle-sidemenu .side-bar .data-items li a {
     padding: 15px 15px;
     border-radius: 30px;
   }
 
-  body.expand-sidemenu .side-bar .data-items li a span {
+  body.toggle-sidemenu .side-bar .data-items li a span {
     opacity: 0;
   }
 
-  body.expand-sidemenu .side-bar .data-items li i {
+  body.toggle-sidemenu .side-bar .data-items li i {
     margin-right: 0;
   }
 
-  body.expand-sidemenu .side-bar .img-perfil {
+  body.toggle-sidemenu .side-bar .img-perfil {
     width: 3.25rem;
     height: 3.25rem;
   }
 
-  body.expand-sidemenu .side-bar .name-perfil {
+  body.toggle-sidemenu .side-bar .name-perfil {
     opacity: 0;
     height: 0;
   }

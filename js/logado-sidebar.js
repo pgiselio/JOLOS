@@ -4,12 +4,12 @@ const bodyDOM = document.getElementsByTagName("body")[0];
 
 btnCollpseSidemenu.addEventListener('click', () => {
     bodyDOM.classList.add('transbar');
-    bodyDOM.classList.toggle('expand-sidemenu');
+    bodyDOM.classList.toggle('toggle-sidemenu');
     btnHam.classList.toggle('active');
     setTimeout(() => {
         bodyDOM.classList.remove('transbar');
     }, 600);
-    if (bodyDOM.classList.contains('expand-sidemenu')) {
+    if (bodyDOM.classList.contains('toggle-sidemenu')) {
         localStorage.setItem('sidebar-collapsed', 'collapsed');
     } else {
         localStorage.setItem('sidebar-collapsed', '');
@@ -28,12 +28,9 @@ function populateStorage() {
 function checkSidebarState() {
     const mq = window.matchMedia("(min-width: 766px)");
 
-    if (mq.matches) {
-        if (localStorage.getItem('sidebar-collapsed') == ('collapsed')) {
-            bodyDOM.classList.toggle('expand-sidemenu');
-            btnHam.classList.toggle('active');
-        }
-    } 
-    
+    if (mq.matches && localStorage.getItem('sidebar-collapsed') == ('collapsed')) {
+        bodyDOM.classList.add('toggle-sidemenu');
+        btnHam.classList.add('active');
+    }
 }
 
