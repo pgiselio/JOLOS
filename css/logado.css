@@ -910,6 +910,10 @@ footer {
   position: relative;
   color: #333;
   width: 100%;
+  user-select: none;
+}
+.candidato-group *{
+  pointer-events: none;
 }
 
 #candidato-checkall {
