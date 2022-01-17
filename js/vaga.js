@@ -21,7 +21,6 @@ function verifyQuantity() {
         selectionMode = false;
         checkAll.checked = false;
     }
-    console.log(checkeds + " " + candidatosQuantity);
 }
 candidatosChk.forEach(candidato => {
     candidato.addEventListener('change', () => {
@@ -49,7 +48,6 @@ for (var i = 0; i < candidatoLink.length; i++) {
     link.id = 'candidato-' + i;
     link.addEventListener('click', function (e) {
         if (selectionMode) {
-            console.log('Click happened for: ' + e.target.id);
             var selected = document.getElementById(e.target.id.replace('candidato-', 'check-'));
             selected.checked = !selected.checked;
             verifyQuantity();
