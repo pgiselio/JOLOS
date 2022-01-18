@@ -70,7 +70,7 @@ input[type="password"]:focus {
 }
 input[type="checkbox"] {
   all: unset;
-  border: 1px solid #cccc;
+  border: 2px solid #cccc;
   border-radius: 5px;
   width: 15px;
   height: 15px;
@@ -94,7 +94,7 @@ input[type="checkbox"]::before {
   text-rendering: auto;
   line-height: 1;
   color: #fff;
-  font-size: 9px;
+  font-size: 10px;
   clip-path: circle(0px at 2px 50%);
   transition: clip-path 0.5s ease;
 }
@@ -102,6 +102,7 @@ input[type="checkbox"]::before {
 input[type="checkbox"]:checked {
   background: var(--accent-color);
   transition: 0.1s linear;
+  border-color: var(--accent-color);
 }
 input[type="checkbox"]:checked::before {
   clip-path: circle(100% at 2px 50%);
@@ -290,7 +291,7 @@ input[type="checkbox"]:checked::before {
   }
   input[type="checkbox"]::before {
     line-height: 20px !important;
-    font-size: 11px;
+    font-size: 12px;
   }
 }
 
