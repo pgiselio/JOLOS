@@ -4,7 +4,7 @@
   --bg-body: #fff;
   --accent-color: #2d9041;
   --accent-color-active: #1d5c2a;
-  --accent-color-opacity: #4abe6228;
+  --accent-color-opacity: #4abe6218;
   --outline-color: #ced4da;
   --info-msg-bg: #e6e6e69a;
   --info-msg-color: #363636;
@@ -111,6 +111,8 @@ input[type="checkbox"]:checked::before {
 .chk {
   display: flex;
   align-items: center;
+  font-size: 14px;
+  color: #070707;
 }
 .chk label {
   font-size: 13px;
@@ -159,6 +161,8 @@ input[type="checkbox"]:checked::before {
   outline-color: var(--accent-color);
 }
 
+
+/* Buttons */
 .btn-accent {
   border-radius: 30px;
   background: var(--accent-color);
@@ -177,10 +181,10 @@ input[type="checkbox"]:checked::before {
   text-decoration: none;
   color: var(--accent-color);
   font-size: 15px;
-  padding: 8px 15px;
+  padding: 8px 20px;
   font-weight: 500;
   border: 2px solid var(--accent-color);
-  border-radius: 6px;
+  border-radius: 50px;
   cursor: pointer;
   background: transparent;
 }
@@ -197,6 +201,9 @@ input[type="checkbox"]:checked::before {
   /* color: #fff; */
   /* background: #ac0000; */
   background: #ac000026;
+}
+.btn-outlined.less-radius{
+  border-radius: 8px;
 }
 
 .info-message {
@@ -229,10 +236,6 @@ input[type="checkbox"]:checked::before {
   font-size: 30px;
 }
 
-.chk {
-  font-size: 14px;
-  color: #070707;
-}
 
 .botao-ham {
   display: flex;

@@ -164,11 +164,9 @@ body.toggle-sidemenu .side-bar {
 }
 
 .side-bar .img-perfil {
-  width: 6rem;
-  height: 6rem;
-  object-fit: cover;
+  width: 5rem;
+  height: 5rem;
   border-radius: 100%;
-  border: 2px solid #ccc;
 }
 body.transbar .side-bar .img-perfil{
   transition: height 0.5s, width 0.5s ease;
@@ -181,11 +179,15 @@ body.transbar .side-bar .img-perfil{
   overflow: hidden;
   overflow-wrap: anywhere;
   text-overflow: ellipsis;
-  height: 29px;
+  white-space: nowrap;
+  padding: 0 10px;
+  padding-top: 10px;
+  font-size: 18px;
+  font-weight: 600;
   opacity: 1;
 }
 body.transbar .side-bar .name-perfil{
-  transition: height 0.2s, opacity 0.2s ease-out;
+  transition: height 0.2s, opacity 0.5s, padding 0.2s ease-out;
 }
 
 .data {
@@ -1136,6 +1138,7 @@ footer {
   body.toggle-sidemenu .side-bar .name-perfil {
     opacity: 0;
     height: 0;
+    padding: 0;
   }
 
   .header-section {

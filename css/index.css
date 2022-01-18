@@ -199,6 +199,9 @@ footer {
     .mobile-access {
         display: none;
     }
+    .menu-container{        
+        height: 100%;
+    }
     .menu {
         transform: none;
         padding-top: 30px;
@@ -211,6 +214,7 @@ footer {
         top: initial;
         left: initial;
         pointer-events: initial;
+        height: 100%;
     }
 
     .menu, .acesso {
@@ -220,21 +224,24 @@ footer {
 
     .menu li {
         display: flex;
-        padding: 0 10px;
+        padding: 0 5px;
         position: relative;
         margin-top: initial;
+        height: 100%;
     }
 
     .menu li a {
         text-decoration: none;
         color: #202020;
         font-weight: 500;
-        padding: 10px;
         height: 100%;
         width: initial;
         text-align: center;
         border: none;
         font-size: initial;
+        display: flex;
+        justify-content: center;
+        align-items: center;
     }
 
     .menu li a:hover {
@@ -250,12 +257,12 @@ footer {
         border-radius: 10px;
         display: block;
         position: absolute;
-        bottom: 3px;
+        bottom: 0;
         background: var(--accent-color);
         transition: 0.13s linear;
     }
 
     .menu li a:hover::after {
-        width: calc(100% - 40px);
+        width: calc(100% - 20px);
     }
 }
