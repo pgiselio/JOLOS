@@ -741,7 +741,7 @@ footer {
   height: 65px;
   align-items: center;
   background: #fff;
-  box-shadow: 0 1px 2px rgb(0 0 0 / 10%);
+  box-shadow: 2px 1px 2px rgb(0 0 0 / 10%);
 }
 
 .tabs-menu ul {
@@ -836,6 +836,9 @@ footer {
   padding: 30px;
   padding-top: 15px;
   text-align: justify;
+}
+.box-content.no-title{
+  padding: 30px;
 }
 
 .box-message {
@@ -1059,6 +1062,10 @@ footer {
   height: 50px;
   border-radius: 100%;
 }
+.profile-pic.default {
+  padding: 10px;
+  background-color: #333;
+}
 
 @media (min-width: 766px) {
   .main-container::-webkit-scrollbar{
@@ -1194,14 +1201,23 @@ footer {
   .tabs-menu {
     z-index: 4;
   }
+  .tabs-menu.ontop{
+    z-index: 10;
+  }
 
   .tabs-menu .spacer {
     display: block;
     height: 20px;
   }
-
+  .tabs-menu.ontop .spacer{
+    display: none;
+  }
   .tabs-menu-container {
     margin: 0 30px;
+  }
+  .tabs-menu.ontop .tabs-menu-container{
+    margin: 0;
+    border-radius: 0;
   }
 
   .box-title.sticky {
