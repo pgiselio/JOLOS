@@ -13,13 +13,22 @@ function verifyQuantity() {
     if (checkeds == candidatosQuantity) {
         selectionMode = true;
         checkAll.checked = true;
+        candidatoLink.forEach(link => {
+            link.style.cursor = "default"
+        });
     }
     else if (checkeds > 0) {
         selectionMode = true;
         checkAll.checked = false;
+        candidatoLink.forEach(link => {
+            link.style.cursor = "default"
+        });
     } else {
         selectionMode = false;
         checkAll.checked = false;
+        candidatoLink.forEach(link => {
+            link.style.cursor = ""
+        });
     }
 }
 candidatosChk.forEach(candidato => {
