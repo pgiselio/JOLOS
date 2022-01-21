@@ -50,7 +50,17 @@
 #descriptionVaga {
   height: 300px;
 }
-
+#submit-container{
+  display: flex;
+  justify-content: flex-end;
+}
+#submit-form{
+  width: 125px;
+}
+.lbl label{
+  color: #444;
+  font-weight: 500;
+}
 
 @media(max-width:766px){
   .form-create-vaga .form-title{
