@@ -286,6 +286,7 @@ body.transbar .side-bar .data-items li a{
   background: #f7f7f7;
   padding: 5px 15px;
   border: 1px solid rgb(221, 221, 221);
+  border-right: none;
   float: left;
   cursor: pointer;
   color: #666;
@@ -293,23 +294,22 @@ body.transbar .side-bar .data-items li a{
 .notification-header .buttons button.active{
   background: #fff;
 }
-.notification-header .buttons button:hover{
-  color: #333;
-  border-color: rgb(172, 172, 172);
-}
 .notification-header .buttons button:first-child{
   border-top-left-radius: 5px;
   border-bottom-left-radius: 5px;
-  border-right: none;
-}
-.notification-header .buttons button:first-child:hover ~ button{
-  border-left-color: rgb(172, 172, 172);
 }
 .notification-header .buttons button:last-child{
   border-top-right-radius: 5px;
   border-bottom-right-radius: 5px;
+  border-right: 1px solid rgb(221, 221, 221);
 }
-
+.notification-header .buttons button:hover + button{
+  border-left-color: rgb(172, 172, 172);
+}
+.notification-header .buttons button:hover{
+  color: #333;
+  border-color: rgb(172, 172, 172);
+}
 .notification-card {
   padding: 20px;
   box-shadow: 0 1px 2px rgb(0 0 0 / 10%);
@@ -1189,7 +1189,6 @@ footer {
   .box.vaga-page-actions {
     max-width: 300px;
     margin-left: 30px;
-    height: 100%;
   }
 
   .vaga-page-header {
@@ -1263,6 +1262,7 @@ footer {
     display: flex;
     flex-flow: row wrap;
     justify-content: space-between;
+    align-items: flex-start;
   }
 
   .vaga-columns-2 .column-1 {
