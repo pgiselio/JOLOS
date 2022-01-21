@@ -45,9 +45,12 @@
     top: 78px;
     left: 0;
     transition: transform 0.5s cubic-bezier(0.77, 0.2, 0.05, 1.0);
-    transform: translateY(-100vh);
+    transform: translateY(-150vh);
     pointer-events: none;
     user-select: none;
+    max-height: calc(100vh - 80px);
+    overflow: hidden;
+    overflow-y: auto;
 }
 .menu.active{
     transform: none;
@@ -93,9 +96,12 @@
     top: 78px;
     left: 0;
     transition: transform 0.5s cubic-bezier(0.77, 0.2, 0.05, 1.0);
-    transform: translateY(-100vh);
+    transform: translateY(-150vh);
     pointer-events: none;
     user-select: none;
+    max-height: calc(100vh - 80px);
+    overflow: hidden;
+    overflow-y: auto;
 }
 .acesso-mobile a{
     text-align: center;
