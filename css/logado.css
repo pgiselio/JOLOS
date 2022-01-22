@@ -1089,7 +1089,8 @@ footer {
 }
 
 .profile-pic {
-    height: 50px;
+    width: 50px;
+    height: auto;
     border-radius: 100%;
 }
 
@@ -1285,7 +1286,7 @@ footer {
     }
 
     .profile-pic {
-        height: 100px;
+        width: 100px;
     }
 }
 
