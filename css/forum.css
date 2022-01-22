@@ -119,3 +119,18 @@
 .btn-filter {
   padding: 8px 20px;
 }
+
+.pessoa-forum-pic {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+.box-header {
+  padding: 1rem;
+}
+
+.box-flex {
+  display: flex;
+}

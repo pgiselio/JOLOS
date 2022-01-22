@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Empresa logada</title>
+    <link rel="stylesheet" href="/extras/FontAwesome/css/all.min.css">
+    <link rel="stylesheet" href="/css/logado.css" />
+    <link rel="stylesheet" href="/css/forum.css">
+    <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon/favicon-16x16.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="96x96" href="/images/favicon/favicon-96x96.png">
+</head>
+
+<body>
+    <div class="grid-container">
+        <header class="header">
+            <nav class="navigate">
+                <div class="menu-container">
+                    <button id="btn-collapse-sidemenu">
+                        <div class="botao-ham">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </div>
+                    </button>
+                    <img src="/images/logo.svg" class="logo" alt="logo projeto"/>
+                    <button class="btn-notify">
+                        <i class="fas fa-bell"></i>
+                        <span></span>
+                    </button>
+                </div>
+            </nav>
+        </header>
+        <section class="side-bar">
+            <div class="side-bar-container">
+                <div class="perfil">
+                    <img class="img-perfil" src="/images/default-image.png" alt="imagem perfil" />
+                    <h3 class="name-perfil">Visão da empresa</h3>
+                </div>
+
+                <div class="data">
+                    <ul class="data-items">
+                        <li>
+                            <a href="/pages/logado.html">
+                                <i class="fas fa-home"></i>
+                                <span>Início</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/pages/logado-dados.html">
+                                <i class="fas fa-user"></i>
+                                <span>Dados</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/pages/logado-vagas.html">
+                                <i class="fas fa-briefcase"></i>
+                                <span>Vagas</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/pages/forum/" class="active">
+                                <i class="fas fa-comments"></i>
+                                <span>Fórum</span>
+                            </a>
+                        </li>
+                        <li class="sair">
+                            <a href="/pages/login.html">
+                                <i class="fas fa-sign-out-alt"></i>
+                                <span>Sair</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+        <script src="/js/logado-sidebar.js"></script>
+        <div class="main">
+            <div class="main-container">
+                <main>
+                    <section>
+                        <div class="header-section">
+                            <h2>Fórum</h2>
+                        </div>
+
+                        <div class="content">
+                            <div class="box">
+                                <div class="box-header box-flex">
+                                    <img src="../../images/male-avatar-3.png" alt="Imagem de Perfil"
+                                     class="pessoa-forum-pic" />
+                                     <div class="pessoa-forum-info">
+                                        <h2>Estágio</h2>
+                                        <span>
+                                            Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+                                            Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, 
+                                            when an unknown printer took a galley of type and scrambled it to make a type 
+                                            specimen book. It has survived not only five centuries, but also the leap into 
+                                            electronic typesetting, remaining essentially unchanged. It was popularised in 
+                                            the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, 
+                                            and more recently with desktop publishing software like Aldus PageMaker including 
+                                            versions of Lorem Ipsum.
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                    </section>
+                </main>
+                <footer>
+
+                </footer>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const iconClose = document.querySelector('.icon-close');
+        const modalContainer = document.querySelector('#modal-filtro');
+        const btnFilter = document.querySelector('#filtro');
+
+        iconClose.addEventListener('click', () => {
+            modalContainer.style.display='none';
+        });
+
+        btnFilter.addEventListener('click', () => {
+            modalContainer.style.display='flex';
+        })
+
+    </script>
+</body>
+
+</html>
