@@ -165,6 +165,7 @@ input[type="checkbox"]:focus-visible{
   border: 1px solid var(--outline-color);
   border-right: none;
   border-radius: 5px 0 0 5px;
+  font-size: 14px;
 }
 
 .lbl-icon input {
