@@ -54,6 +54,13 @@ a:hover {
   justify-content: space-between;
 }
 
+code {
+  background-color: #464646;
+  color: white;
+  padding: 10px;
+  border-radius: 5px;
+}
+
 /*Componentes*/
 .txt-input,
 input,
@@ -174,7 +181,6 @@ input[type="checkbox"]:focus-visible{
   outline-color: var(--accent-color);
 }
 
-
 /* Buttons */
 .btn-accent {
   border-radius: 30px;
@@ -222,7 +228,6 @@ input[type="checkbox"]:focus-visible{
   /* background: #ac0000; */
   background: #ac000026;
 }
-
 .btn-outlined.less-radius {
   border-radius: 8px;
 }
@@ -263,7 +268,6 @@ input[type="checkbox"]:focus-visible{
 .info-message.error-msg.show{
   display: flex;
 }
-
 
 .botao-ham {
   display: flex;
@@ -316,8 +320,7 @@ input[type="checkbox"]:focus-visible{
   transform: rotate(45deg) translate(0, 0);
   -webkit-transform: rotate(45deg) translate(2px, 2px);
 }
-
-@media(max-width: 766px) {
+@media (max-width: 766px) {
   input[type="checkbox"] {
     width: 20px;
     height: 20px;

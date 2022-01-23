@@ -119,3 +119,33 @@
 .btn-filter {
   padding: 8px 20px;
 }
+
+.pessoa-forum-pic {
+  width: 90px;
+  height: 90px;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+.box-header {
+  padding: 1rem;
+}
+
+.box-flex {
+  display: flex;
+}
+
+.box-ask {
+  position: relative;
+}
+
+.btn-answer {
+  margin-top: 10px;
+}
+
+.txt-answer {
+  resize: vertical;
+  max-height: 220px;
+  min-height: 148px;
+  margin: 10px 0;
+}
