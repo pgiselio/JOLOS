@@ -86,25 +86,38 @@
                         </div>
 
                         <div class="content">
-                            <div class="box">
-                                <div class="box-header box-flex">
-                                    <img src="../../images/male-avatar-3.png" alt="Imagem de Perfil"
-                                     class="pessoa-forum-pic" />
-                                     <div class="pessoa-forum-info">
-                                        <h2>Estágio</h2>
-                                        <span>
-                                            Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-                                            Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, 
-                                            when an unknown printer took a galley of type and scrambled it to make a type 
-                                            specimen book. It has survived not only five centuries, but also the leap into 
-                                            electronic typesetting, remaining essentially unchanged. It was popularised in 
-                                            the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, 
-                                            and more recently with desktop publishing software like Aldus PageMaker including 
-                                            versions of Lorem Ipsum.
-                                        </span>
+                            <div class="box box-ask">
+                                <div class="box-header box-title box-flex justify-content-between">
+                                    <div class="box-flex">
+                                        <img src="../../images/male-avatar-3.png" alt="Imagem de Perfil"
+                                         class="pessoa-forum-pic" />
+                                         <div class="pessoa-forum-info">
+                                            <h2>Estágio</h2>
+                                            <a href="/pages/perfil/pessoa/jose-nascimento.html">
+                                                Antônio Lima
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <div class="btn-answer">
+                                        <button class="btn-outlined"><i class="fas fa-reply"></i></button>
                                     </div>
                                 </div>
+                                <div class="box-content">
+                                    <p>
+                                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
+                                        Pellentesque eu tincidunt lectus. Quisque placerat est ut
+                                        justo accumsan malesuada. Class aptent taciti sociosqu ad
+                                        litora torquent per conubia nostra, per inceptos himenaeos.
+                                        Donec arcu metus, tristique eget nunc eget, bibendum 
+                                        hendrerit lacus. Proin iaculis vulputate dolor nec iaculis. 
+                                        Phasellus vel hendrerit elit, non tincidunt eros. Lorem ipsum 
+                                        dolor sit amet, consectetur adipiscing elit. Nunc dictum egestas 
+                                        est sit amet pharetra. Aliquam sit amet ante nec mauris bibendum 
+                                        egestas.
+                                    </p>
+                                </div>
                             </div>
+                            
                         </div>
                         
                     </section>
@@ -116,20 +129,26 @@
         </div>
     </div>
 
-    <script>
-        const iconClose = document.querySelector('.icon-close');
-        const modalContainer = document.querySelector('#modal-filtro');
-        const btnFilter = document.querySelector('#filtro');
+    <div class="modal-container" id="modal-resposta" >
+        <div class="modal">
+            <div class="header-modal">
+                <h3>Resposta</h3>
+                <i class="fas fa-times icon-close"></i>
+            </div>
+            <form method="post" class="form-resposta">
+                <div class="chk">
+                    <textarea 
+                     name="answer" 
+                     id="answer"
+                     placeholder="Fulano de tal, pare de ser um avestruz..."
+                     class="txt-input txt-answer"
+                     style="width: 445px; height:148px"></textarea>
+                </div>
+                <button type="submit" class="btn-accent">Responder</button>
+            </form>
+        </div>
+    </div>
 
-        iconClose.addEventListener('click', () => {
-            modalContainer.style.display='none';
-        });
-
-        btnFilter.addEventListener('click', () => {
-            modalContainer.style.display='flex';
-        })
-
-    </script>
 </body>
 
 </html>
