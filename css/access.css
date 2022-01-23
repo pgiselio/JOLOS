@@ -1,3 +1,4 @@
+@import url("global.css");
 :root{
     --bg-body:linear-gradient(45deg, rgba(6,52,15,1) 0%, rgba(28,136,50,1) 50%, rgba(147,255,169,1) 100%), rgb(6,52,15);
     --bg-login: #fcfcfc;
@@ -39,12 +40,16 @@ body{
     text-decoration: underline;
 }
 .bt-cadse{
+    display: flex;
     background: transparent;
     padding: 10px;
     color: var(--outline-color);
     border: none;
     cursor: pointer;
     margin-top: 10px;
+}
+.bt-cadse:hover{
+    color: #fff;
 }
 .logo-login{
     display: flex;

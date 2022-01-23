@@ -116,7 +116,10 @@ input[type="checkbox"]:checked::before {
   clip-path: circle(100% at 2px 50%);
   transition: clip-path 0.5s ease;
 }
-
+input[type="checkbox"]:focus-visible{
+  box-shadow: 0 0 0 0.2rem rgba(45, 143, 65, 0.308);
+  transition: none;
+}
 .chk {
   display: flex;
   align-items: center;
@@ -130,7 +133,6 @@ input[type="checkbox"]:checked::before {
   user-select: none;
   cursor: pointer;
 }
-
 .lbl {
   display: flex;
   flex-direction: column;
@@ -225,6 +227,8 @@ input[type="checkbox"]:checked::before {
 }
 
 .info-message {
+  display: flex;
+  align-items: center;
   background: var(--info-msg-bg);
   padding: 10px;
   font-size: 13px;
@@ -248,10 +252,15 @@ input[type="checkbox"]:checked::before {
 
   padding-right: 10px;
   padding-top: 3px;
-  min-height: 40px;
   color: var(--info-msg-icon);
   height: 100%;
   font-size: 30px;
+}
+.info-message.error-msg{
+  display: none;
+}
+.info-message.error-msg.show{
+  display: flex;
 }
 
 

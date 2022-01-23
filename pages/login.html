@@ -5,7 +5,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login - IF Jobs</title>
-    <link rel="stylesheet" href="/css/global.css">
     <link rel="stylesheet" href="/extras/FontAwesome/css/all.min.css">
     <link rel="stylesheet" href="/css/access.css">
     <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
@@ -20,8 +19,12 @@
     <main>
         <div class="container">
             <div class="login-form">
-                <a href="/"><img src="/images/logo.svg" class="logo-login" alt="Logo do IF Jobs" title="Logo IF Jobs"></a>
-                <form method="post" autocomplete="off">
+                <a href="/"><img src="/images/logo.svg" class="logo-login" alt="Logo do IF Jobs"
+                        title="Logo IF Jobs"></a>
+                <form method="post" autocomplete="off" onsubmit="userValidation()">
+                    <div class="info-message error-msg">
+                        <span>Usuário ou senha inválidos</span>
+                    </div>
                     <div class="lbl-icon">
                         <label for="login">
                             <i class="fas fa-user"></i>
@@ -29,7 +32,7 @@
                         <input type="text" id="login" placeholder="Usuário" spellcheck="false">
                     </div>
                     <div class="lbl-icon">
-                        <label for="pass"> 
+                        <label for="pass">
                             <i class="fas fa-lock"></i>
                         </label>
                         <input type="password" name="" id="pass" placeholder="Senha">
@@ -38,12 +41,12 @@
                         <input type="checkbox" name="checkbox" id="checkbox" class="checkbox" />
                         <label for="checkbox">Mostrar senha</label>
                     </div>
-                    <input type="submit" class="btn-accent" value="Entrar" onclick="userValidation()"/>
+                    <input type="submit" class="btn-accent" value="Entrar" />
                     <a href="/password-reset/" class="pwrst-link">Esqueceu a senha?</a>
                 </form>
             </div>
             <div>
-                <a href="signup.html"><button class="bt-cadse">Cadastre-se</button></a> 
+                <a href="signup.html" class="bt-cadse">Cadastre-se</a>
             </div>
         </div>
     </main>
@@ -53,11 +56,14 @@
         async function userValidation() {
             let user = document.querySelector('#login');
             let pass = document.querySelector('#pass');
+            var msg = document.querySelector('.info-message')
 
-            if(user.value == "admin" && pass.value =="ADMIN"){
-                window.location.href="/pages/logado.html";
+
+            if (user.value == "admin" && pass.value == "ADMIN") {
+                window.sessionStorage.setItem('isloggedin', 'true');
+                window.location.href = "/pages/logado.html";
             } else {
-                alert("Usuário inválido");
+                msg.classList.add('show');
             }
 
             event.preventDefault();
