@@ -339,7 +339,7 @@ body.transbar .side-bar .data-items li a {
 }
 
 .notification-card:hover {
-    background-color: #fcfcfc;
+    background-color: #f5f6f7;
 }
 
 .notification-card:first-child {
@@ -833,6 +833,8 @@ footer {
     background: #fff;
     border-bottom: 1px solid rgb(241, 241, 241);
     position: relative;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
 }
 
 .box-title.check {

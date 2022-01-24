@@ -26,7 +26,7 @@
                             <span></span>
                         </div>
                     </button>
-                    <img src="/images/logo.svg" class="logo" alt="logo projeto"/>
+                    <img src="/images/logo.svg" class="logo" alt="logo projeto" />
                     <button class="btn-notify">
                         <i class="fas fa-bell"></i>
                         <span></span>
@@ -91,7 +91,8 @@
                             <div class="box">
                                 <div class="box-title flex justify-content-between">
                                     <h3>Perguntas</h3>
-                                    <button class="btn-outlined" id="filtro">Filtros <i class="fas fa-filter"></i></button>
+                                    <button class="btn-outlined" id="filtro">Filtros <i
+                                            class="fas fa-filter"></i></button>
                                 </div>
                                 <div>
                                     <div class="ask-box">
@@ -101,12 +102,21 @@
                                                     class="candidato-pic">
                                                 <div class="pessoa-forum-info">
                                                     <h3>Estágio</h3>
-                                                    <span>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</span>
+                                                    <span>Lorem Ipsum is simply dummy text of the printing and
+                                                        typesetting industry. Lorem Ipsum has been the industry's
+                                                        standard dummy text ever since the 1500s, when an unknown
+                                                        printer took a galley of type and scrambled it to make a type
+                                                        specimen book. It has survived not only five centuries, but also
+                                                        the leap into electronic typesetting, remaining essentially
+                                                        unchanged. It was popularised in the 1960s with the release of
+                                                        Letraset sheets containing Lorem Ipsum passages, and more
+                                                        recently with desktop publishing software like Aldus PageMaker
+                                                        including versions of Lorem Ipsum.</span>
+                                                </div>
+                                                <div class="situation-ask">
+                                                    <i class="fas fa-exclamation-circle pendding"></i>
                                                 </div>
                                             </a>
-                                            <div class="situation-ask">
-                                                <i class="fas fa-exclamation-circle pendding"></i>
-                                            </div>
                                         </div>
                                         <div class="ask">
                                             <a href="#" class="pessoa-forum-group">
@@ -114,18 +124,27 @@
                                                     class="candidato-pic">
                                                 <div class="pessoa-forum-info">
                                                     <h3>Jovem Aprendiz</h3>
-                                                    <span>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</span>
+                                                    <span>Lorem Ipsum is simply dummy text of the printing and
+                                                        typesetting industry. Lorem Ipsum has been the industry's
+                                                        standard dummy text ever since the 1500s, when an unknown
+                                                        printer took a galley of type and scrambled it to make a type
+                                                        specimen book. It has survived not only five centuries, but also
+                                                        the leap into electronic typesetting, remaining essentially
+                                                        unchanged. It was popularised in the 1960s with the release of
+                                                        Letraset sheets containing Lorem Ipsum passages, and more
+                                                        recently with desktop publishing software like Aldus PageMaker
+                                                        including versions of Lorem Ipsum.</span>
+                                                </div>
+                                                <div class="situation-ask answered">
+                                                    <i class="fas fa-check-circle"></i>
                                                 </div>
                                             </a>
-                                            <div class="situation-ask answered">
-                                                <i class="fas fa-check-circle"></i>
-                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        
+
                     </section>
                 </main>
                 <footer>
@@ -137,38 +156,42 @@
 
     <div class="modal-container" id="modal-filtro">
         <div class="modal">
-            <div class="header-modal">
+            <div class="modal-header">
                 <h3>Filtros</h3>
                 <i class="fas fa-times icon-close"></i>
             </div>
             <form method="post" onsubmit="" class="form-filtro">
-                <div class="chk mt-and-mb-10px">
-                    <div class="assuntos">
-                        <div class="check-estagio chk mt-and-mb-5px">
-                            <input type="checkbox" name="check-estagio" id="check-estagio"/>
-                            <label for="check-estagio">Estágio</label>
+                <div class="modal-main">
+                    <div class="chk">
+                        <div class="assuntos">
+                            <div class="check-estagio chk mt-and-mb-5px">
+                                <input type="checkbox" name="check-estagio" id="check-estagio" />
+                                <label for="check-estagio">Estágio</label>
+                            </div>
+                            <div class="check-jovem-ap chk mt-and-mb-5px">
+                                <input type="checkbox" name="check-ja" id="check-ja" />
+                                <label for="check-ja">Jovem Aprendiz</label>
+                            </div>
+                            <div class="check-bolsa chk mt-and-mb-5px">
+                                <input type="checkbox" name="check-bolsa" id="check-bolsa" />
+                                <label for="check-bolsa">Bolsa</label>
+                            </div>
                         </div>
-                        <div class="check-jovem-ap chk mt-and-mb-5px">
-                            <input type="checkbox" name="check-ja" id="check-ja"/>
-                            <label for="check-ja">Jovem Aprendiz</label>
-                        </div>
-                        <div class="check-bolsa chk mt-and-mb-5px">
-                            <input type="checkbox" name="check-bolsa" id="check-bolsa"/>
-                            <label for="check-bolsa">Bolsa</label>
-                        </div>
-                    </div>
-                    <div class="assuntos ml-15px">
-                        <div class="check-respondidas chk mt-and-mb-5px">
-                            <input type="checkbox" name="check-respondidas" id="check-respondidas"/>
-                            <label for="check-respondidas">Respondidas</label>
-                        </div>
-                        <div class="check-pendentes chk mt-and-mb-5px">
-                            <input type="checkbox" name="check-pendentes" id="check-pendente"/>
-                            <label for="check-pendentes">Pendentes</label>
+                        <div class="assuntos ml-15px">
+                            <div class="check-respondidas chk mt-and-mb-5px">
+                                <input type="checkbox" name="check-respondidas" id="check-respondidas" />
+                                <label for="check-respondidas">Respondidas</label>
+                            </div>
+                            <div class="check-pendentes chk mt-and-mb-5px">
+                                <input type="checkbox" name="check-pendentes" id="check-pendente" />
+                                <label for="check-pendentes">Pendentes</label>
+                            </div>
                         </div>
                     </div>
                 </div>
-                <button type="submit" class="btn-accent btn-filter">Filtrar</button>
+                <div class="modal-footer">
+                    <button type="submit" class="btn-accent btn-filter">Filtrar</button>
+                </div>
             </form>
         </div>
     </div>
@@ -179,17 +202,17 @@
         const btnFilter = document.querySelector('#filtro');
 
         iconClose.addEventListener('click', () => {
-            modalContainer.style.display='none';
+            modalContainer.style.display = 'none';
         });
 
         btnFilter.addEventListener('click', () => {
-            modalContainer.style.display='flex';
+            modalContainer.style.display = 'flex';
         })
 
     </script>
     <script>
         function name(params) {
-            
+
         }
     </script>
 </body>
