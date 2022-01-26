@@ -8,7 +8,13 @@
     <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="96x96" href="/images/favicon/favicon-96x96.png">
 </head>
-<body>
+<body class="prevent-transition-flick">
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            let node = document.querySelector('.prevent-transition-flick');
+            node.classList.remove('prevent-transition-flick');
+        });
+    </script>
     <header>
         
     </header>

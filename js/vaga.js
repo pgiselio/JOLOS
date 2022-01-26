@@ -4,7 +4,7 @@ const candidatoLink = document.querySelectorAll('.candidato-group');
 var selectionMode = false;
 var candidatosQuantity = candidatosChk.length;
 function verifyQuantity() {
-    var checkeds = 0;
+    let checkeds = 0;
     candidatosChk.forEach(candidato => {
         if (candidato.checked) {
             checkeds++;
@@ -51,13 +51,13 @@ checkAll.addEventListener('change', () => {
 });
 
 for (var i = 0; i < candidatoLink.length; i++) {
-    var link = candidatoLink[i];
-    var check = candidatosChk[i];
+    let link = candidatoLink[i];
+    let check = candidatosChk[i];
     check.id = 'check-' + i;
     link.id = 'candidato-' + i;
     link.addEventListener('click', function (e) {
         if (selectionMode) {
-            var selected = document.getElementById(e.target.id.replace('candidato-', 'check-'));
+            let selected = document.getElementById(e.target.id.replace('candidato-', 'check-'));
             selected.checked = !selected.checked;
             verifyQuantity();
             e.preventDefault();

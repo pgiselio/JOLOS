@@ -3,12 +3,8 @@ const btnHam = document.querySelector('.botao-ham');
 const bodyDOM = document.getElementsByTagName("body")[0];
 
 btnCollpseSidemenu.addEventListener('click', () => {
-    bodyDOM.classList.add('transbar');
     bodyDOM.classList.toggle('toggle-sidemenu');
     btnHam.classList.toggle('active');
-    setTimeout(() => {
-        bodyDOM.classList.remove('transbar');
-    }, 600);
     if (bodyDOM.classList.contains('toggle-sidemenu')) {
         localStorage.setItem('sidebar-collapsed', 'collapsed');
     } else {
@@ -33,4 +29,5 @@ function checkSidebarState() {
         btnHam.classList.add('active');
     }
 }
+
 

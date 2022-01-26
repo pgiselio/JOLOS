@@ -13,12 +13,30 @@
     <link rel="icon" type="image/png" sizes="96x96" href="/images/favicon/favicon-96x96.png">
 </head>
 
-<body>
+<body class="prevent-transition-flick">
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            let node = document.querySelector('.prevent-transition-flick');
+            node.classList.remove('prevent-transition-flick');
+        });
+    </script>
     <div class="grid-container">
         <header class="header">
             <nav class="navigate">
                 <div class="menu-container">
                     <button id="btn-collapse-sidemenu">
+                        <div class="three-bars-btn">
+                            <div class="dots-btn">
+                                <span></span>
+                                <span></span>
+                                <span></span>
+                            </div>
+                            <div class="lines-btn">
+                                <span></span>
+                                <span></span>
+                                <span></span>
+                            </div>
+                        </div>
                         <div class="botao-ham">
                             <span></span>
                             <span></span>
