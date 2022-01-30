@@ -121,7 +121,7 @@
     overflow-x: hidden;
     z-index: 12;
     width: 0;
-    transition: width 0.5s, padding 0.5s ease;
+    transition: padding 0.3s ease;
 }
 
 body.toggle-sidemenu .side-bar {
@@ -145,7 +145,7 @@ body.toggle-sidemenu .side-bar {
     width: 5rem;
     height: 5rem;
     border-radius: 100%;
-    transition: height 0.5s, width 0.5s ease;
+    transition: height 0.3s, width 0.3s ease;
 }
 
 .side-bar .name-perfil {
@@ -180,17 +180,14 @@ body.toggle-sidemenu .side-bar {
 }
 
 .data-items li i {
-    width: 30px;
+    width: 44px;
     color: rgb(156, 156, 156);
     text-align: center;
-    margin-right: 0.5rem;
-    position: absolute;
 }
 
 .data-items li a span {
     opacity: 1;
     transition: opacity 0.5s ease;
-    margin-left: 44px;
 }
 
 .data-items li a {
@@ -1255,10 +1252,13 @@ footer {
 
     body.toggle-sidemenu .side-bar .data-items li a span {
         opacity: 0;
+        display: none;
     }
 
-    body.toggle-sidemenu .side-bar .data-items li i {
-        margin-right: 0;
+    body.toggle-sidemenu .side-bar .data-items li i{
+        display: flex;
+        justify-content: center;
+        width: 100%;
     }
 
     body.toggle-sidemenu .side-bar .img-perfil {
