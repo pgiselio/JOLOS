@@ -1,10 +1,10 @@
 package br.edu.ifrn.ifjobs.model;
 
+import java.io.Serializable;
 import java.sql.Date;
 
-import javax.persistence.Basic;
+import javax.persistence.Embedded;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -13,13 +13,15 @@ import org.springframework.stereotype.Component;
 
 @Entity
 @Component
-public class Curriculo {
+public class Curriculo implements Serializable {
+
+    private static final long serialVersionUID = 2L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @Basic(fetch = FetchType.LAZY)
+    @Embedded
     private Arquivo pdf;
 
     private Date dataImport;

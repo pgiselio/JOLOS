@@ -1,6 +1,6 @@
 package br.edu.ifrn.ifjobs.model.enums;
 
-public enum StatusAluno {
+public enum StatusUsuario {
 
     PENDENTE, CONCLUIDO, DESATIVADO
 }

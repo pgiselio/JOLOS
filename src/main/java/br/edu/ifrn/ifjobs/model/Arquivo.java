@@ -1,10 +1,28 @@
 package br.edu.ifrn.ifjobs.model;
 
-public class Arquivo {
+import java.io.Serializable;
+
+import javax.persistence.Column;
+import javax.persistence.Embeddable;
+
+import org.springframework.stereotype.Component;
+
+@Component
+@Embeddable
+public class Arquivo implements Serializable {
+
+    private static final long serialVersionUID = 1L;
 
     private String nome;
+
+    @Column(nullable = false)
     private String tipoArquivo;
+
+    @Column(nullable = false)
     private byte[] dados;
+
+    public Arquivo() {
+    }
 
     public Arquivo(String nome, String tipoArquivo, byte[] dados) {
         this.nome = nome;

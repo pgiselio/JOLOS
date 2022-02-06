@@ -1,11 +1,12 @@
 package br.edu.ifrn.ifjobs.model;
 
-import java.sql.Date;
+import java.io.Serializable;
 
+import javax.persistence.Basic;
 import javax.persistence.Column;
+import javax.persistence.Embedded;
 import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -13,51 +14,40 @@ import javax.persistence.OneToOne;
 
 import org.springframework.stereotype.Component;
 
-import br.edu.ifrn.ifjobs.model.enums.StatusAluno;
-
 @Entity
 @Component
-public class Aluno {
+public class Aluno implements Serializable {
+
+    private static final long serialVersionUID = 3L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @Column(nullable = false)
-    private String nome;
+    @Embedded
+    private Pessoa dadosPessoa;
 
-    @Column(nullable = false)
+    @Column(nullable = false, length = 100)
     private String curso;
 
+    @Column(nullable = true)
     private int periodo;
 
-    @Column(nullable = false)
-    @Enumerated(EnumType.STRING)
-    private StatusAluno status;
-
-    private Date dataNasc;
-
-    @Column(nullable = false)
-    private String localizacao;
-
-    @Column(unique = true, nullable = false)
+    @Column(unique = true, nullable = false, length = 11)
     private String cpf;
 
     @OneToOne
-    private Curriculo idCurriculo;
+    @Basic(fetch = FetchType.LAZY)
+    private Curriculo curriculo;
 
     public Aluno() {
     }
 
-    public Aluno(String nome, String curso,
-            int periodo, StatusAluno status, Date dataNasc,
-            String localizacao, String cpf) {
-        this.nome = nome;
+    public Aluno(String curso,
+            int periodo, String cpf, Pessoa pessoa) {
         this.curso = curso;
         this.periodo = periodo;
-        this.status = status;
-        this.dataNasc = dataNasc;
-        this.localizacao = localizacao;
+        this.dadosPessoa = pessoa;
         this.cpf = cpf;
     }
 
@@ -73,20 +63,6 @@ public class Aluno {
      */
     public void setId(int id) {
         this.id = id;
-    }
-
-    /**
-     * @return String return the nome
-     */
-    public String getNome() {
-        return nome;
-    }
-
-    /**
-     * @param nome the nome to set
-     */
-    public void setNome(String nome) {
-        this.nome = nome;
     }
 
     /**
@@ -118,48 +94,6 @@ public class Aluno {
     }
 
     /**
-     * @return StatusAluno return the status
-     */
-    public StatusAluno getStatus() {
-        return status;
-    }
-
-    /**
-     * @param status the status to set
-     */
-    public void setStatus(StatusAluno status) {
-        this.status = status;
-    }
-
-    /**
-     * @return Date return the dataNasc
-     */
-    public Date getDataNasc() {
-        return dataNasc;
-    }
-
-    /**
-     * @param dataNasc the dataNasc to set
-     */
-    public void setDataNasc(Date dataNasc) {
-        this.dataNasc = dataNasc;
-    }
-
-    /**
-     * @return String return the localizacao
-     */
-    public String getLocalizacao() {
-        return localizacao;
-    }
-
-    /**
-     * @param localizacao the localizacao to set
-     */
-    public void setLocalizacao(String localizacao) {
-        this.localizacao = localizacao;
-    }
-
-    /**
      * @return String return the cpf
      */
     public String getCpf() {
@@ -174,17 +108,31 @@ public class Aluno {
     }
 
     /**
-     * @return Curriculo return the idCurriculo
+     * @return Curriculo return the curriculo
      */
-    public Curriculo getIdCurriculo() {
-        return idCurriculo;
+    public Curriculo getCurriculo() {
+        return curriculo;
     }
 
     /**
-     * @param idCurriculo the idCurriculo to set
+     * @param curriculo the curriculo to set
      */
-    public void setIdCurriculo(Curriculo idCurriculo) {
-        this.idCurriculo = idCurriculo;
+    public void setCurriculo(Curriculo curriculo) {
+        this.curriculo = curriculo;
+    }
+
+    /**
+     * @return Pessoa return the dadosPessoa
+     */
+    public Pessoa getDadosPessoa() {
+        return dadosPessoa;
+    }
+
+    /**
+     * @param dadosPessoa the dadosPessoa to set
+     */
+    public void setDadosPessoa(Pessoa dadosPessoa) {
+        this.dadosPessoa = dadosPessoa;
     }
 
 }
