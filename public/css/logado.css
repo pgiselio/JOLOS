@@ -182,13 +182,14 @@ body.toggle-sidemenu .side-bar {
 }
 
 .data-items li i {
-    width: 44px;
+    width: 30px;
     color: rgb(156, 156, 156);
     text-align: center;
 }
 
 .data-items li a span {
     opacity: 1;
+    margin-left: 10px;
     transition: opacity 0.5s ease;
 }
 
@@ -231,6 +232,10 @@ body.toggle-sidemenu .side-bar {
     color: rgb(95, 95, 95);
 }
 
+.data-items li a.sair:hover i {
+    color: #b3001e !important;
+}
+
 body.remove-transbar .side-bar, 
 body.remove-transbar .side-bar *, 
 body.remove-transbar .menu-container , 
@@ -240,10 +245,6 @@ body.remove-transbar .three-bars-btn *{
     -ms-transition: none !important;
     -o-transition: none !important;
     transition: none !important;
-}
-
-.sair a:hover i {
-    color: #b3001e !important;
 }
 
 .hide {
