@@ -1,0 +1,133 @@
+.side-bar {
+    grid-area: menu;
+    height: calc(100vh - var(--top-bar-height));
+    background-color: white;
+    box-shadow: 1px 10px 10px rgb(0 0 0 / 8%);
+    position: fixed;
+    top: var(--top-bar-height);
+    overflow: auto;
+    overflow-x: hidden;
+    z-index: 12;
+    width: 0;
+    transition: padding 0.3s ease;
+}
+
+body.toggle-sidemenu .side-bar {
+    width: 280px;
+    padding: 0;
+    padding-right: 10px;
+}
+
+.side-bar-container {
+    padding-top: 30px;
+}
+
+.side-bar .perfil {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.side-bar .img-perfil {
+    width: 5rem;
+    height: 5rem;
+    border-radius: 100%;
+    transition: height 0.3s, width 0.3s ease;
+}
+
+.side-bar .name-perfil {
+    color: #000;
+    width: 100%;
+    text-align: center;
+    overflow: hidden;
+    overflow-wrap: anywhere;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    padding: 0 10px;
+    padding-top: 10px;
+    font-size: 18px;
+    font-weight: 600;
+    opacity: 1;
+    transition: height 0.2s, opacity 0.5s, padding 0.2s ease-out;
+}
+
+.data {
+    margin-top: 30px;
+}
+
+.data-items {
+    width: 100%;
+}
+
+.data-items li {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 5px;
+}
+
+.data-items li i {
+    width: 44px;
+    color: rgb(156, 156, 156);
+    text-align: center;
+}
+
+.data-items li a span {
+    opacity: 1;
+    transition: opacity 0.5s ease;
+}
+
+.data-items li a {
+    display: flex;
+    align-items: center;
+    position: relative;
+    width: 100%;
+    height: 45px;
+    text-decoration: none;
+    font-weight: 500;
+    color: rgb(43, 43, 43);
+    padding: 10px 15px;
+    border-top-right-radius: 30px;
+    border-bottom-right-radius: 30px;
+    overflow: hidden;
+    overflow-wrap: break-word;
+    transition: border-radius 0.5s, margin 0.5s ease;
+}
+
+.data-items li a:hover {
+    background-color: #dfdfdf;
+}
+
+.data-items li a.active {
+    background-color: var(--accent-color);
+    color: #fff;
+    margin-right: 0;
+}
+
+.data-items li a.active i {
+    color: #fff;
+}
+
+.data-items li a:hover.active i {
+    color: #fff;
+}
+
+.data-items li a:hover i {
+    color: rgb(95, 95, 95);
+}
+
+body.remove-transbar .side-bar, 
+body.remove-transbar .side-bar *, 
+body.remove-transbar .menu-container , 
+body.remove-transbar .three-bars-btn *{
+    -webkit-transition: none !important;
+    -moz-transition: none !important;
+    -ms-transition: none !important;
+    -o-transition: none !important;
+    transition: none !important;
+}
+
+.sair a:hover i {
+    color: #b3001e !important;
+}
