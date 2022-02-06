@@ -11,7 +11,7 @@ function App() {
           <div className="main-container">
             <main>
               <div className="content">
-                <h2>PAU NO SEU CÚ BETOOOOOOOOOOOOOO!</h2>
+                <h2>BETOOOOOOOOOOOOOO!</h2>
                 <h1>bola carro céu árvore joão pôr-do-sol </h1>
               </div>
             </main>

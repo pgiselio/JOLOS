@@ -2,11 +2,11 @@ import { CSSProperties } from "react";
 import "./profile-pic.css";
 
 const defaultProfilePic = "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__480.png";
-type ProfilePic = {
+type ProfilePicType = {
     url?: string
     style: CSSProperties
 }
-export function ProfilePic(props: ProfilePic){
+export function ProfilePic(props: ProfilePicType){
     return(
         <div className="profile-pic" style={props.style}>
             <span className="default-profile">
@@ -14,7 +14,7 @@ export function ProfilePic(props: ProfilePic){
             </span>
             {
                 props.url &&
-                <img className="img-perfil" src={props.url}/>
+                <img className="img-perfil" src={props.url} alt=""/>
             }
         </div>
         
