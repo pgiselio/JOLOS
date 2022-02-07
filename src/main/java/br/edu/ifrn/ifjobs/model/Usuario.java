@@ -7,6 +7,7 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 
 import org.springframework.stereotype.Component;
 
@@ -35,6 +36,9 @@ public class Usuario {
     @Enumerated(EnumType.STRING)
     private StatusUsuario status;
 
+    @OneToOne
+    private Aluno aluno;
+
     public Usuario() {
     }
 
@@ -45,4 +49,89 @@ public class Usuario {
         this.tipoUsuario = tipoUsuario;
         this.status = status;
     }
+
+    /**
+     * @return int return the id
+     */
+    public int getId() {
+        return id;
+    }
+
+    /**
+     * @param id the id to set
+     */
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    /**
+     * @return String return the email
+     */
+    public String getEmail() {
+        return email;
+    }
+
+    /**
+     * @param email the email to set
+     */
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    /**
+     * @return String return the senha
+     */
+    public String getSenha() {
+        return senha;
+    }
+
+    /**
+     * @param senha the senha to set
+     */
+    public void setSenha(String senha) {
+        this.senha = senha;
+    }
+
+    /**
+     * @return TipoUsuario return the tipoUsuario
+     */
+    public TipoUsuario getTipoUsuario() {
+        return tipoUsuario;
+    }
+
+    /**
+     * @param tipoUsuario the tipoUsuario to set
+     */
+    public void setTipoUsuario(TipoUsuario tipoUsuario) {
+        this.tipoUsuario = tipoUsuario;
+    }
+
+    /**
+     * @return StatusUsuario return the status
+     */
+    public StatusUsuario getStatus() {
+        return status;
+    }
+
+    /**
+     * @param status the status to set
+     */
+    public void setStatus(StatusUsuario status) {
+        this.status = status;
+    }
+
+    /**
+     * @return Aluno return the aluno
+     */
+    public Aluno getAluno() {
+        return aluno;
+    }
+
+    /**
+     * @param aluno the aluno to set
+     */
+    public void setAluno(Aluno aluno) {
+        this.aluno = aluno;
+    }
+
 }

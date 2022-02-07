@@ -11,7 +11,6 @@ import br.edu.ifrn.ifjobs.model.Pessoa;
 
 public class AlunoInsertDTO {
 
-    // @NotBlank(message = "Dados pessoais não informados!!")
     private Pessoa dadosPessoa;
 
     @NotBlank(message = "O curso não foi informado!!")
