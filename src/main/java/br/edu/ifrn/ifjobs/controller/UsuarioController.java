@@ -56,7 +56,7 @@ public class UsuarioController {
         }
 
         var conversor = new UsuarioLoginRetornoDTO();
-        var convertToDto = conversor.convertToDto(usuarioLogin);
+        UsuarioLoginRetornoDTO convertToDto = conversor.convertToDto(usuarioLogin);
 
         return ResponseEntity.ok().body(convertToDto);
     }
