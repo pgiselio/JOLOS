@@ -1,5 +1,5 @@
 type Item = {
-    href: string
+    to: string
     icon: string
     label: string
     title?: string
@@ -9,7 +9,7 @@ type Item = {
 export function SidebarItem(item: Item) {
     return (
         <li>
-            <a href={item.href} className={item.className} title={item.title}>
+            <a href={item.to} className={item.className} title={item.title}>
                 <i className={item.icon}></i>
                 <span>{item.label}</span>
             </a>

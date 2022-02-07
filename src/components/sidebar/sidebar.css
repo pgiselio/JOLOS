@@ -9,7 +9,7 @@
     overflow-x: hidden;
     z-index: 12;
     width: 0;
-    transition: padding 0.3s ease;
+    transition: width .3s, padding 0.3s ease;
 }
 
 body.toggle-sidemenu .side-bar {
@@ -49,7 +49,7 @@ body.toggle-sidemenu .side-bar {
     font-size: 18px;
     font-weight: 600;
     opacity: 1;
-    transition: height 0.2s, opacity 0.5s, padding 0.2s ease-out;
+    transition: height 0.5s, opacity 0.5s, padding 0.5s ease;
 }
 
 .data {
@@ -68,13 +68,14 @@ body.toggle-sidemenu .side-bar {
 }
 
 .data-items li i {
-    width: 44px;
-    color: rgb(156, 156, 156);
+    width: 30px;
+    color: rgb(85, 85, 85);
     text-align: center;
 }
 
 .data-items li a span {
     opacity: 1;
+    margin-left: 15px;
     transition: opacity 0.5s ease;
 }
 
@@ -99,6 +100,10 @@ body.toggle-sidemenu .side-bar {
     background-color: #dfdfdf;
 }
 
+/* .data-items li a:hover i {
+    color: rgb(95, 95, 95);
+} */
+
 .data-items li a.active {
     background-color: var(--accent-color);
     color: #fff;
@@ -109,12 +114,8 @@ body.toggle-sidemenu .side-bar {
     color: #fff;
 }
 
-.data-items li a:hover.active i {
-    color: #fff;
-}
-
-.data-items li a:hover i {
-    color: rgb(95, 95, 95);
+.data-items li a.sair:hover i {
+    color: #b3001e !important;
 }
 
 body.remove-transbar .side-bar, 
@@ -128,6 +129,44 @@ body.remove-transbar .three-bars-btn *{
     transition: none !important;
 }
 
-.sair a:hover i {
-    color: #b3001e !important;
+@media (min-width: 766px) {
+    .side-bar {
+        width: 280px;
+        padding-right: 10px;
+        position: relative;
+        z-index: 10;
+        transition: padding 0.3s ease;
+    }
+
+    body.toggle-sidemenu .side-bar {
+        width: 80px;
+        padding: 0 10px;
+    }
+
+    body.toggle-sidemenu .side-bar .data-items li a {
+        padding: 15px 15px;
+        border-radius: 30px;
+    }
+
+    body.toggle-sidemenu .side-bar .data-items li a span {
+        opacity: 0;
+        display: none;
+    }
+
+    body.toggle-sidemenu .side-bar .data-items li i {
+        display: flex;
+        justify-content: center;
+        width: 100%;
+    }
+
+    body.toggle-sidemenu .side-bar .img-perfil {
+        width: 3.25rem;
+        height: 3.25rem;
+    }
+
+    body.toggle-sidemenu .side-bar .name-perfil {
+        opacity: 0;
+        height: 0;
+        padding: 0;
+    }
 }

@@ -1,26 +1,36 @@
 import { ProfilePic } from '../profile-pic/profile-pic';
 import { SidebarItem } from './sidebar-item';
+import "./sidebar.css";
+
+function checkSidebarState() {
+    const mq = window.matchMedia("(min-width: 766px)");
+        
+    if (mq.matches && localStorage.getItem('sidebar-collapsed') === ('collapsed')) {
+        document.body.classList.add('toggle-sidemenu');
+    }  
+}
 
 export function SidebarList(){
+    checkSidebarState();
     return(
-        <section className="side-bar">
+        <aside className="side-bar">
             <div className="side-bar-container">
                 <div className="perfil">
-                    <ProfilePic style={{width: 100 + "px", height: 100 + "px"} }/>
+                    <ProfilePic style={{width: 80 + "px", height: 80 + "px"} }/>
                     <h3 className="name-perfil">testando 123</h3>
                 </div>
 
                 <div className="data">
                     <ul className="data-items">
-                        <SidebarItem href="/" icon="fas fa-home" label="Início"/>
-                        <SidebarItem href="/" icon="fas fa-user" label="Dados"/>
-                        <SidebarItem href="/" icon="fas fa-briefcase" label="Vagas"/>
-                        <SidebarItem href="/" icon="fas fa-comments" label="Fórum"/>
-                        <SidebarItem href="/" icon="fas fa-sign-out-alt" label="Sair" className="sair"/>
+                        <SidebarItem to="/" icon="fas fa-home" label="Início" className='active'/>
+                        <SidebarItem to="/" icon="fas fa-user" label="Dados"/>
+                        <SidebarItem to="/" icon="fas fa-briefcase" label="Vagas"/>
+                        <SidebarItem to="/" icon="fas fa-comments" label="Fórum"/>
+                        <SidebarItem to="/" icon="fas fa-sign-out-alt" label="Sair" className="sair"/>
                     </ul>
                 </div>
             </div>
-        </section>
+        </aside>
 
     );
 }
