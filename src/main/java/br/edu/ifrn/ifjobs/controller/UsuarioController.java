@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
@@ -69,4 +70,20 @@ public class UsuarioController {
         return ResponseEntity.ok().body(convertToDto);
     }
 
+    @GetMapping("/")
+    @ResponseBody
+    public ResponseEntity<UsuarioLoginGetDTO> buscarPorId(@RequestParam(value = "id") int id) {
+        Usuario usuario;
+
+        try {
+            usuario = usuarioService.getById(id);
+        } catch (UsuarioNaoEncontradoException e) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
+        }
+
+        UsuarioLoginGetDTO usuarioLoginGetDTO = new UsuarioLoginGetDTO();
+        usuarioLoginGetDTO = usuarioLoginGetDTO.convertEntityToDto(usuario);
+
+        return ResponseEntity.ok().body(usuarioLoginGetDTO);
+    }
 }

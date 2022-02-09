@@ -30,4 +30,9 @@ public class UsuarioService {
         return optional.orElseThrow(() -> new UsuarioNaoCadastradoException("Erro ao efetuar cadastro!"));
     }
 
+    public Usuario getById(int id) throws UsuarioNaoEncontradoException {
+        Optional<Usuario> usuarioFindById = repository.findById(id);
+        return usuarioFindById.orElseThrow(() -> new UsuarioNaoEncontradoException("Usuário não encontrado!!"));
+    }
+
 }
