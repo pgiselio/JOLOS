@@ -34,9 +34,10 @@ public class UsuarioController {
     @ResponseBody
     public ResponseEntity<Usuario> createAluno(@RequestBody @Valid UsuarioInsertDTO dto) {
         Usuario usuario = dto.convertDtoToEntity();
-        usuario.setStatus(StatusUsuario.PENDENTE);
+
         BCryptPasswordEncoder ciptografo = new BCryptPasswordEncoder();
         usuario.setSenha(ciptografo.encode(usuario.getSenha()));
+        usuario.setStatus(StatusUsuario.PENDENTE);
 
         Usuario usuarioSalvo;
 

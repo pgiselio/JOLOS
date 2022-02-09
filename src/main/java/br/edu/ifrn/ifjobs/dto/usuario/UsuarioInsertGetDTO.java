@@ -8,18 +8,14 @@ import br.edu.ifrn.ifjobs.model.Usuario;
 public class UsuarioInsertGetDTO implements Dto<Usuario, UsuarioInsertGetDTO> {
 
     private int id;
-    private String nome;
     private String email;
-    private int alunoId;
 
     public UsuarioInsertGetDTO() {
     }
 
-    public UsuarioInsertGetDTO(int id, String nome, String email, int alunoId) {
+    public UsuarioInsertGetDTO(int id, String email) {
         this.id = id;
-        this.nome = nome;
         this.email = email;
-        this.alunoId = alunoId;
     }
 
     private ModelMapper modelMapper;
@@ -30,12 +26,10 @@ public class UsuarioInsertGetDTO implements Dto<Usuario, UsuarioInsertGetDTO> {
         return modelMapper.map(this, Usuario.class);
     }
 
-    public int getAlunoId() {
-        return alunoId;
-    }
-
-    public void setAlunoId(int alunoId) {
-        this.alunoId = alunoId;
+    @Override
+    public UsuarioInsertGetDTO convertEntityToDto(Usuario entity) {
+        modelMapper = new ModelMapper();
+        return modelMapper.map(entity, UsuarioInsertGetDTO.class);
     }
 
     public String getEmail() {
@@ -46,26 +40,12 @@ public class UsuarioInsertGetDTO implements Dto<Usuario, UsuarioInsertGetDTO> {
         this.email = email;
     }
 
-    public String getNome() {
-        return nome;
-    }
-
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
-
     public int getId() {
         return id;
     }
 
     public void setId(int id) {
         this.id = id;
-    }
-
-    @Override
-    public UsuarioInsertGetDTO convertEntityToDto(Usuario entity) {
-        modelMapper = new ModelMapper();
-        return modelMapper.map(entity, UsuarioInsertGetDTO.class);
     }
 
 }
