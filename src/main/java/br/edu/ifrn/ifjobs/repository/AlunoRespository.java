@@ -14,5 +14,5 @@ public interface AlunoRespository extends JpaRepository<Aluno, Integer> {
                 FROM aluno a
                 WHERE a.cpf = ?1
             """, nativeQuery = true)
-    public int findIdByCpf(String cpf);
+    public Aluno findIdByCpf(String cpf);
 }

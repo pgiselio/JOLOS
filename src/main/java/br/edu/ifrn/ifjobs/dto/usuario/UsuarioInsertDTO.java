@@ -3,16 +3,12 @@ package br.edu.ifrn.ifjobs.dto.usuario;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 
-import org.hibernate.validator.constraints.br.CPF;
 import org.modelmapper.ModelMapper;
 
 import br.edu.ifrn.ifjobs.dto.Dto;
 import br.edu.ifrn.ifjobs.model.Usuario;
 
 public class UsuarioInsertDTO implements Dto<Usuario, UsuarioInsertDTO> {
-
-    @NotBlank(message = "Nome não informado!!")
-    private String nome;
 
     @Email(message = "Formato de email inválido!!")
     @NotBlank(message = "Email não informado!!")
@@ -21,22 +17,46 @@ public class UsuarioInsertDTO implements Dto<Usuario, UsuarioInsertDTO> {
     @NotBlank(message = "não informada")
     private String senha;
 
-    @NotBlank(message = "CPF não informado!!")
-    @CPF(message = "Formato de CPF inválido!!")
-    private String cpf;
-
     private ModelMapper modelMapper;
 
     @Override
-    public Usuario convertToEntity() {
+    public Usuario convertDtoToEntity() {
         modelMapper = new ModelMapper();
         return modelMapper.map(this, Usuario.class);
     }
 
     @Override
-    public UsuarioInsertDTO convertToDto(Usuario entity) {
+    public UsuarioInsertDTO convertEntityToDto(Usuario entity) {
         modelMapper = new ModelMapper();
         return modelMapper.map(entity, UsuarioInsertDTO.class);
+    }
+
+    /**
+     * @return String return the email
+     */
+    public String getEmail() {
+        return email;
+    }
+
+    /**
+     * @param email the email to set
+     */
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    /**
+     * @return String return the senha
+     */
+    public String getSenha() {
+        return senha;
+    }
+
+    /**
+     * @param senha the senha to set
+     */
+    public void setSenha(String senha) {
+        this.senha = senha;
     }
 
 }

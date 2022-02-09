@@ -6,16 +6,16 @@ import br.edu.ifrn.ifjobs.dto.Dto;
 import br.edu.ifrn.ifjobs.model.Usuario;
 import br.edu.ifrn.ifjobs.model.enums.TipoUsuario;
 
-public class UsuarioLoginRetornoDTO implements Dto<Usuario, UsuarioLoginRetornoDTO> {
+public class UsuarioLoginGetDTO implements Dto<Usuario, UsuarioLoginGetDTO> {
 
     private int id;
     private String email;
     private TipoUsuario tipoUsuario;
 
-    public UsuarioLoginRetornoDTO() {
+    public UsuarioLoginGetDTO() {
     }
 
-    public UsuarioLoginRetornoDTO(int id, String email, TipoUsuario tipoUsuario) {
+    public UsuarioLoginGetDTO(int id, String email, TipoUsuario tipoUsuario) {
         this.id = id;
         this.email = email;
         this.tipoUsuario = tipoUsuario;
@@ -24,15 +24,15 @@ public class UsuarioLoginRetornoDTO implements Dto<Usuario, UsuarioLoginRetornoD
     private ModelMapper modelMapper;
 
     @Override
-    public Usuario convertToEntity() {
+    public Usuario convertDtoToEntity() {
         modelMapper = new ModelMapper();
         return modelMapper.map(this, Usuario.class);
     }
 
     @Override
-    public UsuarioLoginRetornoDTO convertToDto(Usuario entity) {
+    public UsuarioLoginGetDTO convertEntityToDto(Usuario entity) {
         modelMapper = new ModelMapper();
-        return modelMapper.map(entity, UsuarioLoginRetornoDTO.class);
+        return modelMapper.map(entity, UsuarioLoginGetDTO.class);
     }
 
     /**

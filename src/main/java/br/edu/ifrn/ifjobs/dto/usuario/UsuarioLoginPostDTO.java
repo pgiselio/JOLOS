@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import br.edu.ifrn.ifjobs.dto.Dto;
 import br.edu.ifrn.ifjobs.model.Usuario;
 
-public class UsuarioLoginEnvioDTO implements Dto<Usuario, UsuarioLoginEnvioDTO> {
+public class UsuarioLoginPostDTO implements Dto<Usuario, UsuarioLoginPostDTO> {
 
     @Email(message = "Formato de email Inválido!!")
     private String email;
@@ -19,21 +19,21 @@ public class UsuarioLoginEnvioDTO implements Dto<Usuario, UsuarioLoginEnvioDTO> 
     private ModelMapper modelMapper;
 
     @Override
-    public Usuario convertToEntity() {
+    public Usuario convertDtoToEntity() {
         modelMapper = new ModelMapper();
         return modelMapper.map(this, Usuario.class);
     }
 
     @Override
-    public UsuarioLoginEnvioDTO convertToDto(Usuario entity) {
+    public UsuarioLoginPostDTO convertEntityToDto(Usuario entity) {
         modelMapper = new ModelMapper();
-        return modelMapper.map(entity, UsuarioLoginEnvioDTO.class);
+        return modelMapper.map(entity, UsuarioLoginPostDTO.class);
     }
 
-    public UsuarioLoginEnvioDTO() {
+    public UsuarioLoginPostDTO() {
     }
 
-    public UsuarioLoginEnvioDTO(String email, String senha) {
+    public UsuarioLoginPostDTO(String email, String senha) {
         this.email = email;
         this.senha = senha;
     }

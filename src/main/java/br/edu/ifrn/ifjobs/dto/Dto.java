@@ -1,8 +1,21 @@
 package br.edu.ifrn.ifjobs.dto;
 
-public interface Dto<T, D> {
+/**
+ * @param E is an Entity
+ * @param D is a class DTO
+ */
+public interface Dto<E, D> {
 
-    public T convertToEntity();
+    /**
+     * 
+     * @return An Entity
+     */
+    public E convertDtoToEntity();
 
-    public D convertToDto(T entity);
+    /**
+     * 
+     * @param entity It's an entity
+     * @return An DTO (Data Transfer Object)
+     */
+    public D convertEntityToDto(E entity);
 }

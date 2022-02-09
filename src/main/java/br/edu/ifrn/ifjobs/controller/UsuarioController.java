@@ -5,6 +5,7 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -14,11 +15,12 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
 import br.edu.ifrn.ifjobs.dto.usuario.UsuarioInsertDTO;
-import br.edu.ifrn.ifjobs.dto.usuario.UsuarioLoginEnvioDTO;
-import br.edu.ifrn.ifjobs.dto.usuario.UsuarioLoginRetornoDTO;
+import br.edu.ifrn.ifjobs.dto.usuario.UsuarioLoginGetDTO;
+import br.edu.ifrn.ifjobs.dto.usuario.UsuarioLoginPostDTO;
 import br.edu.ifrn.ifjobs.exception.UsuarioNaoCadastradoException;
 import br.edu.ifrn.ifjobs.exception.UsuarioNaoEncontradoException;
 import br.edu.ifrn.ifjobs.model.Usuario;
+import br.edu.ifrn.ifjobs.model.enums.StatusUsuario;
 import br.edu.ifrn.ifjobs.service.UsuarioService;
 
 @RestController
@@ -28,25 +30,29 @@ public class UsuarioController {
     @Autowired
     private UsuarioService usuarioService;
 
-    @PostMapping("/create")
+    @PostMapping("/createAluno")
     @ResponseBody
-    public ResponseEntity<Usuario> create(@RequestBody UsuarioInsertDTO dto) {
-        Usuario usuario = dto.convertToEntity();
+    public ResponseEntity<Usuario> createAluno(@RequestBody @Valid UsuarioInsertDTO dto) {
+        Usuario usuario = dto.convertDtoToEntity();
+        usuario.setStatus(StatusUsuario.PENDENTE);
+        BCryptPasswordEncoder ciptografo = new BCryptPasswordEncoder();
+        usuario.setSenha(ciptografo.encode(usuario.getSenha()));
+
         Usuario usuarioSalvo;
 
         try {
             usuarioSalvo = usuarioService.create(usuario);
         } catch (UsuarioNaoCadastradoException e) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
         }
 
-        return ResponseEntity.ok().body(usuarioSalvo);
+        return new ResponseEntity<>(usuarioSalvo, HttpStatus.CREATED);
     }
 
     @GetMapping("/login")
     @ResponseBody
-    public ResponseEntity<UsuarioLoginRetornoDTO> login(@RequestBody @Valid UsuarioLoginEnvioDTO dto) {
-        Usuario usuario = dto.convertToEntity();
+    public ResponseEntity<UsuarioLoginGetDTO> login(@RequestBody @Valid UsuarioLoginPostDTO dto) {
+        Usuario usuario = dto.convertDtoToEntity();
         Usuario usuarioLogin;
 
         try {
@@ -55,8 +61,9 @@ public class UsuarioController {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
         }
 
-        var conversor = new UsuarioLoginRetornoDTO();
-        UsuarioLoginRetornoDTO convertToDto = conversor.convertToDto(usuarioLogin);
+        var conversor = new UsuarioLoginGetDTO();
+        UsuarioLoginGetDTO convertToDto;
+        convertToDto = conversor.convertEntityToDto(usuarioLogin);
 
         return ResponseEntity.ok().body(convertToDto);
     }
