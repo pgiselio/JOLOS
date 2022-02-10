@@ -1,5 +1,6 @@
 package br.edu.ifrn.ifjobs.service;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,6 +34,10 @@ public class UsuarioService {
     public Usuario getById(int id) throws UsuarioNaoEncontradoException {
         Optional<Usuario> usuarioFindById = repository.findById(id);
         return usuarioFindById.orElseThrow(() -> new UsuarioNaoEncontradoException("Usuário não encontrado!!"));
+    }
+
+    public List<Usuario> getAll() {
+        return repository.findAll();
     }
 
 }

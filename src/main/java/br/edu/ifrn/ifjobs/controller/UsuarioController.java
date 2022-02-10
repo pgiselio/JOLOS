@@ -1,5 +1,7 @@
 package br.edu.ifrn.ifjobs.controller;
 
+import java.util.List;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,10 +9,10 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
@@ -70,9 +72,9 @@ public class UsuarioController {
         return ResponseEntity.ok().body(convertToDto);
     }
 
-    @GetMapping("/")
+    @GetMapping("/{id}")
     @ResponseBody
-    public ResponseEntity<UsuarioLoginGetDTO> buscarPorId(@RequestParam(value = "id") int id) {
+    public ResponseEntity<UsuarioLoginGetDTO> buscarPorId(@PathVariable(name = "id") int id) {
         Usuario usuario;
 
         try {
@@ -85,5 +87,18 @@ public class UsuarioController {
         usuarioLoginGetDTO = usuarioLoginGetDTO.convertEntityToDto(usuario);
 
         return ResponseEntity.ok().body(usuarioLoginGetDTO);
+    }
+
+    @GetMapping("/")
+    @ResponseBody
+    public ResponseEntity<List<UsuarioLoginGetDTO>> buscaUsuarios() {
+        List<Usuario> usuarios = usuarioService.getAll();
+
+        List<UsuarioLoginGetDTO> list = usuarios.stream().map(usuario -> {
+            UsuarioLoginGetDTO u = new UsuarioLoginGetDTO();
+            return u.convertEntityToDto(usuario);
+        }).toList();
+
+        return ResponseEntity.ok().body(list);
     }
 }
