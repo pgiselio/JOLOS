@@ -28,7 +28,7 @@ public class Usuario {
     @Column(nullable = false)
     private String senha;
 
-    @Column(nullable = false)
+    // @Column(nullable = false)
     @Enumerated(EnumType.STRING)
     private TipoUsuario tipoUsuario;
 

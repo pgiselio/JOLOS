@@ -2,6 +2,7 @@ package br.edu.ifrn.ifjobs.controller;
 
 import java.util.List;
 
+import javax.mail.MessagingException;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,8 +23,10 @@ import br.edu.ifrn.ifjobs.dto.usuario.UsuarioLoginGetDTO;
 import br.edu.ifrn.ifjobs.dto.usuario.UsuarioLoginPostDTO;
 import br.edu.ifrn.ifjobs.exception.UsuarioNaoCadastradoException;
 import br.edu.ifrn.ifjobs.exception.UsuarioNaoEncontradoException;
+import br.edu.ifrn.ifjobs.model.Email;
 import br.edu.ifrn.ifjobs.model.Usuario;
 import br.edu.ifrn.ifjobs.model.enums.StatusUsuario;
+import br.edu.ifrn.ifjobs.service.EmailService;
 import br.edu.ifrn.ifjobs.service.UsuarioService;
 
 @RestController
@@ -33,7 +36,10 @@ public class UsuarioController {
     @Autowired
     private UsuarioService usuarioService;
 
-    @PostMapping("/createAluno")
+    @Autowired
+    private EmailService emailService;
+
+    @PostMapping("/create")
     @ResponseBody
     public ResponseEntity<Usuario> createAluno(@RequestBody @Valid UsuarioInsertDTO dto) {
         Usuario usuario = dto.convertDtoToEntity();
@@ -50,7 +56,26 @@ public class UsuarioController {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
         }
 
+        try {
+            enviaEmailParaUsuarioSalvo(usuarioSalvo);
+        } catch (MessagingException e) {
+            e.printStackTrace();
+        }
+
         return new ResponseEntity<>(usuarioSalvo, HttpStatus.CREATED);
+    }
+
+    private void enviaEmailParaUsuarioSalvo(Usuario usuarioSalvo) throws MessagingException {
+        Email email = new Email();
+        email.setDestinatario(usuarioSalvo.getEmail());
+        email.setMensagem("""
+                <h1>Cadastro pendente!</h1>
+                <p>Seu cadastro ainda não foi finalizado!</p>
+                    """);
+        email.setRemetente("lucas.jdev1@gmail.com");
+        email.setAssunto("Cadastro IFJobs!!!");
+
+        emailService.enviaEmail(email);
     }
 
     @GetMapping("/login")
