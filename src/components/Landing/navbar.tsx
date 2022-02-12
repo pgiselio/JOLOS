@@ -1,6 +1,8 @@
+import "./navbar.css";
+
 export function LandNavBar() {
     return(
-        <header className="navigate-container">
+        <header className="landing navigate-container">
                 <nav className="navigate">
                     <div className="menu-container">
                         <a href="/" className="logo-nav"><img src="images/logo.svg" alt="" /></a>

@@ -1,3 +1,4 @@
+import "./header.css";
 function Collapse() {
   document.body.classList.toggle('toggle-sidemenu');
   storageSidebarState();

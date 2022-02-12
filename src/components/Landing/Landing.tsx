@@ -1,10 +1,10 @@
-import { LandNavBar } from "./landingpage/navbar";
-import "./styles/Landing.css";
+import "./Landing.css";
+import { LandNavBar } from "./navbar";
 export function LandingPage() {
     return (
-        <>
-            <LandNavBar/>
-            <main>
+        <div id="landing-page">
+            <LandNavBar />
+            <main className="landing-main">
                 <section id="1">
                     CARROUSEL
                 </section>
@@ -18,9 +18,9 @@ export function LandingPage() {
 
                 </section>
             </main>
-            <footer>
+            <footer className="landing-footer">
 
             </footer>
-        </>
+        </div>
     );
 }

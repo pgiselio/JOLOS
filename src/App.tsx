@@ -1,11 +1,14 @@
 import React from 'react';
+import "./styles/App.css";
 import { Header } from './components/header/header';
 import { SidebarList } from './components/sidebar/sidebar-list';
 
 function App() {
   return (
+    <>
+    <Header/>
+    
     <div className="grid-container">
-        <Header/>
         <SidebarList />
         <div className="main">
           <div className="main-container">
@@ -22,6 +25,7 @@ function App() {
           </div>
         </div>
       </div>
+      </>
   );
 }
 

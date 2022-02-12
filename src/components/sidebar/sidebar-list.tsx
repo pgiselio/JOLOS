@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { ProfilePic } from '../profile-pic/profile-pic';
 import { SidebarItem } from './sidebar-item';
 import "./sidebar.css";
@@ -12,11 +13,12 @@ function checkSidebarState() {
 
 export function SidebarList(){
     checkSidebarState();
+    const [bodyClassList, setbodyClassList] = useState(document.body.classList);
     return(
         <aside className="side-bar">
             <div className="side-bar-container">
                 <div className="perfil">
-                    <ProfilePic style={{width: 80 + "px", height: 80 + "px"} }/>
+                    <ProfilePic/>
                     <h3 className="name-perfil">testando 123</h3>
                 </div>
 

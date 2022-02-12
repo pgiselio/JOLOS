@@ -8,7 +8,7 @@ import {
 import './styles/index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import { LandingPage } from './Landing';
+import { LandingPage } from './components/Landing/Landing';
 
 ReactDOM.render(
   <React.StrictMode>

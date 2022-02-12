@@ -1,15 +1,15 @@
-main{
+main.landing-main{
     margin-top: 80px;
 }
 
-section {
+main.landing-main section{
     height: 50vh;
     background: #f1f1f1;
     margin-top: 10px;
 }
 
 
-footer {
+footer.landing-footer {
     margin-top: 100px;
     height: 500px;
     display: flex;

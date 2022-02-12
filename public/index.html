@@ -17,7 +17,13 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <title>React App</title>
   </head>
-  <body>
+  <body class="prevent-transition-flick">
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+          let node = document.querySelector('.prevent-transition-flick');
+          node.classList.remove('prevent-transition-flick');
+      });
+    </script>
     <noscript>You need to enable JavaScript to run this app.</noscript>
     <div id="root"></div>
   </body>

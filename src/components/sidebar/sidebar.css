@@ -4,7 +4,6 @@
     background-color: white;
     box-shadow: 1px 10px 10px rgb(0 0 0 / 8%);
     position: fixed;
-    top: var(--top-bar-height);
     overflow: auto;
     overflow-x: hidden;
     z-index: 12;
@@ -29,9 +28,9 @@ body.toggle-sidemenu .side-bar {
     justify-content: center;
 }
 
-.side-bar .img-perfil {
-    width: 5rem;
-    height: 5rem;
+.side-bar .profile-pic {
+    width: 80px;
+    height: 80px;
     border-radius: 100%;
     transition: height 0.3s, width 0.3s ease;
 }
@@ -159,9 +158,9 @@ body.remove-transbar .three-bars-btn *{
         width: 100%;
     }
 
-    body.toggle-sidemenu .side-bar .img-perfil {
-        width: 3.25rem;
-        height: 3.25rem;
+    body.toggle-sidemenu .side-bar .profile-pic {
+        width: 60px;
+        height: 60px;
     }
 
     body.toggle-sidemenu .side-bar .name-perfil {
