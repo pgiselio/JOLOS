@@ -13,13 +13,13 @@ export function LandNavBar() {
                             <li><a href="#4">Contato</a> </li>
                         </ul>
                         <div className="acesso">
-                            <a href="login" className="login-bt">Login</a>
+                            <a href="entrar" className="login-bt">Login</a>
                             <a href="cadastro" className="signup-bt">Cadastro</a>
                         </div>
                         <div className="mobile-access">
                             <a href="#" className="access-bt"></a>
                             <div className="acesso-mobile">
-                                <a href="login" className="login-bt">Login</a>
+                                <a href="entrar" className="login-bt">Login</a>
                                 <a href="cadastro" className="signup-bt">Cadastro</a>
                             </div>
                             <div id="botao-ham" className="botao-ham">
