@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import { ProfilePic } from '../profile-pic/profile-pic';
 import { SidebarItem } from './sidebar-item';
 import "./sidebar.css";
@@ -13,7 +12,6 @@ function checkSidebarState() {
 
 export function SidebarList(){
     checkSidebarState();
-    const [bodyClassList, setbodyClassList] = useState(document.body.classList);
     return(
         <aside className="side-bar">
             <div className="side-bar-container">
@@ -24,11 +22,11 @@ export function SidebarList(){
 
                 <div className="data">
                     <ul className="data-items">
-                        <SidebarItem to="/" icon="fas fa-home" label="Início" className='active'/>
-                        <SidebarItem to="/" icon="fas fa-user" label="Dados"/>
-                        <SidebarItem to="/" icon="fas fa-briefcase" label="Vagas"/>
-                        <SidebarItem to="/" icon="fas fa-comments" label="Fórum"/>
-                        <SidebarItem to="/" icon="fas fa-sign-out-alt" label="Sair" className="sair"/>
+                        <SidebarItem to="" icon="fas fa-home" label="Início"/>
+                        <SidebarItem to="profile" icon="fas fa-user" label="Dados"/>
+                        <SidebarItem to="vagas" icon="fas fa-briefcase" label="Vagas"/>
+                        <SidebarItem to="forum" icon="fas fa-comments" label="Fórum"/>
+                        <SidebarItem to="logout" icon="fas fa-sign-out-alt" label="Sair" className="sair"/>
                     </ul>
                 </div>
             </div>

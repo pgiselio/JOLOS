@@ -9,7 +9,7 @@ type ProfilePicType = {
 }
 export function ProfilePic(props: ProfilePicType){
     return(
-        <div className={"profile-pic " + props?.className} style={props.style}>
+        <div className={"profile-pic " + (props.className ?? "" )} style={props.style}>
             <span className="default-profile">
                 <img src={defaultProfilePic} alt="Foto de perfil padrão"/>
             </span>

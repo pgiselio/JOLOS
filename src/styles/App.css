@@ -9,7 +9,9 @@
   grid-template-rows: 1fr auto;
   overflow-x: hidden;
 }
-
+body{
+  background: #fff;
+}
 /* Main content */
 .main {
   grid-area: main;
@@ -17,10 +19,14 @@
   flex-direction: column;
   min-height: 0;
   position: relative;
-  border-top-left-radius: 12px;
   border-bottom: none;
   border-right: none;
   height: 100%;
+  overflow: hidden;
+  background: var(--bg-body);
+  border-top: 1px solid;
+  border-left: 1px solid;
+  border-color: rgb(228, 228, 228);
 }
 
 body.toggle-sidemenu .main {
@@ -106,6 +112,7 @@ body.toggle-sidemenu .main-container {
 
   .main {
     min-width: initial;
+    border-top-left-radius: 12px;
   }
 
   body.toggle-sidemenu .main {
@@ -118,5 +125,11 @@ body.toggle-sidemenu .main-container {
 
   .content {
     padding: 0 30px;
+  }
+}
+
+@media (min-width: 1000px) {
+  .cards-container {
+      grid-template-columns: 1fr 1fr;
   }
 }

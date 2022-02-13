@@ -1,23 +1,24 @@
-#landing-page .landing.navigate-container {
+#landing-page{
+.navigate-container {
     display: flex;
     position: fixed;
     top: 0;
     width: 100%;
     margin-bottom: 200px;
 }
-#landing-page .logo-nav{
+.logo-nav{
     display: flex;
     align-items: center;
     margin-left: 12px;
     z-index: 2;
 }
-#landing-page .logo-nav:hover{
+.logo-nav:hover{
     filter: grayscale(0.5);
 }
-#landing-page .logo-nav img {
+.logo-nav img {
     height: 40px;
 }
-#landing-page .navigate {
+.navigate {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -28,13 +29,13 @@
     box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.1);
 }
 
-#landing-page .menu-container {
+.menu-container {
     display: flex;
     width: 95vw;
     justify-content: space-between;
 }
 
-#landing-page .menu {
+.menu {
     display: flex;
     flex-direction: column;
     position: absolute;
@@ -52,19 +53,19 @@
     overflow: hidden;
     overflow-y: auto;
 }
-#landing-page .menu.active{
+.menu.active{
     transform: none;
     pointer-events: initial;
 }
 
-#landing-page .menu li {
+.menu li {
     display: flex;
     justify-content: center;
     width: 100%;
     margin-top: 10px;
 }
 
-#landing-page .menu li a {
+.menu li a {
     text-align: center;
     width: 100%;
     padding: 15px;
@@ -76,15 +77,15 @@
     color: var(--accent-color);
 }
 
-#landing-page .menu li a:hover {
+.menu li a:hover {
     background: var(--accent-color);
     color: #fff;
     border-color: var(--accent-color);
 }
-#landing-page .acesso{
+.acesso{
     display: none;
 }
-#landing-page .acesso-mobile{
+.acesso-mobile{
     display: flex;
     flex-direction: column;
     position: absolute;
@@ -103,7 +104,7 @@
     overflow: hidden;
     overflow-y: auto;
 }
-#landing-page .acesso-mobile a{
+.acesso-mobile a{
     text-align: center;
     width: 100%;
     padding: 20px;
@@ -115,23 +116,23 @@
     margin-left: initial;
     margin-bottom: 10px;
 }
-#landing-page .acesso-mobile.active{
+.acesso-mobile.active{
     transform:none;
     pointer-events: initial;
 }
 
-#landing-page .mobile-access{
+.mobile-access{
     display: flex;
     z-index: 1;
 }
-#landing-page .access-bt{
+.access-bt{
     display: flex;
     align-items: center;
     margin-right: 2px;
     padding: 10px;
     z-index: 1;   
 }
-#landing-page .access-bt::before{
+.access-bt::before{
     content: "\f007";
     display: flex;
     align-items: center;
@@ -150,13 +151,13 @@
     border-radius: 30px;
     color: #000;
 }
-#landing-page .access-bt.active::before{
+.access-bt.active::before{
     color: var(--accent-color-active);
     border-color: var(--accent-color-active);
 }
 
 
-#landing-page .login-bt, #landing-page .signup-bt {
+.login-bt, .signup-bt {
     text-decoration: none;
     color: var(--accent-color);
     font-size: 15px;
@@ -165,33 +166,33 @@
     transition: 0.1s linear;
 }
 
-#landing-page .login-bt:hover {
+.login-bt:hover {
     color: var(--accent-color-active);
 }
 
-#landing-page .signup-bt {
+.signup-bt {
     border: 2px solid var(--accent-color);
     border-radius: 6px;
     margin-left: 15px;
 }
 
-#landing-page .signup-bt:hover {
+.signup-bt:hover {
     color: #fff;
     background: var(--accent-color);
 }
 
 
 @media (min-width:766px) {
-    #landing-page .logo-index{
+    .logo-index{
         margin-left: initial;
     }
-    #landing-page .mobile-access {
+    .mobile-access {
         display: none;
     }
-    #landing-page .menu-container{        
+    .menu-container{        
         height: 100%;
     }
-    #landing-page .menu {
+    .menu {
         transform: none;
         padding-top: 30px;
         flex-direction: row;
@@ -206,12 +207,12 @@
         height: 100%;
     }
 
-    #landing-page .menu, #landing-page .acesso {
+    .menu, .acesso {
         display: flex;
         align-items: center;
     }
 
-    #landing-page .menu li {
+    .menu li {
         display: flex;
         padding: 0 5px;
         position: relative;
@@ -219,7 +220,7 @@
         height: 100%;
     }
 
-    #landing-page .menu li a {
+    .menu li a {
         text-decoration: none;
         color: #202020;
         font-weight: 500;
@@ -233,13 +234,13 @@
         align-items: center;
     }
 
-    #landing-page .menu li a:hover {
+    .menu li a:hover {
         color: var(--accent-color);
         background: initial;
 
     }
 
-    #landing-page .menu li a::after {
+    .menu li a::after {
         content: " ";
         width: 0;
         height: 4px;
@@ -251,7 +252,8 @@
         transition: 0.13s linear;
     }
 
-    #landing-page .menu li a:hover::after {
+    .menu li a:hover::after {
         width: calc(100% - 20px);
     }
+}
 }

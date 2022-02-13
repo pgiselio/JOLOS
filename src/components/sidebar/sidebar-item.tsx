@@ -1,3 +1,5 @@
+import { NavLink } from "react-router-dom";
+
 type Item = {
     to: string
     icon: string
@@ -9,10 +11,10 @@ type Item = {
 export function SidebarItem(item: Item) {
     return (
         <li>
-            <a href={item.to} className={item.className} title={item.title}>
+            <NavLink to={item.to} className={item.className} title={item.title}>
                 <i className={item.icon}></i>
                 <span>{item.label}</span>
-            </a>
+            </NavLink>
         </li>
     );
 }
