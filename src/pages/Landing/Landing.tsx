@@ -1,5 +1,6 @@
 import "./Landing.css";
 import { LandNavBar } from "./navbar";
+
 export function LandingPage() {
     return (
         <div id="landing-page">

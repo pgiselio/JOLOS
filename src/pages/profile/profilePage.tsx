@@ -1,4 +1,5 @@
-import { ProfilePic } from "../../profile-pic/profile-pic";
+import { ProfilePic } from "../../components/profile-pic/profile-pic";
+import "./profilePage.scss";
 
 export function ProfilePage() {
     return (
@@ -16,7 +17,7 @@ export function ProfilePage() {
                 <div className="profile-page-header">
                     <div className="profile-page-header-container">
                         <div className="user-info">
-                            <ProfilePic className="oi"/>
+                            <ProfilePic/>
                             <div className="profile-names">
                                 <h2>Sua empresa</h2>
                                 <span>XX.XXX.XXX/0001-XX</span>

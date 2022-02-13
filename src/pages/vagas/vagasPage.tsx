@@ -2,7 +2,6 @@ export function VagasPage() {
     return (
         <>
             <section>
-                <div className="spacer"></div>
                 <div className="header-section">
                     <h2>Vagas criadas</h2>
                     <button className="btn-outlined btn-criar-nova" id="newVaga">Criar nova</button>
