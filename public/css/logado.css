@@ -207,10 +207,10 @@ body.remove-transbar .three-bars-btn *{
     justify-content: space-between;
     align-items: center;
     border-bottom: 1px solid #e0e0e0;
-    box-shadow: 0 1px 10px rgb(0 0 0 / 8%);
+    box-shadow: 0 1px 4px rgb(0 0 0 / 8%);
     position: sticky;
     z-index: 10;
-    top: -1px;
+    top: 0;
     background: #fffffff5;
 }
 

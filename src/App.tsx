@@ -14,25 +14,26 @@ import { ProfilePage } from './pages/profile/profilePage';
 import { VagasPage } from './pages/vagas/vagasPage';
 import { CadastroPage } from './pages/cadastro/signup';
 import { LoginPage } from './pages/login/login';
+import { ForumPage } from './pages/forum';
 
 function App() {
   return (
     <>
-      <Router>
       <Routes>
         <Route path="/" element={<LandingPage />} />
-        <Route path="login" element={<LoginPage />} />
+        <Route path="entrar" element={<LoginPage />} />
         <Route path="cadastro" element={<CadastroPage />} />
-        <Route path="sys" element={<SystemLayout />}>
+        <Route path="sys" element={
+                <SystemLayout />
+            }>
           <Route path="" element={<HomePage />} />
           <Route path="profile" element={<ProfilePage />} />
           <Route path="vagas" element={<VagasPage />} />
-          <Route path="forum" element={<HomePage />} />
+          <Route path="forum" element={<ForumPage />} />
           <Route path="logout" element={<HomePage />} />
         </Route>
 
       </Routes>
-    </Router>
     </>
   );
 }

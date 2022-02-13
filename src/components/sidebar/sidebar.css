@@ -99,6 +99,10 @@ body.toggle-sidemenu .side-bar {
     background-color: #dfdfdf;
 }
 
+.data-items li a:active{
+    background-color: #cecece;
+}
+
 /* .data-items li a:hover i {
     color: rgb(95, 95, 95);
 } */

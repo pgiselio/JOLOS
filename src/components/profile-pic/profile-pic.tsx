@@ -17,6 +17,7 @@ export function ProfilePic(props: ProfilePicType){
                 props.url &&
                 <img className="img-perfil" src={props.url} alt=""/>
             }
+            <span className="pp-border"></span>
         </div>
         
     );

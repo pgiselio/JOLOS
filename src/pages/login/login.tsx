@@ -1,5 +1,59 @@
-export function LoginPage(){
-    return(
-        <h2>Login</h2>
+import "./login.scss";
+export function LoginPage() {
+    return (
+        <div id="login-page">
+            <main>
+                <div className="container">
+                    <div className="login-form">
+                        <a href="../"><img src="../images/logo.svg" className="logo-login" alt="Logo do IF Jobs"
+                            title="Logo IF Jobs" /></a>
+                        <form method="post" autoComplete="off" onSubmit={userValidation}>
+                            <div className="info-message error-msg">
+                                <span>Usuário ou senha inválidos</span>
+                            </div>
+                            <div className="lbl-icon">
+                                <label htmlFor="login">
+                                    <i className="fas fa-user"></i>
+                                </label>
+                                <input type="text" id="login" placeholder="Usuário" spellCheck="false" />
+                            </div>
+                            <div className="lbl-icon">
+                                <label htmlFor="pass">
+                                    <i className="fas fa-lock"></i>
+                                </label>
+                                <input type="password" name="" id="pass" placeholder="Senha" />
+                            </div>
+                            <div className="chk">
+                                <input type="checkbox" name="checkbox" id="checkbox" className="checkbox" />
+                                <label htmlFor="checkbox">Mostrar senha</label>
+                            </div>
+                            <input type="submit" className="btn-accent" value="Entrar" />
+                            <a href="/password-reset/" className="pwrst-link">Esqueceu a senha?</a>
+                        </form>
+                    </div>
+                    <div>
+                        <a href="signup.html" className="bt-cadse">Cadastre-se</a>
+                    </div>
+                </div>
+            </main>
+
+            <script src="/js/checkedValidationButton.js"></script>
+        </div>
     );
 }
+
+async function userValidation() {
+    let user: any = document.querySelector('#login');
+    let pass: any = document.querySelector('#pass');
+    var msg: any = document.querySelector('.info-message')
+
+
+    if (user.value == "admin" && pass.value == "ADMIN") {
+        window.sessionStorage.setItem('isloggedin', 'true');
+        window.location.href = "/pages/logado.html";
+    } else {
+        msg.classList.add('show');
+    }
+    return false;
+}
+

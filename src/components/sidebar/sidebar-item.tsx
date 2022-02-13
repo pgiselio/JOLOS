@@ -6,12 +6,13 @@ type Item = {
     label: string
     title?: string
     className?: string
+    end?: boolean;
 }
 
 export function SidebarItem(item: Item) {
     return (
         <li>
-            <NavLink to={item.to} className={item.className} title={item.title}>
+            <NavLink to={item.to} className={item.className} title={item.title} end={item.end}>
                 <i className={item.icon}></i>
                 <span>{item.label}</span>
             </NavLink>

@@ -22,7 +22,7 @@ export function SidebarList(){
 
                 <div className="data">
                     <ul className="data-items">
-                        <SidebarItem to="" icon="fas fa-home" label="Início"/>
+                        <SidebarItem to="" icon="fas fa-home" label="Início" end/>
                         <SidebarItem to="profile" icon="fas fa-user" label="Dados"/>
                         <SidebarItem to="vagas" icon="fas fa-briefcase" label="Vagas"/>
                         <SidebarItem to="forum" icon="fas fa-comments" label="Fórum"/>
