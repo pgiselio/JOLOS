@@ -21,7 +21,7 @@ public class JWTTokenAutenticacaoService {
 
     private static final long EXPIRATION_TIME = 172800000;
 
-    private static final String SECRET = "euSouUmaSenhaExtremamenteDifícil2003";
+    private static final String SECRET = "SEnHaDiFIciL1";
 
     private static final String TOKEN_PREFIX = "Bearer";
 
