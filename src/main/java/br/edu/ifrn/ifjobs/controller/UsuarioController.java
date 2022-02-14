@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -108,5 +109,13 @@ public class UsuarioController {
         }).toList();
 
         return ResponseEntity.ok().body(list);
+    }
+
+    @DeleteMapping("/delete")
+    @ResponseBody
+    public ResponseEntity<Usuario> deletaUsuario(UsuarioInsertDTO dto) {
+        Usuario usuario = dto.convertDtoToEntity();
+        Usuario usuarioDeletado = usuarioService.delete(usuario);
+        return ResponseEntity.ok().body(usuarioDeletado);
     }
 }

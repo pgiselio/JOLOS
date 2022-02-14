@@ -32,4 +32,9 @@ public class UsuarioService {
         return repository.findAll();
     }
 
+    public Usuario delete(Usuario usuario) {
+        repository.delete(usuario);
+        return usuario;
+    }
+
 }
