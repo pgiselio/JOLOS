@@ -1,7 +1,5 @@
 package br.edu.ifrn.ifjobs;
 
-import javax.mail.MessagingException;
-
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -20,17 +18,7 @@ class IfjobsApplicationTests {
 
 	@Test
 	void contextLoads() {
-		email.setDestinatario("pgiselio@gmail.com");
-		email.setMensagem("Bolsonaro vai comer nosso cu!!!!");
-		email.setRemetente("bixopiruleta62@gmail.com");
 
-		try {
-			service.enviaEmail(email);
-		} catch (MessagingException e) {
-			e.printStackTrace();
-		}
-
-		System.out.println("email enviado, porra!");
 	}
 
 }

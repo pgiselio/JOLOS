@@ -17,14 +17,6 @@ public class UsuarioService {
     @Autowired
     private UsuarioRepository repository;
 
-    public Usuario login(Usuario usuario) throws UsuarioNaoEncontradoException {
-        Optional<Usuario> usuarioBuscado = repository
-                .findByEmailAndPassword(usuario.getEmail(),
-                        usuario.getSenha());
-        return usuarioBuscado
-                .orElseThrow(() -> new UsuarioNaoEncontradoException("Falha ao validar!"));
-    }
-
     public Usuario create(Usuario usuario) throws UsuarioNaoCadastradoException {
         Optional<Usuario> optional;
         optional = Optional.ofNullable(repository.save(usuario));

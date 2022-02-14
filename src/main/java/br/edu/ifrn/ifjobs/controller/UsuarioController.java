@@ -21,7 +21,6 @@ import org.springframework.web.server.ResponseStatusException;
 
 import br.edu.ifrn.ifjobs.dto.usuario.UsuarioInsertDTO;
 import br.edu.ifrn.ifjobs.dto.usuario.UsuarioLoginGetDTO;
-import br.edu.ifrn.ifjobs.dto.usuario.UsuarioLoginPostDTO;
 import br.edu.ifrn.ifjobs.exception.UsuarioNaoCadastradoException;
 import br.edu.ifrn.ifjobs.exception.UsuarioNaoEncontradoException;
 import br.edu.ifrn.ifjobs.model.Email;
@@ -79,25 +78,6 @@ public class UsuarioController {
         email.setHtml(true);
 
         emailService.enviaEmail(email);
-    }
-
-    @GetMapping("/login")
-    @ResponseBody
-    public ResponseEntity<UsuarioLoginGetDTO> login(@RequestBody @Valid UsuarioLoginPostDTO dto) {
-        Usuario usuario = dto.convertDtoToEntity();
-        Usuario usuarioLogin;
-
-        try {
-            usuarioLogin = usuarioService.login(usuario);
-        } catch (UsuarioNaoEncontradoException e) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
-        }
-
-        var conversor = new UsuarioLoginGetDTO();
-        UsuarioLoginGetDTO convertToDto;
-        convertToDto = conversor.convertEntityToDto(usuarioLogin);
-
-        return ResponseEntity.ok().body(convertToDto);
     }
 
     @GetMapping("/{id}")
