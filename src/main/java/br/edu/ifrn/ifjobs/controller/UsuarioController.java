@@ -1,5 +1,6 @@
 package br.edu.ifrn.ifjobs.controller;
 
+import java.io.UnsupportedEncodingException;
 import java.util.List;
 
 import javax.mail.MessagingException;
@@ -58,14 +59,15 @@ public class UsuarioController {
 
         try {
             enviaEmailParaUsuarioSalvo(usuarioSalvo);
-        } catch (MessagingException e) {
+        } catch (MessagingException | UnsupportedEncodingException e) {
             e.printStackTrace();
         }
 
         return new ResponseEntity<>(usuarioSalvo, HttpStatus.CREATED);
     }
 
-    private void enviaEmailParaUsuarioSalvo(Usuario usuarioSalvo) throws MessagingException {
+    private void enviaEmailParaUsuarioSalvo(Usuario usuarioSalvo)
+            throws MessagingException, UnsupportedEncodingException {
         Email email = new Email();
         email.setDestinatario(usuarioSalvo.getEmail());
         email.setMensagem("""
@@ -74,6 +76,7 @@ public class UsuarioController {
                     """);
         email.setRemetente("lucas.jdev1@gmail.com");
         email.setAssunto("Cadastro IFJobs!!!");
+        email.setHtml(true);
 
         emailService.enviaEmail(email);
     }
