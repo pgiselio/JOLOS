@@ -112,7 +112,7 @@ body.toggle-sidemenu .main-container {
 
   .main {
     min-width: initial;
-    border-top-left-radius: 12px;
+    border-top-left-radius: 10px;
   }
 
   body.toggle-sidemenu .main {

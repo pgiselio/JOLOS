@@ -1,6 +1,24 @@
+import { FormEvent } from "react";
 import "./login.scss";
 export function LoginPage() {
     document.body.style.background = "linear-gradient(45deg, rgba(6,52,15,1) 0%, rgba(28,136,50,1) 50%, rgba(147,255,169,1) 100%), rgb(6,52,15)";
+
+    const onSubmit = (event : FormEvent) => {
+        let user: any = document.querySelector('#login');
+        let pass: any = document.querySelector('#pass');
+        var msg: any = document.querySelector('.info-message')
+    
+    
+        if (user.value == "admin" && pass.value == "ADMIN") {
+            // window.sessionStorage.setItem('isloggedin', 'true');
+            window.location.href = "sys";
+        } else {
+            msg.classList.add('show');
+        }
+
+        event.preventDefault();
+    };
+    
     return (
         <div id="login-page">
             <main>
@@ -8,7 +26,7 @@ export function LoginPage() {
                     <div className="login-form">
                         <a href="../"><img src="../images/logo.svg" className="logo-login" alt="Logo do IF Jobs"
                             title="Logo IF Jobs" /></a>
-                        <form method="post" autoComplete="off" onSubmit={userValidation}>
+                        <form method="post" autoComplete="off" onSubmit={onSubmit}>
                             <div className="info-message error-msg">
                                 <span>Usuário ou senha inválidos</span>
                             </div>
@@ -43,18 +61,5 @@ export function LoginPage() {
     );
 }
 
-async function userValidation() {
-    let user: any = document.querySelector('#login');
-    let pass: any = document.querySelector('#pass');
-    var msg: any = document.querySelector('.info-message')
 
-
-    if (user.value == "admin" && pass.value == "ADMIN") {
-        window.sessionStorage.setItem('isloggedin', 'true');
-        window.location.href = "/pages/logado.html";
-    } else {
-        msg.classList.add('show');
-    }
-    return false;
-}
 
