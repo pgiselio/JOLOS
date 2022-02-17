@@ -1,5 +1,5 @@
 import { CSSProperties } from "react";
-import "./profile-pic.css";
+import { StyledProfilePic } from "./style";
 
 const defaultProfilePic = "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__480.png";
 type ProfilePicType = {
@@ -9,7 +9,7 @@ type ProfilePicType = {
 }
 export function ProfilePic(props: ProfilePicType){
     return(
-        <div className={"profile-pic " + (props.className ?? "" )} style={props.style}>
+        <StyledProfilePic className={"profile-pic " + (props.className ?? "" )} style={props.style}>
             <span className="default-profile">
                 <img src={defaultProfilePic} alt="Foto de perfil padrão"/>
             </span>
@@ -18,7 +18,7 @@ export function ProfilePic(props: ProfilePicType){
                 <img className="img-perfil" src={props.url} alt=""/>
             }
             <span className="pp-border"></span>
-        </div>
+        </StyledProfilePic>
         
     );
 }
