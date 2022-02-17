@@ -2,7 +2,7 @@
 A ser descrito
 
 
-##How to start
+### How to start
 
 1. `$ npm i`
 2. `$ npm run dev`
