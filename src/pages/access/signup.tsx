@@ -1,8 +1,11 @@
+import { StyledAccess } from "./style";
+
 export function CadastroPage() {
   document.body.style.background =
     "linear-gradient(45deg, rgba(6,52,15,1) 0%, rgba(28,136,50,1) 50%, rgba(147,255,169,1) 100%), rgb(6,52,15)";
+  document.body.style.backgroundAttachment = "fixed";
   return (
-    <main>
+    <StyledAccess>
       <section className="container">
         <div className="login-form signup-form">
           <div className="header-signup">
@@ -82,6 +85,6 @@ export function CadastroPage() {
           </form>
         </div>
       </section>
-    </main>
+    </StyledAccess>
   );
 }

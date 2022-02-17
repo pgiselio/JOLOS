@@ -12,8 +12,8 @@ import { LandingPage } from './pages/Landing/Landing';
 import { HomePage } from './pages/home/homePage';
 import { ProfilePage } from './pages/profile/profilePage';
 import { VagasPage } from './pages/vagas/vagasPage';
-import { CadastroPage } from './pages/cadastro/signup';
-import { LoginPage } from './pages/login/login';
+import { CadastroPage } from './pages/access/signup';
+import { LoginPage } from './pages/access/login';
 import { ForumPage } from './pages/forum';
 
 function App() {

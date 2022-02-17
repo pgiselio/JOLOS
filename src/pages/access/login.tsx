@@ -1,7 +1,9 @@
 import { FormEvent } from "react";
 import "./login.scss";
+import { StyledAccess } from "./style";
 export function LoginPage() {
     document.body.style.background = "linear-gradient(45deg, rgba(6,52,15,1) 0%, rgba(28,136,50,1) 50%, rgba(147,255,169,1) 100%), rgb(6,52,15)";
+    document.body.style.backgroundAttachment = "fixed";
 
     const onSubmit = (event : FormEvent) => {
         let user: any = document.querySelector('#login');
@@ -21,7 +23,7 @@ export function LoginPage() {
     
     return (
         <div id="login-page">
-            <main>
+            <StyledAccess>
                 <div className="container">
                     <div className="login-form">
                         <a href="../"><img src="../images/logo.svg" className="logo-login" alt="Logo do IF Jobs"
@@ -54,7 +56,7 @@ export function LoginPage() {
                         <a href="cadastro" className="bt-cadse">Cadastre-se</a>
                     </div>
                 </div>
-            </main>
+            </StyledAccess>
 
             <script src="/js/checkedValidationButton.js"></script>
         </div>

@@ -1,8 +1,7 @@
-:root {
-  --bg-login: #fcfcfc;
-}
-#login-page {
-  :root {
+import styled from "styled-components";
+
+export const StyledAccess = styled.main`
+    :root {
     --bg-body: linear-gradient(
         45deg,
         rgba(6, 52, 15, 1) 0%,
@@ -11,9 +10,6 @@
       ),
       rgb(6, 52, 15);
     --bg-login: #fcfcfc;
-  }
-  body {
-    background-attachment: fixed;
   }
   .login-form {
     display: flex;
@@ -217,4 +213,4 @@
       width: 80%;
     }
   }
-}
+`;
