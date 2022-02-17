@@ -51,7 +51,7 @@ export function LoginPage() {
                         </form>
                     </div>
                     <div>
-                        <a href="signup.html" className="bt-cadse">Cadastre-se</a>
+                        <a href="cadastro" className="bt-cadse">Cadastre-se</a>
                     </div>
                 </div>
             </main>
