@@ -1,5 +1,6 @@
 package br.edu.ifrn.ifjobs.service;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.function.Supplier;
 
@@ -31,6 +32,10 @@ public class AlunoService {
         excecao = () -> new AlunoNaoEncontradoException("Aluno não encontrado!!");
 
         return findedById.orElseThrow(excecao);
+    }
+
+    public List<Aluno> buscaTodos() {
+        return respository.findAll();
     }
 
 }

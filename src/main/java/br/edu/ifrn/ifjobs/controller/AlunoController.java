@@ -1,5 +1,7 @@
 package br.edu.ifrn.ifjobs.controller;
 
+import java.util.List;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,6 +45,7 @@ public class AlunoController {
     }
 
     @GetMapping("/{id}")
+    @ResponseBody
     public ResponseEntity<Aluno> buscaPorId(@PathVariable(name = "id") int id) {
         Aluno aluno;
 
@@ -53,6 +56,14 @@ public class AlunoController {
         }
 
         return ResponseEntity.ok().body(aluno);
+    }
+
+    @GetMapping
+    @ResponseBody
+    public ResponseEntity<List<Aluno>> buscaTodos() {
+        List<Aluno> alunos;
+        alunos = alunoService.buscaTodos();
+        return ResponseEntity.ok().body(alunos);
     }
 
 }
