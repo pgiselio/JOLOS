@@ -38,4 +38,8 @@ public class AlunoService {
         return respository.findAll();
     }
 
+    public void delete(Aluno aluno) {
+        respository.delete(aluno);
+    }
+
 }
