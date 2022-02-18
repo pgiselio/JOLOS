@@ -1,13 +1,17 @@
 package br.edu.ifrn.ifjobs.controller;
 
+import java.lang.reflect.Field;
 import java.util.List;
+import java.util.Map;
 
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.util.ReflectionUtils;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -64,6 +68,35 @@ public class AlunoController {
         List<Aluno> alunos;
         alunos = alunoService.buscaTodos();
         return ResponseEntity.ok().body(alunos);
+    }
+
+    @PatchMapping("/{id}")
+    @ResponseBody
+    public ResponseEntity<Aluno> atualizaCampo(@PathVariable(name = "id") int id,
+            Map<Object, Object> campos) {
+        Aluno buscadoPorId;
+
+        try {
+            buscadoPorId = alunoService.buscarPorId(id);
+        } catch (AlunoNaoEncontradoException e) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
+        }
+
+        campos.forEach((chave, valor) -> {
+            Field campo = ReflectionUtils.findField(Aluno.class, (String) chave);
+            campo.setAccessible(true);
+            ReflectionUtils.setField(campo, buscadoPorId, valor);
+        });
+
+        Aluno alunoAtualizado;
+
+        try {
+            alunoAtualizado = alunoService.salvaAluno(buscadoPorId);
+        } catch (AlunoNaoCadastradoException e) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
+        }
+
+        return ResponseEntity.ok().body(alunoAtualizado);
     }
 
 }
