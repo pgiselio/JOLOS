@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -99,4 +100,19 @@ public class AlunoController {
         return ResponseEntity.ok().body(alunoAtualizado);
     }
 
+    @PutMapping("/{id}")
+    @ResponseBody
+    public ResponseEntity<Aluno> atualizaAluno(@PathVariable(name = "id") int id,
+            AlunoInsertDTO dto) {
+        Aluno aluno = dto.convertDtoToEntity();
+        Aluno alunoSalvo;
+
+        try {
+            alunoSalvo = alunoService.salvaAluno(aluno);
+        } catch (AlunoNaoCadastradoException e) {
+            throw new ResponseStatusException(HttpStatus.CONFLICT, e.getMessage());
+        }
+
+        return ResponseEntity.ok(alunoSalvo);
+    }
 }
