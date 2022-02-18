@@ -5,14 +5,18 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.server.ResponseStatusException;
 
 import br.edu.ifrn.ifjobs.dto.aluno.AlunoInsertDTO;
 import br.edu.ifrn.ifjobs.exception.AlunoNaoCadastradoException;
+import br.edu.ifrn.ifjobs.exception.AlunoNaoEncontradoException;
 import br.edu.ifrn.ifjobs.model.Aluno;
 import br.edu.ifrn.ifjobs.service.AlunoService;
 
@@ -26,8 +30,8 @@ public class AlunoController {
     @PostMapping("/create")
     @ResponseBody
     public ResponseEntity<Aluno> create(@RequestBody @Valid AlunoInsertDTO dto) {
-        Aluno aluno = alunoService.toAluno(dto);
-        var alunoSalvo = new Aluno();
+        Aluno aluno = dto.convertDtoToEntity();
+        Aluno alunoSalvo;
 
         try {
             alunoSalvo = alunoService.salvaAluno(aluno);
@@ -36,6 +40,19 @@ public class AlunoController {
         }
 
         return ResponseEntity.ok().body(alunoSalvo);
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<Aluno> buscaPorId(@PathVariable(name = "id") int id) {
+        Aluno aluno;
+
+        try {
+            aluno = alunoService.buscarPorId(id);
+        } catch (AlunoNaoEncontradoException e) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
+        }
+
+        return ResponseEntity.ok().body(aluno);
     }
 
 }

@@ -5,11 +5,14 @@ import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.br.CPF;
+import org.modelmapper.ModelMapper;
 
+import br.edu.ifrn.ifjobs.dto.Dto;
+import br.edu.ifrn.ifjobs.model.Aluno;
 import br.edu.ifrn.ifjobs.model.Curriculo;
 import br.edu.ifrn.ifjobs.model.Pessoa;
 
-public class AlunoInsertDTO {
+public class AlunoInsertDTO implements Dto<Aluno, AlunoInsertDTO> {
 
     private Pessoa dadosPessoa;
 
@@ -25,6 +28,8 @@ public class AlunoInsertDTO {
 
     @NotNull(message = "O currículo não foi informado!!")
     private Curriculo curriculo;
+
+    private ModelMapper modelMapper;
 
     public AlunoInsertDTO() {
     }
@@ -106,6 +111,18 @@ public class AlunoInsertDTO {
      */
     public void setCurriculo(Curriculo curriculo) {
         this.curriculo = curriculo;
+    }
+
+    @Override
+    public Aluno convertDtoToEntity() {
+        modelMapper = new ModelMapper();
+        return modelMapper.map(this, Aluno.class);
+    }
+
+    @Override
+    public AlunoInsertDTO convertEntityToDto(Aluno entity) {
+        modelMapper = new ModelMapper();
+        return modelMapper.map(entity, AlunoInsertDTO.class);
     }
 
 }
