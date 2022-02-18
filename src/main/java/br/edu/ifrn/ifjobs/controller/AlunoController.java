@@ -36,7 +36,7 @@ public class AlunoController {
 
     @PostMapping("/create")
     @ResponseBody
-    public ResponseEntity<Aluno> create(@RequestBody @Valid AlunoInsertDTO dto) {
+    public ResponseEntity<Aluno> salvaAluno(@RequestBody @Valid AlunoInsertDTO dto) {
         Aluno aluno = dto.convertDtoToEntity();
         Aluno alunoSalvo;
 
