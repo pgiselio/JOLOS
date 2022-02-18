@@ -1,4 +1,4 @@
-import { Notifications } from "../../components/notifications/notifications";
+import { Notifications } from "../../components/notifications/notifications-list";
 
 export function HomePage() {
     return (
