@@ -1,9 +1,9 @@
-import "./Landing.css";
 import { LandNavBar } from "./navbar";
+import { LandingStyle } from "./style";
 
 export function LandingPage() {
     return (
-        <div id="landing-page">
+        <LandingStyle id="landing-page">
             <LandNavBar />
             <main className="landing-main">
                 <section id="1">
@@ -22,6 +22,6 @@ export function LandingPage() {
             <footer className="landing-footer">
 
             </footer>
-        </div>
+        </LandingStyle>
     );
 }
