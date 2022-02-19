@@ -1,7 +1,9 @@
 package br.edu.ifrn.ifjobs.controller;
 
 import java.io.UnsupportedEncodingException;
+import java.lang.reflect.Field;
 import java.util.List;
+import java.util.Map;
 
 import javax.mail.MessagingException;
 import javax.validation.Valid;
@@ -10,8 +12,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.util.ReflectionUtils;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -109,6 +113,35 @@ public class UsuarioController {
         }).toList();
 
         return ResponseEntity.ok().body(list);
+    }
+
+    @PatchMapping("/{id}")
+    @ResponseBody
+    public ResponseEntity<Usuario> atualizaCampo(@PathVariable(name = "id") int id,
+            @RequestBody Map<Object, Object> campos) {
+        Usuario buscadoPorId;
+
+        try {
+            buscadoPorId = usuarioService.getById(id);
+        } catch (UsuarioNaoEncontradoException e) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
+        }
+
+        campos.forEach((chave, valor) -> {
+            Field campo = ReflectionUtils.findField(Usuario.class, (String) chave);
+            campo.setAccessible(true);
+            ReflectionUtils.setField(campo, buscadoPorId, valor);
+        });
+
+        Usuario usuarioAtualizado;
+
+        try {
+            usuarioAtualizado = usuarioService.create(buscadoPorId);
+        } catch (UsuarioNaoCadastradoException e) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
+        }
+
+        return ResponseEntity.ok(usuarioAtualizado);
     }
 
     @DeleteMapping("/delete")
