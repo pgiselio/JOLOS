@@ -5,6 +5,7 @@ export const SidebarAside = styled.aside`
   grid-area: menu;
   height: calc(100vh - var(--top-bar-height));
   background-color: white;
+  border-right: 1px solid rgb(228, 228, 228);
   position: fixed;
   overflow: auto;
   overflow-x: hidden;
@@ -66,6 +67,7 @@ export const SidebarAside = styled.aside`
     position: relative;
     z-index: 10;
     transition: padding 0.3s ease;
+    border-right: none;
 
     body.toggle-sidemenu & {
       width: 80px;
