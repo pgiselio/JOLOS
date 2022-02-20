@@ -3,10 +3,13 @@ package br.edu.ifrn.ifjobs.dto.empresa;
 import javax.validation.constraints.NotBlank;
 
 import org.hibernate.validator.constraints.br.CNPJ;
+import org.modelmapper.ModelMapper;
 
+import br.edu.ifrn.ifjobs.dto.Dto;
+import br.edu.ifrn.ifjobs.model.Empresa;
 import br.edu.ifrn.ifjobs.model.Pessoa;
 
-public class EmpresaInsertDTO {
+public class EmpresaInsertDTO implements Dto<Empresa, EmpresaInsertDTO> {
 
     private Pessoa dadosPessoais;
 
@@ -19,6 +22,8 @@ public class EmpresaInsertDTO {
     @NotBlank(message = "Telefone não informado!")
     private String telefone;
 
+    private ModelMapper modelMapper;
+
     public EmpresaInsertDTO() {
     }
 
@@ -28,6 +33,18 @@ public class EmpresaInsertDTO {
         this.cnpj = cnpj;
         this.resumo = resumo;
         this.telefone = telefone;
+    }
+
+    @Override
+    public Empresa convertDtoToEntity() {
+        modelMapper = new ModelMapper();
+        return modelMapper.map(this, Empresa.class);
+    }
+
+    @Override
+    public EmpresaInsertDTO convertEntityToDto(Empresa entity) {
+        modelMapper = new ModelMapper();
+        return modelMapper.map(entity, EmpresaInsertDTO.class);
     }
 
     /**
