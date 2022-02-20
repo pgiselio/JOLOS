@@ -2,6 +2,7 @@ package br.edu.ifrn.ifjobs.service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.function.Supplier;
 
 import org.springframework.stereotype.Service;
 
@@ -18,12 +19,20 @@ public class EmpresaService {
     public Empresa createEmpresa(Empresa empresa) throws EmpresaNaoCadastradaException {
         Optional<Empresa> optional;
         optional = Optional.ofNullable(repository.save(empresa));
-        return optional.orElseThrow(() -> new EmpresaNaoCadastradaException("Erro ao efetuar cadastro!"));
+
+        Supplier<EmpresaNaoCadastradaException> excessao;
+        excessao = () -> new EmpresaNaoCadastradaException("Erro ao efetuar cadastro!");
+
+        return optional.orElseThrow(excessao);
     }
 
     public Empresa getById(int id) throws EmpresaNaoEncontradaException {
         Optional<Empresa> empresaFindById = repository.findById(id);
-        return empresaFindById.orElseThrow(() -> new EmpresaNaoEncontradaException("Empresa não encontrada!!"));
+
+        Supplier<EmpresaNaoEncontradaException> excessao;
+        excessao = () -> new EmpresaNaoEncontradaException("Empresa não encontrada!!");
+
+        return empresaFindById.orElseThrow(excessao);
     }
 
     public List<Empresa> getAll() {
