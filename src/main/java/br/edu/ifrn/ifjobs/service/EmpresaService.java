@@ -39,6 +39,18 @@ public class EmpresaService {
         return repository.findAll();
     }
 
+    public Empresa buscaPorCnpj(String cnpj) {
+        Optional<String> optional;
+        optional = Optional.ofNullable(cnpj);
+
+        Supplier<IllegalArgumentException> excessao;
+        excessao = () -> new IllegalArgumentException("Cnpj inválido!");
+
+        String cnpjNaoNulo = optional.orElseThrow(excessao);
+
+        return repository.findByCnpj(cnpjNaoNulo);
+    }
+
     public void delete(Empresa empresa) {
         repository.delete(empresa);
     }
