@@ -4,7 +4,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
-import br.edu.ifrn.ifjobs.model.Aluno;
 import br.edu.ifrn.ifjobs.model.Empresa;
 
 @Repository
@@ -15,5 +14,5 @@ public interface EmpresaRepository extends JpaRepository<Empresa, Integer> {
             FROM Empresa e
             WHERE e.cnpj = ?1
             """)
-    public Aluno findByCnpj(String cnpj);
+    public Empresa findByCnpj(String cnpj);
 }
