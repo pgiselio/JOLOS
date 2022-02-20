@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -110,5 +111,21 @@ public class EmpresaController {
         }
 
         return ResponseEntity.ok(empresaAtualizada);
+    }
+
+    @PutMapping("/{id}")
+    @ResponseBody
+    public ResponseEntity<Empresa> atualizaEmpresa(@PathVariable(name = "id") int id,
+            EmpresaInsertDTO dto) {
+        Empresa empresa = dto.convertDtoToEntity();
+        Empresa empresaSalva;
+
+        try {
+            empresaSalva = empresaService.createEmpresa(empresa);
+        } catch (EmpresaNaoCadastradaException e) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
+        }
+
+        return ResponseEntity.ok(empresaSalva);
     }
 }
