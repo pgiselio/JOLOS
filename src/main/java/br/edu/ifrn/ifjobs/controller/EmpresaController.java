@@ -6,6 +6,7 @@ import java.util.Map;
 
 import javax.validation.Valid;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.util.ReflectionUtils;
@@ -32,6 +33,7 @@ import br.edu.ifrn.ifjobs.service.EmpresaService;
 @RequestMapping(path = "/empresa")
 public class EmpresaController {
 
+    @Autowired
     private EmpresaService empresaService;
 
     @PostMapping("/create")
