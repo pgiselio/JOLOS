@@ -39,4 +39,8 @@ public class EmpresaService {
         return repository.findAll();
     }
 
+    public void delete(Empresa empresa) {
+        repository.delete(empresa);
+    }
+
 }
