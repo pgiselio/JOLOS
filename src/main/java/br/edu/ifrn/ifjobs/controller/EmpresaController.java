@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
@@ -50,6 +51,20 @@ public class EmpresaController {
         try {
             empresa = empresaService.getById(id);
         } catch (EmpresaNaoEncontradaException e) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
+        }
+
+        return ResponseEntity.ok(empresa);
+    }
+
+    @GetMapping("/cnpj")
+    @ResponseBody
+    public ResponseEntity<Empresa> buscaPorCnpj(@RequestParam String cnpj) {
+        Empresa empresa;
+
+        try {
+            empresa = empresaService.buscaPorCnpj(cnpj);
+        } catch (IllegalArgumentException e) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
         }
 
