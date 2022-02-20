@@ -38,6 +38,18 @@ public class AlunoService {
         return respository.findAll();
     }
 
+    public Aluno buscaPorCpf(String cpf) {
+        Optional<String> optional;
+        optional = Optional.ofNullable(cpf);
+
+        Supplier<IllegalArgumentException> argumentoIlegal;
+        argumentoIlegal = () -> new IllegalArgumentException("Cpf inválido!");
+
+        String cpfNaoNulo = optional.orElseThrow(argumentoIlegal);
+
+        return respository.findByCpf(cpfNaoNulo);
+    }
+
     public void delete(Aluno aluno) {
         respository.delete(aluno);
     }

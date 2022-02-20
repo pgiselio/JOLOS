@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
@@ -62,6 +63,20 @@ public class AlunoController {
         }
 
         return ResponseEntity.ok().body(aluno);
+    }
+
+    @GetMapping("/cpf")
+    @ResponseBody
+    public ResponseEntity<Aluno> buscaPorCpf(@RequestParam String cpf) {
+        Aluno aluno;
+
+        try {
+            aluno = alunoService.buscaPorCpf(cpf);
+        } catch (IllegalArgumentException e) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
+        }
+
+        return ResponseEntity.ok(aluno);
     }
 
     @GetMapping
