@@ -9,6 +9,7 @@ import javax.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.util.ReflectionUtils;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -127,5 +128,21 @@ public class EmpresaController {
         }
 
         return ResponseEntity.ok(empresaSalva);
+    }
+
+    @DeleteMapping("/delete/{id}")
+    @ResponseBody
+    public ResponseEntity<Empresa> deletaEmpresa(@PathVariable(name = "id") int id) {
+        Empresa empresa;
+
+        try {
+            empresa = empresaService.getById(id);
+        } catch (EmpresaNaoEncontradaException e) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
+        }
+
+        empresaService.delete(empresa);
+
+        return ResponseEntity.ok(empresa);
     }
 }
