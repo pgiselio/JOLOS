@@ -56,6 +56,9 @@ public class Usuario implements UserDetails {
     @OneToOne
     private Aluno aluno;
 
+    @OneToOne
+    private Empresa empresa;
+
     public Usuario() {
     }
 
@@ -149,6 +152,22 @@ public class Usuario implements UserDetails {
      */
     public void setAluno(Aluno aluno) {
         this.aluno = aluno;
+    }
+
+    /**
+     * 
+     * @return Empresa return the empresa
+     */
+    public Empresa getEmpresa() {
+        return empresa;
+    }
+
+    /**
+     * 
+     * @param empresa the empresa to set
+     */
+    public void setEmpresa(Empresa empresa) {
+        this.empresa = empresa;
     }
 
     @Override

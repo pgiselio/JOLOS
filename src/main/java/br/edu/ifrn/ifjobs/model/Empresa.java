@@ -1,5 +1,7 @@
 package br.edu.ifrn.ifjobs.model;
 
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
@@ -12,7 +14,9 @@ import org.springframework.stereotype.Component;
 
 @Component
 @Entity
-public class Empresa {
+public class Empresa implements Serializable {
+
+    private static final long serialVersionUID = 10L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
