@@ -1,5 +1,6 @@
 package br.edu.ifrn.ifjobs.model;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
@@ -19,7 +20,10 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.UniqueConstraint;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 
@@ -154,7 +158,6 @@ public class Usuario implements UserDetails {
     }
 
     /**
-     * 
      * @return Empresa return the empresa
      */
     public Empresa getEmpresa() {
@@ -162,7 +165,6 @@ public class Usuario implements UserDetails {
     }
 
     /**
-     * 
      * @param empresa the empresa to set
      */
     public void setEmpresa(Empresa empresa) {
@@ -171,34 +173,46 @@ public class Usuario implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return roles;
+        List<SimpleGrantedAuthority> authorities = new ArrayList<>();
+
+        roles.forEach(role -> {
+            authorities.add(new SimpleGrantedAuthority(role.getNomeRole()));
+        });
+
+        return authorities;
     }
 
+    @JsonIgnore
     @Override
     public String getPassword() {
         return this.senha;
     }
 
+    @JsonIgnore
     @Override
     public String getUsername() {
         return this.email;
     }
 
+    @JsonIgnore
     @Override
     public boolean isAccountNonExpired() {
         return true;
     }
 
+    @JsonIgnore
     @Override
     public boolean isAccountNonLocked() {
         return true;
     }
 
+    @JsonIgnore
     @Override
     public boolean isCredentialsNonExpired() {
         return true;
     }
 
+    @JsonIgnore
     @Override
     public boolean isEnabled() {
         return true;
