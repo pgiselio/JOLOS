@@ -62,6 +62,10 @@ public class Usuario implements UserDetails {
     @OneToOne
     private Empresa empresa;
 
+    public void addRole(Role papelDeAutorizacao) {
+        roles.add(papelDeAutorizacao);
+    }
+
     public Usuario() {
     }
 
