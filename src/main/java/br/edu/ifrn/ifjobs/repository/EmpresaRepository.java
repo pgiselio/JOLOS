@@ -11,8 +11,8 @@ public interface EmpresaRepository extends JpaRepository<Empresa, Integer> {
 
     @Query(value = """
             SELECT *
-            FROM Empresa e
+            FROM empresa e
             WHERE e.cnpj = ?1
-            """)
+            """, nativeQuery = true)
     public Empresa findByCnpj(String cnpj);
 }
