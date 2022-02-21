@@ -40,7 +40,6 @@ public class Usuario implements UserDetails {
     @Column(nullable = false)
     private String senha;
 
-    // @Column(nullable = false)
     @Enumerated(EnumType.STRING)
     private TipoUsuario tipoUsuario;
 
