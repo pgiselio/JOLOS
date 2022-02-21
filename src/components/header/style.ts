@@ -1,14 +1,12 @@
 import styled from "styled-components";
 
 export const HeaderSysStyle = styled.header`
-  .header {
-    display: flex;
-    position: fixed;
-    width: 100%;
-    z-index: 5;
-    max-width: 100vw;
-    height: var(--top-bar-height);
-  }
+  display: flex;
+  position: fixed;
+  width: 100%;
+  z-index: 5;
+  max-width: 100vw;
+  height: var(--top-bar-height);
 
   .navigate {
     display: flex;
@@ -94,19 +92,13 @@ export const HeaderSysStyle = styled.header`
       padding: 0 15px;
       transition: padding 0.2s ease;
     }
-
-    #btn-collapse-sidemenu::before {
-      content: "\f060";
-      display: none;
-    }
-
-    .three-bars-btn {
+    .botao-ham {
       display: flex;
       align-items: center;
       justify-content: center;
     }
 
-    .lines-btn span {
+    .botao-ham span {
       display: flex;
       width: 18px;
       height: 2px;
@@ -116,29 +108,30 @@ export const HeaderSysStyle = styled.header`
       border-radius: 3px;
       transition: width 0.2s ease;
     }
-    #btn-collapse-sidemenu:hover .lines-btn span {
+    .botao-ham.active span {
+      transform: none ;
+      opacity: 1;
+      -webkit-transform: none ;
+    }
+    #btn-collapse-sidemenu:hover .botao-ham span {
       width: 14px;
     }
-    #btn-collapse-sidemenu:active .lines-btn span {
+    #btn-collapse-sidemenu:active .botao-ham span {
       width: 8px;
     }
 
-    .lines-btn span:nth-last-child(1) {
+    .botao-ham span:last-child {
       margin-bottom: 0;
     }
 
-    body.toggle-sidemenu #btn-collapse-sidemenu .lines-btn span {
+    body.toggle-sidemenu & #btn-collapse-sidemenu .botao-ham span {
       width: 6px;
     }
-    body.toggle-sidemenu #btn-collapse-sidemenu:hover .lines-btn span {
+    body.toggle-sidemenu & #btn-collapse-sidemenu:hover .botao-ham span {
       width: 12px;
     }
-    body.toggle-sidemenu #btn-collapse-sidemenu:active .lines-btn span {
+    body.toggle-sidemenu & #btn-collapse-sidemenu:active .botao-ham span {
       width: 16px;
-    }
-
-    .botao-ham {
-      display: none;
     }
   }
 `;

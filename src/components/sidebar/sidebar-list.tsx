@@ -4,14 +4,14 @@ import { SidebarItem } from './sidebar-item';
 import "./sidebar.css";
 import { SidebarAside } from './style';
 
-function checkSidebarState() {
-    const mq = window.matchMedia("(min-width: 766px)");
-        
-    if (mq.matches && localStorage.getItem('sidebar-collapsed') === ('collapsed')) {
-        document.body.classList.add('toggle-sidemenu');
-    }  
-}
 export function SidebarList(){
+    function checkSidebarState() {
+        const mq = window.matchMedia("(min-width: 766px)");
+            
+        if (mq.matches && localStorage.getItem('sidebar-collapsed') === ('yes')) {
+            document.body.classList.add('toggle-sidemenu');
+        }  
+    }
     checkSidebarState();
 
     return(

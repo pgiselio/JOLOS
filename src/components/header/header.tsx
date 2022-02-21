@@ -1,29 +1,30 @@
-import "./header.css";
-function Collapse() {
-  document.body.classList.toggle('toggle-sidemenu');
-  storageSidebarState();
-}
+import { HeaderSysStyle } from "./style";
 
-function storageSidebarState() {
-  if (document.body.classList.contains('toggle-sidemenu')) {
-    localStorage.setItem('sidebar-collapsed', 'collapsed');
-  } else {
-    localStorage.setItem('sidebar-collapsed', '');
-  }
-}
 export function Header() {
+  function Collapse() {
+    const botaoHam = document.querySelector(".botao-ham");
+    document.body.classList.toggle("toggle-sidemenu");
+    botaoHam?.classList.toggle("active");
+    storageSidebarState();
+  }
+
+  function storageSidebarState() {
+    if (document.body.classList.contains("toggle-sidemenu")) {
+      localStorage.setItem("sidebar-collapsed", "yes");
+    } else {
+      localStorage.setItem("sidebar-collapsed", "");
+    }
+  }
+
   return (
-    <header className="header">
+    <HeaderSysStyle className="header">
       <nav className="navigate">
         <div className="menu-container">
-          <button id="btn-collapse-sidemenu" onClick={Collapse} aria-label="Botão de esconder ou mostrar menu lateral">
-            <div className="three-bars-btn">
-              <div className="lines-btn">
-                <span></span>
-                <span></span>
-                <span></span>
-              </div>
-            </div>
+          <button
+            id="btn-collapse-sidemenu"
+            onClick={Collapse}
+            aria-label="Botão de esconder ou mostrar menu lateral"
+          >
             <div className="botao-ham">
               <span></span>
               <span></span>
@@ -37,6 +38,6 @@ export function Header() {
           </button>
         </div>
       </nav>
-    </header>
+    </HeaderSysStyle>
   );
 }
