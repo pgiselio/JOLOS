@@ -31,8 +31,8 @@ export const SidebarAside = styled.aside`
   }
 
   .profile-pic {
-    width: 80px;
-    height: 80px;
+    width: 65px;
+    height: 65px;
     border-radius: 100%;
     transition: height 0.3s, width 0.3s ease;
   }
@@ -45,10 +45,11 @@ export const SidebarAside = styled.aside`
     overflow-wrap: anywhere;
     text-overflow: ellipsis;
     white-space: nowrap;
+    text-transform: capitalize;
     padding: 0 10px;
     padding-top: 10px;
-    font-size: 18px;
-    font-weight: 600;
+    font-size: 15px;
+    font-weight: 500;
     opacity: 1;
     transition: height 0.5s, opacity 0.5s, padding 0.5s ease;
   }
@@ -98,7 +99,7 @@ export const SidebarAside = styled.aside`
       align-items: center;
       position: relative;
       width: 100%;
-      height: 45px;
+      height: 42px;
       text-decoration: none;
       font-weight: 500;
       color: rgb(43, 43, 43);
@@ -110,7 +111,6 @@ export const SidebarAside = styled.aside`
     a span {
       opacity: 1;
       margin-left: 15px;
-      height: 100%;
       width: calc(100% - 45px);
       overflow: hidden;
       white-space: nowrap;
