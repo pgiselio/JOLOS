@@ -29,6 +29,7 @@ import br.edu.ifrn.ifjobs.dto.usuario.UsuarioLoginGetDTO;
 import br.edu.ifrn.ifjobs.exception.UsuarioNaoCadastradoException;
 import br.edu.ifrn.ifjobs.exception.UsuarioNaoEncontradoException;
 import br.edu.ifrn.ifjobs.model.Email;
+import br.edu.ifrn.ifjobs.model.Role;
 import br.edu.ifrn.ifjobs.model.Usuario;
 import br.edu.ifrn.ifjobs.model.enums.StatusUsuario;
 import br.edu.ifrn.ifjobs.service.EmailService;
@@ -52,6 +53,10 @@ public class UsuarioController {
         BCryptPasswordEncoder ciptografo = new BCryptPasswordEncoder();
         usuario.setSenha(ciptografo.encode(usuario.getSenha()));
         usuario.setStatus(StatusUsuario.PENDENTE);
+
+        var papelDeAutorizacao = new Role();
+        papelDeAutorizacao.setNomeRole("Usuario");
+        usuario.addRole(papelDeAutorizacao);
 
         Usuario usuarioSalvo;
 
