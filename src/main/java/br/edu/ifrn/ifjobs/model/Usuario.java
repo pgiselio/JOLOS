@@ -175,9 +175,8 @@ public class Usuario implements UserDetails {
     public Collection<? extends GrantedAuthority> getAuthorities() {
         List<SimpleGrantedAuthority> authorities = new ArrayList<>();
 
-        roles.forEach(role -> {
-            authorities.add(new SimpleGrantedAuthority(role.getNomeRole()));
-        });
+        roles.forEach(role -> authorities.add(
+                new SimpleGrantedAuthority(role.getNomeRole())));
 
         return authorities;
     }
