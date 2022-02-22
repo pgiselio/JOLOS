@@ -1,59 +1,56 @@
 import styled from "styled-components";
 
 export const StyledButton = styled.button`
-  /* Buttons */
-  .btn-accent {
-    border-radius: 30px;
-    background: var(--accent-color);
-    padding: 10px;
-    border: none;
-    color: #fff;
-    cursor: pointer;
-    transition: 0.1s linear;
-  }
-
-  .btn-accent.less-radius {
-    border-radius: 8px;
-  }
-
-  .btn-accent:hover {
+  padding: 8px 20px;
+  font-size: 15px;
+  font-weight: 500;
+  cursor: pointer;
+  border: none;
+  border-radius: 50px;
+  transition: 0.1s linear;
+  background: var(--accent-color);
+  border: 2px solid var(--accent-color);
+  color: #fff;
+  :hover {
     background: var(--accent-color-active);
+    border: 2px solid var(--accent-color-active);
   }
-
-  .btn-outlined {
-    text-decoration: none;
+  i:first-child{
+    padding-right: 5px;
+  }
+  i:last-child{
+    padding-left: 5px;
+  }
+  &.less-radius {
+    border-radius: 10px;
+  }
+  &.outlined {
     color: var(--accent-color);
-    font-size: 15px;
-    padding: 8px 20px;
-    font-weight: 500;
     border: 2px solid var(--accent-color);
-    border-radius: 50px;
-    cursor: pointer;
     background: transparent;
-    transition: 0.1s linear;
+    :hover {
+      background: var(--accent-color-opacity);
+    }
+    &.filled:hover {
+      color: #fff;
+      background: var(--accent-color);
+    }
+    &.red {
+      border: 2px solid #c91f1f;
+      color: #ac0000;
+    }
+    &.red:hover {
+      background: #ac000026;
+    }
+    &.red.filled:hover {
+      color: #fff;
+      background: #ac0000;
+    }
   }
-
-  .btn-outlined:hover {
-    background: var(--accent-color-opacity);
-  }
-  .btn-outlined.filled:hover {
-    color: #fff;
-    background: var(--accent-color);
-  }
-
-  .btn-outlined.red {
-    border: 2px solid #c91f1f;
-    color: #ac0000;
-  }
-
-  .btn-outlined.red:hover {
-    background: #ac000026;
-  }
-  .btn-outlined.red-filled:hover {
-    color: #fff;
-    background: #ac0000;
-  }
-  .btn-outlined.less-radius {
-    border-radius: 8px;
+  &.inactive {
+    color: #ccc !important;
+    background: #f1f1f1 !important;
+    border: 2px solid #ccc !important;
+    pointer-events: none; 
   }
 `;

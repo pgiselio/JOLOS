@@ -1,5 +1,6 @@
 import { FormEvent } from "react";
-import "./login.scss";
+import { Button } from "../../components/button";
+import "./access.scss";
 import { StyledAccess } from "./style";
 export function LoginPage() {
     document.body.style.background = "linear-gradient(45deg, rgba(6,52,15,1) 0%, rgba(28,136,50,1) 50%, rgba(147,255,169,1) 100%), rgb(6,52,15)";
@@ -48,7 +49,7 @@ export function LoginPage() {
                                 <input type="checkbox" name="checkbox" id="checkbox" className="checkbox" />
                                 <label htmlFor="checkbox">Mostrar senha</label>
                             </div>
-                            <input type="submit" className="btn-accent" value="Entrar" />
+                            <Button type="submit" className="less-radius">Entrar</Button>
                             <a href="/password-reset/" className="pwrst-link">Esqueceu a senha?</a>
                         </form>
                     </div>

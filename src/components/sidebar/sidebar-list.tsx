@@ -20,9 +20,10 @@ export function SidebarList(){
                 <div className="perfil">
                     <ProfilePic/>
                     <h3 className="name-perfil">testando 123</h3>
+                    <span>aaaaa@gmail.com</span>
                 </div>
 
-                <div className="data">
+                <nav className="data">
                     <ul className="data-items">
                         <SidebarItem to="" icon="fas fa-home" label="Início asdas asdasa aaaas asdasdddd" end/>
                         <SidebarItem to="profile" icon="fas fa-user" label="Dados"/>
@@ -30,7 +31,7 @@ export function SidebarList(){
                         <SidebarItem to="forum" icon="fas fa-comments" label="Fórum"/>
                         <SidebarItem to="logout" icon="fas fa-sign-out-alt" label="Sair" className="sair"/>
                     </ul>
-                </div>
+                </nav>
             </div>
         </SidebarAside>
 

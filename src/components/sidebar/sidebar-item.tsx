@@ -9,12 +9,12 @@ type Item = {
     end?: boolean;
 }
 
-export function SidebarItem(item: Item) {
+export function SidebarItem({to, icon, label, title, className, end} : Item) {
     return (
         <li>
-            <NavLink to={item.to} className={item.className} title={item.title || item.label} end={item.end}>
-                <i className={item.icon}></i>
-                <span>{item.label}</span>
+            <NavLink to={to} className={className} title={title || label} end={end}>
+                <i className={icon}></i>
+                <span>{label}</span>
             </NavLink>
         </li>
     );

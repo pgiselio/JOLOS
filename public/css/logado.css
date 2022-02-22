@@ -75,7 +75,7 @@ body.remove-transbar .three-bars-btn *{
     box-shadow: 0 1px 4px rgb(0 0 0 / 8%);
     position: sticky;
     z-index: 10;
-    top: 0;
+    top: var(--top-bar-height);
     background: #fffffff5;
 }
 
@@ -295,7 +295,7 @@ footer {
     width: 100%;
     position: sticky;
     z-index: 10;
-    top: 0;
+    top: var(--top-bar-height);
 }
 
 .tabs-menu .spacer {

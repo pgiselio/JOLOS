@@ -9,7 +9,8 @@ export const SidebarAside = styled.aside`
   position: fixed;
   overflow: auto;
   overflow-x: hidden;
-  z-index: 12;
+  top: var(--top-bar-height);
+  z-index: 20;
   width: 0;
   transition: width 0.3s, padding 0.3s ease;
 
@@ -60,12 +61,15 @@ export const SidebarAside = styled.aside`
 
   .data-items {
     width: 100%;
+    display: flex;
+    flex-direction: column;
+    row-gap: 5px;
   }
 
   @media (min-width: 766px) {
     width: 280px;
     padding-right: 10px;
-    position: relative;
+    position: sticky;
     z-index: 10;
     transition: padding 0.3s ease;
     border-right: none;
@@ -92,7 +96,7 @@ export const SidebarAside = styled.aside`
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-bottom: 5px;
+    list-style: none;
 
     a {
       display: flex;

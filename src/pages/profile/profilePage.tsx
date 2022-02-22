@@ -1,3 +1,4 @@
+import { Button } from "../../components/button";
 import { ProfilePic } from "../../components/profile-pic/profile-pic";
 import "./profilePage.scss";
 
@@ -24,9 +25,9 @@ export function ProfilePage() {
                             </div>
                         </div>
                         <div className="user-actions">
-                            <button className="btn-outlined">
+                            <Button className="outlined">
                                 Editar perfil
-                            </button>
+                            </Button>
                         </div>
                     </div>
                 </div>

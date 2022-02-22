@@ -1,3 +1,5 @@
+import { Button } from "../../components/button";
+
 export function ForumPage() {
     return (
         <div id="forum-page">
@@ -11,8 +13,8 @@ export function ForumPage() {
                     <div className="box">
                         <div className="box-title flex justify-content-between">
                             <h3>Perguntas</h3>
-                            <button className="btn-outlined" id="filtro">Filtros <i
-                                className="fas fa-filter"></i></button>
+                            <Button className="outlined" id="filtro">Filtros <i
+                                className="fas fa-filter"></i></Button>
                         </div>
                         <div>
                             <div className="ask-box">

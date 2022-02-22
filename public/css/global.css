@@ -82,26 +82,27 @@ input[type="password"]:focus {
 }
 
 input[type="checkbox"] {
-  all: unset;
+  appearance: none;
   border: 2px solid #cccc;
   border-radius: 5px;
-  width: 15px;
-  height: 15px;
+  width: 16px;
+  height: 16px;
   display: inline-block;
   cursor: pointer;
   transition: 0.1s linear 0.2s;
   position: relative;
 }
 
-input[type="checkbox"]::before {
+input[type="checkbox"]::after {
   content: "\f00c";
   font-family: "Font Awesome 5 Free";
   font-weight: 900;
   -webkit-font-smoothing: antialiased;
-  display: inline-block;
-  line-height: 15px !important;
+  line-height: 16px !important;
   width: 100%;
   position: absolute;
+  top: 0;
+  left: 0;
   text-align: center;
   font-style: normal;
   font-variant: normal;
@@ -119,7 +120,7 @@ input[type="checkbox"]:checked {
   border-color: var(--accent-color);
 }
 
-input[type="checkbox"]:checked::before {
+input[type="checkbox"]:checked::after {
   clip-path: circle(100% at 2px 50%);
   transition: clip-path 0.5s ease;
 }

@@ -2,9 +2,10 @@ import styled from "styled-components";
 
 export const HeaderSysStyle = styled.header`
   display: flex;
-  position: fixed;
+  position: sticky;
+  top: 0;
   width: 100%;
-  z-index: 5;
+  z-index: 15;
   max-width: 100vw;
   height: var(--top-bar-height);
 
