@@ -30,12 +30,11 @@ body{
   height: 100%;
   width: 100%;
   border-top: 1px solid;
-  border-left: 1px solid;
+  border-left: none;
   border-color: rgb(228, 228, 228);
   box-shadow: -3px -3px 0 0 #fff;
   z-index: 14;
   pointer-events: none;
-  border-top-left-radius: 10px;
 }
 
 body.toggle-sidemenu .main {
@@ -92,23 +91,25 @@ body.toggle-sidemenu {
 }
 
 @media (min-width: 766px) {
-  .main-container::-webkit-scrollbar {
-    width: 15px;
-    border-radius: 20px;
+  body::-webkit-scrollbar {
+    width: 16px;
   }
-
-  .main-container::-webkit-scrollbar-track {
+/* 
+  body::-webkit-scrollbar-track {
     border-radius: 20px;
     background-color: #f5f5f5;
-  }
+  } */
 
-  .main-container::-webkit-scrollbar-thumb {
-    background-color: #dddddd;
+  body::-webkit-scrollbar-thumb {
+    background-color: #a3a3a3d5;
     border-radius: 20px;
+    background-clip: content-box;
+    border: 5px solid transparent;
   }
 
-  .main-container::-webkit-scrollbar-thumb:hover {
+  body::-webkit-scrollbar-thumb:hover {
     background-color: #ccc;
+    border-width: 5px 4px;
   }
 
   body.toggle-sidemenu .menu-container {
@@ -119,6 +120,11 @@ body.toggle-sidemenu {
 
   .main {
     min-width: initial;
+    border-top-left-radius: 10px;
+  }
+  .main::before{
+    border-left: 1px solid;
+    border-color: rgb(228, 228, 228);
     border-top-left-radius: 10px;
   }
 

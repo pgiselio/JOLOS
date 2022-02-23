@@ -38,7 +38,7 @@ export const SidebarAside = styled.aside`
     transition: height 0.3s, width 0.3s ease;
   }
 
-  .name-perfil {
+  .name-perfil , .perfil .detail{
     color: #000;
     width: 100%;
     text-align: center;
@@ -53,6 +53,12 @@ export const SidebarAside = styled.aside`
     font-weight: 500;
     opacity: 1;
     transition: height 0.5s, opacity 0.5s, padding 0.5s ease;
+  }
+  .perfil .detail{
+    color: #666;
+    font-size: 13px;
+    text-transform: none;
+    padding: 0;
   }
 
   .data {
@@ -70,7 +76,6 @@ export const SidebarAside = styled.aside`
     width: 280px;
     padding-right: 10px;
     position: sticky;
-    z-index: 10;
     transition: padding 0.3s ease;
     border-right: none;
 
@@ -84,7 +89,7 @@ export const SidebarAside = styled.aside`
       height: 60px;
     }
 
-    body.toggle-sidemenu & .name-perfil {
+    body.toggle-sidemenu & .name-perfil, body.toggle-sidemenu & .perfil .detail {
       opacity: 0;
       height: 0;
       padding: 0;

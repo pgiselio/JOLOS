@@ -1,6 +1,10 @@
 import styled from "styled-components";
 
 export const StyledButton = styled.button`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  column-gap: 10px;
   padding: 8px 20px;
   font-size: 15px;
   font-weight: 500;
@@ -14,12 +18,6 @@ export const StyledButton = styled.button`
   :hover {
     background: var(--accent-color-active);
     border: 2px solid var(--accent-color-active);
-  }
-  i:first-child{
-    padding-right: 5px;
-  }
-  i:last-child{
-    padding-left: 5px;
   }
   &.less-radius {
     border-radius: 10px;

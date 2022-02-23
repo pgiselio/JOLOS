@@ -39,6 +39,7 @@ function App() {
 }
 
 function SystemLayout() {
+  document.body.style.background = "#f7f7f7";
   return (
     <>
       <Header />

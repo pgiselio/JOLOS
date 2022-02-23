@@ -20,7 +20,7 @@ export function SidebarList(){
                 <div className="perfil">
                     <ProfilePic/>
                     <h3 className="name-perfil">testando 123</h3>
-                    <span>aaaaa@gmail.com</span>
+                    <span className="detail">aaaaa@gmail.com</span>
                 </div>
 
                 <nav className="data">

@@ -6,7 +6,8 @@ export function VagasPage() {
     <section>
       <div className="header-section">
         <h2>Vagas criadas</h2>
-        <Button className="outlined btn-criar-nova" id="newVaga">
+        <Button className="outlined" id="newVaga">
+        <i className="fas fa-plus"></i>
           Criar nova
         </Button>
       </div>
@@ -18,7 +19,7 @@ export function VagasPage() {
               company="Sua empresa"
               location="João Câmara, RN"
               date="02/12/2022"
-              text="bolsonaro 123"
+              text="Lorem Ipsum"
               candidates="12"
             />
             <VagaCard
@@ -26,7 +27,7 @@ export function VagasPage() {
               company="Sua empresa"
               location="João Câmara, RN"
               date="13/12/2021"
-              text="bolsonaro 123"
+              text="Lorem Ipsum"
               candidates="3"
             />
             <VagaCard
@@ -34,7 +35,7 @@ export function VagasPage() {
               company="Sua empresa"
               location="João Câmara, RN"
               date="13/12/2021"
-              text="bolsonaro 123"
+              text="Lorem Ipsum"
               candidates="3"
             />
             <VagaCard
@@ -42,7 +43,7 @@ export function VagasPage() {
               company="Sua empresa"
               location="João Câmara, RN"
               date="13/12/2021"
-              text="bolsonaro 123"
+              text="Lorem Ipsum"
               candidates="3"
             />
             <VagaCard
@@ -50,7 +51,7 @@ export function VagasPage() {
               company="Sua empresa"
               location="João Câmara, RN"
               date="13/12/2021"
-              text="bolsonaro 123"
+              text="Lorem Ipsum"
               candidates="3"
             />
           </div>
