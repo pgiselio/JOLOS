@@ -1,4 +1,4 @@
-import { Children, CSSProperties } from "react";
+import { CSSProperties } from "react";
 import { StyledButton } from "./style";
 type ButtonType = {
     icon? : string

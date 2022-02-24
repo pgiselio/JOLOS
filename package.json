@@ -19,6 +19,9 @@
     "typescript": "^4.5.5",
     "web-vitals": "^2.1.4"
   },
+  "devDependencies": {
+    "@types/styled-components": "^5.1.23"
+  },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
