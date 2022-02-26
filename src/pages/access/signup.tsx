@@ -1,3 +1,4 @@
+import { Input } from "../../components/input";
 import { StyledAccess } from "./style";
 
 export function CadastroPage() {
@@ -24,21 +25,21 @@ export function CadastroPage() {
               <div className="group3">
                 <h2 className="desc">Criar conta</h2>
                 <section className="inputs">
-                  <input
+                  <Input
                     type="text"
                     id="fullname"
                     placeholder="Nome completo"
                   />
-                  <input type="text" id="email" placeholder="E-mail" />
-                  <input type="text" id="cpf" placeholder="CPF" data-js="cpf" />
+                  <Input type="text" id="email" placeholder="E-mail" />
+                  <Input type="text" id="cpf" placeholder="CPF" data-js="cpf" />
                   <div className="input-group">
-                    <input
+                    <Input
                       type="password"
                       name=""
                       id="pass"
                       placeholder="Senha"
                     />
-                    <input
+                    <Input
                       type="password"
                       name=""
                       id="confirm-pass"
@@ -46,16 +47,6 @@ export function CadastroPage() {
                     />
                   </div>
                 </section>
-
-                <div className="chk">
-                  <input
-                    type="checkbox"
-                    name="checkbox"
-                    id="checkbox"
-                    className="checkbox"
-                  />
-                  <label htmlFor="checkbox">Mostrar senha</label>
-                </div>
                 <div className="info-message">
                   <span>
                     O cadastro continuará após a confirmação do e-mail, então
@@ -69,7 +60,7 @@ export function CadastroPage() {
                 </div>
               </div>
             </div>
-            <div className="group5">
+            <div className="bottom-actions">
               <div className="flex-btn-login">
                 <a
                   href="entrar"

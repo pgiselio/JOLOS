@@ -1,5 +1,6 @@
 import { FormEvent } from "react";
 import { Button } from "../../components/button";
+import { Input } from "../../components/input";
 import "./access.scss";
 import { StyledAccess } from "./style";
 export function LoginPage() {
@@ -37,15 +38,8 @@ export function LoginPage() {
                                 <span>Usuário ou senha inválidos</span>
                             </div>
                             <div className="inputs">
-                                <div className="iconed-input"> 
-                                    <input type="text" id="login" placeholder="Usuário" spellCheck="false" />
-                                    <i className="fas fa-user"></i>
-                                </div>
-                                <div className="iconed-input">
-                                    <input type="password" name="" id="pass" placeholder="Senha" />
-                                    <i className="fas fa-lock"></i>
-                                    <input type="checkbox" name="showpassword" title="Mostrar senha" id="showPassword" className="checkbox" />
-                                </div>
+                                <Input type="text" icon="fas fa-user" id="login" placeholder="Usuário" spellCheck={false} />
+                                <Input type="password" icon="fas fa-lock" name="" id="pass" placeholder="Senha" /> 
                             </div>
                             <a href="/password-reset/" className="pwrst-link">Esqueceu a senha?</a>
                             <Button type="submit" className="less-radius">Entrar</Button>

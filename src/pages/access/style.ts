@@ -15,7 +15,7 @@ export const StyledAccess = styled.main`
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 30px;
+    padding: 50px 30px;
     width: 95vw;
     max-width: 400px;
     border-radius: 15px;
@@ -25,12 +25,19 @@ export const StyledAccess = styled.main`
   }
   .signup-form {
     align-items: initial;
+    padding: 30px;
+    min-height: 96vh;
+  }
+  .signup-form form{
+    padding-bottom: 66px;
   }
   .group3,
   .login-form form {
     display: flex;
     flex-direction: column;
     width: 100%;
+    column-gap: 16px;
+    position: relative;
   }
   .group3 > *,
   .login-form form > * {
@@ -111,7 +118,8 @@ export const StyledAccess = styled.main`
   }
   .input-group {
     display: flex;
-    column-gap: 10px;
+    flex-direction: column;
+    gap: 10px;
   }
   .desc {
     margin-top: 0;
@@ -185,68 +193,16 @@ export const StyledAccess = styled.main`
     text-decoration: none;
     font-weight: 500;
   }
-  .group5 {
+  .bottom-actions {
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
-  }
-
-
-  .iconed-input{
-    display: flex;
-    position: relative;
+    position: absolute;
+    bottom: 0;
     width: 100%;
   }
-  .iconed-input input{
-    display: flex;
-    padding-left: 40px;
-    width: 100%;
-  }
-  .iconed-input i{
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    left: 0;
-    width: 42px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 13px;
-    color: #686868;
-    pointer-events: none;
-  }
-  .iconed-input input:focus ~ i{
-    color: var(--accent-color);
-  }
-  .iconed-input #showPassword{
-    all: unset;
-    position: absolute;
-    display: flex;
-    align-items: center;
-    right: 0;
-    width: 40px;
-    justify-content: center;
-    height: 30px;
-    top: 50%;
-    transform: translateY(-50%);
-    cursor: pointer;
-  }
-  .iconed-input #showPassword::after{
-    all: unset;
-    content: "\f06e";
-    font-family: "Font Awesome 5 Free";
-    font-weight: 900;
-    font-size: 13px;
-    position: relative;
-    color: var(--accent-color);
-    height: 14px;
-    transition: color .2s ease;
-  }
-  .iconed-input #showPassword:checked::after{
-    content: "\f070";
-    color: var(--accent-color-active);
-  }
+
 
   @media (min-width: 766px) {
     .login-form {
@@ -279,6 +235,9 @@ export const StyledAccess = styled.main`
     }
     .imagem-destaque img {
       width: 80%;
+    }
+    .input-group{
+      flex-direction: row;
     }
   }
 `;

@@ -62,7 +62,7 @@ code {
 }
 
 /*Componentes*/
-.txt-input,
+/* .txt-input,
 input,
 input[type="text"],
 input[type="password"] {
@@ -71,15 +71,15 @@ input[type="password"] {
   padding: 10px 8px;
   outline: 0;
   transition: 0.2s linear;
-}
+} */
 
-.txt-input:focus,
+/* .txt-input:focus,
 input:focus,
 input[type="text"]:focus,
 input[type="password"]:focus {
   border-color: var(--accent-color);
   box-shadow: 0 0 0 0.2rem rgba(45, 143, 65, 0.308);
-}
+} */
 
 input[type="checkbox"] {
   all: unset;
