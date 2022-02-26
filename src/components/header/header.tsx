@@ -31,7 +31,7 @@ export function Header() {
               <span></span>
             </div>
           </button>
-          <img src="../images/logo.svg" className="logo" alt="logo projeto" />
+          <img src="/images/logo.svg" className="logo" alt="logo projeto" />
           <button className="btn-notify" aria-label="Botão de notificações">
             <i className="fas fa-bell"></i>
             <span></span>

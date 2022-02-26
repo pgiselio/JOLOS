@@ -1,3 +1,5 @@
+import { VagaCardStyle } from "./style";
+
 type card = {
   title : string
   company : string
@@ -9,7 +11,7 @@ type card = {
 
 export function VagaCard(Props : card) {
   return (
-    <div className="vaga">
+    <VagaCardStyle className="vaga">
       <div className="vaga-data">
         <div className="vaga-header">
           <div className="vaga-titles">
@@ -36,6 +38,6 @@ export function VagaCard(Props : card) {
           </a>
         </div>
       </div>
-    </div>
+    </VagaCardStyle>
   );
 }
