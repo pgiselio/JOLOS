@@ -20,7 +20,7 @@ export function CadastroPage() {
             </div>
           </div>
 
-          <form action="" method="post">
+          <form id="cadastroStep1" action="" method="post">
             <div className="group2">
               <div className="group3">
                 <h2 className="desc">Criar conta</h2>
@@ -60,7 +60,8 @@ export function CadastroPage() {
                 </div>
               </div>
             </div>
-            <div className="bottom-actions">
+          </form>
+          <div className="bottom-actions">
               <div className="flex-btn-login">
                 <a
                   href="entrar"
@@ -75,12 +76,13 @@ export function CadastroPage() {
                   type="submit"
                   className="btn-next"
                   title="Confirmar cadastro"
+                  form="cadastroStep1"
+                  id="cadastroSubmit"
                 >
                   Próximo
                 </button>
               </div>
             </div>
-          </form>
         </div>
       </section>
     </StyledAccess>

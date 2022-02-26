@@ -97,6 +97,7 @@ export const HeaderSysStyle = styled.header`
       display: flex;
       align-items: center;
       justify-content: center;
+      min-width: calc(100% + 10px);
     }
 
     .botao-ham span {

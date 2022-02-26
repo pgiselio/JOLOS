@@ -22,11 +22,13 @@ export const StyledAccess = styled.main`
     background: var(--bg-login);
     border: 1px solid var(--outline-color);
     box-shadow: 0 6px 6px 0 rgba(0, 0, 0, 0.2);
+    row-gap: 16px;
   }
   .signup-form {
     align-items: initial;
     padding: 30px;
     min-height: 96vh;
+    position: relative;
   }
   .signup-form form{
     padding-bottom: 66px;
@@ -36,12 +38,8 @@ export const StyledAccess = styled.main`
     display: flex;
     flex-direction: column;
     width: 100%;
-    column-gap: 16px;
+    row-gap: 16px;
     position: relative;
-  }
-  .group3 > *,
-  .login-form form > * {
-    margin-top: 16px;
   }
   .inputs{
     display: flex;
@@ -128,6 +126,13 @@ export const StyledAccess = styled.main`
     font-weight: 600;
     font-size: 22px;
   }
+  .desc::before{
+    content: "\f105";
+    font-family: "Font Awesome 5 Free";
+    font-weight: 900;
+    color: var(--accent-color);
+    padding-right: 5px;
+  }
   .imagem-destaque {
     display: none;
   }
@@ -200,6 +205,9 @@ export const StyledAccess = styled.main`
     justify-content: space-between;
     position: absolute;
     bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 20px 30px;
     width: 100%;
   }
 
@@ -238,6 +246,9 @@ export const StyledAccess = styled.main`
     }
     .input-group{
       flex-direction: row;
+    }
+    .bottom-actions{
+      padding: 25px 50px;
     }
   }
 `;
