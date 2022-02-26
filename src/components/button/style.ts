@@ -26,7 +26,7 @@ export const StyledButton = styled.button`
     color: var(--accent-color);
     border: 2px solid var(--accent-color);
     background: transparent;
-    :hover {
+    &:not(:disabled):hover {
       background: var(--accent-color-opacity);
     }
     &.filled:not(:disabled):hover {
