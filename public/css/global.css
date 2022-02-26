@@ -68,7 +68,7 @@ input[type="text"],
 input[type="password"] {
   border: 1px solid var(--outline-color);
   border-radius: 5px;
-  padding: 8px;
+  padding: 10px 8px;
   outline: 0;
   transition: 0.2s linear;
 }
@@ -82,7 +82,7 @@ input[type="password"]:focus {
 }
 
 input[type="checkbox"] {
-  appearance: none;
+  all: unset;
   border: 2px solid #cccc;
   border-radius: 5px;
   width: 16px;

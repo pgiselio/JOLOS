@@ -12,7 +12,7 @@ export function LoginPage() {
         var msg: any = document.querySelector('.info-message')
     
     
-        if (user.value == "admin" && pass.value == "ADMIN") {
+        if (user.value === "admin" && pass.value === "ADMIN") {
             // window.sessionStorage.setItem('isloggedin', 'true');
             window.location.href = "sys";
         } else {
@@ -27,34 +27,33 @@ export function LoginPage() {
             <StyledAccess>
                 <div className="container">
                     <div className="login-form">
-                        <a href="../"><img src="../images/logo.svg" className="logo-login" alt="Logo do IF Jobs"
+                        <div className="logo-login">
+                            <a href="../"><img src="../images/logo.svg" className="logo" alt="Logo do IF Jobs"
                             title="Logo IF Jobs" /></a>
+                        </div>
                         <form method="post" autoComplete="off" onSubmit={onSubmit}>
+                            <h2 className="desc">Entrar</h2>
                             <div className="info-message error-msg">
                                 <span>Usuário ou senha inválidos</span>
                             </div>
-                            <div className="lbl-icon">
-                                <label htmlFor="login">
+                            <div className="inputs">
+                                <div className="iconed-input"> 
+                                    <input type="text" id="login" placeholder="Usuário" spellCheck="false" />
                                     <i className="fas fa-user"></i>
-                                </label>
-                                <input type="text" id="login" placeholder="Usuário" spellCheck="false" />
-                            </div>
-                            <div className="lbl-icon">
-                                <label htmlFor="pass">
+                                </div>
+                                <div className="iconed-input">
+                                    <input type="password" name="" id="pass" placeholder="Senha" />
                                     <i className="fas fa-lock"></i>
-                                </label>
-                                <input type="password" name="" id="pass" placeholder="Senha" />
+                                    <input type="checkbox" name="showpassword" title="Mostrar senha" id="showPassword" className="checkbox" />
+                                </div>
                             </div>
-                            <div className="chk">
-                                <input type="checkbox" name="checkbox" id="checkbox" className="checkbox" />
-                                <label htmlFor="checkbox">Mostrar senha</label>
-                            </div>
-                            <Button type="submit" className="less-radius">Entrar</Button>
                             <a href="/password-reset/" className="pwrst-link">Esqueceu a senha?</a>
+                            <Button type="submit" className="less-radius">Entrar</Button>
+                            <div className="registre-se">
+                                <span>Não tem uma conta?</span> 
+                                <a href="cadastro" className="bt-cadse">Registre-se</a>
+                            </div>  
                         </form>
-                    </div>
-                    <div>
-                        <a href="cadastro" className="bt-cadse">Cadastre-se</a>
                     </div>
                 </div>
             </StyledAccess>

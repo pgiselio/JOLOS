@@ -7,10 +7,11 @@ type ButtonType = {
     children?: React.ReactNode;
     className?: string
     id? : string
+    disabled? : boolean
 }
 export function Button(Props : ButtonType){
     return(
-        <StyledButton type={Props.type || "button"} {...(Props.style ? {style: Props.style} : {})} id={Props.id} className={Props.className}>
+        <StyledButton type={Props.type || "button"} {...Props.disabled && {disabled: true}} {...(Props.style ? {style: Props.style} : {})} id={Props.id} className={Props.className}>
             {Props.children}   
         </StyledButton>
     );

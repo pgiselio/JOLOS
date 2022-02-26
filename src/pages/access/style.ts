@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const StyledAccess = styled.main`
-    :root {
+  :root {
     --bg-body: linear-gradient(
         45deg,
         rgba(6, 52, 15, 1) 0%,
@@ -36,9 +36,14 @@ export const StyledAccess = styled.main`
   .login-form form > * {
     margin-top: 16px;
   }
+  .inputs{
+    display: flex;
+    flex-direction: column;
+    row-gap: 10px;
+  }
   .pwrst-link {
     width: 100%;
-    text-align: center;
+    font-weight: 500;
     color: var(--accent-color);
     text-decoration: none;
     font-size: 10pt;
@@ -46,24 +51,34 @@ export const StyledAccess = styled.main`
   .pwrst-link:hover {
     text-decoration: underline;
   }
-  .bt-cadse {
-    display: flex;
-    background: transparent;
-    padding: 10px;
-    color: var(--outline-color);
-    border: none;
-    cursor: pointer;
-    margin-top: 10px;
-  }
-  .bt-cadse:hover {
-    color: #fff;
-  }
   .logo-login {
     display: flex;
-    padding: 25px 60px;
-    margin-bottom: 20px;
-    width: 330px;
+    justify-content: center;
+    width: 100%;
   }
+  .logo-login .logo{
+    width: 110px;
+  }
+  .registre-se{
+    display: flex;
+    font-size: 13px;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    column-gap: 5px;
+  }
+  .bt-cadse {
+    display: flex;
+    color: var(--accent-color);
+    font-weight: 600;
+    border: none;
+  }
+  .bt-cadse:hover {
+    color: var(--accent-color-active);
+  }
+
+
+
   .header-signup {
     display: flex;
     justify-content: space-between;
@@ -96,18 +111,14 @@ export const StyledAccess = styled.main`
   }
   .input-group {
     display: flex;
-    justify-content: space-between;
-  }
-  .input-group > * {
-    display: flex;
-    width: 100%;
-  }
-  .input-group :nth-child(1) {
-    margin-right: 8px;
+    column-gap: 10px;
   }
   .desc {
     margin-top: 0;
     margin-bottom: 10px;
+    color: #052a0c;
+    font-weight: 600;
+    font-size: 22px;
   }
   .imagem-destaque {
     display: none;
@@ -172,6 +183,7 @@ export const StyledAccess = styled.main`
     color: var(--accent-color);
     font-size: 14px;
     text-decoration: none;
+    font-weight: 500;
   }
   .group5 {
     display: flex;
@@ -180,10 +192,65 @@ export const StyledAccess = styled.main`
     justify-content: space-between;
   }
 
+
+  .iconed-input{
+    display: flex;
+    position: relative;
+    width: 100%;
+  }
+  .iconed-input input{
+    display: flex;
+    padding-left: 40px;
+    width: 100%;
+  }
+  .iconed-input i{
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    left: 0;
+    width: 42px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 13px;
+    color: #686868;
+    pointer-events: none;
+  }
+  .iconed-input input:focus ~ i{
+    color: var(--accent-color);
+  }
+  .iconed-input #showPassword{
+    all: unset;
+    position: absolute;
+    display: flex;
+    align-items: center;
+    right: 0;
+    width: 40px;
+    justify-content: center;
+    height: 30px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+  }
+  .iconed-input #showPassword::after{
+    all: unset;
+    content: "\f06e";
+    font-family: "Font Awesome 5 Free";
+    font-weight: 900;
+    font-size: 13px;
+    position: relative;
+    color: var(--accent-color);
+    height: 14px;
+    transition: color .2s ease;
+  }
+  .iconed-input #showPassword:checked::after{
+    content: "\f070";
+    color: var(--accent-color-active);
+  }
+
   @media (min-width: 766px) {
     .login-form {
       padding: 50px;
-      padding-bottom: 30px;
     }
     .group2 {
       display: flex;
@@ -191,6 +258,7 @@ export const StyledAccess = styled.main`
     }
     .signup-form {
       max-width: 750px;
+      padding-bottom: 30px;
     }
     .signup-form form {
       flex-grow: 3;

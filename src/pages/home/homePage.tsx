@@ -13,9 +13,9 @@ export function HomePage() {
                     <i className="fas fa-user"></i> 
                     aaaaaaaaa
                 </Button>
-                <Button className="inactive">
+                <Button className="inactive" disabled>
                     <i className="fas fa-user"></i> 
-                    aaaaaaaaa
+                    aaaaaaaaa disabled
                 </Button>
                 <Button className="less-radius">
                     aaaaaaaaa
@@ -27,12 +27,12 @@ export function HomePage() {
                 <Button className="outlined red filled">outlined red filled</Button>
                 <Button className="outlined red less-radius">outlined red less-radius</Button>
 
-                <Button className="outlined inactive">outlined</Button>
-                <Button className="outlined filled inactive">outlined filled</Button>
-                <Button className="outlined less-radius inactive">outlined less-radius</Button>
-                <Button className="outlined red inactive">outlined red</Button>
-                <Button className="outlined red filled inactive">outlined red filled</Button>
-                <Button className="outlined red less-radius inactive">outlined red less-radius</Button>
+                <Button className="outlined inactive" disabled>outlined disabled</Button>
+                <Button className="outlined filled inactive" disabled>outlined filled disabled</Button>
+                <Button className="outlined less-radius inactive" disabled>outlined less-radius disabled</Button>
+                <Button className="outlined red inactive" disabled>outlined red disabled</Button>
+                <Button className="outlined red filled inactive" disabled>outlined red filled disabled</Button>
+                <Button className="outlined red less-radius inactive" disabled>outlined red less-radius disabled</Button>
             </div>
         </>
     );

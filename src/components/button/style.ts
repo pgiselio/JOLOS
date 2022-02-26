@@ -15,7 +15,7 @@ export const StyledButton = styled.button`
   background: var(--accent-color);
   border: 2px solid var(--accent-color);
   color: #fff;
-  :hover {
+  :not(:disabled):hover {
     background: var(--accent-color-active);
     border: 2px solid var(--accent-color-active);
   }
@@ -29,7 +29,7 @@ export const StyledButton = styled.button`
     :hover {
       background: var(--accent-color-opacity);
     }
-    &.filled:hover {
+    &.filled:not(:disabled):hover {
       color: #fff;
       background: var(--accent-color);
     }
@@ -37,18 +37,16 @@ export const StyledButton = styled.button`
       border: 2px solid #c91f1f;
       color: #ac0000;
     }
-    &.red:hover {
+    &.red:not(:disabled):hover {
       background: #ac000026;
     }
-    &.red.filled:hover {
+    &.red.filled:not(:disabled):hover {
       color: #fff;
       background: #ac0000;
     }
   }
-  &.inactive {
-    color: #ccc !important;
-    background: #f1f1f1 !important;
-    border: 2px solid #ccc !important;
-    pointer-events: none; 
+  &:disabled {
+    opacity: .4;
+    cursor: not-allowed;
   }
 `;

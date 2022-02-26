@@ -22,24 +22,31 @@ export function CadastroPage() {
           <form action="" method="post">
             <div className="group2">
               <div className="group3">
-                <h2 className="desc">Criar a sua conta</h2>
-                <input type="text" id="fullname" placeholder="Nome completo" />
-                <input type="text" id="email" placeholder="E-mail" />
-                <input type="text" id="cpf" placeholder="CPF" data-js="cpf" />
-                <div className="input-group">
+                <h2 className="desc">Criar conta</h2>
+                <section className="inputs">
                   <input
-                    type="password"
-                    name=""
-                    id="pass"
-                    placeholder="Senha"
+                    type="text"
+                    id="fullname"
+                    placeholder="Nome completo"
                   />
-                  <input
-                    type="password"
-                    name=""
-                    id="confirm-pass"
-                    placeholder="Confirmar senha"
-                  />
-                </div>
+                  <input type="text" id="email" placeholder="E-mail" />
+                  <input type="text" id="cpf" placeholder="CPF" data-js="cpf" />
+                  <div className="input-group">
+                    <input
+                      type="password"
+                      name=""
+                      id="pass"
+                      placeholder="Senha"
+                    />
+                    <input
+                      type="password"
+                      name=""
+                      id="confirm-pass"
+                      placeholder="Confirmar senha"
+                    />
+                  </div>
+                </section>
+
                 <div className="chk">
                   <input
                     type="checkbox"
