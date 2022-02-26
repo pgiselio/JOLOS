@@ -133,4 +133,24 @@ export const StyledNotifications = styled.div`
     -webkit-font-smoothing: antialiased;
     font-size: 13px;
   }
+  @media (min-width: 766px) {
+    .notification-cards::-webkit-scrollbar {
+      width: 10px;
+      border-radius: 20px;
+    }
+
+    .notification-cards::-webkit-scrollbar-track {
+      border-radius: 20px;
+      background-color: #0000000a;
+    }
+
+    .notification-cards::-webkit-scrollbar-thumb {
+      background-color: #dddddd;
+      border-radius: 20px;
+    }
+
+    .notification-cards::-webkit-scrollbar-thumb:hover {
+      background-color: #ccc;
+    }
+  }
 `;
