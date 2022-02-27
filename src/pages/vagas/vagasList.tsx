@@ -1,7 +1,7 @@
 import { Button } from "../../components/button";
 import { VagaCard } from "../../components/vagaCard";
 
-export function VagasPage() {
+export function VagasList() {
   return (
     <section>
       <div className="header-section">

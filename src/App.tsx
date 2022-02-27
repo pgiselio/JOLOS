@@ -9,11 +9,12 @@ import { SidebarList } from "./components/sidebar/sidebar-list";
 import { LandingPage } from "./pages/Landing/Landing";
 import { HomePage } from "./pages/home/homePage";
 import { ProfilePage } from "./pages/profile/profilePage";
-import { VagasPage } from "./pages/vagas/vagasPage";
+import { VagasList } from "./pages/vagas/vagasList";
 import { CadastroPage } from "./pages/access/signup";
 import { LoginPage } from "./pages/access/login";
 import { ForumPage } from "./pages/forum";
 import { Error404 } from "./pages/404";
+import { VagaPage } from "./pages/vagas/vaga/vagaPage";
 
 function App() {
   return (
@@ -27,7 +28,10 @@ function App() {
           <Route path="*" element={<Error404 />} />
           <Route path="" element={<HomePage />} />
           <Route path="profile" element={<ProfilePage />} />
-          <Route path="vagas" element={<VagasPage />} />
+          <Route path="vagas" element={<VagasList />} />
+          <Route path="v/:id" element={<VagaPage />}>
+            <Route path="candidatos"/>
+          </Route>
           <Route path="forum" element={<ForumPage />} />
           <Route path="logout" element={<HomePage />} />
         </Route>

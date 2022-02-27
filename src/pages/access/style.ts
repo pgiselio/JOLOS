@@ -22,7 +22,7 @@ export const StyledAccess = styled.main`
     background: var(--bg-login);
     border: 1px solid var(--outline-color);
     box-shadow: 0 6px 6px 0 rgba(0, 0, 0, 0.2);
-    row-gap: 16px;
+    row-gap: 30px;
   }
   .signup-form {
     align-items: initial;
@@ -222,7 +222,7 @@ export const StyledAccess = styled.main`
     }
     .signup-form {
       max-width: 750px;
-      padding-bottom: 30px;
+      padding-bottom: 40px;
     }
     .signup-form form {
       flex-grow: 3;
@@ -248,7 +248,7 @@ export const StyledAccess = styled.main`
       flex-direction: row;
     }
     .bottom-actions{
-      padding: 25px 50px;
+      padding: 30px 50px;
     }
   }
 `;
