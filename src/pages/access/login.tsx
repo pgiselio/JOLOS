@@ -1,4 +1,5 @@
 import { FormEvent } from "react";
+import { Link } from "react-router-dom";
 import { Button } from "../../components/button";
 import { Input } from "../../components/input";
 import "./access.scss";
@@ -45,7 +46,7 @@ export function LoginPage() {
                             <Button type="submit" className="less-radius">Entrar</Button>
                             <div className="registre-se">
                                 <span>Não tem uma conta?</span> 
-                                <a href="cadastro" className="bt-cadse">Registre-se</a>
+                                <Link to="/cadastro" className="bt-cadse">Registre-se</Link>
                             </div>  
                         </form>
                     </div>

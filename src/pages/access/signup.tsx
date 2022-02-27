@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { Input } from "../../components/input";
 import { StyledAccess } from "./style";
 
@@ -63,13 +64,13 @@ export function CadastroPage() {
           </form>
           <div className="bottom-actions">
               <div className="flex-btn-login">
-                <a
-                  href="entrar"
+                <Link
+                  to="/entrar"
                   className="btn-login"
                   title="Já tem uma conta? Faça Login!"
                 >
                   Ou... faça login
-                </a>
+                </Link>
               </div>
               <div className="flex-btn-next">
                 <button
