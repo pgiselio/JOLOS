@@ -1,38 +1,32 @@
 import { HTMLInputTypeAttribute, useState } from "react";
 import { InputContainer, InputPassStyled, InputStyled, ShowPasswordButton } from "./styles";
 
-type input = {
-  id?: string;
+interface input extends React.HTMLAttributes<HTMLDivElement>{
   name?: string;
-  placeholder?: string;
-  spellCheck?: boolean;
   type: HTMLInputTypeAttribute;
   icon?: string;
 };
 
-export function Input({ id, name, placeholder, spellCheck, type, icon }: input) {
+export function Input({ name, type, icon, ...rest }: input) {
   const [showPassword, setShowPassword] = useState(false);
   return (
     (type.match("text") && (
       <InputContainer>
         <InputStyled 
-        id={id} 
         name={name} 
         type={type} 
-        placeholder={placeholder} 
-        spellCheck={spellCheck} 
-        {...icon && {hasIcon: true}}/>
+        {...rest} 
+        {...icon && {hasIcon: true}}
+        />
         {icon && <i className={icon}></i>}
       </InputContainer>
     )) 
     || (type.match("password") && (
       <InputContainer>
         <InputPassStyled
-          type={showPassword ? "text" : "password"}
-          id={id} 
+          type={showPassword ? "text" : "password"} 
           name={name} 
-          placeholder={placeholder} 
-          spellCheck={spellCheck} 
+          {...rest}
           {...icon && {hasIcon: true}}
         />
         {icon && <i className={icon}></i>}        
@@ -46,6 +40,6 @@ export function Input({ id, name, placeholder, spellCheck, type, icon }: input) 
         />
       </InputContainer>
     )) 
-    || (<InputStyled type={type} placeholder="password" />)
+    || (<InputStyled type={type} name={name} {...rest} />)
   );
 }

@@ -3,11 +3,11 @@ import styled from "styled-components";
 export const VagaCardStyle = styled.div`
   border-radius: 10px;
   box-shadow: 0 1px 2px rgb(0 0 0 / 10%);
-  background: #fff;
+  background: var(--primary-bg);
   margin-bottom: 20px;
   display: flex;
   justify-content: space-between;
-  border: 1px solid #e5e5e5;
+  border: 1px solid var(--outline-color);
 
   .vaga-data {
     position: relative;
@@ -62,6 +62,7 @@ export const VagaCardStyle = styled.div`
 
   .vaga-status.enabled {
     color: green;
+    font-weight: 500;
   }
 
   .vaga-status.disabled {
@@ -92,10 +93,10 @@ export const VagaCardStyle = styled.div`
     width: 100%;
     bottom: 0;
     padding: 20px;
-    background: #f9f9f9;
+    background: var(--secondary-bg);
     border-bottom-left-radius: 10px;
     border-bottom-right-radius: 10px;
-    border-top: 1px solid #ededed;
+    border-top: 1px solid var(--outline-color);
   }
 
   .vagas-candidatos {

@@ -28,10 +28,12 @@ export const StyledButton = styled.button`
     background: transparent;
     &:not(:disabled):hover {
       background: var(--accent-color-opacity);
+      border: 2px solid var(--accent-color);
     }
     &.filled:not(:disabled):hover {
       color: #fff;
       background: var(--accent-color);
+      border: 2px solid var(--accent-color);
     }
     &.red {
       border: 2px solid #c91f1f;

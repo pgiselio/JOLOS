@@ -2,8 +2,10 @@ import styled from "styled-components";
 
 export const HeaderSysStyle = styled.header`
   display: flex;
-  position: sticky;
+  position: fixed;
   top: 0;
+  left: 0;
+  right: 0;
   width: 100%;
   z-index: 15;
   max-width: 100vw;
@@ -15,7 +17,7 @@ export const HeaderSysStyle = styled.header`
     justify-content: center;
     width: 100%;
     height: var(--top-bar-height);
-    background: #fff;
+    background: var(--navs-bg);
     /* box-shadow: 0 1px 10px rgb(0 0 0 / 8%); */
   }
 

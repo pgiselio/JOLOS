@@ -54,30 +54,30 @@ export const StyledNotifications = styled.div`
   .notification-card {
     padding: 20px;
     box-shadow: 0 1px 2px rgb(0 0 0 / 10%);
-    background-color: #fff;
+    background-color: var(--primary-bg);
     margin-bottom: 1px;
     display: flex;
     flex-direction: column;
     position: relative;
     cursor: pointer;
-    border-right: 1px solid #e3e3e3;
-    border-left: 1px solid #e3e3e3;
+    border-right: 1px solid var(--outline-color);
+    border-left: 1px solid var(--outline-color);
   }
 
   .notification-card:hover {
-    background-color: #f5f6f7;
+    background-color: var(--secondary-bg);
   }
 
   .notification-card:first-child {
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
-    border-top: 1px solid #e3e3e3;
+    border-top: 1px solid var(--outline-color);
   }
 
   .notification-card:last-child {
     border-bottom-left-radius: 10px;
     border-bottom-right-radius: 10px;
-    border-bottom: 1px solid #e3e3e3;
+    border-bottom: 1px solid var(--outline-color);
   }
 
   .notification-card .card-date {
@@ -95,7 +95,7 @@ export const StyledNotifications = styled.div`
   .notification-card .card-data p {
     word-break: break-all;
     font-size: 15px;
-    color: #444;
+    color: var(--text-b);
   }
 
   .notification-card .card-options {

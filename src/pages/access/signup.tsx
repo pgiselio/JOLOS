@@ -1,13 +1,11 @@
 import { Link } from "react-router-dom";
 import { Input } from "../../components/input";
-import { StyledAccess } from "./style";
+import { AccessGlobalStyle, StyledAccess } from "./style";
 
 export function CadastroPage() {
-  document.body.style.background =
-    "linear-gradient(45deg, rgba(6,52,15,1) 0%, rgba(28,136,50,1) 50%, rgba(147,255,169,1) 100%), rgb(6,52,15)";
-  document.body.style.backgroundAttachment = "fixed";
   return (
     <StyledAccess>
+      <AccessGlobalStyle />
       <section className="container">
         <div className="login-form signup-form">
           <div className="header-signup">
@@ -63,27 +61,27 @@ export function CadastroPage() {
             </div>
           </form>
           <div className="bottom-actions">
-              <div className="flex-btn-login">
-                <Link
-                  to="/entrar"
-                  className="btn-login"
-                  title="Já tem uma conta? Faça Login!"
-                >
-                  Ou... faça login
-                </Link>
-              </div>
-              <div className="flex-btn-next">
-                <button
-                  type="submit"
-                  className="btn-next"
-                  title="Confirmar cadastro"
-                  form="cadastroStep1"
-                  id="cadastroSubmit"
-                >
-                  Próximo
-                </button>
-              </div>
+            <div className="flex-btn-login">
+              <Link
+                to="/entrar"
+                className="btn-login"
+                title="Já tem uma conta? Faça Login!"
+              >
+                Ou... faça login
+              </Link>
             </div>
+            <div className="flex-btn-next">
+              <button
+                type="submit"
+                className="btn-next"
+                title="Confirmar cadastro"
+                form="cadastroStep1"
+                id="cadastroSubmit"
+              >
+                Próximo
+              </button>
+            </div>
+          </div>
         </div>
       </section>
     </StyledAccess>

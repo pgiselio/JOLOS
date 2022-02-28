@@ -1,16 +1,22 @@
-import styled from "styled-components";
+import styled, { createGlobalStyle } from "styled-components";
 
-export const StyledAccess = styled.main`
+export const AccessGlobalStyle = createGlobalStyle`
   :root {
-    --bg-body: linear-gradient(
+    --bg-login: #fcfcfc;
+  }
+  body{
+    background: linear-gradient(
         45deg,
         rgba(6, 52, 15, 1) 0%,
         rgba(28, 136, 50, 1) 50%,
         rgba(147, 255, 169, 1) 100%
       ),
       rgb(6, 52, 15);
-    --bg-login: #fcfcfc;
+    background-attachment: fixed;
   }
+`;
+
+export const StyledAccess = styled.main`
   .login-form {
     display: flex;
     flex-direction: column;
@@ -29,9 +35,6 @@ export const StyledAccess = styled.main`
     padding: 30px;
     min-height: 96vh;
     position: relative;
-  }
-  .signup-form form{
-    padding-bottom: 66px;
   }
   .group3,
   .login-form form {
@@ -95,6 +98,8 @@ export const StyledAccess = styled.main`
   .progress {
     display: flex;
     align-items: center;
+    column-gap: 10px;
+    transition: all 0.5s ease;
   }
   .progress > span {
     display: inline-block;
@@ -102,10 +107,6 @@ export const StyledAccess = styled.main`
     height: 8px;
     border-radius: 10px;
     background: var(--outline-color);
-    margin-right: 12px;
-  }
-  .progress > span:last-child {
-    margin-right: 0;
   }
   .progress > span.active {
     background: var(--accent-color);
@@ -217,12 +218,12 @@ export const StyledAccess = styled.main`
       padding: 50px;
     }
     .group2 {
-      display: flex;
-      flex-direction: row;
+      display: grid;
+      grid-template-columns: 1.3fr 1fr;
     }
     .signup-form {
       max-width: 750px;
-      padding-bottom: 40px;
+      padding-bottom: 109px;
     }
     .signup-form form {
       flex-grow: 3;

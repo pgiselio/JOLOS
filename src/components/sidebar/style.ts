@@ -4,7 +4,7 @@ export const SidebarAside = styled.aside`
   //Sidebar List
   grid-area: menu;
   height: calc(100vh - var(--top-bar-height));
-  background-color: white;
+  background-color: var(--navs-bg);
   border-right: 1px solid rgb(228, 228, 228);
   position: fixed;
   overflow: auto;
@@ -38,8 +38,9 @@ export const SidebarAside = styled.aside`
     transition: height 0.3s, width 0.3s ease;
   }
 
-  .name-perfil , .perfil .detail{
-    color: #000;
+  .name-perfil,
+  .perfil .detail {
+    color: var(--text-a);
     width: 100%;
     text-align: center;
     overflow: hidden;
@@ -54,8 +55,8 @@ export const SidebarAside = styled.aside`
     opacity: 1;
     transition: height 0.5s, opacity 0.5s, padding 0.5s ease;
   }
-  .perfil .detail{
-    color: #666;
+  .perfil .detail {
+    color: var(--text-b);
     font-size: 13px;
     text-transform: none;
     padding: 0;
@@ -89,13 +90,14 @@ export const SidebarAside = styled.aside`
       height: 60px;
     }
 
-    body.toggle-sidemenu & .name-perfil, body.toggle-sidemenu & .perfil .detail {
+    body.toggle-sidemenu & .name-perfil,
+    body.toggle-sidemenu & .perfil .detail {
       opacity: 0;
       height: 0;
       padding: 0;
     }
   }
-  
+
   // ------- Sidebar Item --------
   .data-items li {
     display: flex;
@@ -111,7 +113,7 @@ export const SidebarAside = styled.aside`
       height: 42px;
       text-decoration: none;
       font-weight: 500;
-      color: rgb(43, 43, 43);
+      color: var(--text-a);
       padding: 10px 15px;
       border-top-right-radius: 30px;
       border-bottom-right-radius: 30px;
@@ -128,15 +130,15 @@ export const SidebarAside = styled.aside`
     }
     a i {
       width: 30px;
-      color: rgb(85, 85, 85);
+      color: var(--text-b);
       text-align: center;
     }
     a:hover {
-      background-color: #dfdfdf;
+      background-color: /*#dfdfdf*/ var(--secondary-bg);
     }
 
     a:active {
-      background-color: #cecece;
+      background-color: /*#cecece*/ var(--primary-bg);
     }
 
     a.active {

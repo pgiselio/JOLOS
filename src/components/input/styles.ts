@@ -60,6 +60,7 @@ export const ShowPasswordButton = styled.button`
   border-radius: 10px;
   background: transparent;
   border: none;
+  outline-color: var(--accent-color);
 
   &:focus-visible {
     box-shadow: 0 0 0 0.2rem rgba(45, 143, 65, 0.308);
