@@ -139,16 +139,22 @@ export const LandingStyle = styled.div`
     pointer-events: initial;
   }
 
-  .mobile-access {
+  .mobile-buttons {
     display: flex;
+    align-items: center;
+    column-gap: 10px;
     z-index: 1;
   }
   .access-bt {
     display: flex;
     align-items: center;
-    margin-right: 2px;
-    padding: 10px;
+    justify-content: center;
+    padding: 5px;
     z-index: 1;
+    background: #959595;
+    border: none;
+    border-radius: 50%;
+    transition: background .3s linear;
   }
   .access-bt::before {
     content: "\f007";
@@ -162,16 +168,22 @@ export const LandingStyle = styled.div`
     font-variant: normal;
     text-rendering: auto;
     line-height: 1;
-    width: 15px;
-    height: 15px;
+    width: 13px;
+    height: 13px;
     padding: 5px;
     border: 2px solid #000;
     border-radius: 30px;
     color: #000;
+    color: #fff;
+    border-color: #fff;
+    transition: all .3s linear;
+  }
+  .access-bt.active{
+    background-color: var(--accent-color);
   }
   .access-bt.active::before {
-    color: var(--accent-color-active);
-    border-color: var(--accent-color-active);
+    color: #fff;
+    border-color: #fff;
   }
 
   .login-bt,
@@ -203,7 +215,7 @@ export const LandingStyle = styled.div`
     .logo-index {
       margin-left: initial;
     }
-    .mobile-access {
+    .mobile-buttons {
       display: none;
     }
     .menu-container {
