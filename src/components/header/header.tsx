@@ -13,9 +13,9 @@ export function Header(props : any) {
 
   function storageSidebarState() {
     if (document.body.classList.contains("toggle-sidemenu")) {
-      localStorage.setItem("sidebar-collapsed", "yes");
+      localStorage.setItem("toggle-sidemenu", "yes");
     } else {
-      localStorage.setItem("sidebar-collapsed", "");
+      localStorage.setItem("toggle-sidemenu", "");
     }
   }
   const toggleTheme = () => {
@@ -49,7 +49,7 @@ export function Header(props : any) {
               <i className="fas fa-bell"></i>
               <span></span>
             </div>
-            {props.theme == "light" ? <i className="fas fa-moon"></i> : <i className="fas fa-sun"></i>}
+            {props.theme === "light" ? <i className="far fa-moon"></i> : <i className="far fa-sun"></i>}
             
           </button>
         </div>

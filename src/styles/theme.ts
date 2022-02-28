@@ -29,7 +29,7 @@ export const darkTheme: DefaultTheme = {
     textB: '#888',
     primaryBg: '#333',
     secondaryBg: '#444',
-    outlineColor: '#666',
+    outlineColor: '#555',
     navsBackground: '33 33 33',
   },
 };

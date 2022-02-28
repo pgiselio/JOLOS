@@ -5,19 +5,20 @@ export const SidebarAside = styled.aside`
   grid-area: menu;
   height: calc(100vh - var(--top-bar-height));
   background-color: var(--navs-bg);
-  border-right: 1px solid rgb(228, 228, 228);
+  border-right: 1px solid var(--outline-color);
   position: fixed;
   overflow: auto;
   overflow-x: hidden;
   top: var(--top-bar-height);
   z-index: 20;
-  width: 0;
-  transition: width 0.3s, padding 0.3s ease;
+  width: 280px;
+  transition: width 0.3s, transform .5s, padding 0.3s linear;
+  transform: translateX(-101vw);
 
   body.toggle-sidemenu & {
-    width: 280px;
     padding: 0;
     padding-right: 10px;
+    transform: translateX(0);
   }
 
   .side-bar-container {
@@ -74,11 +75,11 @@ export const SidebarAside = styled.aside`
   }
 
   @media (min-width: 766px) {
-    width: 280px;
     padding-right: 10px;
     position: sticky;
     transition: padding 0.3s ease;
     border-right: none;
+    transform: initial;
 
     body.toggle-sidemenu & {
       width: 80px;

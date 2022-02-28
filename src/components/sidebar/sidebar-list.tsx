@@ -1,4 +1,3 @@
-import styled from 'styled-components';
 import { ProfilePic } from '../profile-pic/profile-pic';
 import { SidebarItem } from './sidebar-item';
 import "./sidebar.css";
@@ -8,7 +7,7 @@ export function SidebarList(){
     function checkSidebarState() {
         const mq = window.matchMedia("(min-width: 766px)");
             
-        if (mq.matches && localStorage.getItem('sidebar-collapsed') === ('yes')) {
+        if (mq.matches && localStorage.getItem('toggle-sidemenu') === ('yes')) {
             document.body.classList.add('toggle-sidemenu');
         }  
     }
