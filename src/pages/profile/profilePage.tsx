@@ -1,4 +1,5 @@
 import { Button } from "../../components/button";
+import { OutsetHeadersCornerRadius } from "../../components/outset-radius-to-headers";
 import { ProfilePic } from "../../components/profile-pic/profile-pic";
 import "./profilePage.scss";
 
@@ -6,6 +7,7 @@ export function ProfilePage() {
     return (
         <>
             <section>
+            <OutsetHeadersCornerRadius>
                 <div className="tabs-menu ontop">
                     <div className="spacer"></div>
                     <div className="tabs-menu-container">
@@ -15,6 +17,7 @@ export function ProfilePage() {
                         </ul>
                     </div>
                 </div>
+            </OutsetHeadersCornerRadius>
                 <div className="profile-page-header">
                     <div className="profile-page-header-container">
                         <div className="user-info">

@@ -7,12 +7,12 @@ export const SidebarAside = styled.aside`
   background-color: var(--navs-bg);
   border-right: 1px solid var(--outline-color);
   position: fixed;
-  overflow: auto;
+  overflow: overlay;
   overflow-x: hidden;
   top: var(--top-bar-height);
   z-index: 20;
   width: 280px;
-  transition: width 0.3s, transform .5s, padding 0.3s linear;
+  transition: width 0.3s, transform 0.5s, padding 0.3s linear;
   transform: translateX(-101vw);
 
   body.toggle-sidemenu & {
@@ -80,7 +80,29 @@ export const SidebarAside = styled.aside`
     transition: padding 0.3s ease;
     border-right: none;
     transform: initial;
+    &::-webkit-scrollbar {
+      width: 8px;
+      transition: all 0.3s linear;
+    }
 
+    &::-webkit-scrollbar-thumb {
+      background: transparent;
+      border-radius: 20px;
+      background-clip: content-box;
+      border: 2px solid transparent;
+    }
+    &:hover::-webkit-scrollbar-thumb {
+      background-color: #a3a3a3d5;
+    }
+
+    &::-webkit-scrollbar-thumb:hover {
+      background-color: #838383d5;
+      border-width: 1px;
+    }
+    &::-webkit-scrollbar-thumb:active {
+      background-color: #707070d5;
+      border-width: 1px;
+    }
     body.toggle-sidemenu & {
       width: 80px;
       padding: 0 10px;

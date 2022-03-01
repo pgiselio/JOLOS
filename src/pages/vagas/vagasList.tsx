@@ -1,16 +1,19 @@
 import { Button } from "../../components/button";
+import { OutsetHeadersCornerRadius } from "../../components/outset-radius-to-headers";
 import { VagaCard } from "../../components/vagaCard";
 
 export function VagasList() {
   return (
     <section>
-      <div className="header-section">
-        <h2>Vagas criadas</h2>
-        <Button className="outlined" id="newVaga">
-        <i className="fas fa-plus"></i>
-          Criar nova
-        </Button>
-      </div>
+      <OutsetHeadersCornerRadius>
+        <div className="header-section">
+          <h2>Vagas criadas</h2>
+          <Button className="outlined" id="newVaga">
+            <i className="fas fa-plus"></i>
+            Criar nova
+          </Button>
+        </div>
+      </OutsetHeadersCornerRadius>
       <div className="content-grid">
         <div className="content">
           <div className="cards-container">
