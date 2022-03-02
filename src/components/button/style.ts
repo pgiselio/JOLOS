@@ -41,6 +41,7 @@ export const StyledButton = styled.button`
     }
     &.red:not(:disabled):hover {
       background: #ac000026;
+      border: 2px solid #c91f1f;
     }
     &.red.filled:not(:disabled):hover {
       color: #fff;

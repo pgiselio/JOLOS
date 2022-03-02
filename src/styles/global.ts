@@ -12,6 +12,7 @@ export const GlobalStyle = createGlobalStyle`
     --info-msg-icon: #72727294;
     --text-a: ${props => props.theme.colors.textA};
     --text-b: ${props => props.theme.colors.textB};
+    --text-c: ${props => props.theme.colors.textC};
     --navs-bg: rgb(${props => props.theme.colors.navsBackground});
     --navs-bg-opacity: rgb(${props => props.theme.colors.navsBackground} / 96%);
     --primary-bg: ${props => props.theme.colors.primaryBg};

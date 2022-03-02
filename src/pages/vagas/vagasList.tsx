@@ -1,8 +1,12 @@
+import { useState } from "react";
 import { Button } from "../../components/button";
 import { OutsetHeadersCornerRadius } from "../../components/outset-radius-to-headers";
 import { VagaCard } from "../../components/vagaCard";
+import { vaga, vagasListTest } from "./vagas";
 
 export function VagasList() {
+  const [vagasRepo] = useState<vaga[]>(vagasListTest);
+
   return (
     <section>
       <OutsetHeadersCornerRadius>
@@ -17,7 +21,16 @@ export function VagasList() {
       <div className="content-grid">
         <div className="content">
           <div className="cards-container">
-            <VagaCard
+            {vagasRepo.map(vaga => {
+              return(
+                <VagaCard
+                  key={vaga.id}
+                  vaga={vaga}
+                />
+              );
+            })}
+
+            {/* <VagaCard
               title="Estágiário na área especificada"
               company="Sua empresa"
               location="João Câmara, RN"
@@ -56,7 +69,7 @@ export function VagasList() {
               date="13/12/2021"
               text="Lorem Ipsum"
               candidates="3"
-            />
+            /> */}
           </div>
         </div>
         <div className="filters hide">

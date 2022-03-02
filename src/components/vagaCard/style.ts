@@ -12,6 +12,7 @@ export const VagaCardStyle = styled.div`
   .vaga-data {
     position: relative;
     height: 100%;
+    width: 100%;
     padding-bottom: 95px;
   }
 
@@ -67,6 +68,7 @@ export const VagaCardStyle = styled.div`
 
   .vaga-status.disabled {
     color: #b3001e;
+    font-weight: 500;
   }
 
   .vaga-text {

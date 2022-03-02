@@ -1,41 +1,39 @@
+import { Link } from "react-router-dom";
+import { vaga } from "../../pages/vagas/vagas";
 import { VagaCardStyle } from "./style";
 
-type card = {
-  title : string
-  company : string
-  location : string
-  date : string
-  text : string
-  candidates : string
+type eunaosei ={
+  vaga : vaga
 }
-
-export function VagaCard(Props : card) {
+export function VagaCard({vaga} : eunaosei) {
   return (
     <VagaCardStyle className="vaga">
       <div className="vaga-data">
         <div className="vaga-header">
           <div className="vaga-titles">
-            <h3>{Props.title}</h3>
-            <span>{Props.company}</span>
-            <span className="vaga-city">{Props.location}</span>
-            <span className="vaga-date">{Props.date}</span>
+            <h3>{vaga.name}</h3>
+            <span>{vaga.owner.name}</span>
+            <span className="vaga-city">{vaga.location}</span>
+            <span className="vaga-date">{vaga.date}</span>
           </div>
-          <span className="vaga-status enabled">ATIVO</span>
+          <span className={vaga.status ? "vaga-status enabled" : "vaga-status disabled"}>
+            {vaga.status ? "ATIVO" : "INATIVO"}
+          </span>
         </div>
         <div className="vaga-text">
           <p>
-            {Props.text}
+            {vaga.description}
           </p>
         </div>
 
         <div className="vagas-bottom">
-          <a href="vagas/01-candidatos.html" className="vagas-candidatos">
+          <Link to={vaga.id + "/candidatos"} className="vagas-candidatos">
             <i className="fas fa-user"></i> 
-            <span>{Props.candidates} Candidatos</span>
-          </a>
-          <a href="vagas/01.html" className="vagas-detalhes-btn">
+            <span>{vaga.candidates.length} Candidatos</span>
+          </Link>
+          <Link to={vaga.id + ""} className="vagas-detalhes-btn">
             Mais detalhes
-          </a>
+          </Link>
         </div>
       </div>
     </VagaCardStyle>

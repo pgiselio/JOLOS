@@ -1,4 +1,3 @@
-import { useLocation } from "react-router-dom";
 import { Error404Style } from "./style";
 
 export function Error404() {

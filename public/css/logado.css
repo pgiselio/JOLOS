@@ -69,7 +69,7 @@ body.remove-transbar .three-bars-btn * {
   padding: 0 20px;
   justify-content: space-between;
   align-items: center;
-  border-bottom: 1px solid var(--outline-color);
+  /*border-bottom: 1px solid var(--outline-color);*/
   box-shadow: 0 1px 4px rgb(0 0 0 / 8%);
   position: sticky;
   z-index: 10;
@@ -230,7 +230,7 @@ footer {
   display: flex;
   flex-direction: column;
   width: 100%;
-  background: var(--primary-bg);
+  background: var(--secondary-bg);
   border-radius: 5px;
   box-shadow: 0 1px 2px rgb(0 0 0 / 10%);
   margin-top: 20px;
@@ -266,7 +266,7 @@ footer {
   align-items: center;
   font-size: 16px;
   font-weight: 500;
-  color: #4e5860;
+  color: var(--text-c);
 }
 
 .box-title h3 i {
@@ -288,11 +288,18 @@ footer {
 
 .box-message {
   display: flex;
+  flex-direction: column;
   justify-content: center;
-  padding: 40px;
-  background: #fcfcfc;
+  gap: 5px;
+  padding: 40px 10px;
+  background: var(--secondary-bg);
   align-items: center;
-  color: #555;
+  color: var(--text-b);
+  font-weight: 500;
+  font-size: 14px;
+  text-align: center;
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
 }
 
 .box-message::before {
@@ -306,10 +313,9 @@ footer {
   text-rendering: auto;
   line-height: 1;
 
-  padding-right: 10px;
   color: var(--info-msg-icon);
   height: 100%;
-  font-size: 30px;
+  font-size: 35px;
 }
 
 .vaga-page-description {
@@ -392,15 +398,6 @@ ol li {
 .candidato-pic {
   height: 50px;
   width: 50px;
-  background-color: #fff;
-  object-fit: cover;
-  border-radius: 100%;
-  border: 2px solid #ccc;
-}
-
-.candidato-pic.default {
-  padding: 10px;
-  background-color: #333;
 }
 
 .candidato-info {
@@ -440,16 +437,6 @@ ol li {
 .lista-candidatos-actions > * {
   margin-right: 5px;
 }
-
-.lista-candidatos-actions button {
-  border: none;
-  padding: 6px 10px;
-  cursor: pointer;
-  background: #f1f1f1;
-  color: #333;
-  border-radius: 5px;
-}
-
 .lista-candidatos-actions .btn-down-curriculo {
   background: var(--accent-color);
   color: #fff;
@@ -515,17 +502,6 @@ ol li {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-}
-
-.profile-pic {
-  width: 50px;
-  height: auto;
-  border-radius: 100%;
-}
-
-.profile-pic.default {
-  padding: 10px;
-  background-color: #333;
 }
 
 .contacts {
@@ -674,10 +650,6 @@ ol li {
   .user-actions {
     width: initial;
     margin-top: 0;
-  }
-
-  .profile-pic {
-    width: 100px;
   }
 }
 

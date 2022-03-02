@@ -13,6 +13,7 @@ declare module 'styled-components' {
         secondaryBg: string;
         textA: string;
         textB: string;
+        textC: string;
         outlineColor: string;
         navsBackground: string;
       };
