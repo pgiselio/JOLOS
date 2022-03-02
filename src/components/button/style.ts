@@ -20,7 +20,7 @@ export const StyledButton = styled.button`
     border: 2px solid var(--accent-color-active);
   }
   &.less-radius {
-    border-radius: 10px;
+    border-radius: 6px;
   }
   &.outlined {
     color: var(--accent-color);
