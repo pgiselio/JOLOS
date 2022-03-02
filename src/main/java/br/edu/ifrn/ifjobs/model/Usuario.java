@@ -2,36 +2,33 @@ package br.edu.ifrn.ifjobs.model;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.Column;
-import javax.persistence.ConstraintMode;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
-import javax.persistence.ForeignKey;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
-import javax.persistence.OneToMany;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
-import javax.persistence.UniqueConstraint;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.stereotype.Component;
 
 import br.edu.ifrn.ifjobs.model.enums.StatusUsuario;
 import br.edu.ifrn.ifjobs.model.enums.TipoUsuario;
 
 @Entity
-@Component
 public class Usuario implements UserDetails {
 
     @Id
@@ -51,10 +48,9 @@ public class Usuario implements UserDetails {
     @Enumerated(EnumType.STRING)
     private StatusUsuario status;
 
-    @OneToMany(fetch = FetchType.EAGER)
-    @JoinTable(name = "usuarios_role", uniqueConstraints = @UniqueConstraint(columnNames = { "usuario_id",
-            "role_id" }, name = "unique_role_usuario"), joinColumns = @JoinColumn(name = "usuario_id", referencedColumnName = "id", table = "usuario", unique = false, foreignKey = @ForeignKey(name = "usuario_fk", value = ConstraintMode.CONSTRAINT)), inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id", table = "role", unique = false, updatable = false, foreignKey = @ForeignKey(name = "role_fk", value = ConstraintMode.CONSTRAINT)))
-    private List<Role> roles;
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(name = "usuarios_roles", joinColumns = @JoinColumn(name = "usuario_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
+    private Set<Role> roles = new HashSet<>();
 
     @OneToOne
     private Aluno aluno;
@@ -62,8 +58,8 @@ public class Usuario implements UserDetails {
     @OneToOne
     private Empresa empresa;
 
-    public void addRole(Role papelDeAutorizacao) {
-        roles.add(papelDeAutorizacao);
+    public void addRole(Role role) {
+        this.roles.add(role);
     }
 
     public Usuario() {
@@ -173,6 +169,20 @@ public class Usuario implements UserDetails {
      */
     public void setEmpresa(Empresa empresa) {
         this.empresa = empresa;
+    }
+
+    /**
+     * @return Set<Role> return the roles
+     */
+    public Set<Role> getRoles() {
+        return roles;
+    }
+
+    /**
+     * @param roles the Set<Role> to set
+     */
+    public void setRoles(Set<Role> roles) {
+        this.roles = roles;
     }
 
     @Override

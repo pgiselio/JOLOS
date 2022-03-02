@@ -4,10 +4,12 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
 import org.springframework.security.core.GrantedAuthority;
 
 @Entity
+@Table(name = "role_tb")
 public class Role implements GrantedAuthority {
 
     private static final Long serialVersionUID = 54L;
@@ -17,6 +19,23 @@ public class Role implements GrantedAuthority {
     private int id;
 
     private String nomeRole;
+
+    public Role() {
+
+    }
+
+    public Role(int id, String nomeRole) {
+        this.id = id;
+        this.nomeRole = nomeRole;
+    }
+
+    public Role(String nomeRole) {
+        this.nomeRole = nomeRole;
+    }
+
+    public Role(int id) {
+        this.id = id;
+    }
 
     @Override
     public String getAuthority() {

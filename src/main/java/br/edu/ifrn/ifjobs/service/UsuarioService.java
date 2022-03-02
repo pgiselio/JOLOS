@@ -8,32 +8,44 @@ import org.springframework.stereotype.Service;
 
 import br.edu.ifrn.ifjobs.exception.UsuarioNaoCadastradoException;
 import br.edu.ifrn.ifjobs.exception.UsuarioNaoEncontradoException;
+import br.edu.ifrn.ifjobs.model.Role;
 import br.edu.ifrn.ifjobs.model.Usuario;
+import br.edu.ifrn.ifjobs.repository.RoleRepository;
 import br.edu.ifrn.ifjobs.repository.UsuarioRepository;
 
 @Service
 public class UsuarioService {
 
     @Autowired
-    private UsuarioRepository repository;
+    private UsuarioRepository usuarioRepository;
+
+    @Autowired
+    private RoleRepository roleRepository;
 
     public Usuario create(Usuario usuario) throws UsuarioNaoCadastradoException {
         Optional<Usuario> optional;
-        optional = Optional.ofNullable(repository.save(usuario));
+        optional = Optional.ofNullable(usuario);
+
+        optional.ifPresent(user -> {
+            Role roleUsuario = roleRepository.findByNome("Usuario");
+            user.addRole(roleUsuario);
+            usuarioRepository.save(user);
+        });
+
         return optional.orElseThrow(() -> new UsuarioNaoCadastradoException("Erro ao efetuar cadastro!"));
     }
 
     public Usuario getById(int id) throws UsuarioNaoEncontradoException {
-        Optional<Usuario> usuarioFindById = repository.findById(id);
+        Optional<Usuario> usuarioFindById = usuarioRepository.findById(id);
         return usuarioFindById.orElseThrow(() -> new UsuarioNaoEncontradoException("Usuário não encontrado!!"));
     }
 
     public List<Usuario> getAll() {
-        return repository.findAll();
+        return usuarioRepository.findAll();
     }
 
     public Usuario delete(Usuario usuario) {
-        repository.delete(usuario);
+        usuarioRepository.delete(usuario);
         return usuario;
     }
 
