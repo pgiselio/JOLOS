@@ -12,6 +12,7 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.test.annotation.Rollback;
 
 import br.edu.ifrn.ifjobs.model.Role;
+import br.edu.ifrn.ifjobs.model.enums.TipoUsuario;
 import br.edu.ifrn.ifjobs.repository.RoleRepository;
 
 @DataJpaTest
@@ -23,16 +24,14 @@ public class RoleRepositoryTest {
     RoleRepository repository;
 
     @Test
-    public void testCreateRoles() {
-        Role usuario = new Role("Usuario");
-        Role admin = new Role("Admin");
-        Role empresa = new Role("Empresa");
-        Role aluno = new Role("Aluno");
+    void testCreateRoles() {
+        Role empresa = new Role(TipoUsuario.EMPRESA);
+        Role aluno = new Role(TipoUsuario.ALUNO);
 
-        repository.saveAll(List.of(usuario, admin, empresa, aluno));
+        repository.saveAll(List.of(empresa, aluno));
 
         List<Role> listRoles = repository.findAll();
 
-        assertEquals(4, listRoles.size());
+        assertEquals(3, listRoles.size());
     }
 }
