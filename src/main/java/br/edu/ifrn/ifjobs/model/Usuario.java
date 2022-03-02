@@ -26,7 +26,6 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import br.edu.ifrn.ifjobs.model.enums.StatusUsuario;
-import br.edu.ifrn.ifjobs.model.enums.TipoUsuario;
 
 @Entity
 public class Usuario implements UserDetails {
@@ -41,13 +40,11 @@ public class Usuario implements UserDetails {
     @Column(nullable = false)
     private String senha;
 
-    @Enumerated(EnumType.STRING)
-    private TipoUsuario tipoUsuario;
-
     @Column(nullable = false, length = 25)
     @Enumerated(EnumType.STRING)
     private StatusUsuario status;
 
+    @JsonIgnore
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "usuarios_roles", joinColumns = @JoinColumn(name = "usuario_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<Role> roles = new HashSet<>();
@@ -65,11 +62,10 @@ public class Usuario implements UserDetails {
     public Usuario() {
     }
 
-    public Usuario(int id, String email, String senha, TipoUsuario tipoUsuario, StatusUsuario status) {
+    public Usuario(int id, String email, String senha, StatusUsuario status) {
         this.id = id;
         this.email = email;
         this.senha = senha;
-        this.tipoUsuario = tipoUsuario;
         this.status = status;
     }
 
@@ -113,20 +109,6 @@ public class Usuario implements UserDetails {
      */
     public void setSenha(String senha) {
         this.senha = senha;
-    }
-
-    /**
-     * @return TipoUsuario return the tipoUsuario
-     */
-    public TipoUsuario getTipoUsuario() {
-        return tipoUsuario;
-    }
-
-    /**
-     * @param tipoUsuario the tipoUsuario to set
-     */
-    public void setTipoUsuario(TipoUsuario tipoUsuario) {
-        this.tipoUsuario = tipoUsuario;
     }
 
     /**
@@ -190,7 +172,7 @@ public class Usuario implements UserDetails {
         List<SimpleGrantedAuthority> authorities = new ArrayList<>();
 
         roles.forEach(role -> authorities.add(
-                new SimpleGrantedAuthority(role.getNomeRole())));
+                new SimpleGrantedAuthority(role.getNomeRole().toString())));
 
         return authorities;
     }

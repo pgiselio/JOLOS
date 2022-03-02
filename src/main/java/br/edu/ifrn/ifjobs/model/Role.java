@@ -1,12 +1,16 @@
 package br.edu.ifrn.ifjobs.model;
 
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
 import org.springframework.security.core.GrantedAuthority;
+
+import br.edu.ifrn.ifjobs.model.enums.TipoUsuario;
 
 @Entity
 @Table(name = "role_tb")
@@ -18,18 +22,19 @@ public class Role implements GrantedAuthority {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    private String nomeRole;
+    @Enumerated(EnumType.STRING)
+    private TipoUsuario nomeRole;
 
     public Role() {
 
     }
 
-    public Role(int id, String nomeRole) {
+    public Role(int id, TipoUsuario nomeRole) {
         this.id = id;
         this.nomeRole = nomeRole;
     }
 
-    public Role(String nomeRole) {
+    public Role(TipoUsuario nomeRole) {
         this.nomeRole = nomeRole;
     }
 
@@ -39,7 +44,7 @@ public class Role implements GrantedAuthority {
 
     @Override
     public String getAuthority() {
-        return this.nomeRole;
+        return this.nomeRole.toString();
     }
 
     /**
@@ -59,14 +64,14 @@ public class Role implements GrantedAuthority {
     /**
      * @return String return the nomeRole
      */
-    public String getNomeRole() {
+    public TipoUsuario getNomeRole() {
         return nomeRole;
     }
 
     /**
      * @param nomeRole the nomeRole to set
      */
-    public void setNomeRole(String nomeRole) {
+    public void setNomeRole(TipoUsuario nomeRole) {
         this.nomeRole = nomeRole;
     }
 
