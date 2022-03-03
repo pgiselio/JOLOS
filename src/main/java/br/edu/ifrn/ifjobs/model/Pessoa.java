@@ -9,6 +9,8 @@ import javax.persistence.Embeddable;
 @Embeddable
 public class Pessoa implements Serializable {
 
+    private static final long serialVersionUID = 23123L;
+
     @Column(nullable = false, length = 300)
     private String nome;
 
