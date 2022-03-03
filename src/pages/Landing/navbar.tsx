@@ -10,11 +10,15 @@ export function LandNavBar() {
           <a href="/" className="logo-nav">
             <img src="images/logo.svg" alt="" />
           </a>
-          <ul className={menuState ? "menu active" : "menu"}>
+          <ul className={"menu " + (menuState && "active")}>
             <LandBarItem href="#1" label="Tadah" setMenuState={setMenuState} />
             <LandBarItem href="#2" label="Cursos" setMenuState={setMenuState} />
             <LandBarItem href="#3" label="Sobre" setMenuState={setMenuState} />
-            <LandBarItem href="#4" label="Contato" setMenuState={setMenuState} />
+            <LandBarItem
+              href="#4"
+              label="Contato"
+              setMenuState={setMenuState}
+            />
           </ul>
           <div className="acesso">
             <Acesso />
@@ -22,18 +26,18 @@ export function LandNavBar() {
           <div className="mobile-buttons">
             <button
               type="button"
-              className={accessState ? "access-bt active" : "access-bt"}
+              className={"access-bt " + (accessState && "active")}
               onClick={() => {
-                setMenuState(false);  
+                setMenuState(false);
                 setAccessState(!accessState);
               }}
             ></button>
-            <div className={accessState ? "acesso-mobile active" : "acesso-mobile"}>
+            <div className={"acesso-mobile " + (accessState && "active")}>
               <Acesso />
             </div>
             <div
               id="botao-ham"
-              className={menuState ? "botao-ham active" : "botao-ham"}
+              className={"botao-ham " + (menuState && "active")}
               onClick={() => {
                 setMenuState(!menuState);
                 setAccessState(false);
@@ -50,12 +54,14 @@ export function LandNavBar() {
   );
 }
 function LandBarItem({ href, label, setMenuState }: any) {
-  const hideMenu = () => {
-    setMenuState(false);
-  };
   return (
     <li>
-      <a href={href} onClick={hideMenu}>
+      <a
+        href={href}
+        onClick={() => {
+          setMenuState(false);
+        }}
+      >
         {label}
       </a>
     </li>

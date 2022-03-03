@@ -33,6 +33,7 @@ export const StyledAccess = styled.main`
   .signup-form {
     align-items: initial;
     padding: 30px;
+    padding-bottom: 100px;
     min-height: 96vh;
     position: relative;
   }

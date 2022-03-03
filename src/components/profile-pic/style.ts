@@ -33,6 +33,7 @@ export const StyledProfilePic = styled.div`
     border-radius: 50%;
     display: flex;
     position: absolute;
+    top: 0;
     height: 100%;
     width: 100%;
     pointer-events: none;

@@ -1,10 +1,12 @@
 import { Link, NavLink, Outlet, useParams } from "react-router-dom";
-import {  vagasListTest } from "../vagas";
+import { vagasListTest } from "../vagas";
 import { Error404 } from "../../404";
 
 export function VagaPage() {
   let params = useParams();
-    const vagaData = vagasListTest.find((a) => a.id === Number.parseInt(params.id + ""));
+  const vagaData = vagasListTest.find(
+    (vaga) => vaga.id === Number.parseInt(params.id + "")
+  );
   if (vagaData) {
     return (
       <>
@@ -70,13 +72,13 @@ export function VagaPage() {
               </ul>
             </div>
             <div className="vaga-navigation">
-              <Outlet context={vagaData}/>
+              <Outlet context={vagaData} />
             </div>
           </div>
         </section>
       </>
     );
   } else {
-    return <Error404/>;
+    return <Error404 />;
   }
 }

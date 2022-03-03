@@ -149,12 +149,11 @@ export const LandingStyle = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 5px;
+    position: relative;
+    background: transparent;
     z-index: 1;
-    background: #959595;
     border: none;
-    border-radius: 50%;
-    transition: background .3s linear;
+    padding: 10px;
   }
   .access-bt::before {
     content: "\f007";
@@ -170,20 +169,19 @@ export const LandingStyle = styled.div`
     line-height: 1;
     width: 13px;
     height: 13px;
-    padding: 5px;
+    padding: 6px;
     border: 2px solid #000;
     border-radius: 30px;
     color: #000;
-    color: #fff;
-    border-color: #fff;
-    transition: all .3s linear;
-  }
-  .access-bt.active{
-    background-color: var(--accent-color);
+    color: #333;
+    border-color: #333;
+    transition: all .2s linear;
+    z-index: 1;
   }
   .access-bt.active::before {
-    color: #fff;
-    border-color: #fff;
+    color: #eaffef;
+    border-color: var(--accent-color);
+    background-color: var(--accent-color);
   }
 
   .login-bt,
