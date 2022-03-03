@@ -10,7 +10,7 @@ import br.edu.ifrn.ifjobs.model.Aluno;
 public interface AlunoRespository extends JpaRepository<Aluno, Integer> {
 
     @Query(value = """
-                SELECT id
+                SELECT *
                 FROM aluno a
                 WHERE a.cpf = ?1
             """, nativeQuery = true)
