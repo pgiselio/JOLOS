@@ -21,9 +21,11 @@ public class Mensagem implements Serializable {
     @Column(nullable = false)
     private String texto;
 
+    @ManyToOne
     @Column(nullable = false)
     private Vaga vaga;
 
+    @ManyToOne
     @Column(nullable = false)
     private Usuario usuario;
 
