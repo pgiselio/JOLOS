@@ -7,7 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToOne;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class Mensagem implements Serializable {
@@ -27,7 +27,7 @@ public class Mensagem implements Serializable {
     @Column(nullable = false)
     private Usuario usuario;
 
-    @OneToOne
+    @ManyToOne
     private Mensagem mensagemForum;
 
     public Mensagem(int id, String texto, Vaga vaga, Usuario usuario, Mensagem mensagemForum) {
