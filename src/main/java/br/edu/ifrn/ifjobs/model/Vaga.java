@@ -17,7 +17,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
-import javax.persistence.OneToMany;
+import javax.persistence.ManyToOne;
 
 import org.hibernate.annotations.Type;
 
@@ -54,8 +54,8 @@ public class Vaga implements Serializable {
     @JoinTable(name = "vaga_aluno", joinColumns = @JoinColumn(name = "vaga_id"), inverseJoinColumns = @JoinColumn(name = "aluno_id"))
     private Set<Aluno> alunos = new HashSet<>();
 
-    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
-    private Set<Empresa> empresas = new HashSet<>();
+    @ManyToOne(cascade = CascadeType.MERGE)
+    private Empresa empresa;
 
     public Vaga(int id, String cursoAlvo, String titulo,
             String descricao, String localizacao, Date dataCriacao) {
@@ -135,20 +135,16 @@ public class Vaga implements Serializable {
         this.alunos = alunos;
     }
 
-    public Set<Empresa> getEmpresas() {
-        return empresas;
-    }
-
-    public void setEmpresas(Set<Empresa> empresas) {
-        this.empresas = empresas;
-    }
-
     public void addAluno(Aluno aluno) {
         this.alunos.add(aluno);
     }
 
-    public void addEmpresa(Empresa empresa) {
-        this.empresas.add(empresa);
+    public Empresa getEmpresa() {
+        return empresa;
+    }
+
+    public void setEmpresa(Empresa empresa) {
+        this.empresa = empresa;
     }
 
 }
