@@ -5,7 +5,7 @@ export const SidebarAside = styled.aside`
   grid-area: menu;
   height: calc(100vh - var(--top-bar-height));
   background-color: var(--navs-bg);
-  border-right: 1px solid var(--outline-color);
+  border-right: 1px solid ${props => props.theme.colors.systemMenu.border};
   position: fixed;
   overflow: overlay;
   overflow-x: hidden;

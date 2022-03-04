@@ -1,7 +1,3 @@
-type candidates = {
-  id: number;
-};
-
 export type user = {
     id: number;
     name: string;
@@ -21,7 +17,7 @@ export type vaga = {
     id: number;
     profilepic_url?: string;
   };
-  candidates: candidates[];
+  candidates: number[];
 };
 
 export const usersList : user[] = [
@@ -76,17 +72,7 @@ export const vagasListTest: vaga[] = [
       name: "Jolos Company",
       id: 1,
     },
-    candidates: [
-        {
-            id: 1,
-        },
-        {
-            id: 2,
-        },
-        {
-            id: 3,
-        },
-    ],
+    candidates: [ 1, 2, 3],
   },
   {
     id: 2,
@@ -100,20 +86,7 @@ export const vagasListTest: vaga[] = [
       name: "Jolos Chocolates",
       id: 2,
     },
-    candidates: [
-        {
-            id: 4,
-        },
-        {
-            id: 5,
-        },
-        {
-            id: 6,
-        },
-        {
-            id: 7,
-        },
-    ],
+    candidates: [4, 5, 6, 7],
   },
   {
     id: 3,
@@ -127,17 +100,7 @@ export const vagasListTest: vaga[] = [
       name: "Jolos Frios",
       id: 3,
     },
-    candidates: [
-        {
-            id: 1,
-        },
-        {
-            id: 2,
-        },
-        {
-            id: 3,
-        },
-    ],
+    candidates: [ 1, 2, 3],
   },
   {
     id: 4,
@@ -158,37 +121,30 @@ export const vagasListTest: vaga[] = [
   {
     id: 5,
     name: "string",
-    status: true,
+    status: false,
     description: "Lorem ipsum 5",
     location: "João Câmara/RN",
     date: "17/03/2012",
     course_target: "Administração",
     owner: {
-      name: "Jolos Automotiva",
+      name: "Jolos Automobilística",
       id: 1,
     },
-    candidates: [
-        {
-            id: 1,
-        },
-        {
-            id: 2,
-        },
-        {
-            id: 3,
-        },
-        {
-            id: 4,
-        },
-        {
-            id: 5,
-        },
-        {
-            id: 6,
-        },
-        {
-            id: 7,
-        },
-    ],
+    candidates: [ 1, 2, 3, 4, 5, 6, 7],
+  },
+  {
+    id: 6,
+    name: "string",
+    status: true,
+    description: "Lorem ipsum 6",
+    location: "João Câmara/RN",
+    date: "17/03/2012",
+    course_target: "Administração",
+    owner: {
+      name: "Jolos Technology",
+      id: 1,
+      profilepic_url: "https://github.com/lucas-dev-back.png",
+    },
+    candidates: [ 1],
   },
 ];

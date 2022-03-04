@@ -1,16 +1,18 @@
 import styled from "styled-components";
 
 export const VagaCardStyle = styled.div`
-  border-radius: 10px;
-  box-shadow: 0 1px 2px rgb(0 0 0 / 10%);
-  background: var(--primary-bg);
   margin-bottom: 20px;
   display: flex;
+  flex-direction: column;
   justify-content: space-between;
-  border: 1px solid var(--outline-color);
 
   .vaga-data {
     position: relative;
+    box-shadow: 0 1px 2px rgb(0 0 0 / 10%);
+    background: var(--primary-bg);
+    /* border: 1px solid var(--outline-color); */
+    border-radius: 10px;
+
     height: 100%;
     width: 100%;
     padding-bottom: 95px;
@@ -20,6 +22,14 @@ export const VagaCardStyle = styled.div`
     display: flex;
     flex-direction: column;
     padding: 20px;
+  }
+
+  .vaga-header .photo-align {
+    display: grid;
+    align-items: flex-start;
+    grid-template-columns: auto 1fr;
+    gap: 10px;
+    width: 100%;
   }
 
   .vaga-titles {
@@ -60,23 +70,21 @@ export const VagaCardStyle = styled.div`
     height: 2px;
     border-radius: 50%;
   }
-
-  .vaga-status.enabled {
-    color: green;
-    font-weight: 500;
-  }
-
-  .vaga-status.disabled {
+  .vaga-status {
     color: #b3001e;
     font-weight: 500;
   }
+  .vaga-status.enabled {
+    color: green;
+  }
 
+  
   .vaga-text {
     position: relative;
     padding: 0 20px;
   }
 
-  .vaga-text p{
+  .vaga-text p {
     position: relative;
     display: inline-block;
     word-wrap: break-word;

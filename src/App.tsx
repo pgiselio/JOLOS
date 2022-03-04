@@ -1,5 +1,4 @@
 import { Routes, Route, Outlet } from "react-router-dom";
-import "./styles/App.css";
 import { Header } from "./components/header/header";
 import { SidebarList } from "./components/sidebar/sidebar-list";
 import { LandingPage } from "./pages/Landing/Landing";
@@ -17,6 +16,8 @@ import { GlobalStyle } from "./styles/global";
 import { ThemeProvider } from "styled-components";
 import { VagaSobrePage } from "./pages/vagas/vaga/sobre";
 import { VagaCandidatoPage } from "./pages/vagas/vaga/candidatos";
+import { CriarNovaVagaPage } from "./pages/vagas/criar-nova";
+import { SysGlobalStyle } from "./styles/sys";
 
 function App() {
   const [theme, setTheme] = useState("light");
@@ -38,6 +39,7 @@ function App() {
             <Route index element={<HomePage />} />
             <Route path="profile" element={<ProfilePage />} />
             <Route path="vagas" element={<VagasList />} />
+            <Route path="vagas/criar" element={<CriarNovaVagaPage/>}/>
             <Route path="vagas/:id" element={<VagaPage />}>
               <Route path="" element={<VagaSobrePage/>}/>
               <Route path="candidatos" element={<VagaCandidatoPage/>}/>
@@ -54,6 +56,7 @@ function App() {
       <>
         <ThemeProvider theme={theme === "light" ? lightTheme : darkTheme}>
           <GlobalStyle />
+          <SysGlobalStyle/>
           <Header theme={theme} setTheme={setTheme} />
           <div className="sys-grid-container">
             <SidebarList />

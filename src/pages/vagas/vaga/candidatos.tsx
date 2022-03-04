@@ -18,7 +18,7 @@ export function VagaCandidatoPage() {
           {vagaData.candidates.length > 0 ? (
             <ul className="lista-candidatos">
               {vagaData.candidates.map((candidato) => {
-                let user = usersList.find((a) => a.id === candidato.id);
+                let user = usersList.find((vaga) => vaga.id === candidato);
                 if (user) {
                   let userTyped: user = user;
                   return (
@@ -32,10 +32,7 @@ export function VagaCandidatoPage() {
                         href="../perfil/pessoa/jose-nascimento.html"
                         className="candidato-group"
                       >
-                        <ProfilePic
-                          {...(userTyped.profilepic_url && {
-                            url: userTyped.profilepic_url,
-                          })}
+                        <ProfilePic url={userTyped.profilepic_url}
                           className="candidato-pic"
                         />
                         <div className="candidato-info">

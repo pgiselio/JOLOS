@@ -13,8 +13,8 @@ export const GlobalStyle = createGlobalStyle`
     --text-a: ${props => props.theme.colors.textA};
     --text-b: ${props => props.theme.colors.textB};
     --text-c: ${props => props.theme.colors.textC};
-    --navs-bg: rgb(${props => props.theme.colors.navsBackground});
-    --navs-bg-opacity: rgb(${props => props.theme.colors.navsBackground} / 96%);
+    --navs-bg: rgb(${props => props.theme.colors.systemMenu.background});
+    --navs-bg-opacity: rgb(${props => props.theme.colors.systemMenu.background} / 96%);
     --primary-bg: ${props => props.theme.colors.primaryBg};
     --secondary-bg: ${props => props.theme.colors.secondaryBg};
   }

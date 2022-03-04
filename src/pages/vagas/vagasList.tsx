@@ -1,12 +1,14 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Button } from "../../components/button";
 import { OutsetHeadersCornerRadius } from "../../components/outset-radius-to-headers";
 import { VagaCard } from "../../components/vagaCard";
 import { vaga, vagasListTest } from "./vagas";
 
 export function VagasList() {
-  const [vagasRepo] = useState<vaga[]>(vagasListTest);
-
+  const [vagasRepo, setVagasRepo] = useState<vaga[]>(vagasListTest);
+  useEffect(() => {
+    setVagasRepo(vagasListTest);
+  }, [vagasListTest]);
   return (
     <section>
       <OutsetHeadersCornerRadius>

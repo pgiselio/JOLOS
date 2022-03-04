@@ -1,6 +1,5 @@
 import { ProfilePic } from '../profile-pic/profile-pic';
 import { SidebarItem } from './sidebar-item';
-import "./sidebar.css";
 import { SidebarAside } from './style';
 
 export function SidebarList(){
@@ -24,7 +23,7 @@ export function SidebarList(){
 
                 <nav className="data">
                     <ul className="data-items">
-                        <SidebarItem to="" icon="fas fa-home" label="Início asdas asdasa aaaas asdasdddd" end/>
+                        <SidebarItem to="" icon="fas fa-home" label="Início" end/>
                         <SidebarItem to="profile" icon="fas fa-user" label="Dados"/>
                         <SidebarItem to="vagas" icon="fas fa-briefcase" label="Vagas"/>
                         <SidebarItem to="forum" icon="fas fa-comments" label="Fórum"/>

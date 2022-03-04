@@ -1,4 +1,7 @@
-.sys-grid-container {
+import { createGlobalStyle } from "styled-components";
+
+export const SysGlobalStyle = createGlobalStyle`
+  .sys-grid-container {
   display: grid;
   grid-template-areas: "menu main";
   position: relative;
@@ -10,16 +13,8 @@
 /* Main content */
 .main {
   grid-area: main;
-  /* display: flex;
-  flex-direction: column;
-  min-height: 0; */
   position: relative;
-  /* height: 100%;
-  overflow: hidden; */
   background: var(--bg-body);
-  /* border-top: 1px solid;
-  border-left: 1px solid;
-  border-color: rgb(228, 228, 228); */
 }
 .main::before{
   content: "";
@@ -27,9 +22,9 @@
   top: var(--top-bar-height);
   height: 100%;
   width: 100%;
-  /* border-top: 1px solid; */
-  border-left: none !important;
-  /* border-color: var(--outline-color); */
+  border-top: 1px solid;
+  border-left: none;
+  border-color: ${props => props.theme.colors.systemMenu.border} ;
   box-shadow: -3px -3px 0 0 var(--navs-bg);
   z-index: 14;
   pointer-events: none;
@@ -42,9 +37,9 @@
     position: absolute;
     bottom: -20px;
     height: 20px;
-    width: 20px;
-    border-left: none;
-    border-color: var(--outline-color);
+    width: 20px;    
+    border-left:1px solid;
+    border-color: ${props => props.theme.colors.systemMenu.border};
     box-shadow: -4px -3px 0 0 var(--navs-bg);
     z-index: 20;
     pointer-events: none;
@@ -56,11 +51,17 @@ body.toggle-sidemenu .main {
 body.toggle-sidemenu {
   overflow-y: hidden;
 }
-/* 
-.main-container {
-  width: 100%;
-  height: 100%;
-} */
+
+body.remove-transbar .side-bar, 
+body.remove-transbar .side-bar *, 
+body.remove-transbar .menu-container , 
+body.remove-transbar .three-bars-btn *{
+    -webkit-transition: none !important;
+    -moz-transition: none !important;
+    -ms-transition: none !important;
+    -o-transition: none !important;
+    transition: none !important;
+}
 
 .main main {
   min-height: 100vh;
@@ -106,11 +107,6 @@ body.toggle-sidemenu {
   body::-webkit-scrollbar {
     width: 16px;
   }
-/* 
-  body::-webkit-scrollbar-track {
-    border-radius: 20px;
-    background-color: #f5f5f5;
-  } */
 
   body::-webkit-scrollbar-thumb {
     background-color: #a3a3a3d5;
@@ -141,11 +137,11 @@ body.toggle-sidemenu {
   }
   .main::before{
     border-left: 1px solid;
-    border-color: var(--outline-color);
+    border-color: ${props => props.theme.colors.systemMenu.border};
     border-top-left-radius: 10px;
   }
   .header-elements::after{
-    border-color: var(--outline-color);
+    border-color: ${props => props.theme.colors.systemMenu.border};
     border-top-left-radius: 10px;
   }
 
@@ -167,3 +163,4 @@ body.toggle-sidemenu {
       grid-template-columns: 1fr 1fr;
   }
 }
+`;

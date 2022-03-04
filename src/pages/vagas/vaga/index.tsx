@@ -1,6 +1,7 @@
-import { Link, NavLink, Outlet, useParams } from "react-router-dom";
+import { Link, Outlet, useParams } from "react-router-dom";
 import { vagasListTest } from "../vagas";
 import { Error404 } from "../../404";
+import { TabsMenu, TabsMenuItem } from "../../../components/tabs-menu";
 
 export function VagaPage() {
   let params = useParams();
@@ -23,31 +24,18 @@ export function VagaPage() {
         <section>
           <div className="vaga-page-header">
             <h2>{vagaData.name}</h2>
-            <span
-              className={
-                vagaData.status ? "vaga-status enabled" : "vaga-status disabled"
-              }
-            >
+            <span className={"vaga-status" + vagaData.status && " enabled"}>
               {vagaData.status ? "ATIVO" : "INATIVO"}
             </span>
           </div>
-          <div className="tabs-menu">
-            <div className="spacer"></div>
-            <div className="tabs-menu-container">
-              <ul>
-                <li>
-                  <NavLink to="" end>
-                    Detalhes
-                  </NavLink>
-                </li>
-                <li>
-                  <NavLink to="candidatos">
-                    Candidatos <span>{vagaData.candidates.length}</span>
-                  </NavLink>
-                </li>
-              </ul>
-            </div>
-          </div>
+          <TabsMenu>
+            <TabsMenuItem to="" title="Detalhes" end />
+            <TabsMenuItem
+              to="candidatos"
+              title="Candidatos"
+              highlighted={vagaData.candidates.length + ""}
+            />
+          </TabsMenu>
           <div className="content">
             <div className="vaga-page-info">
               <ul>
