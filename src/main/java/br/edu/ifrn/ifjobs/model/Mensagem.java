@@ -7,6 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 
 @Entity
 public class Mensagem implements Serializable {
@@ -26,15 +27,19 @@ public class Mensagem implements Serializable {
     @Column(nullable = false)
     private Usuario usuario;
 
-    public Mensagem() {
+    @OneToOne
+    private Mensagem mensagemForum;
 
-    }
-
-    public Mensagem(int id, String texto, Vaga vaga, Usuario usuario) {
+    public Mensagem(int id, String texto, Vaga vaga, Usuario usuario, Mensagem mensagemForum) {
         this.id = id;
         this.texto = texto;
         this.vaga = vaga;
         this.usuario = usuario;
+        this.mensagemForum = mensagemForum;
+    }
+
+    public Mensagem() {
+
     }
 
     public int getId() {
@@ -67,6 +72,14 @@ public class Mensagem implements Serializable {
 
     public void setUsuario(Usuario usuario) {
         this.usuario = usuario;
+    }
+
+    public Mensagem getMensagemForum() {
+        return this.mensagemForum;
+    }
+
+    public void setMensagemForum(Mensagem mensagemForum) {
+        this.mensagemForum = mensagemForum;
     }
 
 }
