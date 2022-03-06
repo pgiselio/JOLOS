@@ -31,6 +31,9 @@ public class EmailServiceTest {
     @Value("${spring.mail.username}")
     private String emailBase;
 
+    @Value("${spring.html.caminhoRaizMensagemCadastroHtml}")
+    private String caminhoRaizMensagemCadastroHtml;
+
     public EmailServiceTest() {
         JavaMailSenderImpl mailSender = new JavaMailSenderImpl();
 
@@ -59,7 +62,7 @@ public class EmailServiceTest {
         email.setAssunto("Teste");
         email.setHtml(true);
 
-        File html = new File("src\\main\\java\\br\\edu\\ifrn\\ifjobs\\model\\html\\MensagemCadastro.html");
+        File html = new File(caminhoRaizMensagemCadastroHtml);
         String htmlContent = Jsoup.parse(html, "UTF-8").toString();
 
         email.setMensagem(htmlContent);
