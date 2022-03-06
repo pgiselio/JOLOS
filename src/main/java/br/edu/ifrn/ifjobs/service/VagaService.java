@@ -1,11 +1,14 @@
 package br.edu.ifrn.ifjobs.service;
 
+import java.lang.reflect.Field;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 import java.util.function.Supplier;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.ReflectionUtils;
 
 import br.edu.ifrn.ifjobs.exception.VagaNaoCadastradaException;
 import br.edu.ifrn.ifjobs.exception.VagaNaoEncontradoException;
@@ -46,4 +49,16 @@ public class VagaService {
         vagaRepository.delete(vaga);
     }
 
+    public Vaga atualizaCampos(int id, Map<Object, Object> campos)
+            throws VagaNaoEncontradoException, VagaNaoCadastradaException {
+        Vaga vagaBuscadaPorId = buscarPorId(id);
+
+        campos.forEach((chave, valor) -> {
+            Field campo = ReflectionUtils.findField(Vaga.class, (String) chave);
+            campo.setAccessible(true);
+            ReflectionUtils.setField(campo, vagaBuscadaPorId, valor);
+        });
+
+        return salvarVaga(vagaBuscadaPorId);
+    }
 }
