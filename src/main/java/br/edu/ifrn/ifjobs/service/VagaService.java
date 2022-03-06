@@ -45,7 +45,8 @@ public class VagaService {
         return vagaRepository.findAll();
     }
 
-    public void delete(Vaga vaga) {
+    public void delete(int id) throws VagaNaoEncontradoException {
+        Vaga vaga = buscarPorId(id);
         vagaRepository.delete(vaga);
     }
 
