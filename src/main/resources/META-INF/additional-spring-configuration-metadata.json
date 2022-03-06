@@ -1,0 +1,5 @@
+{"properties": [{
+  "name": "spring.html.caminhoRaizMensagemCadastroHtml",
+  "type": "java.lang.String",
+  "description": "caminho relativo de 'MensagemCadastro.html'"
+}]}
