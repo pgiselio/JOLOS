@@ -75,4 +75,29 @@ public class Role implements GrantedAuthority {
         this.nomeRole = nomeRole;
     }
 
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int result = 1;
+        result = prime * result + id;
+        result = prime * result + ((nomeRole == null) ? 0 : nomeRole.hashCode());
+        return result;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        Role other = (Role) obj;
+        if (id != other.id)
+            return false;
+        if (nomeRole != other.nomeRole)
+            return false;
+        return true;
+    }
+
 }
