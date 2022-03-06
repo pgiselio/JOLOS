@@ -14,6 +14,7 @@ import org.springframework.test.annotation.Rollback;
 import br.edu.ifrn.ifjobs.model.Role;
 import br.edu.ifrn.ifjobs.model.Usuario;
 import br.edu.ifrn.ifjobs.model.enums.StatusUsuario;
+import br.edu.ifrn.ifjobs.model.enums.TipoUsuario;
 import br.edu.ifrn.ifjobs.repository.RoleRepository;
 import br.edu.ifrn.ifjobs.repository.UsuarioRepository;
 
@@ -61,7 +62,7 @@ public class UsuarioRepositoryTest {
         usuario.setSenha("jolos");
         usuario.setStatus(StatusUsuario.PENDENTE);
 
-        Role roleUsuario = roleRepository.findByNome("Usuario");
+        Role roleUsuario = roleRepository.findByTipoUsuario(TipoUsuario.USUARIO);
         usuario.addRole(roleUsuario);
 
         Usuario usuarioSalvo = usuarioRepository.save(usuario);
@@ -73,7 +74,7 @@ public class UsuarioRepositoryTest {
     void testAddRoleParaUsuarioExistente() {
         Usuario usuario = usuarioRepository.findById(1).get();
 
-        Role roleUsuario = roleRepository.findByNome("Usuario");
+        Role roleUsuario = roleRepository.findByTipoUsuario(TipoUsuario.USUARIO);
         usuario.addRole(roleUsuario);
 
         Role roleAdmin = new Role(2);

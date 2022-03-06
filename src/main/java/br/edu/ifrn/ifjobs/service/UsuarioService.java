@@ -10,6 +10,7 @@ import br.edu.ifrn.ifjobs.exception.UsuarioNaoCadastradoException;
 import br.edu.ifrn.ifjobs.exception.UsuarioNaoEncontradoException;
 import br.edu.ifrn.ifjobs.model.Role;
 import br.edu.ifrn.ifjobs.model.Usuario;
+import br.edu.ifrn.ifjobs.model.enums.TipoUsuario;
 import br.edu.ifrn.ifjobs.repository.RoleRepository;
 import br.edu.ifrn.ifjobs.repository.UsuarioRepository;
 
@@ -27,7 +28,7 @@ public class UsuarioService {
         optional = Optional.ofNullable(usuario);
 
         optional.ifPresent(user -> {
-            Role roleUsuario = roleRepository.findByNome("Usuario");
+            Role roleUsuario = roleRepository.findByTipoUsuario(TipoUsuario.USUARIO);
             user.addRole(roleUsuario);
             usuarioRepository.save(user);
         });

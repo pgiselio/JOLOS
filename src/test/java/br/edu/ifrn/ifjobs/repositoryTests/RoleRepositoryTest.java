@@ -32,6 +32,6 @@ public class RoleRepositoryTest {
 
         List<Role> listRoles = repository.findAll();
 
-        assertEquals(3, listRoles.size());
+        assertEquals(4, listRoles.size());
     }
 }
