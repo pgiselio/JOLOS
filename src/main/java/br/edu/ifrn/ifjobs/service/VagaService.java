@@ -28,6 +28,8 @@ public class VagaService {
         Supplier<VagaNaoCadastradaException> excessao;
         excessao = () -> new VagaNaoCadastradaException("Dados inválidos!!");
 
+        vagaOptional.ifPresent(vagaRepository::save);
+
         return vagaOptional.orElseThrow(excessao);
     }
 
