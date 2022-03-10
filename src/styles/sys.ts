@@ -35,9 +35,9 @@ export const SysGlobalStyle = createGlobalStyle`
 .header-elements::after{
     content: "";
     position: absolute;
-    bottom: -20px;
-    height: 20px;
-    width: 20px;    
+    bottom: -10px;
+    height: 10px;
+    width: 10px;    
     border-left:1px solid;
     border-color: ${props => props.theme.colors.systemMenu.border};
     box-shadow: -4px -3px 0 0 var(--navs-bg);

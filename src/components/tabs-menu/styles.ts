@@ -2,13 +2,15 @@ import styled from "styled-components";
 
 interface TabsMenuProps {
   isOnTop?: boolean;
+  sticky?: boolean;
+  size?: "small" | "medium" | "large";
 }
 
 export const TabsMenuStyle = styled.div<TabsMenuProps>`
   display: flex;
   flex-direction: column;
   width: 100%;
-  position: sticky;
+  position: ${(props) => (props.sticky ? "sticky" : "initial")};
   z-index: 10;
   top: var(--top-bar-height);
 
@@ -19,13 +21,14 @@ export const TabsMenuStyle = styled.div<TabsMenuProps>`
 
   .tabs-menu-container {
     display: flex;
-    padding: 0 10px;
     border-radius: 5px;
     width: 100%;
-    height: 65px;
+    height: ${(props) => (props.size === "large" && "65px") || (props.size === "medium" && "50px") || (props.size === "small" && "45px") || "65px"};
     align-items: center;
+    font-size: ${(props) => (props.size === "large" && "16px") || (props.size === "medium" && "14px") || (props.size === "small" && "13px") || "16px"};
     background: var(--navs-bg);
-    box-shadow: 0 1px 2px rgb(0 0 0 / 10%);
+    font-weight: 500;
+    box-shadow: ${(props) => (props.style?.boxShadow && props.style?.boxShadow) || "0 1px 2px rgb(0 0 0 / 10%)"};
   }
 
   ul {
@@ -38,6 +41,7 @@ export const TabsMenuStyle = styled.div<TabsMenuProps>`
   }
   @media (min-width: 766px) {
     z-index: ${(props) => (props.isOnTop ? "10" : "4")};
+    padding: ${(props) => (props.isOnTop ? "0" : "0 30px")};
 
     &.ontop {
       z-index: 10;
@@ -49,7 +53,6 @@ export const TabsMenuStyle = styled.div<TabsMenuProps>`
     }
 
     .tabs-menu-container {
-      margin: ${(props) => (props.isOnTop ? "0" : "0 30px")};
       border-radius: ${(props) => (props.isOnTop ? "0" : "5px")};
     }
 
@@ -67,8 +70,8 @@ export const TabsMenuItemStyle = styled.li`
   a {
     display: flex;
     align-items: center ;
-    padding: 8px 15px;
-    border-radius: 8px;
+    padding: 0 15px;
+    border-radius: 2px;
     text-decoration: none;
     border: 2px solid transparent;
     position: relative;
@@ -97,7 +100,6 @@ export const TabsMenuItemStyle = styled.li`
   a.active {
     /* background: #f7f7f7; */
     color: var(--accent-color);
-    font-weight: 600;
   }
   a.active::after {
     height: 2px;

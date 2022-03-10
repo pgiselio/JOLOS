@@ -9,7 +9,7 @@ export function ProfilePage() {
     <>
       <section>
         <OutsetHeadersCornerRadius>
-          <TabsMenu isOntop>
+          <TabsMenu isOntop size="large">
             <TabsMenuItem to="" title="Perfil" end />
             <TabsMenuItem
               to="#01"

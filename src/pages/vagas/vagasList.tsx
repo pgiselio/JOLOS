@@ -31,47 +31,6 @@ export function VagasList() {
                 />
               );
             })}
-
-            {/* <VagaCard
-              title="Estágiário na área especificada"
-              company="Sua empresa"
-              location="João Câmara, RN"
-              date="02/12/2022"
-              text="Lorem Ipsum"
-              candidates="12"
-            />
-            <VagaCard
-              title="Jovem Aprendiz na área especificada"
-              company="Sua empresa"
-              location="João Câmara, RN"
-              date="13/12/2021"
-              text="Lorem Ipsum"
-              candidates="3"
-            />
-            <VagaCard
-              title="Jovem Aprendiz na área especificada"
-              company="Sua empresa"
-              location="João Câmara, RN"
-              date="13/12/2021"
-              text="Lorem Ipsum"
-              candidates="3"
-            />
-            <VagaCard
-              title="Jovem Aprendiz na área especificada"
-              company="Sua empresa"
-              location="João Câmara, RN"
-              date="13/12/2021"
-              text="Lorem Ipsum"
-              candidates="3"
-            />
-            <VagaCard
-              title="Jovem Aprendiz na área especificada"
-              company="Sua empresa"
-              location="João Câmara, RN"
-              date="13/12/2021"
-              text="Lorem Ipsum"
-              candidates="3"
-            /> */}
           </div>
         </div>
         <div className="filters hide">

@@ -28,7 +28,7 @@ export function VagaPage() {
               {vagaData.status ? "ATIVO" : "INATIVO"}
             </span>
           </div>
-          <TabsMenu>
+          <TabsMenu sticky size="large">
             <TabsMenuItem to="" title="Detalhes" end />
             <TabsMenuItem
               to="candidatos"
