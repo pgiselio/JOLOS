@@ -21,12 +21,14 @@ export function SidebarList(){
                     <span className="detail">aaaaa@gmail.com</span>
                 </div>
 
-                <nav className="data">
-                    <ul className="data-items">
+                <nav className="sidebar-items">
+                    <ul>
                         <SidebarItem to="" icon="fas fa-home" label="Início" end/>
-                        <SidebarItem to="profile" icon="fas fa-user" label="Dados"/>
                         <SidebarItem to="vagas" icon="fas fa-briefcase" label="Vagas"/>
-                        <SidebarItem to="forum" icon="fas fa-comments" label="Fórum"/>
+                        <SidebarItem to="forum" icon="fas fa-comments" label="Fórum"/> 
+                        <SidebarItem to="profile" icon="fas fa-user" label="Perfil"/>
+                        <SidebarItem to='settings' icon="fas fa-cog" label="Configurações"/>
+                        <div className="menu-separator"></div>
                         <SidebarItem to="logout" icon="fas fa-sign-out-alt" label="Sair" className="sair"/>
                     </ul>
                 </nav>

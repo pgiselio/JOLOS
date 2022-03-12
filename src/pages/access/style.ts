@@ -17,6 +17,14 @@ export const AccessGlobalStyle = createGlobalStyle`
 `;
 
 export const StyledAccess = styled.main`
+  .access-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 95vh;
+    padding: 10px 0;
+  }
   .login-form {
     display: flex;
     flex-direction: column;
@@ -34,7 +42,7 @@ export const StyledAccess = styled.main`
     align-items: initial;
     padding: 30px;
     padding-bottom: 100px;
-    min-height: 96vh;
+    min-height: 590px;
     position: relative;
   }
   .group3,
@@ -45,7 +53,7 @@ export const StyledAccess = styled.main`
     row-gap: 16px;
     position: relative;
   }
-  .inputs{
+  .inputs {
     display: flex;
     flex-direction: column;
     row-gap: 10px;
@@ -65,10 +73,10 @@ export const StyledAccess = styled.main`
     justify-content: center;
     width: 100%;
   }
-  .logo-login .logo{
+  .logo-login .logo {
     width: 110px;
   }
-  .registre-se{
+  .registre-se {
     display: flex;
     font-size: 13px;
     align-items: center;
@@ -85,8 +93,6 @@ export const StyledAccess = styled.main`
   .bt-cadse:hover {
     color: var(--accent-color-active);
   }
-
-
 
   .header-signup {
     display: flex;
@@ -128,7 +134,7 @@ export const StyledAccess = styled.main`
     font-weight: 600;
     font-size: 22px;
   }
-  .desc::before{
+  .desc::before {
     content: "\f105";
     font-family: "Font Awesome 5 Free";
     font-weight: 900;
@@ -213,7 +219,6 @@ export const StyledAccess = styled.main`
     width: 100%;
   }
 
-
   @media (min-width: 766px) {
     .login-form {
       padding: 50px;
@@ -246,10 +251,10 @@ export const StyledAccess = styled.main`
     .imagem-destaque img {
       width: 80%;
     }
-    .input-group{
+    .input-group {
       flex-direction: row;
     }
-    .bottom-actions{
+    .bottom-actions {
       padding: 30px 50px;
     }
   }

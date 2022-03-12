@@ -113,9 +113,24 @@ export const HeaderSysStyle = styled.header`
       transition: width 0.2s ease;
     }
     .botao-ham.active span {
-      transform: none ;
+      transform: none !important;
       opacity: 1;
-      -webkit-transform: none ;
+      -webkit-transform: none;
+    }
+
+    .botao-ham.active span {
+      transform: none;
+      margin-bottom: 5px;
+    }
+
+    .botao-ham.active span:nth-last-child(2) {
+      opacity: 1;
+      transform: none ;
+    }
+
+    .botao-ham.active span:nth-last-child(3) {
+      opacity: 1;
+      transform: none ;
     }
     #btn-collapse-sidemenu:hover .botao-ham span {
       width: 14px;

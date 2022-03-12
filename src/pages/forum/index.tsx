@@ -1,4 +1,5 @@
 import { Button } from "../../components/button";
+import { HeaderTitle } from "../../components/header-title";
 import { OutsetHeadersCornerRadius } from "../../components/outset-radius-to-headers";
 
 export function ForumPage() {
@@ -6,9 +7,9 @@ export function ForumPage() {
     <div id="forum-page">
       <section>
         <OutsetHeadersCornerRadius>
-          <div className="header-section">
+          <HeaderTitle className="header-section">
             <h2>Explore suas perguntas</h2>
-          </div>
+          </HeaderTitle>
         </OutsetHeadersCornerRadius>
 
         <div className="content">

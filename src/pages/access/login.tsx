@@ -23,7 +23,7 @@ export function LoginPage() {
   return (
     <StyledAccess>
       <AccessGlobalStyle />
-      <div className="container">
+      <div className="access-container">
         <div className="login-form">
           <div className="logo-login">
             <a href="../">

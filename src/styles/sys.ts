@@ -1,6 +1,9 @@
 import { createGlobalStyle } from "styled-components";
 
 export const SysGlobalStyle = createGlobalStyle`
+:root{
+  --top-bar-height: 50px;
+}
   .sys-grid-container {
   display: grid;
   grid-template-areas: "menu main";
@@ -35,12 +38,13 @@ export const SysGlobalStyle = createGlobalStyle`
 .header-elements::after{
     content: "";
     position: absolute;
-    bottom: -10px;
+    bottom: -10.2px;
     height: 10px;
     width: 10px;    
-    border-left:1px solid;
+    border-left: 1px solid;
+    border-top: 1px solid;
     border-color: ${props => props.theme.colors.systemMenu.border};
-    box-shadow: -4px -3px 0 0 var(--navs-bg);
+    box-shadow: -4px -3px 0 2px var(--navs-bg);
     z-index: 20;
     pointer-events: none;
 }

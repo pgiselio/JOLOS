@@ -1,9 +1,5 @@
-@import url("global.css");
+/* @import url("global.css"); */
 
-:root {
-  --bg-body: #f7f7f7;
-  --top-bar-height: 50px;
-}
 
 .prevent-transition-flick {
   -webkit-transition: none !important;
@@ -61,39 +57,7 @@ body.remove-transbar .three-bars-btn * {
   text-decoration: none;
 }
 
-/* Header section */
-.header-section {
-  display: flex;
-  height: 70px;
-  width: 100%;
-  padding: 0 20px;
-  justify-content: space-between;
-  align-items: center;
-  /*border-bottom: 1px solid var(--outline-color);*/
-  box-shadow: 0 1px 4px rgb(0 0 0 / 8%);
-  position: sticky;
-  z-index: 10;
-  top: var(--top-bar-height);
-  background: var(--navs-bg-opacity);
-}
 
-.header-section h2 {
-  color: var(--accent-color);
-  font-size: 18px;
-}
-
-.btn-criar-nova::before {
-  content: "\f067";
-  font-family: "Font Awesome 5 Free";
-  font-weight: 900;
-  -webkit-font-smoothing: antialiased;
-  display: inline-block;
-  font-style: normal;
-  font-variant: normal;
-  text-rendering: auto;
-  line-height: 1;
-  padding-right: 12px;
-}
 
 
 footer {
@@ -504,13 +468,6 @@ ol li {
 }
 
 @media (min-width: 766px) {
-  .header-section {
-    height: 80px;
-  }
-
-  .header-section h2 {
-    font-size: 20px;
-  }
 
   .tree-links {
     padding: 5px 32px;

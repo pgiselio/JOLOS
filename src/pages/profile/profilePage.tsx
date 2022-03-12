@@ -1,22 +1,11 @@
 import { Button } from "../../components/button";
-import { OutsetHeadersCornerRadius } from "../../components/outset-radius-to-headers";
 import { ProfilePic } from "../../components/profile-pic/profile-pic";
-import { TabsMenu, TabsMenuItem } from "../../components/tabs-menu";
 import "./profilePage.scss";
 
 export function ProfilePage() {
   return (
     <>
       <section>
-        <OutsetHeadersCornerRadius>
-          <TabsMenu isOntop size="large">
-            <TabsMenuItem to="" title="Perfil" end />
-            <TabsMenuItem
-              to="#01"
-              title="Sua conta"
-            />
-          </TabsMenu>
-        </OutsetHeadersCornerRadius>
         <div className="profile-page-header">
           <div className="profile-page-header-container">
             <div className="user-info">

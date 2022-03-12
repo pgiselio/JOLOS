@@ -6,7 +6,7 @@ export function CadastroPage() {
   return (
     <StyledAccess>
       <AccessGlobalStyle />
-      <section className="container">
+      <section className="access-container">
         <div className="login-form signup-form">
           <div className="header-signup">
             <a href="../">

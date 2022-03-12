@@ -1,6 +1,11 @@
 import styled from "styled-components";
 
 export const Error404Style = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 95vh;
   h1 {
     display: flex;
     font-size: 100pt;
