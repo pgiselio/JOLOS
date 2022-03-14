@@ -12,6 +12,7 @@ import org.springframework.util.ReflectionUtils;
 
 import br.edu.ifrn.ifjobs.exception.VagaNaoCadastradaException;
 import br.edu.ifrn.ifjobs.exception.VagaNaoEncontradoException;
+import br.edu.ifrn.ifjobs.model.Aluno;
 import br.edu.ifrn.ifjobs.model.Vaga;
 import br.edu.ifrn.ifjobs.repository.VagaRepository;
 
@@ -52,6 +53,15 @@ public class VagaService {
         vagaRepository.delete(vaga);
     }
 
+    /**
+     * 
+     * @param id     é a identificação da vaga
+     * @param campos os campos que irão ser modificados, exceto o campo ALUNOS, pois
+     *               ainda não está pronto para modificações
+     * @return vaga atualizada
+     * @throws VagaNaoEncontradoException
+     * @throws VagaNaoCadastradaException
+     */
     public Vaga atualizaCampos(int id, Map<Object, Object> campos)
             throws VagaNaoEncontradoException, VagaNaoCadastradaException {
         Vaga vagaBuscadaPorId = buscarPorId(id);
@@ -63,5 +73,19 @@ public class VagaService {
         });
 
         return salvarVaga(vagaBuscadaPorId);
+    }
+
+    /**
+     * 
+     * @param id    é a identificação da vaga
+     * @param aluno é a entidade que será salva
+     * @return
+     * @throws VagaNaoEncontradoException
+     * @throws VagaNaoCadastradaException
+     */
+    public Vaga addAlunoParaVaga(int id, Aluno aluno) throws VagaNaoEncontradoException, VagaNaoCadastradaException {
+        final Vaga vaga = buscarPorId(id);
+        vaga.addAluno(aluno);
+        return salvarVaga(vaga);
     }
 }
