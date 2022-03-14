@@ -16,8 +16,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
+import br.edu.ifrn.ifjobs.dto.vaga.VagaGetDTO;
 import br.edu.ifrn.ifjobs.exception.VagaNaoCadastradaException;
 import br.edu.ifrn.ifjobs.exception.VagaNaoEncontradoException;
+import br.edu.ifrn.ifjobs.model.Aluno;
 import br.edu.ifrn.ifjobs.model.Vaga;
 import br.edu.ifrn.ifjobs.service.VagaService;
 
@@ -60,6 +62,25 @@ public class VagaController {
         return ResponseEntity.ok(todasVagas);
     }
 
+    @GetMapping("/lista/{id}")
+    public ResponseEntity<VagaGetDTO> dtoVagaBuscadaPorId(
+            @PathVariable(name = "id") int id) {
+        Vaga vagaBuscadaPorId;
+
+        try {
+            vagaBuscadaPorId = vagaService.buscarPorId(id);
+        } catch (VagaNaoEncontradoException e) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
+        }
+
+        final var dto = new VagaGetDTO();
+
+        final VagaGetDTO entidadeConvertidaParaDto;
+        entidadeConvertidaParaDto = dto.convertEntityToDto(vagaBuscadaPorId);
+
+        return ResponseEntity.ok(entidadeConvertidaParaDto);
+    }
+
     @PatchMapping("/{id}")
     public ResponseEntity<Vaga> atualizaCampos(@PathVariable(name = "id") int id,
             @RequestBody Map<Object, Object> campos) {
@@ -73,6 +94,22 @@ public class VagaController {
         }
 
         return ResponseEntity.ok(vagaAtualizada);
+    }
+
+    @PostMapping("/{id}/addAluno")
+    public ResponseEntity<VagaGetDTO> addAluno(@PathVariable(name = "id") int id, @RequestBody Aluno aluno) {
+        Vaga vaga;
+
+        try {
+            vaga = vagaService.addAlunoParaVaga(id, aluno);
+        } catch (VagaNaoEncontradoException | VagaNaoCadastradaException e) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
+        }
+
+        VagaGetDTO dto = new VagaGetDTO();
+        VagaGetDTO vagaConvertidaParaDto = dto.convertEntityToDto(vaga);
+
+        return ResponseEntity.ok(vagaConvertidaParaDto);
     }
 
     @DeleteMapping("/delete/{id}")
