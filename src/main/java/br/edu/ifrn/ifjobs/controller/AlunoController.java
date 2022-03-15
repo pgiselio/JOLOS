@@ -19,7 +19,6 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
@@ -37,7 +36,6 @@ public class AlunoController {
     private AlunoService alunoService;
 
     @PostMapping("/create")
-    @ResponseBody
     public ResponseEntity<Aluno> salvaAluno(@RequestBody @Valid AlunoInsertDTO dto) {
         Aluno aluno = dto.convertDtoToEntity();
         Aluno alunoSalvo;
@@ -52,7 +50,6 @@ public class AlunoController {
     }
 
     @GetMapping("/{id}")
-    @ResponseBody
     public ResponseEntity<Aluno> buscaPorId(@PathVariable(name = "id") int id) {
         Aluno aluno;
 
@@ -66,7 +63,6 @@ public class AlunoController {
     }
 
     @GetMapping("/cpf")
-    @ResponseBody
     public ResponseEntity<Aluno> buscaPorCpf(@RequestParam String cpf) {
         Aluno aluno;
 
@@ -80,7 +76,6 @@ public class AlunoController {
     }
 
     @GetMapping
-    @ResponseBody
     public ResponseEntity<List<Aluno>> buscaTodos() {
         List<Aluno> alunos;
         alunos = alunoService.buscaTodos();
@@ -88,7 +83,6 @@ public class AlunoController {
     }
 
     @PatchMapping("/{id}")
-    @ResponseBody
     public ResponseEntity<Aluno> atualizaCampo(@PathVariable(name = "id") int id,
             Map<Object, Object> campos) {
         Aluno buscadoPorId;
@@ -117,7 +111,6 @@ public class AlunoController {
     }
 
     @PutMapping("/{id}")
-    @ResponseBody
     public ResponseEntity<Aluno> atualizaAluno(@PathVariable(name = "id") int id,
             AlunoInsertDTO dto) {
         Aluno aluno = dto.convertDtoToEntity();
