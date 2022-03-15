@@ -19,6 +19,14 @@ export const StyledButton = styled.button`
     background: var(--accent-color-active);
     border: 2px solid var(--accent-color-active);
   }
+  &.red {
+    background: #c91f1f;
+    border: 2px solid #c91f1f;
+  }
+  &.red:not(:disabled):hover {
+    background: #ac0000;
+    border: 2px solid #ac0000;
+  }
   &.less-radius {
     border-radius: 6px;
   }

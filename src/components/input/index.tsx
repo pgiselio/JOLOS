@@ -1,10 +1,11 @@
 import { HTMLInputTypeAttribute, useState } from "react";
 import { InputContainer, InputPassStyled, InputStyled, ShowPasswordButton } from "./styles";
 
-interface input extends React.HTMLAttributes<HTMLDivElement>{
+interface input{
   name?: string;
   type: HTMLInputTypeAttribute;
   icon?: string;
+  [x:string]: any;
 };
 
 export function Input({ name, type, icon, ...rest }: input) {
@@ -14,7 +15,7 @@ export function Input({ name, type, icon, ...rest }: input) {
       <InputContainer>
         <InputStyled 
         name={name} 
-        type={type} 
+        type={type}
         {...rest} 
         {...icon && {hasIcon: true}}
         />

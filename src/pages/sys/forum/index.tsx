@@ -1,6 +1,7 @@
-import { Button } from "../../components/button";
-import { HeaderTitle } from "../../components/header-title";
-import { OutsetHeadersCornerRadius } from "../../components/outset-radius-to-headers";
+import { Box } from "../../../components/box";
+import { Button } from "../../../components/button";
+import { HeaderTitle } from "../../../components/header-title";
+import { OutsetHeadersCornerRadius } from "../../../components/outset-radius-to-headers";
 
 export function ForumPage() {
   return (
@@ -13,13 +14,16 @@ export function ForumPage() {
         </OutsetHeadersCornerRadius>
 
         <div className="content">
-          <div className="box">
-            <div className="box-title flex justify-content-between">
-              <h3>Perguntas</h3>
-              <Button className="outlined" id="filtro">
-                Filtros <i className="fas fa-filter"></i>
-              </Button>
-            </div>
+          <Box
+            head={
+              <h3 style={{display: "flex", alignItems: "center", width: "100%", justifyContent: "space-between"}}>
+                Perguntas
+                <Button className="outlined" id="filtro">
+                  Filtros <i className="fas fa-filter"></i>
+                </Button>
+              </h3>
+            }
+          >
             <div>
               <div className="ask-box">
                 <div className="ask">
@@ -80,7 +84,7 @@ export function ForumPage() {
                 </div>
               </div>
             </div>
-          </div>
+          </Box>
         </div>
       </section>
     </div>

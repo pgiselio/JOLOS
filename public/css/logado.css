@@ -124,7 +124,7 @@ footer {
   white-space: nowrap;
 }
 
-.box {
+/* .box {
   display: flex;
   flex-direction: column;
   width: 100%;
@@ -155,7 +155,7 @@ footer {
 
 .box-title.sticky {
   position: sticky;
-  top: 65px;
+  top: 90px;
   z-index: 3;
 }
 
@@ -182,7 +182,7 @@ footer {
 
 .box-content.no-title {
   padding: 30px;
-}
+} */
 
 .box-message {
   display: flex;
@@ -440,7 +440,6 @@ ol li {
 .social-info {
   display: flex;
   width: 100%;
-  margin-top: 20px;
   justify-content: space-evenly;
 }
 
@@ -488,7 +487,7 @@ ol li {
   }
 
   .box-title.sticky {
-    top: 85px;
+    top: 134px;
   }
 
   .candidato-info h3 {

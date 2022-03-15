@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { vaga } from "../../pages/vagas/vagas";
+import { vaga } from "../../pages/sys/vagas/vagas";
 import { ProfilePic } from "../profile-pic/profile-pic";
 import { VagaCardStyle } from "./style";
 

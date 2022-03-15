@@ -59,7 +59,6 @@ export const StyledAccess = styled.main`
     row-gap: 10px;
   }
   .pwrst-link {
-    width: 100%;
     font-weight: 500;
     color: var(--accent-color);
     text-decoration: none;

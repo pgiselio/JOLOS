@@ -1,27 +1,73 @@
-import { FormEvent } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate, useSearchParams } from "react-router-dom";
+import { toast, ToastContainer } from "react-toastify";
 import { Button } from "../../components/button";
 import { Input } from "../../components/input";
-import "./access.scss";
+import { useAuth } from "../../contexts/AuthContext/useAuth";
+import { useEffect, useState } from "react";
+import { Controller, useForm } from "react-hook-form";
+
 import { AccessGlobalStyle, StyledAccess } from "./style";
+import "react-toastify/dist/ReactToastify.min.css";
+import { CircularProgress } from "react-cssfx-loading/lib";
+
 export function LoginPage() {
-  const onSubmit = (event: FormEvent) => {
-    let user: any = document.querySelector("#login");
-    let pass: any = document.querySelector("#pass");
-    var msg: any = document.querySelector(".info-message");
+  const auth = useAuth();
+  const navigate = useNavigate();
+  const [isLoading, setIsLoading] = useState(false);
+  const {
+    control,
+    formState: { errors },
+    handleSubmit,
+  } = useForm({
+    defaultValues: {
+      email: "eve.holt@reqres.in",
+      password: "cityslicka",
+    },
+  });
+  let [searchParams, setSearchParams] = useSearchParams();
 
-    if (user.value === "admin" && pass.value === "ADMIN") {
-      // window.sessionStorage.setItem('isloggedin', 'true');
-      window.location.href = "sys";
-    } else {
-      msg.classList.add("show");
-    }
-
-    event.preventDefault();
+  const RedirectForSystem = () => {
+    navigate("/sys");
   };
+
+  useEffect(() => {
+    if (auth.email) {
+      RedirectForSystem();
+    }
+    const paramsError = searchParams.get("error");
+    if (paramsError) {
+      if (paramsError === "needsLogin") {
+        toast.error("Você precisa fazer login primeiro!", {});
+        setSearchParams("");
+      }
+    }
+  });
+
+  async function onSubmit(data: any) {
+    try {
+      setIsLoading(true);
+      await auth.authenticate(data.email, data.password);
+
+      RedirectForSystem();
+    } catch (error) {
+      setIsLoading(false);
+      toast.error("Usuário ou senha inválidos!", {});
+    }
+  }
 
   return (
     <StyledAccess>
+      <ToastContainer
+        position="top-right"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+      />
       <AccessGlobalStyle />
       <div className="access-container">
         <div className="login-form">
@@ -35,32 +81,74 @@ export function LoginPage() {
               />
             </a>
           </div>
-          <form method="post" autoComplete="off" onSubmit={onSubmit}>
+          <form
+            method="post"
+            autoComplete="off"
+            onSubmit={handleSubmit(onSubmit)}
+          >
             <h2 className="desc">Entrar</h2>
             <div className="info-message error-msg">
               <span>Usuário ou senha inválidos</span>
             </div>
             <div className="inputs">
-              <Input
-                type="text"
-                icon="fas fa-user"
-                id="login"
-                placeholder="Usuário"
-                spellCheck={false}
+              <Controller
+                name="email"
+                control={control}
+                rules={{
+                  required: true,
+                  pattern:
+                    /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/,
+                }}
+                render={({ field }) => (
+                  <Input
+                    type="text"
+                    id="email"
+                    icon="fas fa-user"
+                    placeholder="E-mail"
+                    {...field}
+                  />
+                )}
               />
-              <Input
-                type="password"
-                icon="fas fa-lock"
-                name=""
-                id="pass"
-                placeholder="Senha"
+              <Controller
+                name="password"
+                control={control}
+                rules={{ required: true }}
+                render={({ field }) => {
+                  return (
+                    <Input
+                      type="password"
+                      id="password"
+                      refs="password"
+                      icon="fas fa-lock"
+                      placeholder="Senha"
+                      {...field}
+                    />
+                  );
+                }}
               />
             </div>
-            <a href="/password-reset/" className="pwrst-link">
-              Esqueceu a senha?
-            </a>
-            <Button type="submit" className="less-radius">
-              Entrar
+            <div>
+              <Link to="/password-reset/" className="pwrst-link">
+                Esqueceu a senha?
+              </Link>
+            </div>
+
+            <Button
+              type="submit"
+              className="less-radius"
+              disabled={true}
+              {...(!(errors.password || errors.email) && { disabled: false })}
+            >
+              {isLoading ? (
+                <CircularProgress
+                  color="white"
+                  height="23px"
+                  width="23px"
+                  duration="1.5s"
+                />
+              ) : (
+                "Entrar"
+              )}
             </Button>
             <div className="registre-se">
               <span>Não tem uma conta?</span>

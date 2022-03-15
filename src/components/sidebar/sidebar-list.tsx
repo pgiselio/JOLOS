@@ -29,7 +29,7 @@ export function SidebarList(){
                         <SidebarItem to="profile" icon="fas fa-user" label="Perfil"/>
                         <SidebarItem to='settings' icon="fas fa-cog" label="Configurações"/>
                         <div className="menu-separator"></div>
-                        <SidebarItem to="logout" icon="fas fa-sign-out-alt" label="Sair" className="sair"/>
+                        <SidebarItem to="/logout" icon="fas fa-sign-out-alt" label="Sair" className="sair"/>
                     </ul>
                 </nav>
             </div>

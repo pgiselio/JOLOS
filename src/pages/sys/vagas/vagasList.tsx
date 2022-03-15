@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
-import { Button } from "../../components/button";
-import { HeaderTitle } from "../../components/header-title";
-import { OutsetHeadersCornerRadius } from "../../components/outset-radius-to-headers";
-import { VagaCard } from "../../components/vagaCard";
+import { Button } from "../../../components/button";
+import { HeaderTitle } from "../../../components/header-title";
+import { OutsetHeadersCornerRadius } from "../../../components/outset-radius-to-headers";
+import { VagaCard } from "../../../components/vagaCard";
 import { vaga, vagasListTest } from "./vagas";
 
 export function VagasList() {

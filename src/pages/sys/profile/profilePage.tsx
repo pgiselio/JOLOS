@@ -1,5 +1,6 @@
-import { Button } from "../../components/button";
-import { ProfilePic } from "../../components/profile-pic/profile-pic";
+import { Box, BoxContent } from "../../../components/box";
+import { Button } from "../../../components/button";
+import { ProfilePic } from "../../../components/profile-pic/profile-pic";
 import "./profilePage.scss";
 
 export function ProfilePage() {
@@ -33,11 +34,10 @@ export function ProfilePage() {
           </div>
           <div className="vaga-columns-2">
             <div className="column-1">
-              <div className="box">
-                <div className="box-title">
+              <Box head={
                   <h3>Sobre nós</h3>
-                </div>
-                <div className="box-content">
+              }>
+                <BoxContent>
                   <div className="vaga-page-description">
                     <p>
                       asdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasd
@@ -73,15 +73,14 @@ export function ProfilePage() {
                     </ul>
                     <blockquote>asdasdasdasdasdasdasdasdasdasd</blockquote>
                   </div>
-                </div>
-              </div>
+                </BoxContent>
+              </Box>
             </div>
             <div className="column-2">
-              <div className="box">
-                <div className="box-title">
-                  <h3>Contatos</h3>
-                </div>
-                <div className="box-content no-title">
+              <Box head={
+                <h3>Contatos</h3>
+              }>
+                <BoxContent>
                   <div className="contacts">
                     <ul className="essential-info">
                       <li>
@@ -98,10 +97,10 @@ export function ProfilePage() {
                       </li>
                     </ul>
                   </div>
-                </div>
-              </div>
-              <div className="box">
-                <div className="box-content">
+                </BoxContent>
+              </Box>
+              <Box>
+                <BoxContent>
                   <ul className="social-info">
                     <li>
                       <a href="#">
@@ -124,8 +123,8 @@ export function ProfilePage() {
                       </a>
                     </li>
                   </ul>
-                </div>
-              </div>
+                </BoxContent>
+              </Box>
             </div>
           </div>
         </div>

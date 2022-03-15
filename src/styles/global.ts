@@ -3,9 +3,9 @@ import { createGlobalStyle } from "styled-components";
 export const GlobalStyle = createGlobalStyle`
   :root {
     --bg-body: rgb(${(props) => props.theme.colors.bodyBackground});
-    --accent-color: rgb(${(props) => props.theme.colors.main});
+    --accent-color: ${(props) => props.theme.colors.main};
     --accent-color-active: ${(props) => props.theme.colors.mainActive};
-    --accent-color-opacity: rgb(${(props) => props.theme.colors.main} / 15%);
+    --accent-color-opacity: ${(props) => props.theme.colors.main}26;
     --outline-color: ${(props) => props.theme.colors.outlineColor};
     --info-msg-bg: #e6e6e69a;
     --info-msg-color: #363636;
@@ -42,6 +42,7 @@ export const GlobalStyle = createGlobalStyle`
  
   a {
     text-decoration: none;
+    color: var(--accent-color);
   }
 
   html, body, #root{

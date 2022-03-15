@@ -2,6 +2,7 @@ import styled from "styled-components";
 
 interface InputProps {
   hasIcon?: boolean;
+  [x:string]: any;
 }
 
 export const InputStyled = styled.input<InputProps>`
