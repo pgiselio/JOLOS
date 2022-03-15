@@ -9,17 +9,16 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 public class CORSConfig {
 
     @Bean
-    public WebMvcConfigurer getCoreConfiguration(){
-        return new WebMvcConfigurer(){
+    public WebMvcConfigurer getCoreConfiguration() {
+        return new WebMvcConfigurer() {
             @Override
             public void addCorsMappings(CorsRegistry registry) {
                 registry.addMapping("/**")
-                .allowedOrigins("*")
-                .allowedMethods("*")
-                .allowCredentials(true)
-                .allowedHeaders("*");
+                        .allowedOrigins("*")
+                        .allowedMethods("*")
+                        .allowedHeaders("*");
             }
-        }
+        };
     }
 
 }
