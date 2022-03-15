@@ -19,7 +19,6 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
@@ -37,7 +36,6 @@ public class EmpresaController {
     private EmpresaService empresaService;
 
     @PostMapping("/create")
-    @ResponseBody
     public ResponseEntity<Empresa> salvaEmpresa(@RequestBody @Valid EmpresaInsertDTO dto) {
         Empresa empresa = dto.convertDtoToEntity();
         Empresa empresaSalva;
@@ -52,7 +50,6 @@ public class EmpresaController {
     }
 
     @GetMapping("/{id}")
-    @ResponseBody
     public ResponseEntity<Empresa> buscaPorId(@PathVariable(name = "id") int id) {
         Empresa empresa;
 
@@ -66,7 +63,6 @@ public class EmpresaController {
     }
 
     @GetMapping("/cnpj")
-    @ResponseBody
     public ResponseEntity<Empresa> buscaPorCnpj(@RequestParam String cnpj) {
         Empresa empresa;
 
@@ -80,7 +76,6 @@ public class EmpresaController {
     }
 
     @GetMapping
-    @ResponseBody
     public ResponseEntity<List<Empresa>> buscaTodos() {
         List<Empresa> empresas;
         empresas = empresaService.getAll();
@@ -88,7 +83,6 @@ public class EmpresaController {
     }
 
     @PatchMapping("/{id}")
-    @ResponseBody
     public ResponseEntity<Empresa> atualizaCampo(@PathVariable(name = "id") int id,
             Map<Object, Object> campos) {
         Empresa buscadaPorId;
@@ -117,7 +111,6 @@ public class EmpresaController {
     }
 
     @PutMapping("/{id}")
-    @ResponseBody
     public ResponseEntity<Empresa> atualizaEmpresa(@PathVariable(name = "id") int id,
             EmpresaInsertDTO dto) {
         Empresa empresa = dto.convertDtoToEntity();
@@ -133,7 +126,6 @@ public class EmpresaController {
     }
 
     @DeleteMapping("/delete/{id}")
-    @ResponseBody
     public ResponseEntity<Empresa> deletaEmpresa(@PathVariable(name = "id") int id) {
         Empresa empresa;
 
