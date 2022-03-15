@@ -20,8 +20,8 @@ export function LoginPage() {
     handleSubmit,
   } = useForm({
     defaultValues: {
-      email: "eve.holt@reqres.in",
-      password: "cityslicka",
+      email: "jolos@jolos.com",
+      password: "jolos",
     },
   });
   let [searchParams, setSearchParams] = useSearchParams();

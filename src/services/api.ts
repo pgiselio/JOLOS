@@ -2,7 +2,7 @@ import axios from 'axios';
 import { getUserLocalStorage } from '../contexts/AuthContext/util';
 
 export const Api = axios.create({
-    baseURL: "https://reqres.in/api"
+    baseURL: "https://ifjobs-backend.herokuapp.com/"
 });
 
 Api.interceptors.request.use(
@@ -10,7 +10,7 @@ Api.interceptors.request.use(
         const user = getUserLocalStorage();
         
         config.headers = {
-            Authorization: `Bearer ${user?.token}`,
+            Authorization: user?.token,
         };
         return config;
     },
