@@ -4,7 +4,7 @@ import { useAuth } from "../../contexts/AuthContext/useAuth";
 
 export function RequireAuth({ children }: { children: JSX.Element }) {
   const auth = useAuth();
-  if (auth.lodingUserState) {
+  if (auth.loadingUserState) {
     return (
       <div style={{display: "flex", height: "100vh", alignItems: "center", justifyContent: "center"}}>
         <CircularProgress

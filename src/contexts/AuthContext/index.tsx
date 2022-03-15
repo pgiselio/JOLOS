@@ -7,13 +7,13 @@ export const AuthContext = createContext<IContext>({} as IContext);
 
 export function AuthProvider ({children}: IAuthProvider){
     const [user, setUser] = useState<IUser | null>();
-    const [lodingUserState, setLodingUserState] = useState(true);
+    const [loadingUserState, setLoadingUserState] = useState(true);
     useEffect(() =>{
         const user = getUserLocalStorage();
         if(user){
             setUser(user);
         }
-        setLodingUserState(false);
+        setLoadingUserState(false);
     }, []);
 
     async function authenticate(email: string, password: string) {
@@ -29,7 +29,7 @@ export function AuthProvider ({children}: IAuthProvider){
         setUserLocalStorage(null);
     }
     return(
-        <AuthContext.Provider value={{...user, authenticate, logout, lodingUserState}}>
+        <AuthContext.Provider value={{...user, authenticate, logout, loadingUserState}}>
             {children}
         </AuthContext.Provider>
     );

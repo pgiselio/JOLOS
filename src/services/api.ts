@@ -10,7 +10,7 @@ Api.interceptors.request.use(
         const user = getUserLocalStorage();
         
         config.headers = {
-            Authorization: user?.token,
+            Authorization: `Bearer ${user?.token}`,
         };
         return config;
     },
