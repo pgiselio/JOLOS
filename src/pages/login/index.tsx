@@ -6,7 +6,7 @@ import { useAuth } from "../../contexts/AuthContext/useAuth";
 import { useEffect, useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 
-import { AccessGlobalStyle, StyledAccess } from "./style";
+import { AccessGlobalStyle, StyledAccess } from "../../styles/LoginSignupStyle";
 import "react-toastify/dist/ReactToastify.min.css";
 import { CircularProgress } from "react-cssfx-loading/lib";
 
@@ -49,9 +49,10 @@ export function LoginPage() {
       await auth.authenticate(data.email, data.password);
 
       RedirectForSystem();
-    } catch (error) {
+    } catch (error : any) {
+      let e = error.message;
       setIsLoading(false);
-      toast.error("Usuário ou senha inválidos!", {});
+      toast.error("Usuário ou senha inválidos!" , {});
     }
   }
 

@@ -19,7 +19,7 @@ export function AuthProvider ({children}: IAuthProvider){
     async function authenticate(email: string, password: string) {
         const response = await LoginRequest(email, password);
 
-        const payload = { token: response.token, email };
+        const payload = { token: response.Authorization.replace("Bearer ", ""), email };
         
         setUser(payload);
         setUserLocalStorage(payload);
