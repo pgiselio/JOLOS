@@ -10,7 +10,7 @@ import { AccessGlobalStyle, StyledAccess } from "../../styles/LoginSignupStyle";
 import "react-toastify/dist/ReactToastify.min.css";
 import { CircularProgress } from "react-cssfx-loading/lib";
 
-export function LoginPage() {
+export default function LoginPage() {
   const auth = useAuth();
   const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(false);
@@ -49,10 +49,9 @@ export function LoginPage() {
       await auth.authenticate(data.email, data.password);
 
       RedirectForSystem();
-    } catch (error : any) {
-      let e = error.message;
+    } catch (error: any) {
       setIsLoading(false);
-      toast.error("Usuário ou senha inválidos!" , {});
+      toast.error("Usuário ou senha inválidos!", {});
     }
   }
 
@@ -70,6 +69,7 @@ export function LoginPage() {
         pauseOnHover
       />
       <AccessGlobalStyle />
+
       <div className="access-container">
         <div className="login-form">
           <div className="logo-login">
@@ -137,8 +137,10 @@ export function LoginPage() {
             <Button
               type="submit"
               className="less-radius"
-              disabled={true}
-              {...(!(errors.password || errors.email) && { disabled: false })}
+              disabled={false}
+              {...((errors.password || errors.email || isLoading) && {
+                disabled: true,
+              })}
             >
               {isLoading ? (
                 <CircularProgress

@@ -166,7 +166,6 @@ export const GlobalStyle = createGlobalStyle`
     display: flex;
     flex-direction: row;
     color: var(--info-msg-color);
-    text-align: justify;
   }
 
   .info-message::before {
@@ -181,7 +180,6 @@ export const GlobalStyle = createGlobalStyle`
     line-height: 1;
 
     padding-right: 10px;
-    padding-top: 3px;
     color: var(--info-msg-icon);
     height: 100%;
     font-size: 30px;
