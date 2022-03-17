@@ -32,7 +32,7 @@ export const StyledAccess = styled.main`
     padding: 50px 30px;
     width: 95vw;
     max-width: 400px;
-    border-radius: 15px;
+    border-radius: 10px;
     background: var(--bg-login);
     border: 1px solid var(--outline-color);
     box-shadow: 0 6px 6px 0 rgba(0, 0, 0, 0.2);
@@ -42,10 +42,9 @@ export const StyledAccess = styled.main`
     align-items: initial;
     padding: 30px;
     padding-bottom: 100px;
-    min-height: 590px;
     position: relative;
   }
-  .group3,
+  .form-destaque-grid .form,
   .login-form form {
     display: flex;
     flex-direction: column;
@@ -71,9 +70,11 @@ export const StyledAccess = styled.main`
     display: flex;
     justify-content: center;
     width: 100%;
+    height: 40px;
   }
   .logo-login .logo {
     width: 110px;
+    height: 40px;
   }
   .registre-se {
     display: flex;
@@ -140,7 +141,7 @@ export const StyledAccess = styled.main`
     color: var(--accent-color);
     padding-right: 5px;
   }
-  .imagem-destaque {
+  .destaque {
     display: none;
   }
   .flex-btn-next {
@@ -221,10 +222,14 @@ export const StyledAccess = styled.main`
   @media (min-width: 766px) {
     .login-form {
       padding: 50px;
+      border-radius: 15px;
     }
-    .group2 {
+    .form-destaque-grid {
       display: grid;
       grid-template-columns: 1.3fr 1fr;
+    }
+    .form-destaque-grid .form form {
+      padding: 0 10px;
     }
     .signup-form {
       max-width: 750px;
@@ -238,17 +243,26 @@ export const StyledAccess = styled.main`
       height: 40px;
     }
     .imagem-destaque,
-    .group4 {
+    .form-destaque-grid .destaque {
       display: flex;
       align-items: center;
       flex-direction: column;
       justify-content: center;
     }
-    .group4 {
+    .form-destaque-grid .destaque {
       max-width: 280px;
+      min-height: 355px;
+    }
+    .form-destaque-grid .destaque span {
+      padding: 0 40px;
+      margin-top: 40px;
+      text-align: center;
+      font-size: 15px;
+      font-weight: 500;
+      color: #5a5c54;
     }
     .imagem-destaque img {
-      width: 80%;
+      width: 75%;
     }
     .input-group {
       flex-direction: row;

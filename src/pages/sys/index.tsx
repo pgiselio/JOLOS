@@ -7,7 +7,7 @@ import { GlobalStyle } from "../../styles/global";
 import { SysGlobalStyle } from "../../styles/sys";
 import { darkTheme, lightTheme } from "../../styles/themes";
 
-export function SystemLayout() {
+export default function SystemLayout() {
   const [theme, setTheme] = useState("light");
   useEffect(() => {
     const localTheme = window.localStorage.getItem("theme");
