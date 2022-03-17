@@ -27,13 +27,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 security.cors().configurationSource(request -> new CorsConfiguration().applyPermitDefaultValues()).and()
                                 .csrf().csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse())
                                 .disable().authorizeRequests().antMatchers("/").permitAll()
+                                .antMatchers("/usuario/**").permitAll()
                                 .anyRequest().authenticated().and().logout().logoutSuccessUrl("/entrar")
                                 .logoutRequestMatcher(new AntPathRequestMatcher("/saida"))
                                 .and().addFilterBefore(new JWTLoginFilter("/entrar", authenticationManager()),
                                                 UsernamePasswordAuthenticationFilter.class)
                                 .addFilterBefore(new JWTAPIAutenticacaoFilter(),
-                                                UsernamePasswordAuthenticationFilter.class)
-                                .authorizeRequests().antMatchers("/usuario/**").permitAll();
+                                                UsernamePasswordAuthenticationFilter.class);
         }
 
         @Override
