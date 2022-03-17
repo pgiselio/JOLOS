@@ -26,8 +26,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         protected void configure(HttpSecurity security) throws Exception {
                 security.cors().configurationSource(request -> new CorsConfiguration().applyPermitDefaultValues()).and()
                                 .csrf().csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse())
-                                .disable().authorizeRequests().antMatchers("/").permitAll().anyRequest()
-                                .antMatchers("/usuario/create").permitAll().anyRequest()
+                                .disable().authorizeRequests()
+                                .antMatchers("/").permitAll().antMatchers("/usuario/create").permitAll()
                                 .anyRequest().authenticated().and().logout().logoutSuccessUrl("/entrar")
                                 .logoutRequestMatcher(new AntPathRequestMatcher("/saida"))
                                 .and().addFilterBefore(new JWTLoginFilter("/entrar", authenticationManager()),
