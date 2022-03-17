@@ -32,7 +32,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                                 .and().addFilterBefore(new JWTLoginFilter("/entrar", authenticationManager()),
                                                 UsernamePasswordAuthenticationFilter.class)
                                 .addFilterBefore(new JWTAPIAutenticacaoFilter(),
-                                                UsernamePasswordAuthenticationFilter.class);
+                                                UsernamePasswordAuthenticationFilter.class)
+                                .authorizeRequests().antMatchers("/usuario/**").permitAll();
         }
 
         @Override
