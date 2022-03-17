@@ -1,4 +1,4 @@
-import { HTMLInputTypeAttribute, useState } from "react";
+import React, { HTMLInputTypeAttribute, useState } from "react";
 import { InputContainer, InputPassStyled, InputStyled, ShowPasswordButton } from "./styles";
 
 interface input{
@@ -8,30 +8,35 @@ interface input{
   [x:string]: any;
 };
 
-export function Input({ name, type, icon, ...rest }: input) {
+export const Input = React.forwardRef(({ name, type, icon, ...rest }: input, ref) => {
   const [showPassword, setShowPassword] = useState(false);
-  return (
-    (type.match("text") && (
-      <InputContainer>
-        <InputStyled 
-        name={name} 
-        type={type}
-        {...rest} 
-        {...icon && {hasIcon: true}}
-        />
-        {icon && <i className={icon}></i>}
-      </InputContainer>
-    )) 
-    || (type.match("password") && (
-      <InputContainer>
+
+  if(type.match("text")){
+    return (
+        <InputContainer>
+          <InputStyled 
+          name={name} 
+          type={type}
+          ref={ref}
+          {...rest} 
+          {...icon && {hasIcon: true}}
+          />
+          {icon && <i className={icon}></i>}
+        </InputContainer>
+      );
+  }else if(type.match("password")){
+    return(
+    <InputContainer>
         <InputPassStyled
           type={showPassword ? "text" : "password"} 
           name={name} 
+          ref={ref}
           {...rest}
           {...icon && {hasIcon: true}}
         />
         {icon && <i className={icon}></i>}        
         <ShowPasswordButton
+          tabIndex={-1}
           type="button"
           title={showPassword ? "Ocultar senha" : "Mostrar senha"}
           className={showPassword ? "active" : ""}
@@ -40,7 +45,8 @@ export function Input({ name, type, icon, ...rest }: input) {
           }}
         />
       </InputContainer>
-    )) 
-    || (<InputStyled type={type} name={name} {...rest} />)
-  );
-}
+    );
+  }else{
+    return <InputStyled type={type} name={name} ref={ref} {...rest} />;
+  }
+})
