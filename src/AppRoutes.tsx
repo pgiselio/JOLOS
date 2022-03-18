@@ -1,6 +1,5 @@
 import { Routes, Route } from "react-router-dom";
 
-import { AuthProvider } from "./contexts/AuthContext";
 
 import Error404 from "./pages/404";
 import LoginPage from "./pages/login";
@@ -21,7 +20,6 @@ import { RequireAuth } from "./components/ProtectedLayout";
 export const AppRoutes = () => {
   return (
     <>
-      <AuthProvider>
         <Routes>
           <Route path="*" element={<Error404 />} />
           <Route path="/" element={<LandingPage />} />
@@ -48,7 +46,6 @@ export const AppRoutes = () => {
             <Route path="forum" element={<ForumPage />} />
           </Route>
         </Routes>
-      </AuthProvider>
     </>
   );
 };

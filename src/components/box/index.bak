@@ -1,0 +1,19 @@
+// import { ReactNode } from "react";
+// import { BoxContent, Box, BoxTitle } from "./index";
+
+// type BoxType = {
+//   head?: React.ReactNode;
+//   children: ReactNode;
+// };
+
+// export function Box({ children }: BoxType) {
+//   return <BoxStyle>{children}</BoxStyle>;
+// }
+
+// export function BoxContent({ children }: { children?: React.ReactNode }) {
+//   return <BoxContentStyle>{children}</BoxContentStyle>;
+// }
+
+// export function BoxTitle({ children }: { children?: React.ReactNode }) {
+//   return <BoxTitleStyle className="box-title">{children}</BoxTitleStyle>;
+// }

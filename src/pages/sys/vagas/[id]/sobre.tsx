@@ -1,5 +1,5 @@
 import { useOutletContext } from "react-router-dom";
-import { Box, BoxContent } from "../../../../components/box";
+import { Box, BoxContent, BoxTitle } from "../../../../components/box";
 import { Button } from "../../../../components/button";
 import { vaga } from "../vagas";
 
@@ -8,22 +8,22 @@ export function VagaSobrePage() {
   return (
     <div className="vaga-columns-2">
       <div className="column-1">
-        <Box
-          head="Sobre a vaga"
-        >
+        <Box>
+          <BoxTitle>
+            Sobre a vaga
+          </BoxTitle>
           <BoxContent>
             <div className="vaga-page-description">{vagaData.description}</div>
           </BoxContent>
         </Box>
       </div>
       <div className="column-2">
-        <Box
-          head={
+        <Box>
+          <BoxTitle>
             <h3>
               <i className="fas fa-exclamation-triangle"></i> Ações
             </h3>
-          }
-        >
+          </BoxTitle>
           {vagaData.status ? (
             <BoxContent>
               <div className="vaga-page-actions">

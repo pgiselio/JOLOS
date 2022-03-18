@@ -1,4 +1,4 @@
-import { Box, BoxContent } from "../../../components/box";
+import { Box, BoxContent, BoxTitle } from "../../../components/box";
 import { Button } from "../../../components/button";
 import { ProfilePic } from "../../../components/profile-pic/profile-pic";
 import "./profilePage.scss";
@@ -34,9 +34,10 @@ export function ProfilePage() {
           </div>
           <div className="vaga-columns-2">
             <div className="column-1">
-              <Box head={
+              <Box>
+                <BoxTitle>
                   <h3>Sobre nós</h3>
-              }>
+                </BoxTitle>
                 <BoxContent>
                   <div className="vaga-page-description">
                     <p>
@@ -77,9 +78,10 @@ export function ProfilePage() {
               </Box>
             </div>
             <div className="column-2">
-              <Box head={
-                <h3>Contatos</h3>
-              }>
+              <Box>
+                <BoxTitle>
+                  <h3>Contatos</h3>
+                </BoxTitle>
                 <BoxContent>
                   <div className="contacts">
                     <ul className="essential-info">

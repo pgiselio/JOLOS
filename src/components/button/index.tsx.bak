@@ -1,5 +1,5 @@
 import { CSSProperties } from "react";
-import { StyledButton } from "./style";
+import { Button } from "./index";
 type ButtonType = {
     icon? : string
     type? : "button" | "submit" | "reset" | undefined
@@ -8,11 +8,12 @@ type ButtonType = {
     className?: string
     id? : string
     disabled? : boolean
+    [x:string]: any;
 }
-export function Button(Props : ButtonType){
+export function ButtonNotToConsider(Props : ButtonType){
     return(
-        <StyledButton type={Props.type || "button"} {...Props.disabled && {disabled: true}} {...(Props.style ? {style: Props.style} : {})} id={Props.id} className={Props.className}>
+        <Button type={Props.type || "button"} {...Props.disabled && {disabled: true}} {...(Props.style ? {style: Props.style} : {})} id={Props.id} className={Props.className}>
             {Props.children}   
-        </StyledButton>
+        </Button>
     );
 }

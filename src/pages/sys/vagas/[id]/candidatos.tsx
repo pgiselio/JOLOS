@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useOutletContext } from "react-router-dom";
-import { Box } from "../../../../components/box";
+import { Box, BoxTitle } from "../../../../components/box";
 import { Button } from "../../../../components/button";
 import { ProfilePic } from "../../../../components/profile-pic/profile-pic";
 import { usersList, vaga } from "../vagas";
@@ -9,14 +9,12 @@ export function VagaCandidatoPage() {
   const vagaData: vaga = useOutletContext();
   const [checked, setChecked] = useState([]);
   return (
-    <Box
-      head={
-        <>
-          <input type="checkbox" name="" id="candidato-checkall" />
-          <label htmlFor="candidato-checkall">Selecionar tudo</label>
-        </>
-      }
-    >
+    <Box>
+      <BoxTitle>
+        <input type="checkbox" name="" id="candidato-checkall" />
+        <label htmlFor="candidato-checkall">Selecionar tudo</label>
+      </BoxTitle>
+
       <span>
         {vagaData.candidates.length > 0 ? (
           <ul className="lista-candidatos">

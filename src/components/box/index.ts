@@ -1,17 +1,17 @@
 import styled from "styled-components";
 
-export const BoxStyle = styled.div`
+export const Box = styled.div`
   display: flex;
   flex-direction: column;
   width: 100%;
-  background: var(--secondary-bg);
+  background: var(--primary-bg);
   border-radius: 5px;
   box-shadow: 0 1px 2px rgb(0 0 0 / 10%);
   margin-top: 20px;
   overflow: hidden;
 `;
 
-export const BoxTitleStyle = styled.div`
+export const BoxTitle = styled.div`
   width: 100%;
   padding: 15px 20px;
   background: var(--primary-bg);
@@ -45,7 +45,7 @@ export const BoxTitleStyle = styled.div`
   }
 `;
 
-export const BoxContentStyle = styled.div`
+export const BoxContent = styled.div`
   display: flex;
   flex-direction: column;
   padding: 30px;

@@ -1,4 +1,4 @@
-import { Box } from "../../../components/box";
+import { Box, BoxContent, BoxTitle } from "../../../components/box";
 import { Button } from "../../../components/button";
 import { HeaderTitle } from "../../../components/header-title";
 import { OutsetHeadersCornerRadius } from "../../../components/outset-radius-to-headers";
@@ -14,17 +14,23 @@ export function ForumPage() {
         </OutsetHeadersCornerRadius>
 
         <div className="content">
-          <Box
-            head={
-              <h3 style={{display: "flex", alignItems: "center", width: "100%", justifyContent: "space-between"}}>
+          <Box>
+            <BoxTitle>
+              <h3
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  width: "100%",
+                  justifyContent: "space-between",
+                }}
+              >
                 Perguntas
                 <Button className="outlined" id="filtro">
                   Filtros <i className="fas fa-filter"></i>
                 </Button>
               </h3>
-            }
-          >
-            <div>
+            </BoxTitle>
+            <BoxContent>
               <div className="ask-box">
                 <div className="ask">
                   <a href="ask-unanswered.html" className="pessoa-forum-group">
@@ -83,7 +89,7 @@ export function ForumPage() {
                   </a>
                 </div>
               </div>
-            </div>
+            </BoxContent>
           </Box>
         </div>
       </section>
