@@ -1,11 +1,11 @@
 import axios from "axios";
 import { getUserLocalStorage } from "../contexts/AuthContext/util";
 
-export const Api = axios.create({
+export const api = axios.create({
   baseURL: "https://ifjobs-backend.herokuapp.com",
 });
 
-Api.interceptors.request.use(
+api.interceptors.request.use(
   (config) => {
     const user = getUserLocalStorage();
     if (user) {

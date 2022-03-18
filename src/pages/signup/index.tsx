@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import { toast, ToastContainer } from "react-toastify";
 import { Input } from "../../components/input";
 import { TabSelector } from "../../components/Tabs/TabSelector";
-import { Api } from "../../services/api";
+import { api } from "../../services/api";
 import { AccessGlobalStyle, StyledAccess } from "../../styles/LoginSignupStyle";
 
 import * as Yup from "yup";
@@ -16,7 +16,7 @@ type signupType = {
   confirmPassword: string;
 };
 
-export function CadastroPage() {
+export default function CadastroPage() {
   const [selectedTab, setSelectedTab] = useTabs(["Aluno", "Empresa"], "Aluno");
   const [isLoading, setIsLoading] = useState(false);
 
@@ -49,12 +49,14 @@ export function CadastroPage() {
     }
     try {
       setIsLoading(true);
-      await Api.post("usuario/create", { email, senha: password }).catch(function (error) {
-        console.log(error.toJSON());
-      });
+      await api
+        .post("usuario/create", { email, senha: password })
+        .catch(function (error) {
+          console.log(error.toJSON());
+        })
+        .finally(() => setIsLoading(false));
     } catch (error: any) {
       console.error(error.response.data);
-      setIsLoading(false);
       toast.error("DEU ERRO!", {});
     }
   }

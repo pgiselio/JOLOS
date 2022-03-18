@@ -1,6 +1,6 @@
 import { Error404Style } from "./style";
 
-export function Error404() {
+export default function Error404() {
   return (
     <Error404Style>
         <h1>404</h1>

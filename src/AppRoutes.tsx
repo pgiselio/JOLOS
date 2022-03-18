@@ -2,9 +2,9 @@ import { Routes, Route } from "react-router-dom";
 
 import { AuthProvider } from "./contexts/AuthContext";
 
-import { Error404 } from "./pages/404";
+import Error404 from "./pages/404";
 import LoginPage from "./pages/login";
-import { CadastroPage } from "./pages/signup";
+import CadastroPage from "./pages/signup";
 import { ForumPage } from "./pages/sys/forum";
 import { HomePage } from "./pages/sys/home/homePage";
 import { LandingPage } from "./pages/Landing/Landing";
