@@ -1,6 +1,6 @@
 import { Link, Outlet, useParams } from "react-router-dom";
 import { vagasListTest } from "../vagas";
-import { Error404 } from "../../../404";
+import Error404 from "../../../404";
 import { TabsMenu, TabsMenuItem } from "../../../../components/tabs-menu";
 
 export function VagaPage() {

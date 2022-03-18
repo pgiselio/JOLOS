@@ -1,7 +1,6 @@
 import CircularProgress from "react-cssfx-loading/lib/CircularProgress";
 import { Navigate } from "react-router-dom";
 import { useAuth } from "../../contexts/AuthContext/useAuth";
-import { Api } from "../../services/api";
 import { StyledAccess } from "../../styles/LoginSignupStyle";
 
 export function LogoutPage() {
@@ -16,7 +15,6 @@ export function LogoutPage() {
     );
   }
   auth.logout();
-  Api.post('saida');
   
   return (
     <StyledAccess>
