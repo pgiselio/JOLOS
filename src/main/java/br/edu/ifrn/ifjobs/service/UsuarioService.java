@@ -1,16 +1,21 @@
 package br.edu.ifrn.ifjobs.service;
 
+import java.io.UnsupportedEncodingException;
 import java.lang.reflect.Field;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
+import javax.mail.MessagingException;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.util.ReflectionUtils;
 
 import br.edu.ifrn.ifjobs.exception.UsuarioNaoCadastradoException;
 import br.edu.ifrn.ifjobs.exception.UsuarioNaoEncontradoException;
+import br.edu.ifrn.ifjobs.model.Email;
 import br.edu.ifrn.ifjobs.model.Role;
 import br.edu.ifrn.ifjobs.model.Usuario;
 import br.edu.ifrn.ifjobs.model.enums.StatusUsuario;
@@ -25,6 +30,9 @@ public class UsuarioService {
     private UsuarioRepository usuarioRepository;
 
     @Autowired
+    private EmailService emailService;
+
+    @Autowired
     private RoleRepository roleRepository;
 
     public Usuario create(Usuario usuario) throws UsuarioNaoCadastradoException {
@@ -32,12 +40,37 @@ public class UsuarioService {
         optional = Optional.ofNullable(usuario);
 
         optional.ifPresent(user -> {
-            Role roleUsuario = roleRepository.findByTipoUsuario(TipoUsuario.USUARIO);
-            user.addRole(roleUsuario);
+            criptografaSenha(user);
+            user.setStatus(StatusUsuario.PENDENTE);
+            addRolePadraoParaUsuario(user);
+            Email email = new Email();
+            email.setHtml(true);
+            email.setDestinatario(user.getEmail());
+            email.setMensagem("""
+                    <h1>Teste</h1>
+                    """);
+            email.setAssunto("Cadastro IF Jobs!!");
+
+            try {
+                emailService.enviaEmail(email);
+            } catch (MessagingException | UnsupportedEncodingException e) {
+                user = null;
+            }
+
             usuarioRepository.save(user);
         });
 
         return optional.orElseThrow(() -> new UsuarioNaoCadastradoException("Erro ao efetuar cadastro!"));
+    }
+
+    private void addRolePadraoParaUsuario(Usuario user) {
+        Role roleUsuario = roleRepository.findByTipoUsuario(TipoUsuario.USUARIO);
+        user.addRole(roleUsuario);
+    }
+
+    private void criptografaSenha(Usuario usuario) {
+        BCryptPasswordEncoder ciptografo = new BCryptPasswordEncoder();
+        usuario.setSenha(ciptografo.encode(usuario.getSenha()));
     }
 
     public Usuario buscaPorId(int id) throws UsuarioNaoEncontradoException {
