@@ -10,7 +10,6 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
-import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 import org.springframework.web.cors.CorsConfiguration;
 
 import br.edu.ifrn.ifjobs.service.ImplementacaoUserDatailsService;
@@ -27,10 +26,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 security.cors().configurationSource(request -> new CorsConfiguration().applyPermitDefaultValues()).and()
                                 .csrf().csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse())
                                 .disable().authorizeRequests()
-                                .antMatchers("/").permitAll().and().authorizeRequests().antMatchers("/usuario/create")
-                                .permitAll()
-                                .anyRequest().authenticated().and().logout().logoutSuccessUrl("/entrar")
-                                .logoutRequestMatcher(new AntPathRequestMatcher("/saida"))
+                                .antMatchers("/").permitAll().and()
+                                .authorizeRequests().antMatchers("/usuario/create")
+                                .permitAll().anyRequest().authenticated()
                                 .and().addFilterBefore(new JWTLoginFilter("/entrar", authenticationManager()),
                                                 UsernamePasswordAuthenticationFilter.class)
                                 .addFilterBefore(new JWTAPIAutenticacaoFilter(),
@@ -45,6 +43,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
         @Override
         public void configure(WebSecurity web) throws Exception {
-                web.ignoring().antMatchers("/**.html", "/webjars/**", "/configuration/**");
+                web.ignoring().antMatchers("/**.html", "/webjars/**");
         }
 }
