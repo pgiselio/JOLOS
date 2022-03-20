@@ -8,7 +8,7 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
@@ -24,8 +24,6 @@ import br.edu.ifrn.ifjobs.dto.usuario.UsuarioLoginGetDTO;
 import br.edu.ifrn.ifjobs.exception.UsuarioNaoCadastradoException;
 import br.edu.ifrn.ifjobs.exception.UsuarioNaoEncontradoException;
 import br.edu.ifrn.ifjobs.model.Usuario;
-import br.edu.ifrn.ifjobs.model.enums.StatusUsuario;
-import br.edu.ifrn.ifjobs.service.EmailService;
 import br.edu.ifrn.ifjobs.service.UsuarioService;
 
 @RestController
@@ -35,16 +33,10 @@ public class UsuarioController {
     @Autowired
     private UsuarioService usuarioService;
 
-    @Autowired
-    private EmailService emailService;
-
+    @CrossOrigin("*")
     @PostMapping("/create")
     public ResponseEntity<Usuario> createAluno(@RequestBody @Valid UsuarioInsertDTO dto) {
         Usuario usuario = dto.convertDtoToEntity();
-
-        BCryptPasswordEncoder ciptografo = new BCryptPasswordEncoder();
-        usuario.setSenha(ciptografo.encode(usuario.getSenha()));
-        usuario.setStatus(StatusUsuario.PENDENTE);
 
         Usuario usuarioSalvo;
 
