@@ -30,6 +30,8 @@ import br.edu.ifrn.ifjobs.model.enums.StatusUsuario;
 @Entity
 public class Usuario implements UserDetails {
 
+    private static final long serialVersionUID = 212312L;
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
