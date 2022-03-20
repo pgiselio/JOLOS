@@ -9,6 +9,7 @@ import java.util.Optional;
 import javax.mail.MessagingException;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.util.ReflectionUtils;
@@ -25,6 +26,9 @@ import br.edu.ifrn.ifjobs.repository.UsuarioRepository;
 
 @Service
 public class UsuarioService {
+
+    @Value("${spring.mail.username}")
+    private String emailBase;
 
     @Autowired
     private UsuarioRepository usuarioRepository;
@@ -50,6 +54,7 @@ public class UsuarioService {
                     <h1>Teste</h1>
                     """);
             email.setAssunto("Cadastro IF Jobs!!");
+            email.setRemetente(this.emailBase);
 
             try {
                 emailService.enviaEmail(email);
