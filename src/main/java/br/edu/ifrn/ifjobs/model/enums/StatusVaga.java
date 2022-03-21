@@ -1,5 +1,5 @@
 package br.edu.ifrn.ifjobs.model.enums;
 
 public enum StatusVaga {
-    ATIVA, INATIVA;
+    ATIVO, INATIVO;
 }
