@@ -35,7 +35,7 @@ public class UsuarioController {
 
     @CrossOrigin("*")
     @PostMapping("/create")
-    public ResponseEntity<?> createAluno(@RequestBody @Valid UsuarioInsertDTO dto) {
+    public ResponseEntity<Usuario> createAluno(@RequestBody @Valid UsuarioInsertDTO dto) {
         Usuario usuario = dto.convertDtoToEntity();
 
         Usuario usuarioSalvo;
@@ -46,7 +46,7 @@ public class UsuarioController {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
         }
 
-        return new ResponseEntity<>("Criado com sucesso", HttpStatus.CREATED);
+        return new ResponseEntity<>(usuarioSalvo, HttpStatus.CREATED);
     }
 
     @GetMapping("/{id}")
