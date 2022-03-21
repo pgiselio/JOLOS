@@ -27,8 +27,8 @@ export function VagaSobrePage() {
           {vagaData.status ? (
             <BoxContent>
               <div className="vaga-page-actions">
-                <Button className="outlined red">Fechar inscrições</Button>
-                <Button className="outlined">Editar informações</Button>
+                <Button className="red less-radius">Fechar inscrições</Button>
+                <Button className="less-radius">Editar informações</Button>
               </div>
             </BoxContent>
           ) : (

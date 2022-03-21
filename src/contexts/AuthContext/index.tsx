@@ -18,7 +18,6 @@ export function AuthProvider ({children}: IAuthProvider){
 
     async function signin(email: string, password: string) {
         const response = await LoginRequest(email, password);
-        console.log(response);
 
         const payload = { token: response.Authorization.replace("Bearer ", ""), email};
         

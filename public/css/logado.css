@@ -239,10 +239,7 @@ ol li {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-}
-
-.vaga-page-actions button:nth-child(1) {
-  margin-bottom: 10px;
+  gap: 10px;
 }
 
 .vaga-page-actions > * {

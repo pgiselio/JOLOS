@@ -14,11 +14,7 @@ export default function LoginPage() {
   const auth = useAuth();
   const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(false);
-  const {
-    control,
-    formState,
-    handleSubmit,
-  } = useForm({
+  const { control, formState, handleSubmit } = useForm({
     mode: "onChange",
     defaultValues: {
       email: "jolos@jolos.com",
@@ -138,16 +134,16 @@ export default function LoginPage() {
               className="less-radius"
               disabled={!formState.isValid || isLoading}
             >
-              {isLoading ? (
+              {isLoading && (
                 <CircularProgress
                   color="white"
-                  height="23px"
-                  width="23px"
+                  height="25px"
+                  width="25px"
                   duration="1.5s"
+                  style={{ position: "absolute" }}
                 />
-              ) : (
-                "Entrar"
               )}
+              <span {...(isLoading && { style: { opacity: 0 } })}>Entrar</span>
             </Button>
             <div className="registre-se">
               <span>Não tem uma conta?</span>
