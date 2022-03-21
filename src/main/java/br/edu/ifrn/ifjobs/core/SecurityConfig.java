@@ -12,6 +12,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
 import org.springframework.web.cors.CorsConfiguration;
 
+import br.edu.ifrn.ifjobs.model.enums.StatusUsuario;
 import br.edu.ifrn.ifjobs.service.ImplementacaoUserDatailsService;
 
 @Configuration
@@ -28,7 +29,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                                 .disable().authorizeRequests()
                                 .antMatchers("/").permitAll().and()
                                 .authorizeRequests().antMatchers("/usuario/create")
-                                .permitAll().anyRequest().authenticated()
+                                .permitAll().and().authorizeRequests()
+                                .antMatchers("/entrar").hasAuthority(StatusUsuario.CONCLUIDO.toString()).anyRequest()
+                                .authenticated()
                                 .and().addFilterBefore(new JWTLoginFilter("/entrar", authenticationManager()),
                                                 UsernamePasswordAuthenticationFilter.class)
                                 .addFilterBefore(new JWTAPIAutenticacaoFilter(),
