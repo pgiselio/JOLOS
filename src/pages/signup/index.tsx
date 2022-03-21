@@ -10,7 +10,7 @@ import { Controller, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as Yup from "yup";
 import { CircularProgress } from "react-cssfx-loading/lib";
-import { TabSelector } from "../../components/tabs/TabSelector";
+import { TabSelector } from "../../components/Tabs/TabSelector";
 
 type signupType = {
   email: string;
