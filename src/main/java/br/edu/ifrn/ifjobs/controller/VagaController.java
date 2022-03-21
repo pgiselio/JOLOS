@@ -57,9 +57,13 @@ public class VagaController {
     }
 
     @GetMapping("/")
-    public ResponseEntity<List<Vaga>> buscaTodasVagas() {
+    public ResponseEntity<List<VagaGetDTO>> buscaTodasVagas() {
         List<Vaga> todasVagas = vagaService.buscaTodasVagas();
-        return ResponseEntity.ok(todasVagas);
+        List<VagaGetDTO> listDto = todasVagas.stream().map(vaga -> {
+            VagaGetDTO dto = new VagaGetDTO();
+            return dto.convertEntityToDto(vaga);
+        }).toList();
+        return ResponseEntity.ok(listDto);
     }
 
     @GetMapping("/lista/{id}")
