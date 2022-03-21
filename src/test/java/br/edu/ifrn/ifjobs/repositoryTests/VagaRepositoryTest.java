@@ -40,7 +40,7 @@ public class VagaRepositoryTest {
         vaga.setDescricao("Vaga para desenvolvedor Backend Java...");
         vaga.setDataCriacao(data);
         vaga.setLocalizacao("João Câmara - RN");
-        vaga.setStatus(StatusVaga.ATIVA);
+        vaga.setStatus(StatusVaga.ATIVO);
         vaga.setCursoAlvo("informática");
 
         Vaga vagaSalva = vagaRepository.save(vaga);
@@ -66,7 +66,7 @@ public class VagaRepositoryTest {
         vaga.setDescricao("Vaga para desenvolvedor Frontend React...");
         vaga.setDataCriacao(data);
         vaga.setLocalizacao("Natal - RN");
-        vaga.setStatus(StatusVaga.ATIVA);
+        vaga.setStatus(StatusVaga.ATIVO);
         vaga.setCursoAlvo("informática");
 
         Aluno aluno = alunoRespository.findByCpf("11111111111");
