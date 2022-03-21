@@ -14,6 +14,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.util.ReflectionUtils;
 
+import br.edu.ifrn.ifjobs.dto.usuario.UsuarioInsertDTO;
 import br.edu.ifrn.ifjobs.exception.UsuarioNaoCadastradoException;
 import br.edu.ifrn.ifjobs.exception.UsuarioNaoEncontradoException;
 import br.edu.ifrn.ifjobs.model.Email;
@@ -33,39 +34,77 @@ public class UsuarioService {
     @Autowired
     private UsuarioRepository usuarioRepository;
 
+    private Usuario usuarioSalvo;
+
     @Autowired
     private EmailService emailService;
 
     @Autowired
     private RoleRepository roleRepository;
 
+    public Usuario create(UsuarioInsertDTO dto) throws UsuarioNaoCadastradoException {
+        Optional<UsuarioInsertDTO> optional;
+        optional = Optional.ofNullable(dto);
+
+        optional.ifPresent(usuarioDto -> {
+            Usuario usuario = usuarioDto.convertDtoToEntity();
+            Email email = new Email();
+
+            configPadraoAoCriarUsuario(usuario, email);
+            mensagemEmailBaseadoNoTipoUsuario(usuarioDto.getTipoUsuario(), email);
+            enviaEmail(email);
+
+            usuarioSalvo = usuarioRepository.save(usuario);
+        });
+
+        return usuarioSalvo;
+    }
+
+    private void configPadraoAoCriarUsuario(Usuario usuario, Email email) {
+        criptografaSenha(usuario);
+        usuario.setStatus(StatusUsuario.PENDENTE);
+        addRolePadraoParaUsuario(usuario);
+
+        configPadraoAoCriarEmail(email, usuario);
+    }
+
+    private void configPadraoAoCriarEmail(Email email, Usuario usuario) {
+        email.setHtml(true);
+        email.setDestinatario(usuario.getEmail());
+        email.setRemetente(this.emailBase);
+    }
+
     public Usuario create(Usuario usuario) throws UsuarioNaoCadastradoException {
         Optional<Usuario> optional;
         optional = Optional.ofNullable(usuario);
 
         optional.ifPresent(user -> {
-            criptografaSenha(user);
-            user.setStatus(StatusUsuario.PENDENTE);
-            addRolePadraoParaUsuario(user);
             Email email = new Email();
-            email.setHtml(true);
-            email.setDestinatario(user.getEmail());
-            email.setMensagem("""
-                    <h1>Teste</h1>
-                    """);
-            email.setAssunto("Cadastro IF Jobs!!");
-            email.setRemetente(this.emailBase);
+            configPadraoAoCriarUsuario(user, email);
+            enviaEmail(email);
 
-            try {
-                emailService.enviaEmail(email);
-            } catch (MessagingException | UnsupportedEncodingException e) {
-                user = null;
-            }
-
-            usuarioRepository.save(user);
+            usuarioSalvo = usuarioRepository.save(user);
         });
 
-        return optional.orElseThrow(() -> new UsuarioNaoCadastradoException("Erro ao efetuar cadastro!"));
+        Optional<Usuario> optional2;
+        optional2 = Optional.ofNullable(usuarioSalvo);
+
+        return optional2.orElseThrow(() -> new UsuarioNaoCadastradoException("Usuário não cadastrado!"));
+    }
+
+    private void mensagemEmailBaseadoNoTipoUsuario(TipoUsuario tipoUsuario, Email email) {
+        switch (tipoUsuario) {
+            case ALUNO:
+                email.setMensagem("""
+                        <h1>Car@ estudante...</h1>
+                        """);
+            case EMPRESA:
+                email.setMensagem("""
+                        <h1>Car@ empresa</h1>
+                        """);
+            default:
+                throw new IllegalArgumentException("Tipo de usuário inválido para criação!");
+        }
     }
 
     private void addRolePadraoParaUsuario(Usuario user) {
@@ -76,6 +115,14 @@ public class UsuarioService {
     private void criptografaSenha(Usuario usuario) {
         BCryptPasswordEncoder ciptografo = new BCryptPasswordEncoder();
         usuario.setSenha(ciptografo.encode(usuario.getSenha()));
+    }
+
+    private void enviaEmail(Email email) {
+        try {
+            emailService.enviaEmail(email);
+        } catch (UnsupportedEncodingException | MessagingException e) {
+            throw new RuntimeException("Erro ao enviar email, logo não cadastrado!");
+        }
     }
 
     public Usuario buscaPorId(int id) throws UsuarioNaoEncontradoException {
