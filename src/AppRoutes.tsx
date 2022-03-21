@@ -15,7 +15,7 @@ import { VagaSobrePage } from "./pages/sys/vagas/[id]/sobre";
 import { VagasList } from "./pages/sys/vagas/vagasList";
 import SystemLayout  from "./pages/sys";
 import { LogoutPage } from "./pages/logout";
-import { RequireAuth } from "./components/ProtectedLayout";
+import { RequireAuth } from "./components/RequireAuth";
 
 export const AppRoutes = () => {
   return (

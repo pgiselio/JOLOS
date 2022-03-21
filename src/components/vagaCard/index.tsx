@@ -1,49 +1,48 @@
 import { Link } from "react-router-dom";
-import { vaga } from "../../pages/sys/vagas/vagas";
+import { vaga } from "../../pages/sys/vagas/vagaType";
 import { ProfilePic } from "../profile-pic/profile-pic";
 import { VagaCardStyle } from "./style";
 
-type eunaosei = {
+type vagaObj = {
   vaga: vaga;
 };
-export function VagaCard({ vaga }: eunaosei) {
+export function VagaCard({ vaga }: vagaObj) {
   return (
     <VagaCardStyle className="vaga">
       <div className="vaga-data">
         <div className="vaga-header">
           <div className="photo-align">
             <ProfilePic
-              url={vaga.owner.profilepic_url}
               style={{ width: 55, height: 55}}
             />
             <div>
               <div className="vaga-titles">
-                <h3>{vaga.name}</h3>
-                <span>{vaga.owner.name}</span>
-                <span className="vaga-city">{vaga.location}</span>
-                <span className="vaga-date">{vaga.date}</span>
+                <h3>{vaga.titulo}</h3>
+                <span>{vaga.empresa.dadosPessoa.nome}</span>
+                <span className="vaga-city">{vaga.localizacao}</span>
+                <span className="vaga-date">{vaga.dataCriacao}</span>
               </div>
 
               <span
                 className={
-                  "vaga-status "+ (vaga.status && "enabled")
+                  "vaga-status "+ (vaga.status === "ATIVO" && "enabled")
                 }
               >
-                {vaga.status ? "ATIVO" : "INATIVO"}
+                {vaga.status === "ATIVO" ? "ATIVO" : "INATIVO"}
               </span>
             </div>
           </div>
         </div>
         <div className="vaga-text">
-          <p>{vaga.description}</p>
+          <p>{vaga.descricao}</p>
         </div>
 
         <div className="vagas-bottom">
           <Link to={vaga.id + "/candidatos"} className="vagas-candidatos">
             <i className="fas fa-user"></i>
             <span>
-              {vaga.candidates.length}
-              {vaga.candidates.length > 1 || vaga.candidates.length === 0
+              {vaga.alunos.length}
+              {vaga.alunos.length > 1 || vaga.alunos.length === 0
                 ? " Candidatos"
                 : " Candidato"}
             </span>

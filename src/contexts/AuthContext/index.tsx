@@ -16,10 +16,11 @@ export function AuthProvider ({children}: IAuthProvider){
         setLoadingUserState(false);
     }, []);
 
-    async function authenticate(email: string, password: string) {
+    async function signin(email: string, password: string) {
         const response = await LoginRequest(email, password);
+        console.log(response);
 
-        const payload = { token: response.Authorization.replace("Bearer ", ""), email };
+        const payload = { token: response.Authorization.replace("Bearer ", ""), email};
         
         setUser(payload);
         setUserLocalStorage(payload);
@@ -29,7 +30,7 @@ export function AuthProvider ({children}: IAuthProvider){
         setUserLocalStorage(null);
     }
     return(
-        <AuthContext.Provider value={{...user, authenticate, logout, loadingUserState}}>
+        <AuthContext.Provider value={{...user, signin, logout, loadingUserState}}>
             {children}
         </AuthContext.Provider>
     );

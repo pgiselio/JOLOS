@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { useTabs } from "react-headless-tabs";
-import { Controller, useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
 import { toast, ToastContainer } from "react-toastify";
 import { Input } from "../../components/input";
@@ -8,6 +7,8 @@ import { TabSelector } from "../../components/Tabs/TabSelector";
 import { api } from "../../services/api";
 import { AccessGlobalStyle, StyledAccess } from "../../styles/LoginSignupStyle";
 
+import { Controller, useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
 import * as Yup from "yup";
 
 type signupType = {
@@ -21,9 +22,12 @@ export default function CadastroPage() {
   const [isLoading, setIsLoading] = useState(false);
 
   const validationSchema = Yup.object().shape({
+    email: Yup.string()
+      .email("Esse não é um endereço de e-mail válido!")
+      .required("O e-mail é obrigatório"),
     password: Yup.string()
       .required("A senha é obrigatória")
-      .min(6, "A senha deve ter no mínimo 8 caracteres"),
+      .min(8, "A senha deve ter no mínimo 8 caracteres"),
     confirmPassword: Yup.string()
       .required("Corfirmar senha é obrigatório")
       .oneOf([Yup.ref("password")], "As senhas não coincidem"),
@@ -40,26 +44,32 @@ export default function CadastroPage() {
       password: "",
       confirmPassword: "",
     },
+    resolver: yupResolver(validationSchema)
   });
 
-  async function onSubmit({ email, password, confirmPassword }: signupType) {
-    if (password !== confirmPassword) {
-      toast.error("As senhas não conferem");
-      return;
-    }
-    try {
-      setIsLoading(true);
-      await api
-        .post("usuario/create", { email, senha: password })
-        .catch(function (error) {
-          console.log(error.toJSON());
-        })
-        .finally(() => setIsLoading(false));
-    } catch (error: any) {
-      console.error(error.response.data);
-      toast.error("DEU ERRO!", {});
-    }
+  function onSubmit({ email, password, confirmPassword }: signupType) {
+    setIsLoading(true);
+
+    validationSchema
+      .isValid({
+        email: email,
+        password: password,
+        confirmPassword: confirmPassword,
+      })
+      .then((valid) => {
+        if (valid) {
+          formSubmit(email, password, confirmPassword);
+        }
+      });
   }
+  async function formSubmit(email: string, password: string, confirmPassword: string){ 
+    return await api
+      .post("/usuario/create", { email, senha: password})
+      .catch(function () {
+        toast.error("O email cadastrado já existe!", {});
+      })
+      .finally(() => setIsLoading(false));
+  };
   return (
     <StyledAccess>
       <ToastContainer
@@ -121,11 +131,6 @@ export default function CadastroPage() {
                     <Controller
                       name="email"
                       control={control}
-                      rules={{
-                        required: true,
-                        pattern:
-                          /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/,
-                      }}
                       render={({ field }) => (
                         <Input
                           type="text"
@@ -135,12 +140,10 @@ export default function CadastroPage() {
                         />
                       )}
                     />
+                    <p>{errors.email?.message}</p>
                     <Controller
                       name="password"
                       control={control}
-                      rules={{
-                        required: true,
-                      }}
                       render={({ field }) => (
                         <Input
                           type="password"
@@ -150,12 +153,10 @@ export default function CadastroPage() {
                         />
                       )}
                     />
+                    <p>{errors.password?.message}</p>
                     <Controller
                       name="confirmPassword"
                       control={control}
-                      rules={{
-                        required: true,
-                      }}
                       render={({ field }) => (
                         <Input
                           type="password"
@@ -165,6 +166,7 @@ export default function CadastroPage() {
                         />
                       )}
                     />
+                    <p>{errors.confirmPassword?.message}</p>
                   </section>
                   <div className="info-message">
                     {selectedTab === "Aluno" ? (
@@ -185,8 +187,10 @@ export default function CadastroPage() {
               <div className="imagem-destaque">
                 <img src="../images/undraw_typewriter_re_u9i2.svg" alt="" />
               </div>
-              {selectedTab === "Aluno" && (
+              {selectedTab === "Aluno" ? (
                 <span>Sua conta a três passos de você</span>
+              ) : (
+                <span>Faça o pré-cadastro da sua empresa</span>
               )}
             </div>
           </div>
@@ -207,6 +211,7 @@ export default function CadastroPage() {
                 title="Confirmar cadastro"
                 form="cadastroStep1"
                 id="cadastroSubmit"
+                {... isLoading && {disabled: true}}
               >
                 Próximo
               </button>

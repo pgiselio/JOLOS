@@ -3,7 +3,7 @@ import { useOutletContext } from "react-router-dom";
 import { Box, BoxTitle } from "../../../../components/box";
 import { Button } from "../../../../components/button";
 import { ProfilePic } from "../../../../components/profile-pic/profile-pic";
-import { usersList, vaga } from "../vagas";
+import { usersList, vaga } from "../vagaType";
 
 export function VagaCandidatoPage() {
   const vagaData: vaga = useOutletContext();
@@ -16,9 +16,9 @@ export function VagaCandidatoPage() {
       </BoxTitle>
 
       <span>
-        {vagaData.candidates.length > 0 ? (
+        {vagaData.alunos.length > 0 ? (
           <ul className="lista-candidatos">
-            {vagaData.candidates.map((candidato) => {
+            {vagaData.alunos.map((candidato) => {
               let user = usersList.find((user) => user.id === candidato);
               if (user) {
                 return (

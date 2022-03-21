@@ -1,7 +1,7 @@
 import { useOutletContext } from "react-router-dom";
 import { Box, BoxContent, BoxTitle } from "../../../../components/box";
 import { Button } from "../../../../components/button";
-import { vaga } from "../vagas";
+import { vaga } from "../vagaType";
 
 export function VagaSobrePage() {
   const vagaData: vaga = useOutletContext();
@@ -13,7 +13,7 @@ export function VagaSobrePage() {
             Sobre a vaga
           </BoxTitle>
           <BoxContent>
-            <div className="vaga-page-description">{vagaData.description}</div>
+            <div className="vaga-page-description">{vagaData.descricao}</div>
           </BoxContent>
         </Box>
       </div>

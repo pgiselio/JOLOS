@@ -1,11 +1,17 @@
 import { Link, Outlet, useParams } from "react-router-dom";
-import { vagasListTest } from "../vagas";
 import Error404 from "../../../404";
 import { TabsMenu, TabsMenuItem } from "../../../../components/tabs-menu";
+import { vaga } from "../vagaType";
+import { useQuery } from "react-query";
+import { api } from "../../../../services/api";
 
 export function VagaPage() {
   let params = useParams();
-  const vagaData = vagasListTest.find(
+  const { data, isFetching} = useQuery<vaga[]>('vagas', async () =>{
+    const response = await api.get('/vaga/');
+    return response.data;    
+  });
+  const vagaData = data?.find(
     (vaga) => vaga.id === Number.parseInt(params.id + "")
   );
   if (vagaData) {
@@ -23,7 +29,7 @@ export function VagaPage() {
         </div>
         <section>
           <div className="vaga-page-header">
-            <h2>{vagaData.name}</h2>
+            <h2>{vagaData.titulo}</h2>
             <span className={"vaga-status" + vagaData.status && " enabled"}>
               {vagaData.status ? "ATIVO" : "INATIVO"}
             </span>
@@ -33,7 +39,7 @@ export function VagaPage() {
             <TabsMenuItem
               to="candidatos"
               title="Candidatos"
-              highlighted={vagaData.candidates.length + ""}
+              highlighted={vagaData.alunos.length + ""}
             />
           </TabsMenu>
           <div className="content">
@@ -42,19 +48,19 @@ export function VagaPage() {
                 <li>
                   <div className="vaga-page-info-item">
                     <i className="fas fa-calendar-day"></i>
-                    <span>{vagaData.date}</span>
+                    <span>{vagaData.dataCriacao}</span>
                   </div>
                 </li>
                 <li>
                   <div className="vaga-page-info-item">
                     <i className="fas fa-map-marker-alt"></i>
-                    <span>{vagaData.location}</span>
+                    <span>{vagaData.localizacao}</span>
                   </div>
                 </li>
                 <li>
                   <div className="vaga-page-info-item">
                     <i className="fas fa-book-open"></i>
-                    <span>{vagaData.course_target}</span>
+                    <span>{vagaData.cursoAlvo}</span>
                   </div>
                 </li>
               </ul>

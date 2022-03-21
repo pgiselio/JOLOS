@@ -46,7 +46,7 @@ export default function LoginPage() {
   async function onSubmit(data: any) {
     try {
       setIsLoading(true);
-      await auth.authenticate(data.email, data.password);
+      await auth.signin(data.email, data.password);
 
       RedirectForSystem();
     } catch (error: any) {

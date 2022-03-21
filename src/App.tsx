@@ -7,16 +7,20 @@ import { GlobalStyle } from "./styles/global";
 import { BrowserRouter } from "react-router-dom";
 import { AppRoutes } from "./AppRoutes";
 import ScrollToTop from "./utils/scrollToTop";
+import { QueryClientProvider } from "react-query";
+import { queryClient } from "./services/queryClient";
 function App() {
   return (
     <>
       <ThemeProvider theme={lightTheme}>
         <GlobalStyle />
         <AuthProvider>
-          <BrowserRouter>
-            <ScrollToTop />
-            <AppRoutes />
-          </BrowserRouter>
+          <QueryClientProvider client={queryClient}>
+            <BrowserRouter>
+              <ScrollToTop />
+              <AppRoutes />
+            </BrowserRouter>
+          </QueryClientProvider>
         </AuthProvider>
       </ThemeProvider>
     </>
