@@ -207,7 +207,7 @@ export default function CadastroPage() {
               ) : (
                 <>
                   <div className="imagem-destaque">
-                    <img src="../images/undraw_connected_re_lmq2.svg" alt="" />
+                    <img src="../images/undraw_connected_re_lmq2.svg" alt="" style={{width: "60%"}}/>
                   </div>
                   <span>Faça o pré-cadastro da sua empresa</span>
                 </>
