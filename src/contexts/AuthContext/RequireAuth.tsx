@@ -1,6 +1,6 @@
 import { CircularProgress } from "react-cssfx-loading/lib";
 import { Navigate } from "react-router-dom";
-import { useAuth } from "../../contexts/AuthContext/useAuth";
+import { useAuth } from "./useAuth";
 
 export function RequireAuth({ children }: { children: JSX.Element }) {
   const auth = useAuth();

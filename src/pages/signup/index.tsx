@@ -3,7 +3,7 @@ import { useTabs } from "react-headless-tabs";
 import { Link } from "react-router-dom";
 import { toast, ToastContainer } from "react-toastify";
 import { Input } from "../../components/input";
-import { TabSelector } from "../../components/Tabs/TabSelector";
+import { TabSelector } from "../../components/tabs/TabSelector";
 import { api } from "../../services/api";
 import { AccessGlobalStyle, StyledAccess } from "../../styles/LoginSignupStyle";
 

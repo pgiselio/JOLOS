@@ -12,10 +12,10 @@ import { CriarNovaVagaPage } from "./pages/sys/vagas/criar-nova";
 import { VagaPage } from "./pages/sys/vagas/[id]";
 import { VagaCandidatoPage} from "./pages/sys/vagas/[id]/candidatos";
 import { VagaSobrePage } from "./pages/sys/vagas/[id]/sobre";
-import { VagasList } from "./pages/sys/vagas/vagasList";
+import { VagasList } from "./pages/sys/vagas";
 import SystemLayout  from "./pages/sys";
 import { LogoutPage } from "./pages/logout";
-import { RequireAuth } from "./components/RequireAuth";
+import { RequireAuth } from "./contexts/AuthContext/RequireAuth";
 
 export const AppRoutes = () => {
   return (

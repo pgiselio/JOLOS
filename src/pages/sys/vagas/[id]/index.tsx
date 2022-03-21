@@ -7,14 +7,20 @@ import { api } from "../../../../services/api";
 
 export function VagaPage() {
   let params = useParams();
-  const { data, isFetching} = useQuery<vaga[]>('vagas', async () =>{
-    const response = await api.get('/vaga/');
+  const { data, isFetching} = useQuery<vaga>('vaga', async () =>{
+    const response = await api.get(`/vaga/${params.id}`);
     return response.data;    
   });
-  const vagaData = data?.find(
-    (vaga) => vaga.id === Number.parseInt(params.id + "")
-  );
+  
+  const vagaData = data;
+
+  
   if (vagaData) {
+    const date = new Intl.DateTimeFormat(undefined, {
+      day: "2-digit",
+      month: "short",
+      year: "numeric",
+    }).format(new Date(vagaData.dataCriacao));
     return (
       <>
         <div className="tree-links">
@@ -48,7 +54,7 @@ export function VagaPage() {
                 <li>
                   <div className="vaga-page-info-item">
                     <i className="fas fa-calendar-day"></i>
-                    <span>{vagaData.dataCriacao}</span>
+                    <span>{date}</span>
                   </div>
                 </li>
                 <li>
@@ -72,7 +78,11 @@ export function VagaPage() {
         </section>
       </>
     );
-  } else {
+  } else if (!isFetching){
     return <Error404 />;
+  } else{
+    return (
+      <p>Carregando</p>
+    )
   }
 }

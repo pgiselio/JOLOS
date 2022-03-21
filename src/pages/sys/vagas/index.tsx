@@ -13,6 +13,8 @@ export function VagasList() {
   const { data, isFetching } = useQuery<vaga[]>("vagas", async () => {
     const response = await api.get("/vaga/");
     return response.data;
+  }, {
+    staleTime: 1000 * 60, // 1 minute to refetch
   });
 
   return (
