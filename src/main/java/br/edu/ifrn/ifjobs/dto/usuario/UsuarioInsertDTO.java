@@ -1,5 +1,7 @@
 package br.edu.ifrn.ifjobs.dto.usuario;
 
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 
@@ -7,6 +9,7 @@ import org.modelmapper.ModelMapper;
 
 import br.edu.ifrn.ifjobs.dto.Dto;
 import br.edu.ifrn.ifjobs.model.Usuario;
+import br.edu.ifrn.ifjobs.model.enums.TipoUsuario;
 
 public class UsuarioInsertDTO implements Dto<Usuario, UsuarioInsertDTO> {
 
@@ -17,7 +20,18 @@ public class UsuarioInsertDTO implements Dto<Usuario, UsuarioInsertDTO> {
     @NotBlank(message = "não informada")
     private String senha;
 
+    @Enumerated(EnumType.STRING)
+    private TipoUsuario tipoUsuario;
+
     private ModelMapper modelMapper;
+
+    public TipoUsuario getTipoUsuario() {
+        return tipoUsuario;
+    }
+
+    public void setTipoUsuario(TipoUsuario tipoUsuario) {
+        this.tipoUsuario = tipoUsuario;
+    }
 
     @Override
     public Usuario convertDtoToEntity() {
