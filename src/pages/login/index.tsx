@@ -16,9 +16,10 @@ export default function LoginPage() {
   const [isLoading, setIsLoading] = useState(false);
   const {
     control,
-    formState: { errors },
+    formState,
     handleSubmit,
   } = useForm({
+    mode: "onChange",
     defaultValues: {
       email: "jolos@jolos.com",
       password: "jolos",
@@ -97,8 +98,6 @@ export default function LoginPage() {
                 control={control}
                 rules={{
                   required: true,
-                  pattern:
-                    /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/,
                 }}
                 render={({ field }) => (
                   <Input
@@ -137,10 +136,7 @@ export default function LoginPage() {
             <Button
               type="submit"
               className="less-radius"
-              disabled={false}
-              {...((errors.password || errors.email || isLoading) && {
-                disabled: true,
-              })}
+              disabled={!formState.isValid || isLoading}
             >
               {isLoading ? (
                 <CircularProgress

@@ -49,13 +49,19 @@ export const StyledAccess = styled.main`
     display: flex;
     flex-direction: column;
     width: 100%;
-    row-gap: 16px;
+    row-gap: 12px;
     position: relative;
   }
   .inputs {
     display: flex;
     flex-direction: column;
     row-gap: 10px;
+  }
+  .input-error{
+    color: #cb0404;
+    padding: 0 3px;
+    padding-top: 1px;
+    font-size: 13px;
   }
   .pwrst-link {
     font-weight: 500;
@@ -161,17 +167,7 @@ export const StyledAccess = styled.main`
     user-select: none;
     color: var(--accent-color);
   }
-  .btn-next::after {
-    content: "\f061";
-    font-family: "Font Awesome 5 Free";
-    font-weight: 900;
-    -webkit-font-smoothing: antialiased;
-    display: inline-block;
-    font-style: normal;
-    font-variant: normal;
-    text-rendering: auto;
-    line-height: 1;
-
+  .btn-next .next-arrow{
     color: #fff;
     display: flex;
     justify-content: center;
@@ -183,16 +179,16 @@ export const StyledAccess = styled.main`
     background: var(--accent-color);
     transition: 100ms linear;
   }
-  .btn-next:hover {
+  .btn-next:not(:disabled):hover {
     color: var(--accent-color-active);
   }
-  .btn-next:hover::after {
+  .btn-next:not(:disabled):hover .next-arrow {
     background: var(--accent-color-active);
   }
-  .btn-next:active {
+  .btn-next:not(:disabled):active {
     color: var(--accent-color-active);
   }
-  .btn-next:active::after {
+  .btn-next:not(:disabled):active .next-arrow{
     transform: translateX(3px);
     background: var(--accent-color-active);
   }

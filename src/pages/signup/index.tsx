@@ -10,6 +10,7 @@ import { AccessGlobalStyle, StyledAccess } from "../../styles/LoginSignupStyle";
 import { Controller, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as Yup from "yup";
+import { CircularProgress } from "react-cssfx-loading/lib";
 
 type signupType = {
   email: string;
@@ -18,18 +19,18 @@ type signupType = {
 };
 
 export default function CadastroPage() {
-  const [selectedTab, setSelectedTab] = useTabs(["Aluno", "Empresa"], "Aluno");
+  const [selectedTab, setSelectedTab] = useTabs(["ALUNO", "EMPRESA"], "ALUNO");
   const [isLoading, setIsLoading] = useState(false);
 
   const validationSchema = Yup.object().shape({
     email: Yup.string()
       .email("Esse não é um endereço de e-mail válido!")
-      .required("O e-mail é obrigatório"),
+      .required("Este campo é obrigatório"),
     password: Yup.string()
-      .required("A senha é obrigatória")
+      .required("Este campo é obrigatório")
       .min(8, "A senha deve ter no mínimo 8 caracteres"),
     confirmPassword: Yup.string()
-      .required("Corfirmar senha é obrigatório")
+      .required("Este campo é obrigatório")
       .oneOf([Yup.ref("password")], "As senhas não coincidem"),
   });
   // const formOptions = { resolver: yupResolver(validationSchema) };
@@ -44,7 +45,7 @@ export default function CadastroPage() {
       password: "",
       confirmPassword: "",
     },
-    resolver: yupResolver(validationSchema)
+    resolver: yupResolver(validationSchema),
   });
 
   function onSubmit({ email, password, confirmPassword }: signupType) {
@@ -58,18 +59,21 @@ export default function CadastroPage() {
       })
       .then((valid) => {
         if (valid) {
-          formSubmit(email, password, confirmPassword);
+          formSubmit(email, password);
         }
       });
   }
-  async function formSubmit(email: string, password: string, confirmPassword: string){ 
+  async function formSubmit(email: string, password: string) {
     return await api
-      .post("/usuario/create", { email, senha: password})
+      .post("/usuario/create", { email, senha: password })
       .catch(function () {
-        toast.error("O email cadastrado já existe!", {});
+        toast.error(
+          "O e-mail informado já se encontra cadastrado no sistema!",
+          {}
+        );
       })
       .finally(() => setIsLoading(false));
-  };
+  }
   return (
     <StyledAccess>
       <ToastContainer
@@ -106,14 +110,14 @@ export default function CadastroPage() {
                   style={{ display: "flex", height: "35px", columnGap: "10px" }}
                 >
                   <TabSelector
-                    isActive={selectedTab === "Aluno"}
-                    onClick={() => setSelectedTab("Aluno")}
+                    isActive={selectedTab === "ALUNO"}
+                    onClick={() => setSelectedTab("ALUNO")}
                   >
                     Aluno
                   </TabSelector>
                   <TabSelector
-                    isActive={selectedTab === "Empresa"}
-                    onClick={() => setSelectedTab("Empresa")}
+                    isActive={selectedTab === "EMPRESA"}
+                    onClick={() => setSelectedTab("EMPRESA")}
                   >
                     Empresa
                   </TabSelector>
@@ -128,48 +132,56 @@ export default function CadastroPage() {
                   style={{ paddingRight: "10px" }}
                 >
                   <section className="inputs">
-                    <Controller
-                      name="email"
-                      control={control}
-                      render={({ field }) => (
-                        <Input
-                          type="text"
-                          id="email"
-                          placeholder="E-mail"
-                          {...field}
-                        />
-                      )}
-                    />
-                    <p>{errors.email?.message}</p>
-                    <Controller
-                      name="password"
-                      control={control}
-                      render={({ field }) => (
-                        <Input
-                          type="password"
-                          id="password"
-                          placeholder="Senha"
-                          {...field}
-                        />
-                      )}
-                    />
-                    <p>{errors.password?.message}</p>
-                    <Controller
-                      name="confirmPassword"
-                      control={control}
-                      render={({ field }) => (
-                        <Input
-                          type="password"
-                          id="passwordconfirm"
-                          placeholder="Confirmar senha"
-                          {...field}
-                        />
-                      )}
-                    />
-                    <p>{errors.confirmPassword?.message}</p>
+                    <div>
+                      <Controller
+                        name="email"
+                        control={control}
+                        render={({ field }) => (
+                          <Input
+                            type="text"
+                            id="email"
+                            placeholder="E-mail"
+                            {...field}
+                          />
+                        )}
+                      />
+                      <p className="input-error">{errors.email?.message}</p>
+                    </div>
+                    <div>
+                      <Controller
+                        name="password"
+                        control={control}
+                        render={({ field }) => (
+                          <Input
+                            type="password"
+                            id="password"
+                            placeholder="Senha"
+                            {...field}
+                          />
+                        )}
+                      />
+                      <p className="input-error">{errors.password?.message}</p>
+                    </div>
+                    <div>
+                      <Controller
+                        name="confirmPassword"
+                        control={control}
+                        render={({ field }) => (
+                          <Input
+                            type="password"
+                            id="passwordconfirm"
+                            placeholder="Confirmar senha"
+                            {...field}
+                          />
+                        )}
+                      />
+                      <p className="input-error">
+                        {errors.confirmPassword?.message}
+                      </p>
+                    </div>
                   </section>
                   <div className="info-message">
-                    {selectedTab === "Aluno" ? (
+                    {selectedTab === "ALUNO" ? (
                       <span>
                         O cadastro continuará após a confirmação do e-mail,
                         então certifique-se de informar um e-mail válido
@@ -184,13 +196,21 @@ export default function CadastroPage() {
               </div>
             </div>
             <div className="destaque">
-              <div className="imagem-destaque">
-                <img src="../images/undraw_typewriter_re_u9i2.svg" alt="" />
-              </div>
-              {selectedTab === "Aluno" ? (
-                <span>Sua conta a três passos de você</span>
+              {selectedTab === "ALUNO" ? (
+                <>
+                  <div className="imagem-destaque">
+                    <img src="../images/undraw_typewriter_re_u9i2.svg" alt="" />
+                  </div>
+
+                  <span>Sua conta a três passos de você</span>
+                </>
               ) : (
-                <span>Faça o pré-cadastro da sua empresa</span>
+                <>
+                  <div className="imagem-destaque">
+                    <img src="../images/undraw_connected_re_lmq2.svg" alt="" />
+                  </div>
+                  <span>Faça o pré-cadastro da sua empresa</span>
+                </>
               )}
             </div>
           </div>
@@ -211,9 +231,22 @@ export default function CadastroPage() {
                 title="Confirmar cadastro"
                 form="cadastroStep1"
                 id="cadastroSubmit"
-                {... isLoading && {disabled: true}}
+                disabled={isLoading}
               >
-                Próximo
+                <span>Próximo</span>
+                <span className="next-arrow">
+                  {isLoading ? (
+                    <CircularProgress
+                      color="white"
+                      height="2em"
+                      width="2em"
+                      duration="1.5s"
+                      style={{ position: "absolute" }}
+                    />
+                  ) : (
+                    <i className="fas fa-arrow-right"></i>
+                  )}
+                </span>
               </button>
             </div>
           </div>
