@@ -16,6 +16,9 @@ export const InputStyled = styled.input<InputProps>`
     border-color: var(--accent-color);
     box-shadow: 0 0 0 0.2rem rgba(45, 143, 65, 0.308);
   }
+  &.danger{
+    border-color: #cb0404;
+  }
 `;
 
 export const InputPassStyled = styled(InputStyled)`

@@ -24,7 +24,7 @@ export default function CadastroPage() {
 
   const validationSchema = Yup.object().shape({
     email: Yup.string()
-      .email("Esse não é um endereço de e-mail válido!")
+      .email("Endereço de e-mail inválido")
       .required("Este campo é obrigatório"),
     password: Yup.string()
       .required("Este campo é obrigatório")
@@ -142,6 +142,7 @@ export default function CadastroPage() {
                             id="email"
                             placeholder="E-mail"
                             {...field}
+                            {...errors.email && {className: "danger"}}
                           />
                         )}
                       />
@@ -157,6 +158,7 @@ export default function CadastroPage() {
                             id="password"
                             placeholder="Senha"
                             {...field}
+                            {...errors.password && {className: "danger"}}
                           />
                         )}
                       />
@@ -172,6 +174,7 @@ export default function CadastroPage() {
                             id="passwordconfirm"
                             placeholder="Confirmar senha"
                             {...field}
+                            {...errors.confirmPassword && {className: "danger"}}
                           />
                         )}
                       />
