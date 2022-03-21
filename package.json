@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "engines": {
-    "node" : "16.x"
+    "node": "16.x"
   },
   "dependencies": {
     "@hookform/resolvers": "^2.8.8",
@@ -31,7 +31,7 @@
     "yup": "^0.32.11"
   },
   "devDependencies": {
-    "@types/styled-components": "^5.1.23"
+    "@types/styled-components": "^5.1.24"
   },
   "scripts": {
     "start": "react-scripts start",
