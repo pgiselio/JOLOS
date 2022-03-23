@@ -12,7 +12,7 @@ export default function VagaPage() {
   const { data, isFetching } = useQuery<vaga>([
     "vagas", params.id],
     async () => {
-      const response = await api.get(`/vaga/${params.id}`).catch(() => null);
+      const response = await api.get(`/vaga/${params.id}`).catch((error) => error.response.status === 400 ? null : error);
       return response?.data;
     },
     {
