@@ -13,7 +13,7 @@ export function ProfilePic(props: ProfilePicType){
             <span className="default-profile">
                 <img src={defaultProfilePic} alt="Foto de perfil padrão"/>
             </span>
-            <span className="pp-border" style={props.style}></span>
+            <span className="pp-border"></span>
             {
                 props.url &&
                 <img className="img-perfil" src={props.url} alt=""/>

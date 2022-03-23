@@ -9,8 +9,8 @@ import { ProfilePic } from "../../../../components/profile-pic/profile-pic";
 
 export default function VagaPage() {
   let params = useParams();
-  const { data, isFetching } = useQuery<vaga>(
-    "vaga",
+  const { data, isFetching } = useQuery<vaga>([
+    "vagas", params.id],
     async () => {
       const response = await api.get(`/vaga/${params.id}`).catch(() => null);
       return response?.data;

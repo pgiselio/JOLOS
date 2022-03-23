@@ -25,35 +25,40 @@ const ForumPage = lazy(() => import("./pages/sys/forum"));
 export const AppRoutes = () => {
   return (
     <>
-      <Suspense fallback={<div>Carregando...</div>}>
-        <Routes>
+      <Routes>
+        <Route path="*" element={<Error404 />} />
+        <Route path="/" element={<LandingPage />} />
+        <Route path="entrar" element={<LoginPage />} />
+        <Route path="cadastro" element={<CadastroPage />} />
+        <Route path="logout" element={<LogoutPage />} />
+        <Route
+          path="sys"
+          element={
+            <RequireAuth>
+              <SystemLayout />
+            </RequireAuth>
+          }
+        >
           <Route path="*" element={<Error404 />} />
-          <Route path="/" element={<LandingPage />} />
-          <Route path="entrar" element={<LoginPage />} />
-          <Route path="cadastro" element={<CadastroPage />} />
-          <Route path="logout" element={<LogoutPage />} />
-          <Route
-            path="sys"
-            element={
-              <RequireAuth>
-                <SystemLayout />
-              </RequireAuth>
-            }
-          >
-            <Route path="*" element={<Error404 />} />
-            <Route index element={<HomePage />} />
-            <Route path="profile" element={<ProfilePage />} />
-            <Route path="vagas" element={<VagasList />} />
-            <Route path="vagas/criar" element={<CriarNovaVagaPage />} />
-            <Route path="vagas/:id" element={<VagaPage />}>
-              <Route path="" element={<VagaSobrePage />} />
-              <Route path="candidatos" element={<VagaCandidatoPage />} />
-            </Route>
-            <Route path="forum" element={<ForumPage />} />
-            <Route path="settings/*" element={<SettingsPage />} />
+          <Route index element={<HomePage />} />
+          <Route path="profile" element={<ProfilePage />} />
+          <Route path="vagas" element={<VagasList />} />
+          <Route path="vagas/criar" element={<CriarNovaVagaPage />} />
+          <Route path="vagas/:id" element={<VagaPage />}>
+            <Route path="" element={<VagaSobrePage />} />
+            <Route path="candidatos" element={<VagaCandidatoPage />} />
           </Route>
-        </Routes>
-      </Suspense>
+          <Route
+            path="forum"
+            element={
+              <Suspense fallback={<div>Carregando...</div>}>
+                <ForumPage />
+              </Suspense>
+            }
+          />
+          <Route path="settings/*" element={<SettingsPage />} />
+        </Route>
+      </Routes>
     </>
   );
 };

@@ -86,13 +86,13 @@ export default function ProfilePage() {
                   <div className="contacts">
                     <ul className="essential-info">
                       <li>
-                        <a href="#">
+                        <a href="#oi">
                           <i className="fas fa-envelope"></i>{" "}
                           <span>email@seusite.com.br</span>
                         </a>
                       </li>
                       <li>
-                        <a href="#">
+                        <a href="#oi">
                           <i className="fas fa-phone-alt"></i>{" "}
                           <span>(84) 0000-0000</span>
                         </a>
@@ -105,22 +105,22 @@ export default function ProfilePage() {
                 <BoxContent>
                   <ul className="social-info">
                     <li>
-                      <a href="#">
+                      <a href="#oi" target="_blank">
                         <i className="fab fa-linkedin"></i>
                       </a>
                     </li>
                     <li>
-                      <a href="#">
+                      <a href="#oi" target="_blank">
                         <i className="fab fa-facebook"></i>
                       </a>
                     </li>
                     <li>
-                      <a href="#">
+                      <a href="#oi" target="_blank">
                         <i className="fab fa-instagram"></i>
                       </a>
                     </li>
                     <li>
-                      <a href="#">
+                      <a href="#oi" target="_blank">
                         <i className="fab fa-twitter"></i>
                       </a>
                     </li>

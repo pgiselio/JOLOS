@@ -61,7 +61,7 @@ export default function ForumPage() {
                   </a>
                 </div>
                 <div className="ask">
-                  <a href="#" className="pessoa-forum-group">
+                  <a href="#oi" className="pessoa-forum-group">
                     <img
                       src="../../images/male-avatar-3.png"
                       alt="Imagem de Perfil"

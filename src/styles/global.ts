@@ -123,8 +123,8 @@ export const GlobalStyle = createGlobalStyle`
 
   .lbl label {
     font-size: 10pt;
-    font-weight: 400;
-    color: #070707;
+    font-weight: 500;
+    color: var(--text-b);
     padding: 3px 0;
   }
 

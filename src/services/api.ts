@@ -7,7 +7,7 @@ export const api = axios.create({
 
 api.interceptors.request.use(
   (config) => {
-    const user = getUserLocalStorage();
+    let user = getUserLocalStorage();
     if (user) {
       config.headers = {
         Authorization: user?.token,

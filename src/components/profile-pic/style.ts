@@ -30,12 +30,12 @@ export const StyledProfilePic = styled.div`
 
   .pp-border {
     box-shadow: inset 0 0 0 1px rgb(221, 221, 221);
-    border-radius: 50%;
+    border-radius: inherit;
     display: flex;
     position: absolute;
     top: 0;
-    height: 100%;
-    width: 100%;
+    height: inherit;
+    width: inherit;
     pointer-events: none;
   }
 `;

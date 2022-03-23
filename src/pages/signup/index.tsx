@@ -103,7 +103,7 @@ export default function CadastroPage() {
           </div>
           <div className="form-destaque-grid">
             <div className="form">
-              <div style={{ display: "flex", justifyContent: "space-between" }}>
+              <div style={{ display: "flex", justifyContent: "space-between" , flexWrap: "wrap"}}>
                 <h2 className="desc">Criar conta</h2>
 
                 <div

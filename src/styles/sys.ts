@@ -32,22 +32,7 @@ export const SysGlobalStyle = createGlobalStyle`
   z-index: 14;
   pointer-events: none;
 }
-.header-elements{
-  position: relative;
-}
-.header-elements::after{
-    content: "";
-    position: absolute;
-    bottom: -10.2px;
-    height: 10px;
-    width: 10px;    
-    border-left: 1px solid;
-    border-top: 1px solid;
-    border-color: ${props => props.theme.colors.systemMenu.border};
-    box-shadow: -4px -3px 0 2px var(--navs-bg);
-    z-index: 20;
-    pointer-events: none;
-}
+
 body.toggle-sidemenu .main {
   pointer-events: none;
 }
@@ -144,10 +129,7 @@ body.remove-transbar .three-bars-btn *{
     border-color: ${props => props.theme.colors.systemMenu.border};
     border-top-left-radius: 10px;
   }
-  .header-elements::after{
-    border-color: ${props => props.theme.colors.systemMenu.border};
-    border-top-left-radius: 10px;
-  }
+  
 
   body.toggle-sidemenu .main {
     pointer-events: all;

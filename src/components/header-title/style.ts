@@ -7,16 +7,13 @@ export const HeaderTitleStyle = styled.div`
   padding: 0 20px;
   justify-content: center;
   /*border-bottom: 1px solid var(--outline-color);*/
-  box-shadow: 0 1px 4px rgb(0 0 0 / 8%);
-  position: sticky;
   z-index: 10;
   border-bottom: 1px solid ${(props) => props.theme.colors.systemMenu.border};
   top: var(--top-bar-height);
-  background: var(--navs-bg-opacity);
 
   h2 {
     color: var(--accent-color);
-    font-size: 18px;
+    font-size: 16px;
   }
   .container {
     display: flex;
@@ -27,6 +24,10 @@ export const HeaderTitleStyle = styled.div`
     max-width: 1280px;
   }
   @media (min-width: 766px) {
+    position: sticky;
+    background: var(--navs-bg-opacity);
+    box-shadow: 0 1px 4px rgb(0 0 0 / 8%);
+
     .header-section {
       height: 80px;
     }

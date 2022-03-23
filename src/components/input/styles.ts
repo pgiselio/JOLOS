@@ -12,6 +12,8 @@ export const InputStyled = styled.input<InputProps>`
   padding-left: ${(props) => (props.hasIcon ? "40px" : "10px")};
   outline: 0;
   transition: 0.2s linear;
+  color: var(--text-a);
+  background: #ffffff1a;
   &:focus {
     border-color: var(--accent-color);
     box-shadow: 0 0 0 0.2rem rgba(45, 143, 65, 0.308);
