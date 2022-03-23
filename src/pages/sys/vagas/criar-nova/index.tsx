@@ -1,8 +1,15 @@
+import { Editor, EditorState } from "draft-js";
+import { useState } from "react";
+
 import { Box, BoxContent, BoxTitle } from "../../../../components/box";
 import { Button } from "../../../../components/button";
 import { Input } from "../../../../components/input";
 
 export function CriarNovaVagaPage() {
+  const [editorState, setEditorState] = useState(() =>
+    EditorState.createEmpty()
+  );
+
   function counter() {
     const descriptionVaga: any = document.querySelector("#desc");
     let countChar: any = document.querySelector("#count");
@@ -63,7 +70,7 @@ export function CriarNovaVagaPage() {
               </div>
               <div className="lbl">
                 <label htmlFor="descriptionVaga">Sobre a vaga: </label>
-
+                <Editor editorState={editorState} onChange={setEditorState} />
                 <div id="descriptionVaga"></div>
                 <textarea
                   style={{

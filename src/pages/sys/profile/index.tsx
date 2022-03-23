@@ -3,7 +3,7 @@ import { Button } from "../../../components/button";
 import { ProfilePic } from "../../../components/profile-pic/profile-pic";
 import "./profilePage.scss";
 
-export function ProfilePage() {
+export default function ProfilePage() {
   return (
     <>
       <section>

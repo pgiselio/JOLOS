@@ -1,3 +1,4 @@
+import { useAuth } from '../../contexts/AuthContext/useAuth';
 import { ProfilePic } from '../profile-pic/profile-pic';
 import { SidebarItem } from './sidebar-item';
 import { SidebarAside } from './style';
@@ -11,14 +12,14 @@ export function SidebarList(){
         }  
     }
     checkSidebarState();
-
+    const auth = useAuth();
     return(
         <SidebarAside className="side-bar">
             <div className="side-bar-container">
                 <div className="perfil">
                     <ProfilePic/>
-                    <h3 className="name-perfil">testando 123</h3>
-                    <span className="detail">aaaaa@gmail.com</span>
+                    <h3 className="name-perfil">FALTA DTO</h3>
+                    <span className="detail">{auth?.email}</span>
                 </div>
 
                 <nav className="sidebar-items">

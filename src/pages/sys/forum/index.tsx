@@ -3,7 +3,7 @@ import { Button } from "../../../components/button";
 import { HeaderTitle } from "../../../components/header-title";
 import { OutsetHeadersCornerRadius } from "../../../components/outset-radius-to-headers";
 
-export function ForumPage() {
+export default function ForumPage() {
   return (
     <div id="forum-page">
       <section>

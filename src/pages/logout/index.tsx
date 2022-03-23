@@ -3,7 +3,7 @@ import { Navigate } from "react-router-dom";
 import { useAuth } from "../../contexts/AuthContext/useAuth";
 import { StyledAccess } from "../../styles/LoginSignupStyle";
 
-export function LogoutPage() {
+export default function LogoutPage() {
   const auth = useAuth();
 
   if (!auth.email) {

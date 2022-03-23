@@ -1,7 +1,7 @@
 import { LandNavBar } from "./navbar";
 import { LandingStyle } from "./style";
 
-export function LandingPage() {
+export default function LandingPage() {
     window.location.href = "/entrar";
     return (
         <LandingStyle id="landing-page">

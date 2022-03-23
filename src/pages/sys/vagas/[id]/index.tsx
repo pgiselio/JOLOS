@@ -1,4 +1,4 @@
-import { Link, Outlet, useParams } from "react-router-dom";
+import { Outlet, useParams } from "react-router-dom";
 import Error404 from "../../../404";
 import { TabsMenu, TabsMenuItem } from "../../../../components/tabs-menu";
 import { vaga } from "../vagaType";
@@ -7,7 +7,7 @@ import { api } from "../../../../services/api";
 import { Skeleton } from "../../../../components/skeleton-load";
 import { ProfilePic } from "../../../../components/profile-pic/profile-pic";
 
-export function VagaPage() {
+export default function VagaPage() {
   let params = useParams();
   const { data, isFetching } = useQuery<vaga>(
     "vaga",
