@@ -29,7 +29,7 @@ public class JWTTokenAutenticacaoService {
 
     public void addAuthentication(HttpServletResponse response,
             String username) throws IOException {
-        String JWT = Jwts.builder()
+        final String JWT = Jwts.builder()
                 .setSubject(username)
                 .setExpiration(new Date(System.currentTimeMillis() + EXPIRATION_TIME))
                 .signWith(SignatureAlgorithm.HS512, SECRET).compact();

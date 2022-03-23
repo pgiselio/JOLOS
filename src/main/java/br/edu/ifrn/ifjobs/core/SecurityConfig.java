@@ -12,7 +12,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
 import org.springframework.web.cors.CorsConfiguration;
 
-import br.edu.ifrn.ifjobs.model.enums.StatusUsuario;
+import br.edu.ifrn.ifjobs.model.enums.TipoUsuario;
 import br.edu.ifrn.ifjobs.service.ImplementacaoUserDatailsService;
 
 @Configuration
@@ -27,11 +27,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 security.cors().configurationSource(request -> new CorsConfiguration().applyPermitDefaultValues()).and()
                                 .csrf().csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse())
                                 .disable().authorizeRequests()
-                                .antMatchers("/").permitAll().and()
-                                .authorizeRequests().antMatchers("/usuario/create")
-                                .permitAll().and().authorizeRequests()
-                                .antMatchers("/entrar").hasAuthority(StatusUsuario.CONCLUIDO.toString()).anyRequest()
-                                .authenticated()
+                                .antMatchers("/").permitAll()
+                                .antMatchers("/usuario/create").permitAll()
+                                .antMatchers("/aluno/**").hasAuthority(TipoUsuario.ALUNO.toString())
+                                .antMatchers("/empresa/**")
+                                .hasAnyAuthority(TipoUsuario.EMPRESA.toString(), TipoUsuario.ADMIN.toString())
+                                .anyRequest().authenticated()
                                 .and().addFilterBefore(new JWTLoginFilter("/entrar", authenticationManager()),
                                                 UsernamePasswordAuthenticationFilter.class)
                                 .addFilterBefore(new JWTAPIAutenticacaoFilter(),

@@ -10,6 +10,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import br.edu.ifrn.ifjobs.model.Usuario;
+import br.edu.ifrn.ifjobs.model.enums.StatusUsuario;
 import br.edu.ifrn.ifjobs.repository.UsuarioRepository;
 
 @Service
@@ -23,6 +24,10 @@ public class ImplementacaoUserDatailsService implements UserDetailsService {
         Usuario usuario = usuarioRepository.findUsuarioByEmail(username);
         Optional<Usuario> optional = Optional.ofNullable(usuario);
         usuario = optional.orElseThrow(() -> new UsernameNotFoundException("Usuário não foi encontrado!"));
+
+        if (usuario.getStatus().equals(StatusUsuario.DESATIVADO)) {
+            return null;
+        }
 
         return new User(usuario.getUsername(), usuario.getPassword(), usuario.getAuthorities());
     }

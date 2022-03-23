@@ -49,6 +49,19 @@ public class UsuarioController {
         return new ResponseEntity<>(usuarioSalvo, HttpStatus.CREATED);
     }
 
+    @GetMapping("/{email}")
+    public ResponseEntity<Usuario> buscaPorEmail(@PathVariable(name = "email") String email) {
+        Usuario usuario;
+
+        try {
+            usuario = usuarioService.buscaPorEmail(email);
+        } catch (UsuarioNaoEncontradoException e) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
+        }
+
+        return ResponseEntity.ok(usuario);
+    }
+
     @GetMapping("/{id}")
     public ResponseEntity<UsuarioLoginGetDTO> buscarPorId(@PathVariable(name = "id") int id) {
         Usuario usuario;

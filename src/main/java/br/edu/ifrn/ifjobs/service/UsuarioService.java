@@ -34,7 +34,7 @@ public class UsuarioService {
     @Autowired
     private UsuarioRepository usuarioRepository;
 
-    private Usuario usuarioSalvo;
+    private Usuario usuarioGlobal;
 
     @Autowired
     private EmailService emailService;
@@ -46,6 +46,15 @@ public class UsuarioService {
         Optional<UsuarioInsertDTO> optional;
         optional = Optional.ofNullable(dto);
 
+        processoDeSalvarUsuarioeDispararEmail(optional);
+
+        Optional<Usuario> usuarioOptional;
+        usuarioOptional = Optional.ofNullable(usuarioGlobal);
+
+        return usuarioOptional.orElseThrow(() -> new UsuarioNaoCadastradoException("Usuário não encontrado"));
+    }
+
+    private void processoDeSalvarUsuarioeDispararEmail(Optional<UsuarioInsertDTO> optional) {
         optional.ifPresent(usuarioDto -> {
             Usuario usuario = usuarioDto.convertDtoToEntity();
             Email email = new Email();
@@ -54,10 +63,8 @@ public class UsuarioService {
             mensagemEmailBaseadoNoTipoUsuario(usuarioDto.getTipoUsuario(), email);
             enviaEmail(email);
 
-            usuarioSalvo = usuarioRepository.save(usuario);
+            usuarioGlobal = usuarioRepository.save(usuario);
         });
-
-        return usuarioSalvo;
     }
 
     private void configPadraoAoCriarUsuario(Usuario usuario, Email email) {
@@ -83,11 +90,11 @@ public class UsuarioService {
             configPadraoAoCriarUsuario(user, email);
             enviaEmail(email);
 
-            usuarioSalvo = usuarioRepository.save(user);
+            usuarioGlobal = usuarioRepository.save(user);
         });
 
         Optional<Usuario> optional2;
-        optional2 = Optional.ofNullable(usuarioSalvo);
+        optional2 = Optional.ofNullable(usuarioGlobal);
 
         return optional2.orElseThrow(() -> new UsuarioNaoCadastradoException("Usuário não cadastrado!"));
     }
@@ -98,10 +105,12 @@ public class UsuarioService {
                 email.setMensagem("""
                         <h1>Car@ estudante...</h1>
                         """);
+                break;
             case EMPRESA:
                 email.setMensagem("""
                         <h1>Car@ empresa</h1>
                         """);
+                break;
             default:
                 throw new IllegalArgumentException("Tipo de usuário inválido para criação!");
         }
@@ -128,6 +137,23 @@ public class UsuarioService {
     public Usuario buscaPorId(int id) throws UsuarioNaoEncontradoException {
         Optional<Usuario> usuarioFindById = usuarioRepository.findById(id);
         return usuarioFindById.orElseThrow(() -> new UsuarioNaoEncontradoException("Usuário não encontrado!!"));
+    }
+
+    public Usuario buscaPorEmail(String email) throws UsuarioNaoEncontradoException {
+        Optional<String> emailOptional;
+        emailOptional = Optional.ofNullable(email);
+
+        emailOptional.ifPresent(emailUser -> {
+            final Usuario usuarioBuscadoPorEmail;
+            usuarioBuscadoPorEmail = usuarioRepository.findUsuarioByEmail(emailUser);
+
+            usuarioGlobal = usuarioBuscadoPorEmail;
+        });
+
+        Optional<Usuario> usuarioOptional;
+        usuarioOptional = Optional.ofNullable(usuarioGlobal);
+
+        return usuarioOptional.orElseThrow(() -> new UsuarioNaoEncontradoException("Usuário não encontrado!"));
     }
 
     public List<Usuario> getAll() {
