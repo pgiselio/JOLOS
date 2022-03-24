@@ -18,7 +18,7 @@ public class Arquivo implements Serializable {
     @Column(nullable = false)
     private String tipoArquivo;
 
-    @Column(nullable = false)
+    @Column(nullable = false, columnDefinition = "CLOB")
     private byte[] dados;
 
     public Arquivo() {
