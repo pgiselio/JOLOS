@@ -57,7 +57,9 @@ public class UsuarioService {
     private void processoDeSalvarUsuarioeDispararEmail(Optional<UsuarioInsertDTO> optional) {
         optional.ifPresent(usuarioDto -> {
             Usuario usuario = usuarioDto.convertDtoToEntity();
+
             Email email = new Email();
+            email.setAssunto("IF Jobs - Confirmação de cadastro");
 
             configPadraoAoCriarUsuario(usuario, email);
             mensagemEmailBaseadoNoTipoUsuario(usuarioDto.getTipoUsuario(), email);

@@ -36,12 +36,10 @@ public class UsuarioController {
     @CrossOrigin("*")
     @PostMapping("/create")
     public ResponseEntity<Usuario> createAluno(@RequestBody @Valid UsuarioInsertDTO dto) {
-        Usuario usuario = dto.convertDtoToEntity();
-
         Usuario usuarioSalvo;
 
         try {
-            usuarioSalvo = usuarioService.create(usuario);
+            usuarioSalvo = usuarioService.create(dto);
         } catch (UsuarioNaoCadastradoException e) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
         }
