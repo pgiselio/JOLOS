@@ -1,4 +1,5 @@
 import { useQuery } from "react-query";
+import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../contexts/AuthContext/useAuth";
 import { api } from "../../services/api";
 import { ProfilePic } from "../profile-pic/profile-pic";
@@ -17,31 +18,44 @@ export function SidebarList() {
   checkSidebarState();
   const auth = useAuth();
 
-  const { data, isFetching } = useQuery(
+  const { data } = useQuery(
     ["meUser"],
     async () => {
       const response = await api
-        .get(`/usuario/${auth?.email}`)
-        .catch((error) => (error.response.status === 400 ? null : error));
-      console.log(response?.data);
+        .get(`/usuario/email/${auth?.email}`)
+        .catch((error) => ((error.response.status === 401 || error.response.status === 403) ? (
+          window.location.href = window.location.href
+        ) : error));
       return response?.data;
     },
     {
-      refetchOnWindowFocus: false,
+      refetchOnWindowFocus: true,
+      staleTime: 1000 * 60, // 1 minute
+      refetchInterval: 1000 * 60 * 5, // 5 minutes to refetch automatically
     }
   );
+  function nomePessoa(): string {
+    if (data?.aluno) {
+      return data.aluno.dadosPessoa.nome;
+    } else if (data?.empresa) {
+      return data.empresa.dadosPessoa.nome;
+    } else {
+      return "ADMIN";
+    }
+  }
   return (
     <SidebarAside className="side-bar">
       <div className="side-bar-container">
-        <div className="perfil">
+        <div className="min-perfil">
           <ProfilePic />
-          {isFetching ? (
-            <Skeleton variant="text" width="100px" height="35px" />
-          ) : (
-            <h2>{data?.nome}</h2>
-          )}
-          <h3 className="name-perfil"></h3>
-          <span className="detail">{auth?.email}</span>
+          <div className="min-perfil-details">
+            {!data ? (
+              <Skeleton variant="text" width="120px" height="23px" />
+            ) : (
+              <h3 className="min-perfil-name">{nomePessoa()}</h3>
+            )}
+            <span className="min-perfil-detail">{auth?.email}</span>
+          </div>
         </div>
 
         <nav className="sidebar-items">

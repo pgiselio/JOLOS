@@ -59,13 +59,19 @@ export default function CadastroPage() {
       })
       .then((valid) => {
         if (valid) {
-          formSubmit(email, password);
+          formSubmit(email, password);  
         }
       });
   }
   async function formSubmit(email: string, password: string) {
     return await api
       .post("/usuario/create", { email, senha: password, tipoUsuario: selectedTab})
+      .then((response)=>{
+        if(response.status === 201){
+          toast.success("Cadastro realizado com sucesso!");
+          toast.success("Verifique o seu e-mail");
+        }
+      })
       .catch(() => {
         toast.error(
           "O e-mail informado já se encontra cadastrado no sistema!",

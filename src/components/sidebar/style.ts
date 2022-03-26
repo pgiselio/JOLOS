@@ -25,11 +25,12 @@ export const SidebarAside = styled.aside`
     padding-top: 30px;
   }
 
-  .perfil {
+  .min-perfil {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    gap: 10px;
   }
 
   .profile-pic {
@@ -38,9 +39,14 @@ export const SidebarAside = styled.aside`
     border-radius: 100%;
     transition: height 0.3s, width 0.3s ease;
   }
-
-  .name-perfil,
-  .perfil .detail {
+  .min-perfil-details{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+  }
+  .min-perfil-name,
+  .min-perfil .min-perfil-detail {
     color: var(--text-a);
     width: 100%;
     text-align: center;
@@ -50,13 +56,12 @@ export const SidebarAside = styled.aside`
     white-space: nowrap;
     text-transform: capitalize;
     padding: 0 10px;
-    padding-top: 10px;
     font-size: 15px;
     font-weight: 500;
     opacity: 1;
     transition: height 0.5s, opacity 0.5s, padding 0.5s ease;
   }
-  .perfil .detail {
+  .min-perfil .min-perfil-detail {
     color: var(--text-b);
     font-size: 13px;
     text-transform: none;
@@ -119,8 +124,8 @@ export const SidebarAside = styled.aside`
       height: 60px;
     }
 
-    body.toggle-sidemenu & .name-perfil,
-    body.toggle-sidemenu & .perfil .detail {
+    body.toggle-sidemenu & .min-perfil-name,
+    body.toggle-sidemenu & .min-perfil .min-perfil-detail {
       opacity: 0;
       height: 0;
       padding: 0;
