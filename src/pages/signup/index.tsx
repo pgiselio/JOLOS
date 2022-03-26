@@ -65,8 +65,8 @@ export default function CadastroPage() {
   }
   async function formSubmit(email: string, password: string) {
     return await api
-      .post("/usuario/create", { email, senha: password })
-      .catch(function () {
+      .post("/usuario/create", { email, senha: password, tipoUsuario: selectedTab})
+      .catch(() => {
         toast.error(
           "O e-mail informado já se encontra cadastrado no sistema!",
           {}
