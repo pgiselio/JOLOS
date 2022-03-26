@@ -91,3 +91,28 @@ export const darkTheme: DefaultTheme = {
     outlineColor: "#555",
   },
 };
+
+export const midnightBlue: DefaultTheme = {
+  borderRadius: "5px",
+  pallets: {
+    ...defaultColors, 
+  },
+  colors: {
+    main: defaultColors.green[6],
+    mainActive: defaultColors.green[7],
+    secondary: "magenta",
+    bodyBackground: "28 27 34",
+    systemMenu: {
+      border: "#2b2936",
+      background: "28 27 34",
+      link: "#000",
+      icon: "",
+    },
+    textA: "#fafafa",
+    textB: "#888",
+    textC: "#fff",
+    primaryBg: "#212126",
+    secondaryBg: "#26252b",
+    outlineColor: "#2b2936",
+  },
+};

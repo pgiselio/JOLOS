@@ -5,7 +5,7 @@ import { Header } from "../../components/header/header";
 import { SidebarList } from "../../components/sidebar/sidebar-list";
 import { GlobalStyle } from "../../styles/global";
 import { SysGlobalStyle } from "../../styles/sys";
-import { darkTheme, lightTheme } from "../../styles/themes";
+import { darkTheme, lightTheme, midnightBlue } from "../../styles/themes";
 
 export default function SystemLayout() {
   const [theme, setTheme] = useState(localStorage.getItem("theme") || "light");
@@ -15,7 +15,7 @@ export default function SystemLayout() {
   }, []);
   return (
     <>
-      <ThemeProvider theme={theme === "light" ? lightTheme : darkTheme}>
+      <ThemeProvider theme={theme === "light" ? lightTheme : midnightBlue}>
         <GlobalStyle />
         <SysGlobalStyle />
         <Header theme={theme} setTheme={setTheme} />

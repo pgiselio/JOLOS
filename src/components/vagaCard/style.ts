@@ -70,14 +70,8 @@ export const VagaCardStyle = styled.div`
     height: 2px;
     border-radius: 50%;
   }
-  .vaga-status {
-    color: #b3001e;
-    font-weight: 500;
-  }
-  .vaga-status.enabled {
-    color: green;
-  }
 
+  // See vaga-status on globalSysStyle
   
   .vaga-text {
     position: relative;
@@ -112,7 +106,8 @@ export const VagaCardStyle = styled.div`
   .vagas-candidatos {
     font-size: 14px;
     font-weight: 500;
-    background: #f1f1f1;
+    /* background: #f1f1f1; */
+    background: var(--primary-bg);
     padding: 8px;
     border-radius: 5px;
     margin-right: 10px;

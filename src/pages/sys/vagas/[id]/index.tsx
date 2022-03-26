@@ -54,7 +54,9 @@ export default function VagaPage() {
           {isFetching ? (
             <Skeleton variant="text" width="60px" height="25px" />
           ) : (
-            <span className={"vaga-status" + vagaData?.status === "ATIVO" ? " enabled" : ""}>
+            <span className={
+              "vaga-status " + (vagaData?.status === "ATIVO" && "enabled")
+            }>
               {vagaData?.status ? "ATIVO" : "INATIVO"}
             </span>
           )}

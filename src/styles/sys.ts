@@ -27,7 +27,7 @@ export const SysGlobalStyle = createGlobalStyle`
   width: 100%;
   border-top: 1px solid;
   border-left: none;
-  border-color: ${props => props.theme.colors.systemMenu.border} ;
+  border-color: ${(props) => props.theme.colors.systemMenu.border} ;
   box-shadow: -3px -3px 0 0 var(--navs-bg);
   z-index: 14;
   pointer-events: none;
@@ -92,6 +92,14 @@ body.remove-transbar .three-bars-btn *{
   width: 250px;
 }
 
+.vaga-status {
+    color: #b3001e;
+    font-weight: 500;
+  }
+  .vaga-status.enabled {
+    color: green;
+  }
+
 @media (min-width: 766px) {
   body::-webkit-scrollbar {
     width: 16px;
@@ -126,7 +134,7 @@ body.remove-transbar .three-bars-btn *{
   }
   .main::before{
     border-left: 1px solid;
-    border-color: ${props => props.theme.colors.systemMenu.border};
+    border-color: ${(props) => props.theme.colors.systemMenu.border};
     border-top-left-radius: 10px;
   }
   
