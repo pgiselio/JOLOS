@@ -47,7 +47,7 @@ public class UsuarioController {
         return new ResponseEntity<>(usuarioSalvo, HttpStatus.CREATED);
     }
 
-    @GetMapping("/{email}")
+    @GetMapping("/email/{email}")
     public ResponseEntity<Usuario> buscaPorEmail(@PathVariable(name = "email") String email) {
         Usuario usuario;
 
