@@ -27,11 +27,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 security.cors().configurationSource(request -> new CorsConfiguration().applyPermitDefaultValues()).and()
                                 .csrf().csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse())
                                 .disable().authorizeRequests()
-                                .antMatchers("/").permitAll().and()
+                                .antMatchers("/").permitAll()
+                                .and()
                                 .authorizeRequests().antMatchers("/usuario/create").permitAll()
-                                .and().authorizeRequests().antMatchers("/aluno/**")
-                                .hasAuthority(TipoUsuario.ALUNO.toString())
-                                .and().authorizeRequests().antMatchers("/empresa/**")
+                                .and()
+                                .authorizeRequests().antMatchers("/aluno/**")
+                                .hasAnyAuthority(TipoUsuario.ALUNO.toString(), TipoUsuario.ADMIN.toString())
+                                .and()
+                                .authorizeRequests().antMatchers("/empresa/**")
                                 .hasAnyAuthority(TipoUsuario.EMPRESA.toString(), TipoUsuario.ADMIN.toString())
                                 .anyRequest().authenticated()
                                 .and().addFilterBefore(new JWTLoginFilter("/entrar", authenticationManager()),
@@ -48,6 +51,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
         @Override
         public void configure(WebSecurity web) throws Exception {
-                web.ignoring().antMatchers("/**.html", "/webjars/**");
+                web.ignoring().antMatchers("/webjars/**", "/swagger-ui/**", "/api-docs/**", "/v3/**");
         }
 }
