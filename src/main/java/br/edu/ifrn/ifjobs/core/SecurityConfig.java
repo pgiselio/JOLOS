@@ -29,6 +29,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                                 .disable().authorizeRequests()
                                 .antMatchers("/").permitAll()
                                 .and()
+                                .authorizeRequests().antMatchers("/api-docs").permitAll()
+                                .and()
                                 .authorizeRequests().antMatchers("/usuario/create").permitAll()
                                 .and()
                                 .authorizeRequests().antMatchers("/aluno/**")
