@@ -41,7 +41,8 @@ export const AppRoutes = () => {
         >
           <Route path="*" element={<Error404 />} />
           <Route index element={<HomePage />} />
-          <Route path="profile" element={<ProfilePage />} />
+          <Route path="profile/me" element={<ProfilePage />} />
+          <Route path="profile/:id" element={<ProfilePage />} />
           <Route path="vagas" element={<VagasList />} />
           <Route path="vagas/criar" element={<CriarNovaVagaPage />} />
           <Route path="vagas/:id" element={<VagaPage />}>

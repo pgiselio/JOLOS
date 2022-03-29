@@ -24,7 +24,7 @@ export function SidebarList() {
       const response = await api
         .get(`/usuario/email/${auth?.email}`)
         .catch((error) => ((error.response.status === 401 || error.response.status === 403) ? (
-          window.location.href = window.location.href
+          window.location.href = "/logout"
         ) : error));
       return response?.data;
     },
@@ -63,7 +63,7 @@ export function SidebarList() {
             <SidebarItem to="" icon="fas fa-home" label="Início" end />
             <SidebarItem to="vagas" icon="fas fa-briefcase" label="Vagas" />
             <SidebarItem to="forum" icon="fas fa-comments" label="Fórum" />
-            <SidebarItem to="profile" icon="fas fa-user" label="Perfil" />
+            <SidebarItem to="profile/me" icon="fas fa-user" label="Perfil" />
             <SidebarItem
               to="settings"
               icon="fas fa-cog"
