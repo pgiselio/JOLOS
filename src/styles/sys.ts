@@ -61,7 +61,7 @@ body.remove-transbar .three-bars-btn *{
   grid-template-areas: "content filter";
   grid-template-columns: 1fr auto;
   grid-template-rows: 1fr auto;
-  margin-top: 30px;
+  margin-top: 5px;
 }
 
 .content {
@@ -149,6 +149,9 @@ body.remove-transbar .three-bars-btn *{
 
   .content {
     padding: 0 30px;
+  }
+  .content-grid {
+    margin-top: 30px;
   }
 }
 

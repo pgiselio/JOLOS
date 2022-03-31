@@ -6,6 +6,7 @@ export const HeaderTitleStyle = styled.div`
   width: 100%;
   padding: 0 20px;
   justify-content: center;
+  margin-top: 5px;
   /*border-bottom: 1px solid var(--outline-color);*/
   z-index: 10;
   /* border-bottom: 1px solid ${(props) =>
@@ -26,6 +27,7 @@ export const HeaderTitleStyle = styled.div`
   }
   @media (min-width: 766px) {
     position: sticky;
+    margin-top: 0;
     background: var(--navs-bg-opacity);
     box-shadow: 0 1px 4px rgb(0 0 0 / 8%);
     border-bottom: 1px solid ${(props) => props.theme.colors.systemMenu.border};
