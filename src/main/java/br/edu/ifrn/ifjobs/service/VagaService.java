@@ -10,9 +10,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.ReflectionUtils;
 
+import br.edu.ifrn.ifjobs.dto.vaga.VagaInsertDto;
 import br.edu.ifrn.ifjobs.exception.VagaNaoCadastradaException;
 import br.edu.ifrn.ifjobs.exception.VagaNaoEncontradoException;
 import br.edu.ifrn.ifjobs.model.Aluno;
+import br.edu.ifrn.ifjobs.model.Empresa;
 import br.edu.ifrn.ifjobs.model.Vaga;
 import br.edu.ifrn.ifjobs.repository.VagaRepository;
 
@@ -21,6 +23,9 @@ public class VagaService {
 
     @Autowired
     private VagaRepository vagaRepository;
+
+    @Autowired
+    private EmpresaService empresaService;
 
     public Vaga salvarVaga(Vaga vaga) throws VagaNaoCadastradaException {
         Optional<Vaga> vagaOptional;
@@ -32,6 +37,22 @@ public class VagaService {
         vagaOptional.ifPresent(vagaRepository::save);
 
         return vagaOptional.orElseThrow(excessao);
+    }
+
+    public Vaga salvarVaga(VagaInsertDto dto) throws VagaNaoCadastradaException {
+        Optional<VagaInsertDto> dtoOptional;
+        dtoOptional = Optional.ofNullable(dto);
+
+        Optional<Vaga> vagaOptional = dtoOptional.map(vagaDto -> {
+            final Empresa empresa = empresaService.buscaPorCnpj(vagaDto.getCnpj());
+            final Vaga vaga = vagaDto.convertDtoToEntity();
+            vaga.setEmpresa(empresa);
+            return vaga;
+        });
+
+        vagaOptional.ifPresent(vagaRepository::save);
+
+        return vagaOptional.orElseThrow(() -> new VagaNaoCadastradaException("Dados inválidos!!"));
     }
 
     public Vaga buscarPorId(int id) throws VagaNaoEncontradoException {
