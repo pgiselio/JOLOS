@@ -1,5 +1,7 @@
 package br.edu.ifrn.ifjobs.service;
 
+import java.io.File;
+import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.lang.reflect.Field;
 import java.util.List;
@@ -8,6 +10,8 @@ import java.util.Optional;
 
 import javax.mail.MessagingException;
 
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -62,7 +66,13 @@ public class UsuarioService {
             email.setAssunto("IF Jobs - Confirmação de cadastro");
 
             configPadraoAoCriarUsuario(usuario, email);
-            mensagemEmailBaseadoNoTipoUsuario(usuarioDto.getTipoUsuario(), email);
+
+            try {
+                mensagemEmailBaseadoNoTipoUsuario(usuarioDto.getTipoUsuario(), email);
+            } catch (IOException e) {
+                throw new RuntimeException("Erro ao tentar encontrar arquivo de email");
+            }
+
             enviaEmail(email);
 
             usuarioGlobal = usuarioRepository.save(usuario);
@@ -101,17 +111,17 @@ public class UsuarioService {
         return optional2.orElseThrow(() -> new UsuarioNaoCadastradoException("Usuário não cadastrado!"));
     }
 
-    private void mensagemEmailBaseadoNoTipoUsuario(TipoUsuario tipoUsuario, Email email) {
+    private void mensagemEmailBaseadoNoTipoUsuario(TipoUsuario tipoUsuario, Email email) throws IOException {
+        final Document doc;
+
         switch (tipoUsuario) {
             case ALUNO:
-                email.setMensagem("""
-                        <h1>Car@ estudante...</h1>
-                        """);
+                doc = Jsoup.parse(new File("src/main/resources/html/MensagemCadastroAluno.html"), "UTF-8");
+                email.setMensagem(doc.toString());
                 break;
             case EMPRESA:
-                email.setMensagem("""
-                        <h1>Car@ empresa</h1>
-                        """);
+                doc = Jsoup.parse(new File("src/main/resources/html/MensagemCadastroEmpresa.html"), "UTF-8");
+                email.setMensagem(doc.toString());
                 break;
             default:
                 throw new IllegalArgumentException("Tipo de usuário inválido para criação!");
