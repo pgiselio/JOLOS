@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { Outlet } from "react-router-dom";
+import { ToastContainer } from "react-toastify";
 import { ThemeProvider } from "styled-components";
 import { Header } from "../../components/header/header";
 import { SidebarList } from "../../components/sidebar/sidebar-list";
@@ -18,6 +19,18 @@ export default function SystemLayout() {
       <ThemeProvider theme={theme === "light" ? lightTheme : midnightBlue}>
         <GlobalStyle />
         <SysGlobalStyle />
+        <ToastContainer
+          position="top-right"
+          style={{top: "var(--top-bar-height)"}}
+          autoClose={5000}
+          hideProgressBar={false}
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+        />
         <Header theme={theme} setTheme={setTheme} />
         <div className="sys-grid-container">
           <SidebarList />

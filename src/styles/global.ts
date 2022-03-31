@@ -119,6 +119,7 @@ export const GlobalStyle = createGlobalStyle`
   .lbl {
     display: flex;
     flex-direction: column;
+    flex-grow: 1;
   }
 
   .lbl label {
@@ -126,6 +127,7 @@ export const GlobalStyle = createGlobalStyle`
     font-weight: 500;
     color: var(--text-b);
     padding: 3px 0;
+    width: fit-content;
   }
 
   .lbl-icon {
@@ -189,6 +191,12 @@ export const GlobalStyle = createGlobalStyle`
   }
   .info-message.error-msg.show{
     display: flex;
+  }
+
+  .form-item-group{
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
   }
 
   .botao-ham {

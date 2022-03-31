@@ -1,0 +1,30 @@
+:root {
+  --reach-dialog: 1;
+}
+[data-reach-dialog-overlay] {
+  background: hsla(0, 0%, 0%, 0.33);
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 20;
+}
+[data-reach-dialog-content] {
+  min-width: 600px;
+  width: 50vw;
+  margin: 5vh auto;
+  background: var(--secondary-bg);
+  outline: none;
+  border-radius: 5px;
+}
+
+@media (max-width: 700px) {
+  [data-reach-dialog-content] {
+    margin: 0;
+    min-width: initial;
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+  }
+}

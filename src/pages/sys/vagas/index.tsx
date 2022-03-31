@@ -1,6 +1,6 @@
 import { CircularProgress } from "react-cssfx-loading/lib";
 import { useQuery } from "react-query";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { Button } from "../../../components/button";
 import { HeaderTitle } from "../../../components/header-title";
 import { OutsetHeadersCornerRadius } from "../../../components/outset-radius-to-headers";
@@ -16,7 +16,7 @@ export function VagasList() {
   }, {
     staleTime: 1000 * 60, // 1 minute to refetch
   });
-
+  let location = useLocation();
   return (
     <section>
       <OutsetHeadersCornerRadius>
@@ -25,7 +25,8 @@ export function VagasList() {
           <Button
             className="outlined"
             id="newVaga"
-            onClick={() => navigate("criar")}
+            onClick={() => navigate("criar", {state: { modalLocation: location }})}
+            key="create-new-vaga-btn"
           >
             <i className="fas fa-plus"></i>
             Criar nova

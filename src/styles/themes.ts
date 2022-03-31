@@ -101,7 +101,7 @@ export const midnightBlue: DefaultTheme = {
     main: defaultColors.green[6],
     mainActive: defaultColors.green[7],
     secondary: "magenta",
-    bodyBackground: "28 27 34",
+    bodyBackground: "20 19 24",
     systemMenu: {
       border: "#2b2936",
       background: "28 27 34",

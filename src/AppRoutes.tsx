@@ -1,5 +1,5 @@
 import { lazy, Suspense } from "react";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, useLocation } from "react-router-dom";
 
 import Error404 from "./pages/404";
 // import ForumPage from "./pages/sys/forum";
@@ -19,13 +19,18 @@ import CadastroPage from "./pages/signup";
 import SystemLayout from "./pages/sys";
 import ProfilePage from "./pages/sys/profile";
 import VagaPage from "./pages/sys/vagas/[id]";
+import { ModalRouter } from "./components/modal-router";
+import { CriarNovaVagaForm } from "./pages/sys/vagas/criar-nova/_form";
 
 const ForumPage = lazy(() => import("./pages/sys/forum"));
 
 export const AppRoutes = () => {
+  let location = useLocation();
+  let state = location.state as { modalLocation?: Location };
+
   return (
     <>
-      <Routes>
+      <Routes location={state?.modalLocation || location}>
         <Route path="*" element={<Error404 />} />
         <Route path="/" element={<LandingPage />} />
         <Route path="entrar" element={<LoginPage />} />
@@ -60,6 +65,9 @@ export const AppRoutes = () => {
           <Route path="settings/*" element={<SettingsPage />} />
         </Route>
       </Routes>
+      {state?.modalLocation && (
+       <ModalRouter title="Criar nova vaga" toForm="form-create-vaga"><CriarNovaVagaForm /></ModalRouter>
+      )}
     </>
   );
 };

@@ -21,9 +21,7 @@ export function VagaCard({ vaga }: vagaObj) {
             <div>
               <div className="vaga-titles">
                 <h3>{vaga.titulo}</h3>
-                <span>{vaga.empresa.dadosPessoa.nome}</span>
-                <span className="vaga-city">{vaga.localizacao}</span>
-                <span className="vaga-date">{date}</span>
+                <span>{vaga?.empresa?.dadosPessoa.nome}</span>
               </div>
 
               <span
@@ -37,7 +35,10 @@ export function VagaCard({ vaga }: vagaObj) {
           </div>
         </div>
         <div className="vaga-text">
-          <p>{vaga.descricao}</p>
+          <p>
+            <span className="vaga-city">{vaga.localizacao}</span>
+            <span className="vaga-date">{date}</span>
+          </p>
         </div>
 
         <div className="vagas-bottom">

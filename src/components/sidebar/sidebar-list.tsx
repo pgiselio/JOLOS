@@ -1,5 +1,4 @@
 import { useQuery } from "react-query";
-import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../contexts/AuthContext/useAuth";
 import { api } from "../../services/api";
 import { ProfilePic } from "../profile-pic/profile-pic";

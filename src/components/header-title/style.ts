@@ -8,7 +8,8 @@ export const HeaderTitleStyle = styled.div`
   justify-content: center;
   /*border-bottom: 1px solid var(--outline-color);*/
   z-index: 10;
-  border-bottom: 1px solid ${(props) => props.theme.colors.systemMenu.border};
+  /* border-bottom: 1px solid ${(props) =>
+    props.theme.colors.systemMenu.border}; */
   top: var(--top-bar-height);
 
   h2 {
@@ -27,6 +28,7 @@ export const HeaderTitleStyle = styled.div`
     position: sticky;
     background: var(--navs-bg-opacity);
     box-shadow: 0 1px 4px rgb(0 0 0 / 8%);
+    border-bottom: 1px solid ${(props) => props.theme.colors.systemMenu.border};
 
     .header-section {
       height: 80px;
