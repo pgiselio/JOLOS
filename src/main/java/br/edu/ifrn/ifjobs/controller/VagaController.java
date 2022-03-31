@@ -3,6 +3,8 @@ package br.edu.ifrn.ifjobs.controller;
 import java.util.List;
 import java.util.Map;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,6 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
 import br.edu.ifrn.ifjobs.dto.vaga.VagaGetDTO;
+import br.edu.ifrn.ifjobs.dto.vaga.VagaInsertDto;
 import br.edu.ifrn.ifjobs.exception.VagaNaoCadastradaException;
 import br.edu.ifrn.ifjobs.exception.VagaNaoEncontradoException;
 import br.edu.ifrn.ifjobs.model.Aluno;
@@ -31,7 +34,7 @@ public class VagaController {
     private VagaService vagaService;
 
     @PostMapping("/create")
-    public ResponseEntity<Vaga> criaVaga(@RequestBody final Vaga vaga) {
+    public ResponseEntity<Vaga> criaVaga(@RequestBody @Valid final VagaInsertDto vaga) {
         Vaga vagaSalva;
 
         try {
