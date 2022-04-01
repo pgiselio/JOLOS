@@ -21,7 +21,7 @@ export function AuthProvider({ children }: IAuthProvider) {
 
     const payload = {
       token: response.Authorization.replace("Bearer ", ""),
-      email,
+      email, type: response.usertype
     };
 
     setUser(payload);

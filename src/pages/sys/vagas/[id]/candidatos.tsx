@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useOutletContext } from "react-router-dom";
-import { Box, BoxTitle } from "../../../../components/box";
+import { Box, BoxMessage, BoxTitle } from "../../../../components/box";
 import { Button } from "../../../../components/button";
 import { ProfilePic } from "../../../../components/profile-pic/profile-pic";
 import { usersList, vaga } from "../vagaType";
@@ -55,9 +55,9 @@ export function VagaCandidatoPage() {
           </ul>
         ) : (
           <span>
-            <div className="box-message">
+            <BoxMessage>
               <span>Sem candidatos para essa vaga</span>
-            </div>
+            </BoxMessage>
           </span>
         )}
       </span>

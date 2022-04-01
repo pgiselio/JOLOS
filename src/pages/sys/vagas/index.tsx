@@ -5,32 +5,47 @@ import { Button } from "../../../components/button";
 import { HeaderTitle } from "../../../components/header-title";
 import { OutsetHeadersCornerRadius } from "../../../components/outset-radius-to-headers";
 import { VagaCard } from "../../../components/vagaCard";
+import { useAuth } from "../../../hooks/useAuth";
 import { api } from "../../../services/api";
 import { vaga } from "./vagaType";
 
 export function VagasList() {
   const navigate = useNavigate();
-  const { data, isFetching } = useQuery<vaga[]>("vagas", async () => {
-    const response = await api.get("/vaga/");
-    return response.data;
-  }, {
-    staleTime: 1000 * 60, // 1 minute to refetch
-  });
+  const { data, isFetching } = useQuery<vaga[]>(
+    "vagas",
+    async () => {
+      const response = await api.get("/vaga/");
+      return response.data;
+    },
+    {
+      staleTime: 1000 * 60, // 1 minute to refetch
+    }
+  );
   let location = useLocation();
+  const auth = useAuth();
+  const isAluno = auth.type === "ALUNO";
   return (
     <section>
       <OutsetHeadersCornerRadius>
         <HeaderTitle>
-          <h2>Vagas criadas</h2>
-          <Button
-            className="outlined"
-            id="newVaga"
-            onClick={() => navigate("criar", {state: { modalLocation: location }})}
-            key="create-new-vaga-btn"
-          >
-            <i className="fas fa-plus"></i>
-            Criar nova
-          </Button>
+          {isAluno ? <h2>Vagas disponíveis</h2>
+          
+          : (
+            <>
+              <h2>Vagas criadas</h2>
+              <Button
+                className="outlined"
+                id="newVaga"
+                onClick={() =>
+                  navigate("criar", { state: { modalLocation: location } })
+                }
+                key="create-new-vaga-btn"
+              >
+                <i className="fas fa-plus"></i>
+                Criar nova
+              </Button>
+            </>
+          )}
         </HeaderTitle>
       </OutsetHeadersCornerRadius>
       <div className="content-grid">

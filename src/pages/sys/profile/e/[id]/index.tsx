@@ -1,12 +1,31 @@
-import { Box, BoxContent, BoxTitle } from "../../../components/box";
-import { Button } from "../../../components/button";
-import { ProfilePic } from "../../../components/profile-pic/profile-pic";
-import "./profilePage.scss";
+import { useQuery } from "react-query";
+import { useParams } from "react-router-dom";
+import { Box, BoxContent, BoxTitle } from "../../../../../components/box";
+import { Button } from "../../../../../components/button";
+import { PillItem, PillList } from "../../../../../components/pill";
+import { ProfilePic } from "../../../../../components/profile-pic/profile-pic";
+import { api } from "../../../../../services/api";
+import Error404 from "../../../../404";
+import { ProfilePageStyle } from "../../styles";
 
-export default function ProfilePage() {
+export default function EmpresaProfilePage() {
+  let params = useParams();
+  const { data, isFetching } = useQuery(
+    "empresa",
+    async () => {
+      const response = await api.get(`/usuario/${params.id}`);
+      return response.data;
+    },
+    {
+      staleTime: 1000 * 60, // 1 minute to refetch
+    }
+  );
+  if(!data && !isFetching){
+    return <Error404/>
+  }
   return (
     <>
-      <section>
+      <ProfilePageStyle>
         <div className="profile-page-header">
           <div className="profile-page-header-container">
             <div className="user-info">
@@ -23,14 +42,14 @@ export default function ProfilePage() {
         </div>
         <div className="content">
           <div className="vaga-page-info">
-            <ul>
-              <li>
+            <PillList>
+              <PillItem>
                 <div className="vaga-page-info-item">
                   <i className="fas fa-map-marker-alt"></i>
                   <span>LOCALIZAÇÃO</span>
                 </div>
-              </li>
-            </ul>
+              </PillItem>
+            </PillList>
           </div>
           <div className="vaga-columns-2">
             <div className="column-1">
@@ -40,39 +59,7 @@ export default function ProfilePage() {
                 </BoxTitle>
                 <BoxContent>
                   <div className="vaga-page-description">
-                    <p>
-                      asdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasd
-                      asdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasddas
-                      dasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasddas
-                    </p>
-                    <h1>AAAAAHHHHH111111</h1>
-                    <h2>adasdasdasdas</h2>
-                    <h3>aaaaaaaaaaaaaa</h3>
-                    <ol>
-                      <li>asdasdasdasdasdas</li>
-                      <li>asdasdasdasdasd</li>
-                      <li>asdasdasdasd</li>
-                      <li>asdasdasdasd</li>
-                      <li>asdasdasd</li>
-                      <li>asdasdasdadsad</li>
-                    </ol>
-                    <p>
-                      <s>asdasdads</s>
-                    </p>
-                    <p>
-                      <strong>asasdasdasdasd</strong>
-                    </p>
-                    <ul>
-                      <li>asdassadasdasdaasdasdasdasdasdasdasd</li>
-                      <li>asdasdasda</li>
-                      <li>aasdasdaaa</li>
-                    </ul>
-                    <ul>
-                      <li>asdassadasdasdaasdasdasdasdasdasdasd</li>
-                      <li>asdasdasda</li>
-                      <li>aasdasdaaa</li>
-                    </ul>
-                    <blockquote>asdasdasdasdasdasdasdasdasdasd</blockquote>
+                    
                   </div>
                 </BoxContent>
               </Box>
@@ -84,53 +71,53 @@ export default function ProfilePage() {
                 </BoxTitle>
                 <BoxContent>
                   <div className="contacts">
-                    <ul className="essential-info">
-                      <li>
+                    <PillList className="essential-info">
+                      <PillItem>
                         <a href="#oi">
                           <i className="fas fa-envelope"></i>{" "}
                           <span>email@seusite.com.br</span>
                         </a>
-                      </li>
-                      <li>
+                      </PillItem>
+                      <PillItem>
                         <a href="#oi">
                           <i className="fas fa-phone-alt"></i>{" "}
                           <span>(84) 0000-0000</span>
                         </a>
-                      </li>
-                    </ul>
+                      </PillItem>
+                    </PillList>
                   </div>
                 </BoxContent>
               </Box>
               <Box>
                 <BoxContent>
-                  <ul className="social-info">
-                    <li>
+                  <PillList className="social-info">
+                    <PillItem>
                       <a href="#oi" target="_blank">
                         <i className="fab fa-linkedin"></i>
                       </a>
-                    </li>
-                    <li>
+                    </PillItem>
+                    <PillItem>
                       <a href="#oi" target="_blank">
                         <i className="fab fa-facebook"></i>
                       </a>
-                    </li>
-                    <li>
+                    </PillItem>
+                    <PillItem>
                       <a href="#oi" target="_blank">
                         <i className="fab fa-instagram"></i>
                       </a>
-                    </li>
-                    <li>
+                    </PillItem>
+                    <PillItem>
                       <a href="#oi" target="_blank">
                         <i className="fab fa-twitter"></i>
                       </a>
-                    </li>
-                  </ul>
+                    </PillItem>
+                  </PillList>
                 </BoxContent>
               </Box>
             </div>
           </div>
         </div>
-      </section>
+      </ProfilePageStyle>
     </>
   );
 }

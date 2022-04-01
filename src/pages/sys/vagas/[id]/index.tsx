@@ -6,13 +6,17 @@ import { useQuery } from "react-query";
 import { api } from "../../../../services/api";
 import { Skeleton } from "../../../../components/skeleton-load";
 import { ProfilePic } from "../../../../components/profile-pic/profile-pic";
+import { VagaPageStyle } from "./styles";
+import { PillItem, PillList } from "../../../../components/pill";
 
 export default function VagaPage() {
   let params = useParams();
-  const { data, isFetching } = useQuery<vaga>([
-    "vagas", params.id],
+  const { data, isFetching } = useQuery<vaga>(
+    ["vagas", params.id],
     async () => {
-      const response = await api.get(`/vaga/${params.id}`).catch((error) => error.response.status === 400 ? null : error);
+      const response = await api
+        .get(`/vaga/${params.id}`)
+        .catch((error) => (error.response.status === 400 ? null : error));
       return response?.data;
     },
     {
@@ -21,7 +25,7 @@ export default function VagaPage() {
   );
   const vagaData = data;
 
-  let date;
+  let date; 
 
   if (vagaData) {
     date = new Intl.DateTimeFormat(undefined, {
@@ -29,21 +33,18 @@ export default function VagaPage() {
       month: "short",
       year: "numeric",
     }).format(new Date(vagaData.dataCriacao));
-  }else if(!isFetching){
-    return(
-      <Error404/>
-    )
+  } else if (!isFetching) {
+    return <Error404 />;
   }
   return (
     <>
-      <div className="tree-links">
-      </div>
-      <section>
+      <div className="tree-PillItemnks"></div>
+      <VagaPageStyle>
         <div className="vaga-page-header content">
           {isFetching ? (
             <Skeleton variant="circle" width="60px" height="60px" />
           ) : (
-            <ProfilePic style={{width: "60px", height: "60px"}}/>
+            <ProfilePic style={{ width: "60px", height: "60px" }} />
           )}
           {isFetching ? (
             <Skeleton variant="text" width="300px" height="35px" />
@@ -54,9 +55,11 @@ export default function VagaPage() {
           {isFetching ? (
             <Skeleton variant="text" width="60px" height="25px" />
           ) : (
-            <span className={
-              "vaga-status " + (vagaData?.status === "ATIVO" && "enabled")
-            }>
+            <span
+              className={
+                "vaga-status " + (vagaData?.status === "ATIVO" && "enabled")
+              }
+            >
               {vagaData?.status ? "ATIVO" : "INATIVO"}
             </span>
           )}
@@ -71,8 +74,8 @@ export default function VagaPage() {
         </TabsMenu>
         <div className="content">
           <div className="vaga-page-info">
-            <ul>
-              <li>
+            <PillList>
+              <PillItem>
                 <div className="vaga-page-info-item">
                   <i className="fas fa-calendar-day"></i>
                   {isFetching ? (
@@ -81,8 +84,8 @@ export default function VagaPage() {
                     <span>{date}</span>
                   )}
                 </div>
-              </li>
-              <li>
+              </PillItem>
+              <PillItem>
                 <div className="vaga-page-info-item">
                   <i className="fas fa-map-marker-alt"></i>
                   {isFetching ? (
@@ -91,8 +94,8 @@ export default function VagaPage() {
                     <span>{vagaData?.localizacao}</span>
                   )}
                 </div>
-              </li>
-              <li>
+              </PillItem>
+              <PillItem>
                 <div className="vaga-page-info-item">
                   <i className="fas fa-book-open"></i>
                   {isFetching ? (
@@ -101,18 +104,23 @@ export default function VagaPage() {
                     <span>{vagaData?.cursoAlvo}</span>
                   )}
                 </div>
-              </li>
-            </ul>
+              </PillItem>
+            </PillList>
           </div>
           <div className="vaga-navigation">
             {isFetching ? (
-              <Skeleton variant="square" width="100%" height="300px" style={{marginTop: "20px"}}/>
+              <Skeleton
+                variant="square"
+                width="100%"
+                height="300px"
+                style={{ marginTop: "20px" }}
+              />
             ) : (
               <Outlet context={vagaData} />
             )}
           </div>
         </div>
-      </section>
+      </VagaPageStyle>
     </>
   );
 }

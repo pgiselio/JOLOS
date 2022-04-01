@@ -34,7 +34,6 @@ export function ModalRouter({
                 border: "none",
                 cursor: "pointer",
               }}
-              className="less-radius"
               onClick={onDismiss}
             >
               <i
@@ -48,8 +47,7 @@ export function ModalRouter({
             <div>
               <Button
                 type="submit"
-                className="less-radius"
-                style={{ padding: "6px 12px" }}
+                style={{ padding: "6px 16px" }}
                 form={toForm}
               >
                 Criar

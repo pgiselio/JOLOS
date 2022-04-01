@@ -41,12 +41,11 @@ export const VagaCardStyle = styled.div`
 
   .vaga-titles h3 {
     width: 100%;
-    margin-bottom: 2px;
+    margin-top: 2px;
   }
 
-  .vaga-titles span {
-    font-size: 14px;
-    margin-right: 5px;
+  .vaga-titles a {
+    font-size: 14.4px;
   }
 
   .vaga-city::before {

@@ -17,10 +17,13 @@ import LandingPage from "./pages/Landing";
 import LoginPage from "./pages/login";
 import CadastroPage from "./pages/signup";
 import SystemLayout from "./pages/sys";
-import ProfilePage from "./pages/sys/profile";
+import ProfilePage from "./pages/sys/profile/a/[id]";
 import VagaPage from "./pages/sys/vagas/[id]";
 import { ModalRouter } from "./components/modal-router";
 import { CriarNovaVagaForm } from "./pages/sys/vagas/criar-nova/_form";
+import { MeProfilePage } from "./pages/sys/profile/me";
+import AlunoProfilePage from "./pages/sys/profile/a/[id]";
+import EmpresaProfilePage from "./pages/sys/profile/e/[id]";
 
 const ForumPage = lazy(() => import("./pages/sys/forum"));
 
@@ -46,8 +49,9 @@ export const AppRoutes = () => {
         >
           <Route path="*" element={<Error404 />} />
           <Route index element={<HomePage />} />
-          <Route path="profile/me" element={<ProfilePage />} />
-          <Route path="profile/:id" element={<ProfilePage />} />
+          <Route path="profile/me" element={<MeProfilePage />} />
+          <Route path="profile/a/:id" element={<AlunoProfilePage/>}/>
+          <Route path="profile/e/:id" element={<EmpresaProfilePage/>} />
           <Route path="vagas" element={<VagasList />} />
           <Route path="vagas/criar" element={<CriarNovaVagaPage />} />
           <Route path="vagas/:id" element={<VagaPage />}>

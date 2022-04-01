@@ -17,11 +17,16 @@ export function VagaCard({ vaga }: vagaObj) {
       <div className="vaga-data">
         <div className="vaga-header">
           <div className="photo-align">
-            <ProfilePic style={{ width: 55, height: 55 }} />
+            <Link to={`../profile/e/${vaga?.empresa?.id}`}>
+              <ProfilePic style={{ width: 55, height: 55 }} />
+            </Link>
+
             <div>
               <div className="vaga-titles">
                 <h3>{vaga.titulo}</h3>
-                <span>{vaga?.empresa?.dadosPessoa.nome}</span>
+                <Link to={`../profile/e/${vaga?.empresa?.id}`}>
+                  {vaga?.empresa?.dadosPessoa.nome}
+                </Link>
               </div>
 
               <span

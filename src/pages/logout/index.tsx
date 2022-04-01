@@ -1,6 +1,6 @@
 import CircularProgress from "react-cssfx-loading/lib/CircularProgress";
 import { Navigate } from "react-router-dom";
-import { useAuth } from "../../contexts/AuthContext/useAuth";
+import { useAuth } from "../../hooks/useAuth";
 import { StyledAccess } from "../../styles/LoginSignupStyle";
 
 export default function LogoutPage() {

@@ -2,7 +2,7 @@ import { Link, useNavigate, useSearchParams } from "react-router-dom";
 import { toast, ToastContainer } from "react-toastify";
 import { Button } from "../../components/button";
 import { Input } from "../../components/input";
-import { useAuth } from "../../contexts/AuthContext/useAuth";
+import { useAuth } from "../../hooks/useAuth";
 import { useEffect, useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 

@@ -26,10 +26,12 @@ export const BoxTitle = styled.div`
   color: var(--text-c);
   align-items: center;
 
-  & ~ div{
-      padding-top: 15px;
+  & ~ div {
+    padding-top: 15px;
   }
-  h1, h2, h3{
+  h1,
+  h2,
+  h3 {
     font-size: 16px;
     font-weight: 500;
   }
@@ -50,4 +52,36 @@ export const BoxContent = styled.div`
   flex-direction: column;
   padding: 30px;
   text-align: justify;
+`;
+
+export const BoxMessage = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  padding: 40px 10px;
+  background: var(--secondary-bg);
+  align-items: center;
+  color: var(--text-b);
+  font-weight: 500;
+  font-size: 14px;
+  text-align: center;
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+
+  &::before {
+    content: "\f05a";
+    font-family: "Font Awesome 5 Free";
+    font-weight: 900;
+    -webkit-font-smoothing: antialiased;
+    display: inline-block;
+    font-style: normal;
+    font-variant: normal;
+    text-rendering: auto;
+    line-height: 1;
+
+    color: var(--info-msg-icon);
+    height: 100%;
+    font-size: 35px;
+  }
 `;

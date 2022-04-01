@@ -1,5 +1,5 @@
 import { useQuery } from "react-query";
-import { useAuth } from "../../contexts/AuthContext/useAuth";
+import { useAuth } from "../../hooks/useAuth";
 import { api } from "../../services/api";
 import { ProfilePic } from "../profile-pic/profile-pic";
 import { Skeleton } from "../skeleton-load";
@@ -22,9 +22,11 @@ export function SidebarList() {
     async () => {
       const response = await api
         .get(`/usuario/email/${auth?.email}`)
-        .catch((error) => ((error.response.status === 401 || error.response.status === 403) ? (
-          window.location.href = "/logout"
-        ) : error));
+        .catch((error) =>
+          error.response.status === 401 || error.response.status === 403
+            ? (window.location.href = "/logout")
+            : error
+        );
       return response?.data;
     },
     {
@@ -48,11 +50,7 @@ export function SidebarList() {
         <div className="min-perfil">
           <ProfilePic />
           <div className="min-perfil-details">
-            {!data ? (
-              <Skeleton variant="text" width="120px" height="23px" />
-            ) : (
-              <h3 className="min-perfil-name">{nomePessoa()}</h3>
-            )}
+            <h3 className="min-perfil-name">{nomePessoa()}</h3>
             <span className="min-perfil-detail">{auth?.email}</span>
           </div>
         </div>

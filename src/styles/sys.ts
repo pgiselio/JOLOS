@@ -92,12 +92,17 @@ body.remove-transbar .three-bars-btn *{
   width: 250px;
 }
 
-.vaga-status {
+  .vaga-status {
     color: #b3001e;
     font-weight: 500;
   }
   .vaga-status.enabled {
     color: green;
+  }
+  .vaga-page-info {
+    display: flex;
+    margin-top: 15px;
+    width: 100%;
   }
 
 @media (min-width: 766px) {
@@ -138,6 +143,9 @@ body.remove-transbar .three-bars-btn *{
     border-top-left-radius: 10px;
   }
   
+  .flex-colums-2 {
+    flex-flow: row nowrap;
+  }
 
   body.toggle-sidemenu .main {
     pointer-events: all;
@@ -158,6 +166,29 @@ body.remove-transbar .three-bars-btn *{
 @media (min-width: 1000px) {
   .cards-container {
       grid-template-columns: 1fr 1fr;
+  }
+  .vaga-columns-2 {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-between;
+    align-items: flex-start;
+  }
+
+  .vaga-columns-2 .column-1 {
+    display: flex;
+    flex: 0 1 70%;
+    padding-right: 20px;
+  }
+
+  .vaga-columns-2 .column-2 {
+    display: flex;
+    flex-direction: column;
+    flex: 0 1 30%;
+    height: 100%;
+  }
+
+  .vaga-columns-2 .column-2 .box {
+    height: 100%;
   }
 }
 `;
