@@ -38,6 +38,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                                 .and()
                                 .authorizeRequests().antMatchers("/empresa/**")
                                 .hasAnyAuthority(TipoUsuario.EMPRESA.toString(), TipoUsuario.ADMIN.toString())
+                                .and()
+                                .authorizeRequests().antMatchers("/vaga/**")
+                                .hasAnyAuthority(TipoUsuario.EMPRESA.toString(), TipoUsuario.ADMIN.toString())
                                 .anyRequest().authenticated()
                                 .and().addFilterBefore(new JWTLoginFilter("/entrar", authenticationManager()),
                                                 UsernamePasswordAuthenticationFilter.class)
