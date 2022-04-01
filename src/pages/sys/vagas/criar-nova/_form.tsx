@@ -79,8 +79,15 @@ export function CriarNovaVagaForm() {
           toast.success("Vaga criada com sucesso!");
         }
       })
-      .catch(() => {
-        toast.error("Houve um erro ao criar a vaga!", {});
+      .catch((err) => {
+        if(err.status === 500){
+          toast.error("Ops... algo não deu certo!", {});
+        }
+        if(err.response.status === 403 || err.response.status === 401){
+          toast.error("Você não tem autorização para executar essa ação!")
+        }else{
+          console.error(err);
+        }
       });
   }
   return (
