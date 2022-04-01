@@ -6,6 +6,8 @@ import java.util.Map;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.CachePut;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -47,6 +49,8 @@ public class VagaController {
     }
 
     @GetMapping("/{id}")
+    @CacheEvict(value = "vaga", allEntries = true)
+    @CachePut(value = "vaga", key = "#vaga.id")
     public ResponseEntity<Vaga> buscaPorId(@PathVariable(name = "id") int id) {
         Vaga vagaBuscada;
 
@@ -60,6 +64,7 @@ public class VagaController {
     }
 
     @GetMapping("/")
+    @CacheEvict(value = "vagas", allEntries = true)
     public ResponseEntity<List<VagaGetDTO>> buscaTodasVagas() {
         List<Vaga> todasVagas = vagaService.buscaTodasVagas();
         List<VagaGetDTO> listDto = todasVagas.stream().map(vaga -> {
