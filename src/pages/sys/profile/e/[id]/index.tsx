@@ -8,12 +8,12 @@ import { api } from "../../../../../services/api";
 import Error404 from "../../../../404";
 import { ProfilePageStyle } from "../../styles";
 
-export default function EmpresaProfilePage() {
+export default function EmpresaProfilePage({email}: {email?: string }) {
   let params = useParams();
   const { data, isFetching } = useQuery(
     "empresa",
     async () => {
-      const response = await api.get(`/usuario/${params.id}`);
+      const response = await api.get(`/usuario/${email ? "email/" + email : params.id}`);
       return response.data;
     },
     {
@@ -67,7 +67,7 @@ export default function EmpresaProfilePage() {
             <div className="column-2">
               <Box>
                 <BoxTitle>
-                  <h3>Contatos</h3>
+                  <h3>Contato</h3>
                 </BoxTitle>
                 <BoxContent>
                   <div className="contacts">

@@ -7,12 +7,12 @@ import { ProfilePic } from "../../../../../components/profile-pic/profile-pic";
 import { api } from "../../../../../services/api";
 import { ProfilePageStyle } from "../../styles";
 
-export default function AlunoProfilePage(id: {id?: string }) {
+export default function AlunoProfilePage({email}: {email?: string }) {
   let params = useParams();
   const { data, isFetching } = useQuery(
     "profile",
     async () => {
-      const response = await api.get(`/aluno/${params.id}`);
+      const response = await api.get(`/usuario/${email ? "email/" + email : params.id}`);
       return response.data;
     },
     {
