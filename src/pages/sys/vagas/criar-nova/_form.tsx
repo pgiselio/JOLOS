@@ -53,7 +53,7 @@ export function CriarNovaVagaForm() {
             ? (window.location.href = "/logout")
             : error
         );
-      setEmpresaCNPJ(response?.data.empresa.cnpj);
+      setEmpresaCNPJ(response?.data?.empresa?.cnpj);
     }
     getUser();
   });
