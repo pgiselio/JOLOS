@@ -40,6 +40,12 @@ public class UsuarioService {
 
     private Usuario usuarioGlobal;
 
+    @Value("${spring.html.CadastroAluno}")
+    private String caminhoArquivoEmailAluno;
+
+    @Value("${spring.html.CadastroEmpresa}")
+    private String caminhoArquivoEmailEmpresa;
+
     @Autowired
     private EmailService emailService;
 
@@ -50,17 +56,15 @@ public class UsuarioService {
         Optional<UsuarioInsertDTO> optional;
         optional = Optional.ofNullable(dto);
 
-        processoDeSalvarUsuarioeDispararEmail(optional);
-
         Optional<Usuario> usuarioOptional;
-        usuarioOptional = Optional.ofNullable(usuarioGlobal);
+        usuarioOptional = processoDeSalvarUsuarioeDispararEmail(optional);
 
         return usuarioOptional.orElseThrow(() -> new UsuarioNaoCadastradoException("Usuário não encontrado"));
     }
 
-    private void processoDeSalvarUsuarioeDispararEmail(Optional<UsuarioInsertDTO> optional) {
-        optional.ifPresent(usuarioDto -> {
-            Usuario usuario = usuarioDto.convertDtoToEntity();
+    private Optional<Usuario> processoDeSalvarUsuarioeDispararEmail(Optional<UsuarioInsertDTO> optional) {
+        return optional.map(dto -> {
+            Usuario usuario = dto.convertDtoToEntity();
 
             Email email = new Email();
             email.setAssunto("IF Jobs - Confirmação de cadastro");
@@ -68,14 +72,14 @@ public class UsuarioService {
             configPadraoAoCriarUsuario(usuario, email);
 
             try {
-                mensagemEmailBaseadoNoTipoUsuario(usuarioDto.getTipoUsuario(), email);
+                mensagemEmailBaseadoNoTipoUsuario(dto.getTipoUsuario(), email);
             } catch (IOException e) {
                 throw new RuntimeException("Erro ao tentar encontrar arquivo de email");
             }
 
             enviaEmail(email);
 
-            usuarioGlobal = usuarioRepository.save(usuario);
+            return usuarioRepository.save(usuario);
         });
     }
 
@@ -97,18 +101,16 @@ public class UsuarioService {
         Optional<Usuario> optional;
         optional = Optional.ofNullable(usuario);
 
-        optional.ifPresent(user -> {
+        Optional<Usuario> usuarioOptional;
+        usuarioOptional = optional.map(user -> {
             Email email = new Email();
             configPadraoAoCriarUsuario(user, email);
             enviaEmail(email);
 
-            usuarioGlobal = usuarioRepository.save(user);
+            return usuarioRepository.save(user);
         });
 
-        Optional<Usuario> optional2;
-        optional2 = Optional.ofNullable(usuarioGlobal);
-
-        return optional2.orElseThrow(() -> new UsuarioNaoCadastradoException("Usuário não cadastrado!"));
+        return usuarioOptional.orElseThrow(() -> new UsuarioNaoCadastradoException("Usuário não cadastrado!"));
     }
 
     private void mensagemEmailBaseadoNoTipoUsuario(TipoUsuario tipoUsuario, Email email) throws IOException {
@@ -116,11 +118,11 @@ public class UsuarioService {
 
         switch (tipoUsuario) {
             case ALUNO:
-                doc = Jsoup.parse(new File("src/main/resources/html/MensagemCadastroAluno.html"), "UTF-8");
+                doc = Jsoup.parse(new File(caminhoArquivoEmailAluno), "UTF-8");
                 email.setMensagem(doc.toString());
                 break;
             case EMPRESA:
-                doc = Jsoup.parse(new File("src/main/resources/html/MensagemCadastroEmpresa.html"), "UTF-8");
+                doc = Jsoup.parse(new File(caminhoArquivoEmailEmpresa), "UTF-8");
                 email.setMensagem(doc.toString());
                 break;
             default:
