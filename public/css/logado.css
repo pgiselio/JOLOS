@@ -252,25 +252,6 @@ ol li {
 }
 
 
-
-
-.profile-names {
-  margin-left: 10px;
-  font-size: 12px;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  width: calc(100% - 120px);
-}
-
-.profile-names h2 {
-  font-size: 20px;
-  font-weight: 500;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
-
 .contacts {
   display: flex;
   flex-direction: column;

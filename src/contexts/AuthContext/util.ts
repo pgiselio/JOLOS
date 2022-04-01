@@ -24,7 +24,6 @@ export async function LoginRequest(email: string, password: string) {
         Authorization: request.data.Authorization.replace("Bearer ", ""),
       },
     });
-    console.log(getUser.data);
     
     let usertype;
     if (getUser.data?.aluno) {

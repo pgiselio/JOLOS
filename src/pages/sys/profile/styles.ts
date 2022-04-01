@@ -47,6 +47,23 @@ export const ProfilePageStyle = styled.section`
     width: 100%;
   }
 
+  .profile-names {
+    margin-left: 10px;
+    font-size: 12px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    width: calc(100% - 60px);
+  }
+
+  .profile-names h2 {
+    font-size: 20px;
+    font-weight: 500;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
   @media (min-width: 766px) {
     .profile-page-header {
       padding: 35px 40px;
@@ -55,6 +72,9 @@ export const ProfilePageStyle = styled.section`
     .profile-page-header-container {
       grid-template-columns: 1fr auto;
       grid-template-rows: 1fr auto;
+    }
+    .profile-names {
+      width: calc(100% - 90px);
     }
     .user-actions {
       margin-top: 0;

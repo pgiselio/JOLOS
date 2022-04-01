@@ -60,7 +60,10 @@ export function SidebarList() {
             <SidebarItem to="" icon="fas fa-home" label="Início" end />
             <SidebarItem to="vagas" icon="fas fa-briefcase" label="Vagas" />
             <SidebarItem to="forum" icon="fas fa-comments" label="Fórum" />
-            <SidebarItem to="profile/me" icon="fas fa-user" label="Perfil" />
+            {nomePessoa() !== "ADMIN" && (
+              <SidebarItem to="profile/me" icon="fas fa-user" label="Perfil" />
+            )}
+
             <SidebarItem
               to="settings"
               icon="fas fa-cog"

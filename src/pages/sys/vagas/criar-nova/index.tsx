@@ -1,8 +1,13 @@
 import { Box, BoxContent, BoxTitle } from "../../../../components/box";
 import { Button } from "../../../../components/button";
+import { useAuth } from "../../../../hooks/useAuth";
 import { CriarNovaVagaForm } from "./_form";
 
-export function CriarNovaVagaPage() {
+export default function CriarNovaVagaPage() {
+  const auth = useAuth();
+  if (auth.type === "ALUNO") {
+    return <h2>SEM PERMISÃO</h2>;
+  }
   return (
     <section>
       <div className="content">

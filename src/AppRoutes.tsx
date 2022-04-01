@@ -5,7 +5,7 @@ import Error404 from "./pages/404";
 // import ForumPage from "./pages/sys/forum";
 import { HomePage } from "./pages/sys/home/homePage";
 // import ProfilePage from "./pages/sys/profile";
-import { CriarNovaVagaPage } from "./pages/sys/vagas/criar-nova";
+import CriarNovaVagaPage from "./pages/sys/vagas/criar-nova";
 // import VagaPage from "./pages/sys/vagas/[id]";
 import { VagaCandidatoPage } from "./pages/sys/vagas/[id]/candidatos";
 import { VagaSobrePage } from "./pages/sys/vagas/[id]/sobre";

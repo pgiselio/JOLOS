@@ -1,17 +1,20 @@
 // import { Editor, EditorState } from "draft-js";
 // import { useState } from "react";
 
+import { useEffect, useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 import { toast } from "react-toastify";
 
 import { Input } from "../../../../components/input";
+import { useAuth } from "../../../../hooks/useAuth";
 import { api } from "../../../../services/api";
 
 export function CriarNovaVagaForm() {
   // const [editorState, setEditorState] = useState(() =>
   //   EditorState.createEmpty()
   // );
-
+  const [empresaCNPJ, setEmpresaCNPJ] = useState<string | null>("000");
+  const auth = useAuth();
   const {
     control,
     formState: { errors },
@@ -22,6 +25,7 @@ export function CriarNovaVagaForm() {
       localidade: "",
       cursoAlvo: "",
       descricao: "",
+      cnpj: "",
     },
   });
 
@@ -40,13 +44,34 @@ export function CriarNovaVagaForm() {
     countChar.innerHTML = currentValue + "";
   }
 
-  async function onSubmit({ titulo, localidade, cursoAlvo, descricao }: any) {
+  useEffect(() => {
+    async function getUser() {
+      const response = await api
+        .get(`/usuario/email/${auth?.email}`)
+        .catch((error) =>
+          error.response.status === 401 || error.response.status === 403
+            ? (window.location.href = "/logout")
+            : error
+        );
+      setEmpresaCNPJ(response?.data.empresa.cnpj);
+    }
+    getUser();
+  }, []);
+
+  async function onSubmit({
+    titulo,
+    localidade,
+    cursoAlvo,
+    descricao,
+    cnpj,
+  }: any) {
     await api
       .post("/vaga/create", {
         cursoAlvo,
         titulo,
         localizacao: localidade,
         descricao,
+        cnpj: auth.type === "EMPRESA" ? empresaCNPJ : cnpj,
         dataCriacao: new Date(),
       })
       .then((response) => {
@@ -57,6 +82,10 @@ export function CriarNovaVagaForm() {
       .catch(() => {
         toast.error("Houve um erro ao criar a vaga!", {});
       });
+  }
+
+  if (auth.type === "ALUNO") {
+    return <h1>SEM PERMISÃO</h1>;
   }
   return (
     <form
@@ -79,7 +108,7 @@ export function CriarNovaVagaForm() {
           )}
         />
       </div>
-      <div className="form-item-group" style={{width: "100%"}}>
+      <div className="form-item-group" style={{ width: "100%" }}>
         <div className="lbl">
           <label htmlFor="vaga-location">Localidade da vaga: </label>
           <Controller
@@ -120,6 +149,19 @@ export function CriarNovaVagaForm() {
           </datalist>
         </div>
       </div>
+      {auth.type !== "EMPRESA" && (
+        <div className="lbl">
+          <label htmlFor="cnpj">CNPJ da empresa: </label>
+          <Controller
+            name="cnpj"
+            control={control}
+            render={({ field }) => (
+              <Input type="text" id="cnpj" placeholder="CNPJ" {...field} />
+            )}
+          />
+        </div>
+      )}
+
       <div className="lbl">
         <label htmlFor="descriptionVaga">Descrição: </label>
         {/* <Editor editorState={editorState} onChange={setEditorState} /> */}
