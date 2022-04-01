@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.function.Supplier;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import br.edu.ifrn.ifjobs.exception.EmpresaNaoCadastradaException;
@@ -14,6 +15,7 @@ import br.edu.ifrn.ifjobs.repository.EmpresaRepository;
 @Service
 public class EmpresaService {
 
+    @Autowired
     private EmpresaRepository repository;
 
     public Empresa createEmpresa(Empresa empresa) throws EmpresaNaoCadastradaException {
