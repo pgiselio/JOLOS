@@ -39,7 +39,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                                 .authorizeRequests().antMatchers("/empresa/**")
                                 .hasAnyAuthority(TipoUsuario.EMPRESA.toString(), TipoUsuario.ADMIN.toString())
                                 .and()
-                                .authorizeRequests().antMatchers("/vaga/**")
+                                .authorizeRequests().antMatchers("/vaga/create")
                                 .hasAnyAuthority(TipoUsuario.EMPRESA.toString(), TipoUsuario.ADMIN.toString())
                                 .anyRequest().authenticated()
                                 .and().addFilterBefore(new JWTLoginFilter("/entrar", authenticationManager()),
