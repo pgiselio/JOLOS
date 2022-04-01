@@ -14,8 +14,8 @@ import { RequireAuth } from "./contexts/AuthContext/RequireAuth";
 import LogoutPage from "./pages/logout";
 import SettingsPage from "./pages/sys/settings";
 import LandingPage from "./pages/Landing";
-import LoginPage from "./pages/login";
-import CadastroPage from "./pages/signup";
+import LoginPage from "./pages/entrar";
+import CadastroPage from "./pages/cadastro";
 import SystemLayout from "./pages/sys";
 import VagaPage from "./pages/sys/vagas/[id]";
 import { ModalRouter } from "./components/modal-router";
@@ -23,6 +23,7 @@ import { CriarNovaVagaForm } from "./pages/sys/vagas/criar-nova/_form";
 import { MeProfilePage } from "./pages/sys/profile/me";
 import AlunoProfilePage from "./pages/sys/profile/a/[id]";
 import EmpresaProfilePage from "./pages/sys/profile/e/[id]";
+import { CadastroLayout } from "./pages/cadastro/layout";
 
 const ForumPage = lazy(() => import("./pages/sys/forum"));
 
@@ -36,7 +37,10 @@ export const AppRoutes = () => {
         <Route path="*" element={<Error404 />} />
         <Route path="/" element={<LandingPage />} />
         <Route path="entrar" element={<LoginPage />} />
-        <Route path="cadastro" element={<CadastroPage />} />
+        <Route path="cadastro" element={<CadastroLayout/>}>
+          <Route index element={<CadastroPage />}/>
+
+        </Route>
         <Route path="logout" element={<LogoutPage />} />
         <Route
           path="sys"
