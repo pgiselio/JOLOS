@@ -1,6 +1,8 @@
 package br.edu.ifrn.ifjobs.service;
 
 import java.lang.reflect.Field;
+import java.sql.Date;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -16,6 +18,7 @@ import br.edu.ifrn.ifjobs.exception.VagaNaoEncontradoException;
 import br.edu.ifrn.ifjobs.model.Aluno;
 import br.edu.ifrn.ifjobs.model.Empresa;
 import br.edu.ifrn.ifjobs.model.Vaga;
+import br.edu.ifrn.ifjobs.model.enums.StatusVaga;
 import br.edu.ifrn.ifjobs.repository.VagaRepository;
 
 @Service
@@ -34,7 +37,11 @@ public class VagaService {
         Supplier<VagaNaoCadastradaException> excessao;
         excessao = () -> new VagaNaoCadastradaException("Dados inválidos!!");
 
-        vagaOptional.ifPresent(vagaRepository::save);
+        vagaOptional.ifPresent(vaguinha -> {
+            vaguinha.setStatus(StatusVaga.ATIVO);
+            vaguinha.setDataCriacao(Date.valueOf(LocalDate.now()));
+            vagaRepository.save(vaguinha);
+        });
 
         return vagaOptional.orElseThrow(excessao);
     }
@@ -50,7 +57,11 @@ public class VagaService {
             return vaga;
         });
 
-        vagaOptional.ifPresent(vagaRepository::save);
+        vagaOptional.ifPresent(vaga -> {
+            vaga.setStatus(StatusVaga.ATIVO);
+            vaga.setDataCriacao(Date.valueOf(LocalDate.now()));
+            vagaRepository.save(vaga);
+        });
 
         return vagaOptional.orElseThrow(() -> new VagaNaoCadastradaException("Dados inválidos!!"));
     }
