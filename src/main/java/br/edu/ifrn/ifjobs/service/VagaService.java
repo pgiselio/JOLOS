@@ -57,7 +57,11 @@ public class VagaService {
             return vaga;
         });
 
-        vagaOptional.ifPresent(vagaRepository::save);
+        vagaOptional.ifPresent(vaga -> {
+            vaga.setStatus(StatusVaga.ATIVO);
+            vaga.setDataCriacao(Date.valueOf(LocalDate.now()));
+            vagaRepository.save(vaga);
+        });
 
         return vagaOptional.orElseThrow(() -> new VagaNaoCadastradaException("Dados inválidos!!"));
     }
