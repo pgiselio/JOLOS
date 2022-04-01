@@ -17,7 +17,6 @@ import LandingPage from "./pages/Landing";
 import LoginPage from "./pages/login";
 import CadastroPage from "./pages/signup";
 import SystemLayout from "./pages/sys";
-import ProfilePage from "./pages/sys/profile/a/[id]";
 import VagaPage from "./pages/sys/vagas/[id]";
 import { ModalRouter } from "./components/modal-router";
 import { CriarNovaVagaForm } from "./pages/sys/vagas/criar-nova/_form";

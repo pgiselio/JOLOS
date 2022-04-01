@@ -56,7 +56,7 @@ export function CriarNovaVagaForm() {
       setEmpresaCNPJ(response?.data.empresa.cnpj);
     }
     getUser();
-  }, []);
+  });
 
   async function onSubmit({
     titulo,
@@ -82,10 +82,6 @@ export function CriarNovaVagaForm() {
       .catch(() => {
         toast.error("Houve um erro ao criar a vaga!", {});
       });
-  }
-
-  if (auth.type === "ALUNO") {
-    return <h1>SEM PERMISÃO</h1>;
   }
   return (
     <form

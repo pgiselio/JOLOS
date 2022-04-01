@@ -31,6 +31,7 @@ export default function LoginPage() {
     if (auth.email) {
       RedirectForSystem();
     }
+
     const paramsError = searchParams.get("error");
     if (paramsError) {
       if (paramsError === "needsLogin") {
@@ -54,6 +55,7 @@ export default function LoginPage() {
 
   return (
     <StyledAccess>
+
       <ToastContainer
         position="top-right"
         autoClose={5000}
