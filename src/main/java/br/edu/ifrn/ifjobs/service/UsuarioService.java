@@ -35,11 +35,6 @@ public class UsuarioService {
     @Value("${spring.mail.username}")
     private String emailBase;
 
-    @Autowired
-    private UsuarioRepository usuarioRepository;
-
-    private Usuario usuarioGlobal;
-
     @Value("${spring.html.CadastroAluno}")
     private String caminhoArquivoEmailAluno;
 
@@ -47,10 +42,13 @@ public class UsuarioService {
     private String caminhoArquivoEmailEmpresa;
 
     @Autowired
-    private EmailService emailService;
+    private UsuarioRepository usuarioRepository;
 
     @Autowired
     private RoleRepository roleRepository;
+
+    @Autowired
+    private EmailService emailService;
 
     public Usuario create(UsuarioInsertDTO dto) throws UsuarioNaoCadastradoException {
         Optional<UsuarioInsertDTO> optional;
@@ -157,15 +155,13 @@ public class UsuarioService {
         Optional<String> emailOptional;
         emailOptional = Optional.ofNullable(email);
 
-        emailOptional.ifPresent(emailUser -> {
+        Optional<Usuario> usuarioOptional;
+        usuarioOptional = emailOptional.map(emailUser -> {
             final Usuario usuarioBuscadoPorEmail;
             usuarioBuscadoPorEmail = usuarioRepository.findUsuarioByEmail(emailUser);
 
-            usuarioGlobal = usuarioBuscadoPorEmail;
+            return usuarioBuscadoPorEmail;
         });
-
-        Optional<Usuario> usuarioOptional;
-        usuarioOptional = Optional.ofNullable(usuarioGlobal);
 
         return usuarioOptional.orElseThrow(() -> new UsuarioNaoEncontradoException("Usuário não encontrado!"));
     }
