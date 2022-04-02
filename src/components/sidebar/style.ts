@@ -5,7 +5,7 @@ export const SidebarAside = styled.aside`
   grid-area: menu;
   height: calc(100vh - var(--top-bar-height));
   background-color: var(--navs-bg);
-  border-right: 1px solid ${props => props.theme.colors.systemMenu.border};
+  border-right: 1px solid ${(props) => props.theme.colors.systemMenu.border};
   position: fixed;
   overflow: overlay;
   overflow-x: hidden;
@@ -31,6 +31,7 @@ export const SidebarAside = styled.aside`
     align-items: center;
     justify-content: center;
     gap: 10px;
+    transition: gap .3s ease ;
   }
 
   .profile-pic {
@@ -39,7 +40,7 @@ export const SidebarAside = styled.aside`
     border-radius: 100%;
     transition: height 0.3s, width 0.3s ease;
   }
-  .min-perfil-details{
+  .min-perfil-details {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -80,7 +81,7 @@ export const SidebarAside = styled.aside`
     padding-bottom: 20px;
   }
 
-  .sidebar-items .menu-separator{
+  .sidebar-items .menu-separator {
     border-bottom: 1px solid var(--outline-color);
     margin: 5px 0;
   }
@@ -119,6 +120,10 @@ export const SidebarAside = styled.aside`
       padding: 0 10px;
     }
 
+    body.toggle-sidemenu & .min-perfil {
+      gap: 0;
+    }
+
     body.toggle-sidemenu & .profile-pic {
       width: 60px;
       height: 60px;
@@ -153,42 +158,41 @@ export const SidebarAside = styled.aside`
       border-top-right-radius: 30px;
       border-bottom-right-radius: 30px;
       transition: border-radius 0.5s, margin 0.5s ease;
-    }
-    a span {
-      opacity: 1;
-      margin-left: 15px;
-      width: calc(100% - 45px);
-      overflow: hidden;
-      white-space: nowrap;
-      text-overflow: ellipsis;
-      transition: opacity 0.5s ease;
-    }
-    a i {
-      width: 30px;
-      color: var(--text-b);
-      text-align: center;
-      font-size: 16px;
-    }
-    a:hover {
-      background-color: /*#dfdfdf*/ var(--secondary-bg);
-    }
+      span {
+        opacity: 1;
+        margin-left: 15px;
+        width: calc(100% - 45px);
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        transition: opacity 0.5s ease;
+      }
+      i {
+        width: 30px;
+        color: var(--text-b);
+        text-align: center;
+        font-size: 16px;
+      }
+      &:hover {
+        background-color: /*#dfdfdf*/ var(--secondary-bg);
+      }
 
-    a:active {
-      background-color: /*#cecece*/ var(--primary-bg);
-    }
+      &:active {
+        background-color: /*#cecece*/ var(--primary-bg);
+      }
 
-    a.active {
-      background-color: var(--accent-color);
-      color: #fff;
-      margin-right: 0;
-    }
+      &.active {
+        background-color: var(--accent-color);
+        color: #fff;
+        margin-right: 0;
+      }
+      &.active i {
+        color: #fff;
+      }
 
-    a.active i {
-      color: #fff;
-    }
-
-    a.sair:hover i {
-      color: #b3001e !important;
+      &.sair:hover i {
+        color: #b3001e !important;
+      }
     }
 
     @media (min-width: 766px) {

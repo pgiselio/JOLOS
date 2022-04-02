@@ -44,10 +44,8 @@ export default function EmpresaProfilePage({email}: {email?: string }) {
           <div className="vaga-page-info">
             <PillList>
               <PillItem>
-                <div className="vaga-page-info-item">
                   <i className="fas fa-map-marker-alt"></i>
                   <span>LOCALIZAÇÃO</span>
-                </div>
               </PillItem>
             </PillList>
           </div>

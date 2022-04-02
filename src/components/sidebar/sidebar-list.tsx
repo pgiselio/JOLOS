@@ -17,7 +17,7 @@ export function SidebarList() {
   checkSidebarState();
   const auth = useAuth();
 
-  const { data } = useQuery(
+  const { data, isFetching } = useQuery(
     ["meUser"],
     async () => {
       const response = await api
@@ -36,6 +36,9 @@ export function SidebarList() {
     }
   );
   function nomePessoa(): string {
+    if(isFetching){
+      return "Carregando...";
+    }
     if (data?.aluno) {
       return data.aluno.dadosPessoa.nome;
     } else if (data?.empresa) {

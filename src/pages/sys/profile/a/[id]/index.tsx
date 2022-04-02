@@ -43,22 +43,17 @@ export default function AlunoProfilePage({email}: {email?: string }) {
           <div className="vaga-page-info">
             <PillList>
               <PillItem>
-                <div className="vaga-page-info-item">
+                
                   <i className="fas fa-calendar-day"></i>
                   <span>DATA NASCIMENTO</span>
-                </div>
               </PillItem>
               <PillItem>
-                <div className="vaga-page-info-item">
                   <i className="fas fa-map-marker-alt"></i>
                   <span>CIDADE</span>
-                </div>
               </PillItem>
               <PillItem>
-                <div className="vaga-page-info-item">
                   <i className="fas fa-book-open"></i>
                   <span>CURSANDO... PERÍODO</span>
-                </div>
               </PillItem>
             </PillList>
           </div>

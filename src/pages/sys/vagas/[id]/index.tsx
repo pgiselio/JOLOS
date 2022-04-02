@@ -74,36 +74,30 @@ export default function VagaPage() {
         </TabsMenu>
         <div className="content">
           <div className="vaga-page-info">
-            <PillList>
+            <PillList style={{marginTop: 10}}>
               <PillItem>
-                <div className="vaga-page-info-item">
                   <i className="fas fa-calendar-day"></i>
                   {isFetching ? (
                     <Skeleton variant="text" width="130px" height="25px" />
                   ) : (
                     <span>{date}</span>
                   )}
-                </div>
               </PillItem>
               <PillItem>
-                <div className="vaga-page-info-item">
                   <i className="fas fa-map-marker-alt"></i>
                   {isFetching ? (
                     <Skeleton variant="text" width="150px" height="25px" />
                   ) : (
                     <span>{vagaData?.localizacao}</span>
                   )}
-                </div>
               </PillItem>
               <PillItem>
-                <div className="vaga-page-info-item">
                   <i className="fas fa-book-open"></i>
                   {isFetching ? (
                     <Skeleton variant="text" width="150px" height="25px" />
                   ) : (
                     <span>{vagaData?.cursoAlvo}</span>
                   )}
-                </div>
               </PillItem>
             </PillList>
           </div>
