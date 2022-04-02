@@ -61,7 +61,7 @@ public class UsuarioController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<UsuarioLoginGetDTO> buscarPorId(@PathVariable(name = "id") int id) {
+    public ResponseEntity<Usuario> buscarPorId(@PathVariable(name = "id") int id) {
         Usuario usuario;
 
         try {
