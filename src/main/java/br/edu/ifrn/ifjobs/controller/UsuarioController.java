@@ -70,10 +70,7 @@ public class UsuarioController {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
         }
 
-        UsuarioLoginGetDTO usuarioLoginGetDTO = new UsuarioLoginGetDTO();
-        usuarioLoginGetDTO = usuarioLoginGetDTO.convertEntityToDto(usuario);
-
-        return ResponseEntity.ok().body(usuarioLoginGetDTO);
+        return ResponseEntity.ok().body(usuario);
     }
 
     @GetMapping("/")
