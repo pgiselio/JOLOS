@@ -58,12 +58,6 @@ export default function ProfilePage({ email }: { email?: string }) {
             <div className="user-actions">
               {data?.email === auth.email && (
                 <>
-                  {usertype === "ALUNO" && (
-                    <Button className="outlined">
-                      <i className="fas fa-arrow-down"></i>
-                      Baixar currículo
-                    </Button>
-                  )}
                   <Button>
                     <i className="fas fa-pencil-alt"></i>
 
@@ -71,7 +65,7 @@ export default function ProfilePage({ email }: { email?: string }) {
                   </Button>
                 </>
               )}
-              {usertype === "ALUNO" && auth.type !== "ALUNO" && (
+              {usertype === "ALUNO" && (
                 <Button className="outlined">
                   <i className="fas fa-arrow-down"></i>
                   Baixar currículo
