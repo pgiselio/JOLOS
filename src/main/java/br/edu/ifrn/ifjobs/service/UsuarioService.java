@@ -7,6 +7,7 @@ import java.lang.reflect.Field;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import java.util.function.Supplier;
 
 import javax.mail.MessagingException;
 
@@ -164,6 +165,16 @@ public class UsuarioService {
         });
 
         return usuarioOptional.orElseThrow(() -> new UsuarioNaoEncontradoException("Usuário não encontrado!"));
+    }
+
+    public Usuario buscaPorEmpresaId(int id) throws UsuarioNaoEncontradoException {
+        Optional<Usuario> usuarioFindById;
+        usuarioFindById = usuarioRepository.findUsuarioByEmpresaId(id);
+
+        Supplier<UsuarioNaoEncontradoException> excessao;
+        excessao = () -> new UsuarioNaoEncontradoException("Usuário não encontrado!");
+
+        return usuarioFindById.orElseThrow(excessao);
     }
 
     public List<Usuario> getAll() {
