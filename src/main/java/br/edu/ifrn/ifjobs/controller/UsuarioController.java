@@ -73,6 +73,19 @@ public class UsuarioController {
         return ResponseEntity.ok().body(usuario);
     }
 
+    @GetMapping("/empresa/{id}")
+    public ResponseEntity<Usuario> buscarPorEmpresaId(@PathVariable(name = "id") int id) {
+        Usuario usuario;
+
+        try {
+            usuario = usuarioService.buscaPorEmpresaId(id);
+        } catch (UsuarioNaoEncontradoException e) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
+        }
+
+        return ResponseEntity.ok().body(usuario);
+    }
+
     @GetMapping("/")
     public ResponseEntity<List<UsuarioLoginGetDTO>> buscaUsuarios() {
         List<Usuario> usuarios = usuarioService.getAll();
