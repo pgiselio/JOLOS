@@ -224,8 +224,8 @@ export const GlobalStyle = createGlobalStyle`
   }
 
   .botao-ham:first-child {
-    transform-origin: 0% 0%;
     -webkit-transform-origin: 0% 0%;
+    transform-origin: 0% 0%;
   }
 
   .botao-ham span:nth-last-child(1) {
@@ -234,21 +234,21 @@ export const GlobalStyle = createGlobalStyle`
 
   .botao-ham.active span {
     opacity: 0;
-    transform: rotate(0deg) scale(0.2, 0.2);
     -webkit-transform: rotate(0deg) scale(0.2, 0.2);
+    transform: rotate(0deg) scale(0.2, 0.2);
     margin: 0;
   }
 
   .botao-ham.active span:nth-last-child(2) {
     opacity: 1;
-    transform: rotate(-45deg);
     -webkit-transform: rotate(-45deg);
+    transform: rotate(-45deg);
   }
 
   .botao-ham.active span:nth-last-child(3) {
     opacity: 1;
-    transform: rotate(45deg) translate(0, 0);
     -webkit-transform: rotate(45deg) translate(2px, 2px);
+    transform: rotate(45deg) translate(0, 0);
   }
   @media (max-width: 766px) {
     input[type="checkbox"] {

@@ -52,7 +52,6 @@ export const SidebarAside = styled.aside`
     width: 100%;
     text-align: center;
     overflow: hidden;
-    overflow-wrap: anywhere;
     text-overflow: ellipsis;
     white-space: nowrap;
     text-transform: capitalize;
@@ -100,6 +99,7 @@ export const SidebarAside = styled.aside`
     &::-webkit-scrollbar-thumb {
       background: transparent;
       border-radius: 20px;
+      -webkit-background-clip: content-box;
       background-clip: content-box;
       border: 2px solid transparent;
     }

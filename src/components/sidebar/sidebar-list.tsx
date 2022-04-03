@@ -36,7 +36,7 @@ export function SidebarList() {
     }
   );
   function nomePessoa(): string {
-    if(isFetching){
+    if(!data){
       return "Carregando...";
     }
     if (data?.aluno) {

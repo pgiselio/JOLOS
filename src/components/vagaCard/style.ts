@@ -5,28 +5,18 @@ export const VagaCardStyle = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  & > a {
-    display: flex;
-    flex: 1;
-    flex-direction: column;
-  }
 
   .vaga-data {
     display: flex;
     flex-direction: column;
     position: relative;
-    box-shadow: 0 1px 2px rgb(0 0 0 / 10%);
-    border: 1px solid transparent;
+    /* box-shadow: 0 1px 2px rgb(0 0 0 / 10%); */
     background: var(--primary-bg);
-    /* border: 1px solid var(--outline-color); */
+    border: 1px solid var(--outline-color);
     border-radius: 10px;
 
     height: 100%;
     width: 100%;
-    transition: border .2s ease-in;
-  }
-  .vaga-data:hover{
-    border-color: var(--accent-color);
   }
 
   .vaga-header {

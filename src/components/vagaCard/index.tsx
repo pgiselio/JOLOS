@@ -9,29 +9,33 @@ type vagaObj = {
 };
 export function VagaCard({ vaga }: vagaObj) {
   const date = new Date(vaga.dataCriacao);
-  const dateFormated = new Intl.DateTimeFormat(undefined, {
+  const dateFormatted = new Intl.DateTimeFormat(undefined, {
     day: "2-digit",
     month: "short",
     year: "numeric",
   }).format(date.getTime() + Math.abs(date.getTimezoneOffset() * 60000));
   return (
     <VagaCardStyle className="vaga">
-      <Link to={`${vaga.id}`}>
       <div className="vaga-data">
         <div className="vaga-header">
           <div className="photo-align">
-            <Link to={`../profile/e/${vaga?.empresa?.id}`}>
+            <Link to={`../profile/${vaga?.empresa?.id}`}>
               <ProfilePic style={{ width: 55, height: 55 }} />
             </Link>
 
             <div>
               <div className="vaga-titles">
-                <h3>{vaga.titulo}</h3>
+                <h3>
+                  <Link to={`${vaga.id}`} className="vagas-detalhes-btn">
+                    {vaga.titulo}
+                  </Link>
+                </h3>
+
                 <div className="sub">
-                  <Link to={`../profile/e/${vaga?.empresa?.id}`}>
+                  <Link to={`../profile/${vaga?.empresa?.id}`}>
                     {vaga?.empresa?.dadosPessoa.nome}
                   </Link>
-                  <span className="vaga-date">{dateFormated}</span>
+                  <span className="vaga-date">{dateFormatted}</span>
                 </div>
               </div>
             </div>
@@ -73,7 +77,6 @@ export function VagaCard({ vaga }: vagaObj) {
           </Link>
         </div>
       </div>
-      </Link>
     </VagaCardStyle>
   );
 }

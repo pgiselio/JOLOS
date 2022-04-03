@@ -113,9 +113,9 @@ export const HeaderSysStyle = styled.header`
       transition: width 0.2s ease;
     }
     .botao-ham.active span {
+      -webkit-transform: none;
       transform: none !important;
       opacity: 1;
-      -webkit-transform: none;
     }
 
     .botao-ham.active span {

@@ -25,14 +25,16 @@ export default function VagaPage() {
   );
   const vagaData = data;
 
-  let date; 
+  let date;
+  let dateFormatted;
 
   if (vagaData) {
-    date = new Intl.DateTimeFormat(undefined, {
+    date = new Date(vagaData.dataCriacao);
+    dateFormatted = new Intl.DateTimeFormat(undefined, {
       day: "2-digit",
       month: "short",
       year: "numeric",
-    }).format(new Date(vagaData.dataCriacao));
+    }).format(date.getTime() + Math.abs(date.getTimezoneOffset() * 60000));
   } else if (!isFetching) {
     return <Error404 />;
   }
@@ -74,30 +76,30 @@ export default function VagaPage() {
         </TabsMenu>
         <div className="content">
           <div className="vaga-page-info">
-            <PillList style={{marginTop: 10}}>
+            <PillList style={{ marginTop: 10 }}>
               <PillItem>
-                  <i className="fas fa-calendar-day"></i>
-                  {isFetching ? (
-                    <Skeleton variant="text" width="130px" height="25px" />
-                  ) : (
-                    <span>{date}</span>
-                  )}
+                <i className="fas fa-calendar-day"></i>
+                {isFetching ? (
+                  <Skeleton variant="text" width="130px" height="25px" />
+                ) : (
+                  <span>{dateFormatted}</span>
+                )}
               </PillItem>
               <PillItem>
-                  <i className="fas fa-map-marker-alt"></i>
-                  {isFetching ? (
-                    <Skeleton variant="text" width="150px" height="25px" />
-                  ) : (
-                    <span>{vagaData?.localizacao}</span>
-                  )}
+                <i className="fas fa-map-marker-alt"></i>
+                {isFetching ? (
+                  <Skeleton variant="text" width="150px" height="25px" />
+                ) : (
+                  <span>{vagaData?.localizacao}</span>
+                )}
               </PillItem>
               <PillItem>
-                  <i className="fas fa-book-open"></i>
-                  {isFetching ? (
-                    <Skeleton variant="text" width="150px" height="25px" />
-                  ) : (
-                    <span>{vagaData?.cursoAlvo}</span>
-                  )}
+                <i className="fas fa-book-open"></i>
+                {isFetching ? (
+                  <Skeleton variant="text" width="150px" height="25px" />
+                ) : (
+                  <span>{vagaData?.cursoAlvo}</span>
+                )}
               </PillItem>
             </PillList>
           </div>

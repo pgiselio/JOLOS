@@ -113,6 +113,7 @@ body.remove-transbar .three-bars-btn *{
   body::-webkit-scrollbar-thumb {
     background-color: #a3a3a3d5;
     border-radius: 20px;
+    -webkit-background-clip: content-box;
     background-clip: content-box;
     border: 6px solid transparent;
   }
