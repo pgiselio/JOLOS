@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import CircularProgress from "react-cssfx-loading/lib/CircularProgress";
 import { Navigate } from "react-router-dom";
 import { useAuth } from "../../hooks/useAuth";
@@ -5,14 +6,11 @@ import { StyledAccess } from "../../styles/LoginSignupStyle";
 
 export default function LogoutPage() {
   const auth = useAuth();
-  auth.logout();
+  useEffect(() => {
+    auth.logout();
+  });
   if (!auth.email) {
-    return (
-      <Navigate
-        to="/entrar"
-        replace
-      />
-    );
+    return <Navigate to="/entrar" replace />;
   }
   return (
     <StyledAccess>

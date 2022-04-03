@@ -13,7 +13,7 @@ export default function ProfilePage({ email }: { email?: string }) {
   let usertype;
   const auth = useAuth();
   const { data, isFetching } = useQuery(
-    "profile",
+    "profile-" + (email ? email : params.id),
     async () => {
       const response = await api.get(
         `/usuario/${email ? "email/" + email : params.id}`

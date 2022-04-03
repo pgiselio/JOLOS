@@ -12,7 +12,7 @@ import { PillItem, PillList } from "../../../../components/pill";
 export default function VagaPage() {
   let params = useParams();
   const { data, isFetching } = useQuery<vaga>(
-    ["vagas", params.id],
+    ["vaga", params.id],
     async () => {
       const response = await api
         .get(`/vaga/lista/${params.id}`)
