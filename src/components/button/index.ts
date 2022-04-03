@@ -4,7 +4,7 @@ export const Button = styled.button`
   display: flex;
   align-items: center;
   justify-content: center;
-  column-gap: 10px;
+  column-gap: 12px;
   padding: 8px 20px;
   font-size: 14px;
   font-weight: 500;
@@ -15,6 +15,9 @@ export const Button = styled.button`
   background: var(--accent-color);
   border: 2px solid var(--accent-color);
   color: #fff;
+  i{
+    font-size: .8rem;
+  }
   :not(:disabled):hover {
     background: var(--accent-color-active);
     border: 2px solid var(--accent-color-active);

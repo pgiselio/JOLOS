@@ -41,7 +41,7 @@ export function VagasList() {
                 }
                 key="create-new-vaga-btn"
               >
-                <i className="fas fa-plus"></i>
+                <i className="fa-solid fa-plus"></i>
                 Criar nova
               </Button>
             </>

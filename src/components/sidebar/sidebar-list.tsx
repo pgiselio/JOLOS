@@ -23,7 +23,7 @@ export function SidebarList() {
       const response = await api
         .get(`/usuario/email/${auth?.email}`)
         .catch((error) =>
-          error.response.status === 401 || error.response.status === 403
+          (error.response.status === 401 || error.response.status === 403)
             ? (window.location.href = "/logout")
             : error
         );

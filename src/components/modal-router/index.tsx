@@ -1,10 +1,9 @@
-// import { ModalRouterStyle } from "./style";
-import { Dialog } from "@reach/dialog";
 import "./styles.css";
 import { ReactNode, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { Box, BoxContent, BoxTitle } from "../box";
 import { Button } from "../button";
+import { ModalRouterStyle } from "./style";
 
 export function ModalRouter({
   title,
@@ -21,7 +20,7 @@ export function ModalRouter({
     navigate(-1);
   }
   return (
-    <Dialog aria-labelledby="label" initialFocusRef={buttonRef}>
+    <ModalRouterStyle aria-labelledby="label" initialFocusRef={buttonRef}>
       <Box style={{maxHeight: "100vh", margin: 0}}>
         <BoxTitle style={{ display: "flex", justifyContent: "space-between"}}>
           <div style={{ display: "flex", alignItems: "center", gap: 6 }}>
@@ -63,6 +62,6 @@ export function ModalRouter({
             }}
         >{children}</BoxContent>
       </Box>
-    </Dialog>
+    </ModalRouterStyle>
   );
 }

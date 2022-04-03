@@ -5,7 +5,7 @@ import { StyledAccess } from "../../styles/LoginSignupStyle";
 
 export default function LogoutPage() {
   const auth = useAuth();
-
+  auth.logout();
   if (!auth.email) {
     return (
       <Navigate
@@ -14,8 +14,6 @@ export default function LogoutPage() {
       />
     );
   }
-  auth.logout();
-  
   return (
     <StyledAccess>
       <div

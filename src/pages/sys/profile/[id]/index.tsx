@@ -58,13 +58,17 @@ export default function ProfilePage({ email }: { email?: string }) {
             <div className="user-actions">
               {data?.email === auth.email && (
                 <>
-                  <Button className="outlined">Editar perfil</Button>
                   {usertype === "ALUNO" && (
                     <Button className="outlined">
                       <i className="fas fa-arrow-down"></i>
                       Baixar currículo
                     </Button>
                   )}
+                  <Button>
+                    <i className="fas fa-pencil-alt"></i>
+
+                    <span>Editar perfil</span>
+                  </Button>
                 </>
               )}
               {usertype === "ALUNO" && auth.type !== "ALUNO" && (
@@ -81,15 +85,19 @@ export default function ProfilePage({ email }: { email?: string }) {
             <PillList>
               <PillItem>
                 <i className="fas fa-calendar-day"></i>
-                <span>DATA NASCIMENTO</span>
+                <span>{data?.aluno?.dadosPessoa.dataNasc}</span>
               </PillItem>
               <PillItem>
                 <i className="fas fa-map-marker-alt"></i>
-                <span>CIDADE</span>
+                <span>{data?.aluno?.dadosPessoa.localizacao}</span>
               </PillItem>
               <PillItem>
                 <i className="fas fa-book-open"></i>
-                <span>CURSANDO... PERÍODO</span>
+                <span>{data?.aluno?.curso} - </span>
+                <span title="Período do curso">
+                  <i className="fas fa-clock"></i>
+                  <span>{data?.aluno?.periodo}</span>
+                </span>
               </PillItem>
             </PillList>
           </div>

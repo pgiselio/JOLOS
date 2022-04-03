@@ -248,7 +248,7 @@ export const GlobalStyle = createGlobalStyle`
   .botao-ham.active span:nth-last-child(3) {
     opacity: 1;
     -webkit-transform: rotate(45deg) translate(2px, 2px);
-    transform: rotate(45deg) translate(0, 0);
+    transform: rotate(45deg) translate(2px, 2px);
   }
   @media (max-width: 766px) {
     input[type="checkbox"] {

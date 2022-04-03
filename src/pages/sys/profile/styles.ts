@@ -25,6 +25,7 @@ export const ProfilePageStyle = styled.section`
     width: 100%;
     max-width: 1200px;
     margin: 0 auto;
+    gap: 15px;
     grid-template-columns: 1fr;
     grid-template-rows: 1fr auto;
   }
@@ -38,7 +39,9 @@ export const ProfilePageStyle = styled.section`
 
   .user-actions {
     display: flex;
-    margin-top: 15px;
+    flex-direction: column;
+
+    gap: 10px;
     width: 100%;
     min-width: 169px;
   }
