@@ -1,4 +1,5 @@
 import { useQuery } from "react-query";
+import { userInfo } from "../../contexts/AuthContext/types";
 import { useAuth } from "../../hooks/useAuth";
 import { api } from "../../services/api";
 import { ProfilePic } from "../profile-pic/profile-pic";
@@ -17,7 +18,7 @@ export function SidebarList() {
   checkSidebarState();
   const auth = useAuth();
 
-  const { data, isFetching } = useQuery(
+  const { data, isFetching } = useQuery<userInfo>(
     ["meUser"],
     async () => {
       const response = await api
@@ -64,7 +65,7 @@ export function SidebarList() {
             <SidebarItem to="vagas" icon="fas fa-briefcase" label="Vagas" />
             <SidebarItem to="forum" icon="fas fa-comments" label="Fórum" />
             {nomePessoa() !== "ADMIN" && (
-              <SidebarItem to="profile/me" icon="fas fa-user" label="Perfil" />
+              <SidebarItem to={`profile/${data?.id}`} icon="fas fa-user" label="Perfil" />
             )}
 
             <SidebarItem

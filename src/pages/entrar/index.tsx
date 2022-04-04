@@ -9,6 +9,7 @@ import { Controller, useForm } from "react-hook-form";
 import { AccessGlobalStyle, StyledAccess } from "../../styles/LoginSignupStyle";
 import "react-toastify/dist/ReactToastify.min.css";
 import { CircularProgress } from "react-cssfx-loading/lib";
+import CircularProgressFluent from "../../components/circular-progress-fluent";
 
 export default function LoginPage() {
   const auth = useAuth();
@@ -137,11 +138,11 @@ export default function LoginPage() {
               disabled={!formState.isValid || isLoading}
             >
               {isLoading && (
-                <CircularProgress
+                <CircularProgressFluent
                   color="white"
                   height="25px"
                   width="25px"
-                  duration="1.5s"
+                  duration=".8s"
                   style={{ position: "absolute" }}
                 />
               )}

@@ -16,20 +16,20 @@ import SettingsPage from "./pages/sys/settings";
 import LandingPage from "./pages/Landing";
 import LoginPage from "./pages/entrar";
 import CadastroPage from "./pages/cadastro";
-import SystemLayout from "./pages/sys";
 import VagaPage from "./pages/sys/vagas/[id]";
 import { ModalRouter } from "./components/modal-router";
 import { CriarNovaVagaForm } from "./pages/sys/vagas/criar-nova/_form";
 import { CadastroLayout } from "./pages/cadastro/layout";
-import { useAuth } from "./hooks/useAuth";
-import ProfilePage from "./pages/sys/profile/[id]";
+import { LoadingPage } from "./components/loadingPage";
+import { LoadingPageLogo } from "./components/loadingPage/logo";
 
 const ForumPage = lazy(() => import("./pages/sys/forum"));
+const ProfilePage = lazy(() => import("./pages/sys/profile/[id]"));
+const SystemLayout = lazy(() => import("./pages/sys"));
 
 export const AppRoutes = () => {
   let location = useLocation();
   let state = location.state as { modalLocation?: Location };
-  const auth = useAuth();
 
   return (
     <>
@@ -37,23 +37,30 @@ export const AppRoutes = () => {
         <Route path="*" element={<Error404 />} />
         <Route path="/" element={<LandingPage />} />
         <Route path="entrar" element={<LoginPage />} />
-        <Route path="cadastro" element={<CadastroLayout/>}>
-          <Route index element={<CadastroPage />}/>
-
+        <Route path="cadastro" element={<CadastroLayout />}>
+          <Route index element={<CadastroPage />} />
         </Route>
         <Route path="logout" element={<LogoutPage />} />
         <Route
           path="sys"
           element={
             <RequireAuth>
-              <SystemLayout />
+              <Suspense fallback={<LoadingPageLogo />}>
+                <SystemLayout />
+              </Suspense>
             </RequireAuth>
           }
         >
           <Route path="*" element={<Error404 />} />
           <Route index element={<HomePage />} />
-          <Route path="profile/me" element={<ProfilePage email={auth.email}/>} />
-          <Route path="profile/:id" element={<ProfilePage/>}/>
+          <Route
+            path="profile/:id"
+            element={
+              <Suspense fallback={<LoadingPage/>}>
+                <ProfilePage />
+              </Suspense>
+            }
+          />
           <Route path="vagas" element={<VagasList />} />
           <Route path="vagas/criar" element={<CriarNovaVagaPage />} />
           <Route path="vagas/:id" element={<VagaPage />}>
@@ -63,7 +70,7 @@ export const AppRoutes = () => {
           <Route
             path="forum"
             element={
-              <Suspense fallback={<div>Carregando...</div>}>
+              <Suspense fallback={<LoadingPage/>}>
                 <ForumPage />
               </Suspense>
             }
@@ -72,7 +79,9 @@ export const AppRoutes = () => {
         </Route>
       </Routes>
       {state?.modalLocation && (
-       <ModalRouter title="Criar nova vaga" toForm="form-create-vaga"><CriarNovaVagaForm /></ModalRouter>
+        <ModalRouter title="Criar nova vaga" toForm="form-create-vaga">
+          <CriarNovaVagaForm />
+        </ModalRouter>
       )}
     </>
   );

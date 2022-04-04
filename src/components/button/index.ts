@@ -15,9 +15,7 @@ export const Button = styled.button`
   background: var(--accent-color);
   border: 2px solid var(--accent-color);
   color: #fff;
-  i{
-    font-size: .8rem;
-  }
+  
   :not(:disabled):hover {
     background: var(--accent-color-active);
     border: 2px solid var(--accent-color-active);
