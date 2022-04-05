@@ -44,6 +44,9 @@ export const VagaCardStyle = styled.div`
     h3::first-letter {
       text-transform: uppercase;
     }
+    h3 a {
+      color: var(--text-a);
+    }
     .sub {
       display: flex;
       flex-wrap: wrap;

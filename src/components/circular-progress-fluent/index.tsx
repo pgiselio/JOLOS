@@ -8,9 +8,7 @@ interface CircularProgressProps {
   duration?: string;
 }
 
-const CircularProgressFluent: React.FC<
-  CircularProgressProps & React.SVGProps<SVGSVGElement>
-> = ({
+export function CircularProgressFluent({
   className = "",
   color = "#1d8c37",
   width = "50px",
@@ -18,7 +16,7 @@ const CircularProgressFluent: React.FC<
   style,
   duration = "1s",
   ...rest
-}) => {
+}: CircularProgressProps & React.SVGProps<SVGSVGElement>) {
   return (
     <CircularProgressFluentStyle
       style={{
@@ -44,7 +42,7 @@ const CircularProgressFluent: React.FC<
       </svg>
     </CircularProgressFluentStyle>
   );
-};
+}
 
 const CircularProgressFluentStyle = styled.b`
   display: flex;
