@@ -70,16 +70,27 @@ public class UsuarioService {
 
             configPadraoAoCriarUsuario(usuario, email);
 
-            try {
-                mensagemEmailBaseadoNoTipoUsuario(dto.getTipoUsuario(), email);
-            } catch (IOException e) {
-                throw new RuntimeException("Erro ao tentar encontrar arquivo de email");
-            }
+            verificaSeEPossivelEnviarEmail(dto, email);
 
             enviaEmail(email);
 
+            addRolesParaUsuarioBaseadoNoTipoUsuario(usuario, dto.getTipoUsuario());
+
             return usuarioRepository.save(usuario);
         });
+    }
+
+    private void verificaSeEPossivelEnviarEmail(UsuarioInsertDTO dto, Email email) {
+        try {
+            mensagemEmailBaseadoNoTipoUsuario(dto.getTipoUsuario(), email);
+        } catch (IOException e) {
+            throw new RuntimeException("Erro ao tentar encontrar arquivo de email");
+        }
+    }
+
+    private void addRolesParaUsuarioBaseadoNoTipoUsuario(Usuario usuario, TipoUsuario tipoUsuario) {
+        Role role = roleRepository.findByTipoUsuario(tipoUsuario);
+        usuario.addRole(role);
     }
 
     private void configPadraoAoCriarUsuario(Usuario usuario, Email email) {
