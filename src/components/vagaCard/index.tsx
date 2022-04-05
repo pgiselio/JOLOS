@@ -26,7 +26,7 @@ export function VagaCard({ vaga }: vagaObj) {
             <div>
               <div className="vaga-titles">
                 <h3>
-                  <Link to={`${vaga.id}`} className="vagas-detalhes-btn">
+                  <Link to={`${vaga.id}`} className="vagas-detalhes-btn" title={vaga.titulo}>
                     {vaga.titulo}
                   </Link>
                 </h3>

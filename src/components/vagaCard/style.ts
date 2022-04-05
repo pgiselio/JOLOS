@@ -37,9 +37,13 @@ export const VagaCardStyle = styled.div`
     flex-direction: row;
     flex-wrap: wrap;
     word-break: break-word;
+    gap: 3px;
     h3 {
       width: 100%;
+      line-height: 25px;
+      max-height: 50px;
       margin-top: 2px;
+      overflow: hidden;
     }
     h3::first-letter {
       text-transform: uppercase;
@@ -89,6 +93,8 @@ export const VagaCardStyle = styled.div`
     position: relative;
     padding: 0 20px;
     flex-grow: 1;
+    display: flex;
+    align-items: center;
     p {
       position: relative;
       display: inline-block;
