@@ -9,6 +9,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -26,7 +27,7 @@ public class CurriculoController {
     @Autowired
     private CurriculoService service;
 
-    @GetMapping(path = "/upload")
+    @PostMapping(path = "/upload")
     public void upload(@RequestParam MultipartFile arquivo) {
         try {
             service.uploadArquivo(arquivo);
