@@ -3,6 +3,7 @@ package br.edu.ifrn.ifjobs.model;
 import java.io.Serializable;
 import java.sql.Date;
 
+import javax.persistence.Column;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -23,6 +24,9 @@ public class Curriculo implements Serializable {
 
     @Embedded
     private Arquivo pdf;
+
+    @Column(nullable = false, length = 150)
+    private String linkVideo;
 
     private Date dataImport;
 
