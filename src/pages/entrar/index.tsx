@@ -8,7 +8,6 @@ import { Controller, useForm } from "react-hook-form";
 
 import { AccessGlobalStyle, StyledAccess } from "../../styles/LoginSignupStyle";
 import "react-toastify/dist/ReactToastify.min.css";
-import { CircularProgress } from "react-cssfx-loading/lib";
 import CircularProgressFluent from "../../components/circular-progress-fluent";
 
 export default function LoginPage() {

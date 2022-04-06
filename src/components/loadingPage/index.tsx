@@ -1,4 +1,3 @@
-import { CircularProgress } from "react-cssfx-loading/lib";
 import CircularProgressFluent from "../circular-progress-fluent";
 import { LoadingPageStyle } from "./styles";
 

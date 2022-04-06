@@ -1,6 +1,6 @@
 import { useEffect } from "react";
-import CircularProgress from "react-cssfx-loading/lib/CircularProgress";
 import { Navigate } from "react-router-dom";
+import CircularProgressFluent from "../../components/circular-progress-fluent";
 import { useAuth } from "../../hooks/useAuth";
 import { StyledAccess } from "../../styles/LoginSignupStyle";
 
@@ -23,7 +23,7 @@ export default function LogoutPage() {
           color: "#413e4a",
         }}
       >
-        <CircularProgress
+        <CircularProgressFluent
           color="var(--accent-color)"
           height="60px"
           width="60px"

@@ -6,6 +6,7 @@ import { PillItem, PillList } from "../../../../components/pill";
 import { ProfilePic } from "../../../../components/profile-pic/profile-pic";
 import { useAuth } from "../../../../hooks/useAuth";
 import { api } from "../../../../services/api";
+import Error404 from "../../../404";
 import { ProfilePageStyle } from "../styles";
 
 export default function ProfilePage({ email }: { email?: string }) {
@@ -24,6 +25,22 @@ export default function ProfilePage({ email }: { email?: string }) {
       staleTime: 1000 * 60, // 1 minute to refetch
     }
   );
+  function getFormattedDate(date: Date) {
+    if (!date) {
+      return;
+    }
+    date = new Date(date);
+    let dateFormatted = new Intl.DateTimeFormat(undefined, {
+      day: "2-digit",
+      month: "long",
+      year: "numeric",
+    }).format(date.getTime() + Math.abs(date.getTimezoneOffset() * 60000));
+    return dateFormatted;
+  }
+
+  if (!data && !isFetching) {
+    return <Error404 />;
+  }
   if (data?.aluno) {
     usertype = "ALUNO";
   } else if (data?.empresa) {
@@ -79,13 +96,15 @@ export default function ProfilePage({ email }: { email?: string }) {
             <PillList>
               <PillItem>
                 <i className="fas fa-calendar-day"></i>
-                <span>{data?.aluno?.dadosPessoa.dataNasc}</span>
+                <span>
+                  {getFormattedDate(data?.aluno?.dadosPessoa.dataNasc)}
+                </span>
               </PillItem>
               <PillItem>
                 <i className="fas fa-map-marker-alt"></i>
                 <span>{data?.aluno?.dadosPessoa.localizacao}</span>
               </PillItem>
-              <PillItem>
+              <PillItem title="Curso">
                 <i className="fas fa-book-open"></i>
                 <span>{data?.aluno?.curso} - </span>
                 <span title="Período do curso">
@@ -100,13 +119,7 @@ export default function ProfilePage({ email }: { email?: string }) {
               <h3>Sobre</h3>
             </BoxTitle>
             <BoxContent>
-              <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. In a
-                gravida mi. Donec et mauris quis massa convallis vulputate.
-                Etiam a lectus et nunc interdum suscipit eu ultrices diam. Nulla
-                ullamcorper semper velit sit amet pulvinar. Pellentesque et nisi
-                dui. Nulla quis dignissim dui. Nunc ex placerat.
-              </p>
+              <p>{data?.status}</p>
             </BoxContent>
           </Box>
         </div>

@@ -29,7 +29,7 @@ export const StyledProfilePic = styled.div`
   }
 
   .pp-border {
-    box-shadow: inset 0 0 0 1px rgb(221, 221, 221);
+    box-shadow: inset 0 0 0 1px rgb(221 221 221 / 20%);
     border-radius: inherit;
     display: flex;
     position: absolute;

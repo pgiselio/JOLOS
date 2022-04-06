@@ -1,7 +1,7 @@
 import { useState } from "react";
-import { CircularProgress } from "react-cssfx-loading/lib";
 import { Link, Outlet } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
+import CircularProgressFluent from "../../components/circular-progress-fluent";
 import { AccessGlobalStyle, StyledAccess } from "../../styles/LoginSignupStyle";
 
 export function CadastroLayout() {
@@ -59,7 +59,7 @@ export function CadastroLayout() {
                 <span>Próximo</span>
                 <span className="next-arrow">
                   {isLoading ? (
-                    <CircularProgress
+                    <CircularProgressFluent
                       color="white"
                       height="2em"
                       width="2em"

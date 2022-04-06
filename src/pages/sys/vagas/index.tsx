@@ -1,7 +1,7 @@
-import { CircularProgress } from "react-cssfx-loading/lib";
 import { useQuery } from "react-query";
 import { useLocation, useNavigate } from "react-router-dom";
 import { Button } from "../../../components/button";
+import CircularProgressFluent from "../../../components/circular-progress-fluent";
 import { HeaderTitle } from "../../../components/header-title";
 import { OutsetHeadersCornerRadius } from "../../../components/outset-radius-to-headers";
 import { VagaCard } from "../../../components/vagaCard";
@@ -55,7 +55,7 @@ export function VagasList() {
               return <VagaCard key={vaga.id} vaga={vaga} />;
             })}
           </div>
-          {isFetching && (
+          {true && (
             <p
               style={{
                 display: "flex",
@@ -66,11 +66,11 @@ export function VagasList() {
                 paddingTop: "30px",
               }}
             >
-              <CircularProgress
+              <CircularProgressFluent
                 color="var(--accent-color)"
                 height="30px"
                 width="30px"
-                duration="1.5s"
+                duration=".9s"
               />
               Carregando...
             </p>

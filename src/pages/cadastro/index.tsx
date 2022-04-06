@@ -4,12 +4,10 @@ import { Link, useOutletContext } from "react-router-dom";
 import { toast, ToastContainer } from "react-toastify";
 import { Input } from "../../components/input";
 import { api } from "../../services/api";
-import { AccessGlobalStyle, StyledAccess } from "../../styles/LoginSignupStyle";
 
 import { Controller, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as Yup from "yup";
-import { CircularProgress } from "react-cssfx-loading/lib";
 import { TabSelector } from "../../components/Tabs/TabSelector";
 
 type signupType = {

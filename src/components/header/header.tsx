@@ -49,7 +49,7 @@ export function Header(props : any) {
               <i className="fas fa-bell"></i>
               <span></span>
             </div>
-            {props.theme === "light" ? <i className="far fa-moon"></i> : <i className="fas fa-sun"></i>}
+            {props.theme === "light" ? <i className="fas fa-moon"></i> : <i className="fas fa-sun"></i>}
             
           </button>
         </div>
