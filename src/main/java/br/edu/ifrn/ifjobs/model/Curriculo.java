@@ -25,7 +25,7 @@ public class Curriculo implements Serializable {
     @Embedded
     private Arquivo pdf;
 
-    @Column(nullable = false, length = 150)
+    @Column(length = 150)
     private String linkVideo;
 
     private Date dataImport;
@@ -79,6 +79,14 @@ public class Curriculo implements Serializable {
      */
     public void setDataImport(Date dataImport) {
         this.dataImport = dataImport;
+    }
+
+    public String getLinkVideo() {
+        return linkVideo;
+    }
+
+    public void setLinkVideo(String linkVideo) {
+        this.linkVideo = linkVideo;
     }
 
 }
