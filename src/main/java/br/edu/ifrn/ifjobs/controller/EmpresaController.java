@@ -1,6 +1,5 @@
 package br.edu.ifrn.ifjobs.controller;
 
-import java.lang.reflect.Field;
 import java.util.List;
 import java.util.Map;
 
@@ -9,7 +8,6 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.util.ReflectionUtils;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
@@ -54,7 +52,7 @@ public class EmpresaController {
         Empresa empresa;
 
         try {
-            empresa = empresaService.getById(id);
+            empresa = empresaService.buscaPorId(id);
         } catch (EmpresaNaoEncontradaException e) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
         }
@@ -85,25 +83,11 @@ public class EmpresaController {
     @PatchMapping("/{id}")
     public ResponseEntity<Empresa> atualizaCampo(@PathVariable(name = "id") int id,
             Map<Object, Object> campos) {
-        Empresa buscadaPorId;
-
-        try {
-            buscadaPorId = empresaService.getById(id);
-        } catch (EmpresaNaoEncontradaException e) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
-        }
-
-        campos.forEach((chave, valor) -> {
-            Field campo = ReflectionUtils.findField(Empresa.class, (String) chave);
-            campo.setAccessible(true);
-            ReflectionUtils.setField(campo, buscadaPorId, valor);
-        });
-
         Empresa empresaAtualizada;
 
         try {
-            empresaAtualizada = empresaService.createEmpresa(buscadaPorId);
-        } catch (EmpresaNaoCadastradaException e) {
+            empresaAtualizada = empresaService.atualizaCampos(id, campos);
+        } catch (EmpresaNaoEncontradaException | EmpresaNaoCadastradaException e) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
         }
 
@@ -130,7 +114,7 @@ public class EmpresaController {
         Empresa empresa;
 
         try {
-            empresa = empresaService.getById(id);
+            empresa = empresaService.buscaPorId(id);
         } catch (EmpresaNaoEncontradaException e) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
         }
