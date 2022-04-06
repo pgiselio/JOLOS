@@ -55,7 +55,7 @@ export function VagasList() {
               return <VagaCard key={vaga.id} vaga={vaga} />;
             })}
           </div>
-          {true && (
+          {isFetching && (
             <p
               style={{
                 display: "flex",
