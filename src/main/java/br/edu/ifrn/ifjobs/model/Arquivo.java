@@ -15,10 +15,10 @@ public class Arquivo implements Serializable {
 
     private String nome;
 
-    @Column(nullable = false)
+    @Column
     private String tipoArquivo;
 
-    @Column(nullable = false, columnDefinition = "CLOB")
+    @Column(columnDefinition = "CLOB")
     private byte[] dados;
 
     public Arquivo() {
