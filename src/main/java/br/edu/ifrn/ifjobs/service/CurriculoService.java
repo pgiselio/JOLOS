@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.sql.Date;
 import java.time.LocalDate;
 import java.util.Optional;
+import java.util.function.Supplier;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -28,6 +29,26 @@ public class CurriculoService {
         curriculoRepository.save(curriculo);
     }
 
+    public Curriculo uploadLink(String link) {
+        final Curriculo curriculo = construcaoCurriculoBaseadoNoLink(link);
+
+        return curriculoRepository.save(curriculo);
+    }
+
+    public Curriculo atualizaLink(int id, final String link) throws CurriculoNaoEncontradoException {
+        Optional<Curriculo> curriculoOptional = curriculoRepository.findById(id);
+
+        curriculoOptional.ifPresent(curriculo -> {
+            curriculo.setLinkVideo(link);
+            curriculoRepository.save(curriculo);
+        });
+
+        Supplier<CurriculoNaoEncontradoException> excessao;
+        excessao = () -> new CurriculoNaoEncontradoException("Curriculo não encontrado");
+
+        return curriculoOptional.orElseThrow(excessao);
+    }
+
     public void removeArquivo(int id) throws CurriculoNaoEncontradoException {
         Curriculo curriculo = buscaPorId(id);
         curriculoRepository.delete(curriculo);
@@ -44,6 +65,13 @@ public class CurriculoService {
     private Curriculo construcaoCurriculoBaseadoNoArquivo(final Arquivo arquivo) {
         final Curriculo curriculo = new Curriculo();
         curriculo.setPdf(arquivo);
+        curriculo.setDataImport(Date.valueOf(LocalDate.now()));
+        return curriculo;
+    }
+
+    private Curriculo construcaoCurriculoBaseadoNoLink(final String link) {
+        final Curriculo curriculo = new Curriculo();
+        curriculo.setLinkVideo(link);
         curriculo.setDataImport(Date.valueOf(LocalDate.now()));
         return curriculo;
     }
