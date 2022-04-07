@@ -13,7 +13,7 @@ export function CriarNovaVagaForm() {
   // const [editorState, setEditorState] = useState(() =>
   //   EditorState.createEmpty()
   // );
-  const [empresaCNPJ, setEmpresaCNPJ] = useState<string | null>("000");
+  const [empresaCNPJ, setEmpresaCNPJ] = useState<string | null>();
   const auth = useAuth();
   const {
     control,
@@ -56,7 +56,7 @@ export function CriarNovaVagaForm() {
       setEmpresaCNPJ(response?.data?.empresa?.cnpj);
     }
     getUser();
-  });
+  }, []);
 
   async function onSubmit({
     titulo,

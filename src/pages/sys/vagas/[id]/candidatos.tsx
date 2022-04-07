@@ -3,7 +3,7 @@ import { useOutletContext } from "react-router-dom";
 import { Box, BoxMessage, BoxTitle } from "../../../../components/box";
 import { Button } from "../../../../components/button";
 import { ProfilePic } from "../../../../components/profile-pic/profile-pic";
-import { usersList, vaga } from "../vagaType";
+import { vaga } from "../vagaType";
 
 export function VagaCandidatoPage() {
   const vagaData: vaga = useOutletContext();
@@ -19,10 +19,10 @@ export function VagaCandidatoPage() {
         {vagaData.alunos.length > 0 ? (
           <ul className="lista-candidatos">
             {vagaData.alunos.map((candidato) => {
-              let user = usersList.find((user) => user.id === candidato);
-              if (user) {
+              // let user = usersList.find((user) => user.id === candidato);
+              if (candidato) {
                 return (
-                  <li className="candidato" key={user.id}>
+                  <li className="candidato" key={candidato}>
                     <button>
                       <input
                         type="checkbox"
@@ -34,12 +34,11 @@ export function VagaCandidatoPage() {
                         className="candidato-group"
                       >
                         <ProfilePic
-                          url={user.profilepic_url}
                           className="candidato-pic"
                         />
                         <div className="candidato-info">
-                          <h3>{user.name}</h3>
-                          <span>{user.email}</span>
+                          <h3>{candidato}</h3>
+                          <span>{candidato}</span>
                         </div>
                       </a>
                     </button>

@@ -22,6 +22,7 @@ import { CriarNovaVagaForm } from "./pages/sys/vagas/criar-nova/_form";
 import { CadastroLayout } from "./pages/cadastro/layout";
 import { LoadingPage } from "./components/loadingPage";
 import { LoadingPageLogo } from "./components/loadingPage/logo";
+import SettingContaPage from "./pages/sys/settings/conta";
 
 const ForumPage = lazy(() => import("./pages/sys/forum"));
 const ProfilePage = lazy(() => import("./pages/sys/profile/[id]"));
@@ -75,7 +76,9 @@ export const AppRoutes = () => {
               </Suspense>
             }
           />
-          <Route path="settings/*" element={<SettingsPage />} />
+          <Route path="settings" element={<SettingsPage />} >
+            <Route path="conta" element={<SettingContaPage />} />
+          </Route>
         </Route>
       </Routes>
       {state?.modalLocation && (
