@@ -19,6 +19,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.server.ResponseStatusException;
 
 import br.edu.ifrn.ifjobs.exception.CurriculoNaoEncontradoException;
+import br.edu.ifrn.ifjobs.exception.UsuarioNaoEncontradoException;
 import br.edu.ifrn.ifjobs.model.Arquivo;
 import br.edu.ifrn.ifjobs.model.Curriculo;
 import br.edu.ifrn.ifjobs.service.CurriculoService;
@@ -50,17 +51,18 @@ public class CurriculoController {
         return ResponseEntity.ok(curriculo);
     }
 
-    @PostMapping(path = "/upload")
-    public void upload(@RequestParam MultipartFile arquivo) {
+    @PostMapping(path = "/upload/{email}")
+    public void upload(@RequestParam(name = "arquivo") MultipartFile arquivo,
+            @PathVariable(name = "email") String email) {
         try {
-            service.uploadArquivo(arquivo);
-        } catch (IOException e) {
+            service.uploadArquivo(arquivo, email);
+        } catch (IOException | UsuarioNaoEncontradoException e) {
             throw new RuntimeException("Não foi possível salvar o arquivo");
         }
     }
 
     @GetMapping("/download/{id}")
-    public ResponseEntity<?> downloadPorId(@PathVariable(name = "id") int id) {
+    public ResponseEntity<ByteArrayResource> downloadPorId(@PathVariable(name = "id") int id) {
         Curriculo curriculo;
 
         try {
@@ -70,11 +72,21 @@ public class CurriculoController {
         }
 
         Arquivo arquivo = curriculo.getPdf();
-        String texto = "inline; filename=\\" + arquivo.getNome() + "\\";
+        String texto = "inline; filename=\\" + arquivo.getNome() + "." + arquivo.getTipoArquivo() + "\\";
+
+        String tipoArquivo = arquivo.getTipoArquivo();
+        String headerArquivo = tipoArquivo(tipoArquivo);
 
         return ResponseEntity.ok()
-                .contentType(MediaType.parseMediaType(arquivo.getTipoArquivo()))
+                .contentType(MediaType.parseMediaType(headerArquivo))
                 .header(HttpHeaders.CONTENT_DISPOSITION, texto)
                 .body(new ByteArrayResource(arquivo.getDados()));
+    }
+
+    private String tipoArquivo(String tipoArquivo) {
+        return switch (tipoArquivo) {
+            case "pdf" -> "application/pdf";
+            default -> "application/octet-stream";
+        };
     }
 }
