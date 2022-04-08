@@ -38,7 +38,6 @@ public class CurriculoService {
 
         final Curriculo curriculo = construcaoCurriculoBaseadoNoArquivo(arquivo);
 
-        curriculoRepository.save(curriculo);
     }
 
     public Curriculo uploadLink(String link) {
