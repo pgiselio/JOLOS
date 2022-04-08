@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import br.edu.ifrn.ifjobs.exception.AlunoNaoCadastradoException;
 import br.edu.ifrn.ifjobs.exception.CurriculoNaoEncontradoException;
 import br.edu.ifrn.ifjobs.exception.UsuarioNaoEncontradoException;
 import br.edu.ifrn.ifjobs.model.Aluno;
@@ -27,6 +28,9 @@ public class CurriculoService {
 
     @Autowired
     private UsuarioService usuarioService;
+
+    @Autowired
+    private AlunoService alunoService;
 
     public void uploadArquivo(MultipartFile multipartFile, String email)
             throws IOException, UsuarioNaoEncontradoException {
@@ -107,6 +111,18 @@ public class CurriculoService {
         arquivo.setNome(primeiroNome + ultimoNome + aluno.getId());
         arquivo.setDados(multipartFile.getBytes());
         arquivo.setTipoArquivo(extensao);
+
+        final Curriculo curriculo = new Curriculo();
+        curriculo.setPdf(arquivo);
+        curriculo.setDataImport(Date.valueOf(LocalDate.now()));
+
+        aluno.setCurriculo(curriculo);
+        try {
+            alunoService.salvaAluno(aluno);
+        } catch (AlunoNaoCadastradoException e) {
+            throw new RuntimeException(e.getMessage());
+        }
+
         return arquivo;
     }
 }
