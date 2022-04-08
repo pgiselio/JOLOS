@@ -8,7 +8,7 @@ export default function LogoutPage() {
   const auth = useAuth();
   useEffect(() => {
     auth.logout();
-  });
+  }, []);
   if (!auth.email) {
     return <Navigate to="/entrar" replace />;
   }

@@ -1,15 +1,15 @@
 import styled from "styled-components";
 type SkeletonType = {
   variant: "text" | "circle" | "square";
-  height: string;
-  width: string;
+  height?: string;
+  width?: string;
 };
 export const Skeleton = styled.span<SkeletonType>`
   display: block;
   background-color: rgba(000, 000, 000, 0.12);
-  height: ${(props) => (props.height && props.height) || "auto"}};
-  width: ${(props) => (props.width && props.width) || ""};
-  margin-top: ${(props) => (props.variant === "square" && "8px") || "0px"}};
+  ${(props) => (props.height && "height: " + props.height + ";") || "height: auto;"}
+  ${(props) => (props.width && " width: " + props.width+ ";")}
+  margin-top: ${(props) => (props.variant === "square" && "8px") || "0px"};
   margin-bottom: 0px;
   transform-origin: ${(props) =>
     (props.variant === "circle" && "55%") ||

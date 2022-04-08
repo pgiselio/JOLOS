@@ -1,9 +1,6 @@
-import { useQuery } from "react-query";
-import { userInfo } from "../../contexts/AuthContext/types";
 import { useAuth } from "../../hooks/useAuth";
-import { api } from "../../services/api";
+import { useUser } from "../../hooks/useUser";
 import { ProfilePic } from "../profile-pic/profile-pic";
-import { Skeleton } from "../skeleton-load";
 import { SidebarItem } from "./sidebar-item";
 import { SidebarAside } from "./style";
 
@@ -17,36 +14,12 @@ export function SidebarList() {
   }
   checkSidebarState();
   const auth = useAuth();
-
-  const { data, isFetching } = useQuery<userInfo>(
-    ["meUser"],
-    async () => {
-      const response = await api
-        .get(`/usuario/email/${auth?.email}`)
-        .catch((error) =>
-          (error.response.status === 401 || error.response.status === 403)
-            ? (window.location.href = "/logout")
-            : error
-        );
-      return response?.data;
-    },
-    {
-      refetchOnWindowFocus: true,
-      staleTime: 1000 * 60, // 1 minute
-      refetchInterval: 1000 * 60 * 5, // 5 minutes to refetch automatically
-    }
-  );
+  const user = useUser();
   function nomePessoa(): string {
-    if(!data){
+    if(user.loadingData){
       return "Carregando...";
     }
-    if (data?.aluno) {
-      return data.aluno.dadosPessoa.nome;
-    } else if (data?.empresa) {
-      return data.empresa.dadosPessoa.nome;
-    } else {
-      return "ADMIN";
-    }
+    return user?.aluno?.dadosPessoa.nome || user?.empresa?.dadosPessoa.nome || "ADMIN";
   }
   return (
     <SidebarAside className="side-bar">
@@ -65,7 +38,7 @@ export function SidebarList() {
             <SidebarItem to="vagas" icon="fas fa-briefcase" label="Vagas" />
             <SidebarItem to="forum" icon="fas fa-comments" label="Fórum" />
             {nomePessoa() !== "ADMIN" && (
-              <SidebarItem to={`profile/${data?.id}`} icon="fas fa-user" label="Perfil" />
+              <SidebarItem to={`profile/${user?.id}`} icon="fas fa-user" label="Perfil" />
             )}
 
             <SidebarItem

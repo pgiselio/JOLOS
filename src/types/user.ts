@@ -1,8 +1,8 @@
 export type User = {
-  id: 0;
-  email: string;
-  senha: string;
-  status: string;
+  id?: 0;
+  email?: string;
+  senha?: string;
+  status?: string;
   aluno?: {
     id: 0;
     dadosPessoa: {

@@ -1,6 +1,6 @@
 import { useForm } from "react-hook-form";
 import { useOutletContext } from "react-router-dom";
-import { toast, ToastContainer } from "react-toastify";
+import { toast } from "react-toastify";
 import { Button } from "../../../../components/button";
 import { api } from "../../../../services/api";
 import { User } from "../../../../types/user";
@@ -31,7 +31,7 @@ export default function SettingContaPage() {
         }
       )
       .then((response) => {
-        if (response.status === 201) {
+        if (response.status === 200) {
           toast.success("Currículo enviado com sucesso!");
         }
       })
@@ -48,19 +48,6 @@ export default function SettingContaPage() {
   }
   return (
     <>
-      <ToastContainer
-        position="top-right"
-        style={{ top: "var(--top-bar-height)" }}
-        autoClose={5000}
-        hideProgressBar={false}
-        newestOnTop={false}
-        closeOnClick
-        rtl={false}
-        pauseOnFocusLoss
-        draggable
-        pauseOnHover
-      />
-      <h3>Configurações de conta</h3>
       <div>
         <div>Currículo</div>
         <form onSubmit={handleSubmit(onSubmit)}>

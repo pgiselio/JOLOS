@@ -1,42 +1,29 @@
-import { useEffect, useState } from "react";
-import { TabPanel, useTabs } from "react-headless-tabs";
-import { Outlet, useSearchParams } from "react-router-dom";
+import { useEffect } from "react";
+import { useTabs } from "react-headless-tabs";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import { LoadingPage } from "../../../components/loadingPage";
 import { TabSelector } from "../../../components/Tabs/TabSelector";
-import { useAuth } from "../../../hooks/useAuth";
-import { api } from "../../../services/api";
-import { User } from "../../../types/user";
+import { useUser } from "../../../hooks/useUser";
 import SettingContaPage from "./conta";
 import { SettingPageStyle } from "./styles";
 
 export default function SettingsPage() {
-  const [user, setUser] = useState<User>();
-  const auth = useAuth();
   const [searchParams, setSearchParams] = useSearchParams();
   const [selectedTab, setSelectedTab] = useTabs(
-    ["security", "profile", "notify", "themes"],
+    ["security", "profile", "notifications", "themes"],
     searchParams.get("tab") || "profile"
   );
+  let navigate = useNavigate();
+  const user = useUser();
+  const mq = window.matchMedia("(min-width: 1000px)");
   useEffect(() => {
-    if (!searchParams.get("tab")) {
+    if (!searchParams.get("tab") && mq.matches) {
       setSearchParams({ tab: "profile" });
     } else {
       setSelectedTab(searchParams.get("tab"));
     }
-
-    async function getUser() {
-      const response = await api
-        .get(`/usuario/email/${auth?.email}`)
-        .catch((error) =>
-          error.response.status === 401 || error.response.status === 403
-            ? (window.location.href = "/logout")
-            : error
-        );
-      setUser(response?.data);
-    }
-    getUser();
-  }, []);
-  if (!user) {
+  }, [searchParams.get("tab")]);
+  if (user.loadingData) {
     return <LoadingPage />;
   }
 
@@ -48,7 +35,6 @@ export default function SettingsPage() {
           <TabSelector
             isActive={selectedTab === "profile"}
             onClick={() => {
-              setSelectedTab("profile");
               setSearchParams({ tab: "profile" });
             }}
             className="tab-selector-profile"
@@ -60,7 +46,6 @@ export default function SettingsPage() {
           <TabSelector
             isActive={selectedTab === "security"}
             onClick={() => {
-              setSelectedTab("security");
               setSearchParams({ tab: "security" });
             }}
             vertical
@@ -69,10 +54,9 @@ export default function SettingsPage() {
             Conta e Segurança
           </TabSelector>
           <TabSelector
-            isActive={selectedTab === "notify"}
+            isActive={selectedTab === "notifications"}
             onClick={() => {
-              setSelectedTab("notify");
-              setSearchParams({ tab: "notify" });
+              setSearchParams({ tab: "notifications" });
             }}
             vertical
           >
@@ -82,7 +66,6 @@ export default function SettingsPage() {
           <TabSelector
             isActive={selectedTab === "themes"}
             onClick={() => {
-              setSelectedTab("themes");
               setSearchParams({ tab: "themes" });
             }}
             vertical
@@ -93,19 +76,23 @@ export default function SettingsPage() {
         </div>
       </nav>
       <div className="content-settings">
-        {selectedTab === "profile" && (
-          <>
-            <SettingContaPage />
-          </>
-        )}
-        {selectedTab === "security" && (
-            <h2>Segurança</h2>
-        )}
-        {selectedTab === "notify" && (
-            <h2>Notificações</h2>
-        )}
-        {selectedTab === "themes" && (
-            <h2>Temas</h2>
+        {selectedTab && (
+          <div className="setting">
+            {!mq.matches && (
+              <button type="button" onClick={() => navigate(-1)}>
+                Voltar
+              </button>
+            )}
+            {selectedTab === "profile" && (
+              <>
+                <h3>Configurações de conta</h3>
+                <SettingContaPage />
+              </>
+            )}
+            {selectedTab === "security" && <h3>Segurança</h3>}
+            {selectedTab === "notifications" && <h3>Notificações</h3>}
+            {selectedTab === "themes" && <h3>Temas</h3>}
+          </div>
         )}
       </div>
     </SettingPageStyle>

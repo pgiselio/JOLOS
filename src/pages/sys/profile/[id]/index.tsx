@@ -2,8 +2,10 @@ import { useQuery } from "react-query";
 import { useParams } from "react-router-dom";
 import { Box, BoxContent, BoxTitle } from "../../../../components/box";
 import { Button } from "../../../../components/button";
+import CircularProgressFluent from "../../../../components/circular-progress-fluent";
 import { PillItem, PillList } from "../../../../components/pill";
 import { ProfilePic } from "../../../../components/profile-pic/profile-pic";
+import { Skeleton } from "../../../../components/skeleton-load";
 import { useAuth } from "../../../../hooks/useAuth";
 import { api } from "../../../../services/api";
 import Error404 from "../../../404";
@@ -55,21 +57,35 @@ export default function ProfilePage({ email }: { email?: string }) {
           <div className="profile-page-header-container">
             <div className="user-info">
               <ProfilePic />
+
               <div className="profile-names">
-                <h2>
-                  {usertype === "ALUNO"
-                    ? data.aluno.dadosPessoa.nome
-                    : usertype === "EMPRESA"
-                    ? data.empresa.dadosPessoa.nome
-                    : data?.email}
-                </h2>
-                <span>
-                  {usertype === "ALUNO"
-                    ? data.email
-                    : usertype === "EMPRESA"
-                    ? data.empresa.cnpj
-                    : data?.email}
-                </span>
+                {isFetching ? (
+                  <>
+                    <h2>
+                      <Skeleton variant="text" width="200px" height="30px" />
+                    </h2>
+                    <span>
+                      <Skeleton variant="text" width="150px" height="20px" />
+                    </span>
+                  </>
+                ) : (
+                  <>
+                    <h2>
+                      {usertype === "ALUNO"
+                        ? data.aluno.dadosPessoa.nome
+                        : usertype === "EMPRESA"
+                        ? data.empresa.dadosPessoa.nome
+                        : data?.email}
+                    </h2>
+                    <span>
+                      {usertype === "ALUNO"
+                        ? data.email
+                        : usertype === "EMPRESA"
+                        ? data.empresa.cnpj
+                        : data?.email}
+                    </span>
+                  </>
+                )}
               </div>
             </div>
             <div className="user-actions">
@@ -91,38 +107,58 @@ export default function ProfilePage({ email }: { email?: string }) {
             </div>
           </div>
         </div>
-        <div className="content">
-          <div className="vaga-page-info">
-            <PillList>
-              <PillItem>
-                <i className="fas fa-calendar-day"></i>
-                <span>
-                  {getFormattedDate(data?.aluno?.dadosPessoa.dataNasc)}
-                </span>
-              </PillItem>
-              <PillItem>
-                <i className="fas fa-map-marker-alt"></i>
-                <span>{data?.aluno?.dadosPessoa.localizacao}</span>
-              </PillItem>
-              <PillItem title="Curso">
-                <i className="fas fa-book-open"></i>
-                <span>{data?.aluno?.curso} - </span>
-                <span title="Período do curso">
-                  <i className="fas fa-clock"></i>
-                  <span>{data?.aluno?.periodo}</span>
-                </span>
-              </PillItem>
-            </PillList>
+        {isFetching ? (
+          <p
+            style={{
+              display: "flex",
+              width: "100%",
+              justifyContent: "center",
+              alignItems: "center",
+              gap: "10px",
+              paddingTop: "30px",
+            }}
+          >
+            <CircularProgressFluent
+              color="var(--accent-color)"
+              height="50px"
+              width="50px"
+              duration=".8s"
+            />
+          </p>
+        ) : (
+          <div className="content">
+            <div className="vaga-page-info">
+              <PillList>
+                <PillItem>
+                  <i className="fas fa-calendar-day"></i>
+                  <span>
+                    {getFormattedDate(data?.aluno?.dadosPessoa.dataNasc)}
+                  </span>
+                </PillItem>
+                <PillItem>
+                  <i className="fas fa-map-marker-alt"></i>
+                  <span>{data?.aluno?.dadosPessoa.localizacao}</span>
+                </PillItem>
+                <PillItem title="Curso">
+                  <i className="fas fa-book-open"></i>
+                  <span>{data?.aluno?.curso} - </span>
+                  <span title="Período do curso">
+                    <i className="fas fa-clock"></i>
+                    <span>{data?.aluno?.periodo}</span>
+                  </span>
+                </PillItem>
+              </PillList>
+            </div>
+            <Box>
+              <BoxTitle>
+                <h3>Sobre</h3>
+              </BoxTitle>
+              <BoxContent>
+                <p>{data?.status}</p>
+              </BoxContent>
+            </Box>
           </div>
-          <Box>
-            <BoxTitle>
-              <h3>Sobre</h3>
-            </BoxTitle>
-            <BoxContent>
-              <p>{data?.status}</p>
-            </BoxContent>
-          </Box>
-        </div>
+        )}
       </ProfilePageStyle>
     </>
   );
