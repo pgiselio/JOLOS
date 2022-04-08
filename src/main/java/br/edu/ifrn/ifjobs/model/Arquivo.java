@@ -13,6 +13,7 @@ public class Arquivo implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
+    @Column(unique = true, nullable = false)
     private String nome;
 
     @Column
