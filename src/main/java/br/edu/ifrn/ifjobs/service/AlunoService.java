@@ -20,7 +20,7 @@ public class AlunoService {
 
     public Aluno salvaAluno(Aluno aluno) throws AlunoNaoCadastradoException {
         Optional<Aluno> optional;
-        optional = Optional.ofNullable(respository.save(aluno));
+        optional = Optional.ofNullable(respository.saveAndFlush(aluno));
         return optional.orElseThrow(() -> new AlunoNaoCadastradoException("Dados inválidos!"));
     }
 
