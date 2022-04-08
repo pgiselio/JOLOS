@@ -1,4 +1,4 @@
-import { createContext, useState } from "react";
+import { createContext } from "react";
 import { useQuery } from "react-query";
 import { api } from "../../services/api";
 import { User } from "../../types/user";
@@ -22,12 +22,11 @@ export function UserProvider({ children }: { children: JSX.Element }) {
             ? (window.location.href = "/logout")
             : error
         );
-      console.log("REFETCHED");
       return response?.data;
     },
     {
       refetchOnWindowFocus: true,
-      staleTime: 1000 * 1, // 1 minute
+      staleTime: 1000 * 60, // 1 minute
       refetchInterval: 1000 * 60 * 5, // 5 minutes to refetch automatically
     }
   );

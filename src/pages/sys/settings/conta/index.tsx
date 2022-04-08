@@ -1,12 +1,11 @@
 import { useForm } from "react-hook-form";
-import { useOutletContext } from "react-router-dom";
 import { toast } from "react-toastify";
 import { Button } from "../../../../components/button";
+import { useUser } from "../../../../hooks/useUser";
 import { api } from "../../../../services/api";
-import { User } from "../../../../types/user";
 
 export default function SettingContaPage() {
-  const user: User = useOutletContext();
+  const user = useUser();
   const {
     register,
     formState: { errors },
@@ -23,7 +22,7 @@ export default function SettingContaPage() {
     formData.append("arquivo", file);
     await api
       .post(
-        "/curriculo/upload", formData,
+        `/curriculo/upload/${user.email}`, formData,
         {
           headers: {
             "Content-Type": "multipart/form-data",
@@ -54,7 +53,6 @@ export default function SettingContaPage() {
           <input type="file" {...register("arquivo")} />
           <Button type="submit">Enviar</Button>
         </form>
-        {user?.aluno && JSON.stringify(user?.aluno)}
       </div>
     </>
   );

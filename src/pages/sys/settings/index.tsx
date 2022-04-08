@@ -22,7 +22,7 @@ export default function SettingsPage() {
     } else {
       setSelectedTab(searchParams.get("tab"));
     }
-  }, [searchParams.get("tab")]);
+  });
   if (user.loadingData) {
     return <LoadingPage />;
   }
