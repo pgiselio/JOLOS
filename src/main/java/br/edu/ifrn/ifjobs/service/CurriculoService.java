@@ -11,8 +11,12 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import br.edu.ifrn.ifjobs.exception.CurriculoNaoEncontradoException;
+import br.edu.ifrn.ifjobs.exception.UsuarioNaoEncontradoException;
+import br.edu.ifrn.ifjobs.model.Aluno;
 import br.edu.ifrn.ifjobs.model.Arquivo;
 import br.edu.ifrn.ifjobs.model.Curriculo;
+import br.edu.ifrn.ifjobs.model.Pessoa;
+import br.edu.ifrn.ifjobs.model.Usuario;
 import br.edu.ifrn.ifjobs.repository.CurriculoRepository;
 
 @Service
@@ -21,8 +25,12 @@ public class CurriculoService {
     @Autowired
     private CurriculoRepository curriculoRepository;
 
-    public void uploadArquivo(MultipartFile multipartFile) throws IOException {
-        final Arquivo arquivo = construcaoArquivoBaseadoNoMultipartFile(multipartFile);
+    @Autowired
+    private UsuarioService usuarioService;
+
+    public void uploadArquivo(MultipartFile multipartFile, String email)
+            throws IOException, UsuarioNaoEncontradoException {
+        final Arquivo arquivo = construcaoArquivoBaseadoNoMultipartFile(multipartFile, email);
 
         final Curriculo curriculo = construcaoCurriculoBaseadoNoArquivo(arquivo);
 
@@ -76,11 +84,29 @@ public class CurriculoService {
         return curriculo;
     }
 
-    private Arquivo construcaoArquivoBaseadoNoMultipartFile(MultipartFile multipartFile) throws IOException {
+    private Arquivo construcaoArquivoBaseadoNoMultipartFile(MultipartFile multipartFile, String email)
+            throws IOException, UsuarioNaoEncontradoException {
+        Usuario usuario = usuarioService.buscaPorEmail(email);
+        final Aluno aluno = usuario.getAluno();
+        final Pessoa dadosPessoais = aluno.getDadosPessoa();
+
+        String nome = dadosPessoais.getNome();
+        String[] nomeDescomposto = nome.split(" ");
+        String primeiroNome = nomeDescomposto[0];
+        String ultimoNome = nomeDescomposto[nomeDescomposto.length - 1];
+
+        String contentType = multipartFile.getOriginalFilename();
+        var contentTypeOptional = Optional.ofNullable(contentType);
+        String extensao = contentTypeOptional.stream()
+                .reduce("", (content, contentTypeDecomposto) -> {
+                    String[] nomeArquivo = contentTypeDecomposto.split("\\.");
+                    return nomeArquivo[nomeArquivo.length - 1];
+                });
+
         final Arquivo arquivo = new Arquivo();
-        arquivo.setNome(multipartFile.getName());
+        arquivo.setNome(primeiroNome + ultimoNome + aluno.getId());
         arquivo.setDados(multipartFile.getBytes());
-        arquivo.setTipoArquivo(multipartFile.getContentType());
+        arquivo.setTipoArquivo(extensao);
         return arquivo;
     }
 }
