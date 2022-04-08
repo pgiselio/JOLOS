@@ -3,6 +3,7 @@ package br.edu.ifrn.ifjobs.model;
 import java.io.Serializable;
 
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
@@ -36,7 +37,7 @@ public class Aluno implements Serializable {
     @Column(unique = true, nullable = false, length = 11)
     private String cpf;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     @Basic(fetch = FetchType.LAZY)
     private Curriculo curriculo;
 
