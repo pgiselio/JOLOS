@@ -30,6 +30,10 @@ export const VagaCardStyle = styled.div`
       gap: 10px;
       width: 100%;
     }
+    .profile-pic {
+      width: 35px;
+      height: 35px;
+    }
   }
 
   .vaga-titles {
@@ -40,9 +44,9 @@ export const VagaCardStyle = styled.div`
     gap: 3px;
     h3 {
       width: 100%;
-      line-height: 25px;
-      max-height: 50px;
-      margin-top: 2px;
+      max-height: 40px;
+      line-height: 20px;
+      font-size: 16px;
       overflow: hidden;
     }
     h3::first-letter {
@@ -107,8 +111,12 @@ export const VagaCardStyle = styled.div`
   }
 
   .card-pill {
-    padding: 6px 10px;
-    font-size: 14px;
+    padding: 5px 7px;
+    font-size: 12px;
+    max-width: calc(100vw - 70px);
+    span {
+      white-space: initial;
+    }
     &.status {
       background: #c91f1f;
       color: #fff;
@@ -123,6 +131,7 @@ export const VagaCardStyle = styled.div`
   .vagas-bottom {
     display: flex;
     align-items: center;
+    flex-wrap: wrap;
     margin-top: 20px;
     justify-content: space-between;
     width: 100%;
@@ -160,6 +169,36 @@ export const VagaCardStyle = styled.div`
 
     .vagas-detalhes-btn:hover {
       color: var(--accent-color-active);
+    }
+  }
+  @media (min-width: 766px) {
+    .card-pill {
+      padding: 6px 10px;
+      font-size: 14px;
+    }
+    .vaga-header {
+      display: flex;
+      flex-direction: column;
+      padding: 20px;
+      .photo-align {
+        display: grid;
+        align-items: flex-start;
+        grid-template-columns: auto 1fr;
+        gap: 10px;
+        width: 100%;
+      }
+      .profile-pic {
+        width: 55px;
+        height: 55px;
+      }
+    }
+    .vaga-titles {
+      h3 {
+        margin-top: 2px;
+        max-height: 50px;
+        line-height: 25px;
+        font-size: 18px;
+      }
     }
   }
 `;

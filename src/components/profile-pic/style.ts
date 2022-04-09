@@ -14,7 +14,7 @@ export const StyledProfilePic = styled.div`
     width: 100%;
     height: 100%;
   }
-  .default-profile img {
+  .default-profile svg {
     display: flex;
     position: absolute;
     height: 100%;

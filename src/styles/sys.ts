@@ -69,7 +69,7 @@ body.remove-transbar .three-bars-btn *{
   display: flex;
   flex-direction: column;
   padding: 0 15px;
-  max-width: 1280px;
+  max-width: 100vw;
   margin: 0 auto;
 }
 
@@ -92,18 +92,7 @@ body.remove-transbar .three-bars-btn *{
   width: 250px;
 }
 
-  .vaga-status {
-    color: #b3001e;
-    font-weight: 500;
-  }
-  .vaga-status.enabled {
-    color: green;
-  }
-  .vaga-page-info {
-    display: flex;
-    margin-top: 15px;
-    width: 100%;
-  }
+  
 
 @media (min-width: 766px) {
   body::-webkit-scrollbar {
@@ -158,6 +147,7 @@ body.remove-transbar .three-bars-btn *{
 
   .content {
     padding: 0 30px;
+    max-width: 1280px;
   }
   .content-grid {
     margin-top: 30px;

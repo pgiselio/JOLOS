@@ -20,7 +20,7 @@ export function VagaCard({ vaga }: vagaObj) {
         <div className="vaga-header">
           <div className="photo-align">
             <Link to={`../profile/${vaga?.empresa?.id}`}>
-              <ProfilePic style={{ width: 55, height: 55 }} />
+              <ProfilePic/>
             </Link>
 
             <div>
@@ -51,13 +51,13 @@ export function VagaCard({ vaga }: vagaObj) {
             >
               <span>{vaga.status === "ATIVO" ? "ATIVO" : "INATIVO"}</span>
             </PillItem>
-            <PillItem className="card-pill" title="Localização">
-              <i className="fas fa-map-marker-alt"></i>
-              <span className="vaga-city">{vaga.localizacao}</span>
-            </PillItem>
             <PillItem className="card-pill" title="Curso alvo">
               <i className="fas fa-book-open"></i>
               <span className="vaga-city">{vaga.cursoAlvo}</span>
+            </PillItem>
+            <PillItem className="card-pill" title="Localização">
+              <i className="fas fa-map-marker-alt"></i>
+              <span className="vaga-city">{vaga.localizacao}</span>
             </PillItem>
           </PillList>
         </div>

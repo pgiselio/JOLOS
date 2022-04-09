@@ -8,6 +8,7 @@ type TabsMenuType = {
   style?: CSSProperties;
   sticky?: boolean;
   size?: "small" | "medium" | "large";
+  className?: string;
 };
 type TabsMenuItemType = {
   to: string;
@@ -15,12 +16,12 @@ type TabsMenuItemType = {
   highlighted?: string;
   end?: boolean;
 };
-export function TabsMenu({ children, isOntop, style, sticky, size }: TabsMenuType) {
+export function TabsMenu({ children, isOntop, style, sticky, size, className }: TabsMenuType) {
   return (
     <TabsMenuStyle isOnTop={isOntop} sticky={sticky} size={size} style={style}>
       {!isOntop && <div className="spacer"></div>}
 
-      <div className="tabs-menu-container">
+      <div className={`tabs-menu-container ${className}`}>
         <ul>
           {children}
         </ul>

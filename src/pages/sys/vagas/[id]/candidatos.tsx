@@ -30,7 +30,7 @@ export function VagaCandidatoPage() {
                         className="candidato-list-check"
                       />
                       <a
-                        href="../perfil/pessoa/jose-nascimento.html"
+                        href="#aluno"
                         className="candidato-group"
                       >
                         <ProfilePic

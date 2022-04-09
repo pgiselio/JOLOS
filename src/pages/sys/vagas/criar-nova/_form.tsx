@@ -7,6 +7,7 @@ import { toast } from "react-toastify";
 
 import { Input } from "../../../../components/input";
 import { useAuth } from "../../../../hooks/useAuth";
+import { useUser } from "../../../../hooks/useUser";
 import { api } from "../../../../services/api";
 
 export function CriarNovaVagaForm() {
@@ -15,6 +16,7 @@ export function CriarNovaVagaForm() {
   // );
   const [empresaCNPJ, setEmpresaCNPJ] = useState<string | null>();
   const auth = useAuth();
+  const user = useUser();
   const {
     control,
     formState: { errors },
@@ -45,18 +47,8 @@ export function CriarNovaVagaForm() {
   }
 
   useEffect(() => {
-    async function getUser() {
-      const response = await api
-        .get(`/usuario/email/${auth?.email}`)
-        .catch((error) =>
-          error.response.status === 401 || error.response.status === 403
-            ? (window.location.href = "/logout")
-            : error
-        );
-      setEmpresaCNPJ(response?.data?.empresa?.cnpj);
-    }
-    getUser();
-  }, []);
+    setEmpresaCNPJ(user?.empresa?.cnpj);
+  }, [user]);
 
   async function onSubmit({
     titulo,

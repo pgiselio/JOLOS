@@ -36,6 +36,11 @@ export const ProfilePageStyle = styled.section`
     text-overflow: ellipsis;
     white-space: nowrap;
   }
+  .profile-page-info {
+    display: flex;
+    margin-top: 15px;
+    width: 100%;
+  }
 
   .user-actions {
     display: flex;

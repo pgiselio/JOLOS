@@ -12,8 +12,9 @@ export const SidebarAside = styled.aside`
   top: var(--top-bar-height);
   z-index: 20;
   width: 280px;
+  max-width: 100vw;
   transition: width 0.3s, transform 0.5s, padding 0.3s linear;
-  transform: translateX(-101vw);
+  transform: translateX(calc(-100vw - 280px));
 
   body.toggle-sidemenu & {
     padding: 0;

@@ -8,6 +8,7 @@ import { ProfilePic } from "../../../../components/profile-pic/profile-pic";
 import { Skeleton } from "../../../../components/skeleton-load";
 import { useAuth } from "../../../../hooks/useAuth";
 import { api } from "../../../../services/api";
+import { cnpjMask } from "../../../../utils/cnpjMask";
 import Error404 from "../../../404";
 import { ProfilePageStyle } from "../styles";
 
@@ -16,7 +17,7 @@ export default function ProfilePage({ email }: { email?: string }) {
   let usertype;
   const auth = useAuth();
   const { data, isFetching } = useQuery(
-    "profile-" + (email ? email : params.id),
+    ["profile", email ? email : params.id],
     async () => {
       const response = await api.get(
         `/usuario/${email ? "email/" + email : params.id}`
@@ -81,7 +82,7 @@ export default function ProfilePage({ email }: { email?: string }) {
                       {usertype === "ALUNO"
                         ? data.email
                         : usertype === "EMPRESA"
-                        ? data.empresa.cnpj
+                        ? cnpjMask(data.empresa.cnpj) 
                         : data?.email}
                     </span>
                   </>
@@ -127,7 +128,7 @@ export default function ProfilePage({ email }: { email?: string }) {
           </p>
         ) : (
           <div className="content">
-            <div className="vaga-page-info">
+            <div className="profile-page-info">
               <PillList>
                 <PillItem>
                   <i className="fas fa-calendar-day"></i>
