@@ -24,7 +24,7 @@ export default function ProfilePage({ email }: { email?: string }) {
       return response.data;
     },
     {
-      staleTime: 1000 * 60, // 1 minute to refetch
+      staleTime: 1000 * 60 * 2, // 2 minutes
     }
   );
   function getFormattedDate(date: Date) {
@@ -149,14 +149,83 @@ export default function ProfilePage({ email }: { email?: string }) {
                 </PillItem>
               </PillList>
             </div>
-            <Box>
-              <BoxTitle>
-                <h3>Sobre</h3>
-              </BoxTitle>
-              <BoxContent>
-                <p>{data?.status}</p>
-              </BoxContent>
-            </Box>
+            {usertype === "ALUNO" && (
+              <Box>
+                <BoxTitle>
+                  <h3>Sobre</h3>
+                </BoxTitle>
+                <BoxContent>
+                  <p>{data?.status}</p>
+                </BoxContent>
+              </Box>
+            )}
+            {usertype === "EMPRESA" && (
+              <div className="vaga-columns-2">
+                <div className="column-1">
+                  <Box>
+                    <BoxTitle>
+                      <h3>Sobre nós</h3>
+                    </BoxTitle>
+                    <BoxContent>
+                      <div className="vaga-page-description">
+                        <p>{data?.empresa?.descricao}</p>
+                      </div>
+                    </BoxContent>
+                  </Box>
+                </div>
+                <div className="column-2">
+                  <Box>
+                    <BoxTitle>
+                      <h3>Contato</h3>
+                    </BoxTitle>
+                    <BoxContent>
+                      <div className="contacts">
+                        <ul className="essential-info">
+                          <li>
+                            <a href="#oi">
+                              <i className="fas fa-envelope"></i>{" "}
+                              <span>email@seusite.com.br</span>
+                            </a>
+                          </li>
+                          <li>
+                            <a href="#oi">
+                              <i className="fas fa-phone-alt"></i>{" "}
+                              <span>(84) 0000-0000</span>
+                            </a>
+                          </li>
+                        </ul>
+                      </div>
+                    </BoxContent>
+                  </Box>
+                  <Box>
+                    <BoxContent>
+                      <ul className="social-info">
+                        <li>
+                          <a href="#oi" target="_blank">
+                            <i className="fab fa-linkedin"></i>
+                          </a>
+                        </li>
+                        <li>
+                          <a href="#oi" target="_blank">
+                            <i className="fab fa-facebook"></i>
+                          </a>
+                        </li>
+                        <li>
+                          <a href="#oi" target="_blank">
+                            <i className="fab fa-instagram"></i>
+                          </a>
+                        </li>
+                        <li>
+                          <a href="#oi" target="_blank">
+                            <i className="fab fa-twitter"></i>
+                          </a>
+                        </li>
+                      </ul>
+                    </BoxContent>
+                  </Box>
+                </div>
+              </div>
+            )}
           </div>
         )}
       </ProfilePageStyle>
