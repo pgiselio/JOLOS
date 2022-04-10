@@ -6,17 +6,23 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import java.util.Set;
 import java.util.function.Supplier;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.ReflectionUtils;
 
+import br.edu.ifrn.ifjobs.dto.vaga.VagaGetAllDTO;
+import br.edu.ifrn.ifjobs.dto.vaga.VagaGetDTO;
 import br.edu.ifrn.ifjobs.dto.vaga.VagaInsertDto;
+import br.edu.ifrn.ifjobs.exception.UsuarioNaoEncontradoException;
 import br.edu.ifrn.ifjobs.exception.VagaNaoCadastradaException;
 import br.edu.ifrn.ifjobs.exception.VagaNaoEncontradoException;
 import br.edu.ifrn.ifjobs.model.Aluno;
 import br.edu.ifrn.ifjobs.model.Empresa;
+import br.edu.ifrn.ifjobs.model.Usuario;
 import br.edu.ifrn.ifjobs.model.Vaga;
 import br.edu.ifrn.ifjobs.model.enums.StatusVaga;
 import br.edu.ifrn.ifjobs.repository.VagaRepository;
@@ -29,6 +35,9 @@ public class VagaService {
 
     @Autowired
     private EmpresaService empresaService;
+
+    @Autowired
+    private UsuarioService usuarioService;
 
     public Vaga salvarVaga(Vaga vaga) throws VagaNaoCadastradaException {
         Optional<Vaga> vagaOptional;
@@ -76,8 +85,43 @@ public class VagaService {
         return vagaBuscadaPorId.orElseThrow(excessao);
     }
 
-    public List<Vaga> buscaTodasVagas() {
-        return vagaRepository.findAll();
+    public List<VagaGetAllDTO> buscaTodasVagas() {
+        List<Vaga> vagas = vagaRepository.findAll();
+
+        return vagas.stream().map(vaga -> {
+            Empresa empresa = vaga.getEmpresa();
+            Usuario usuario = usuarioBuscadoPorEmpresaId(empresa.getId());
+
+            VagaGetAllDTO dto = new VagaGetAllDTO();
+            VagaGetAllDTO convertEntityToDto = dto.convertEntityToDto(vaga);
+            convertEntityToDto.setEmpresaID(usuario.getId());
+
+            Set<Aluno> alunos = vaga.getAlunos();
+
+            Set<Usuario> listAlunos;
+            listAlunos = alunos.stream()
+                    .map(aluno -> {
+                        try {
+                            return usuarioService.buscaPorAlunoId(aluno.getId());
+                        } catch (UsuarioNaoEncontradoException e) {
+                            throw new RuntimeException(e.getMessage());
+                        }
+                    })
+                    .collect(Collectors.toSet());
+
+            convertEntityToDto.setAlunos(listAlunos);
+            return convertEntityToDto;
+        }).toList();
+    }
+
+    private Usuario usuarioBuscadoPorEmpresaId(int id) {
+        Usuario usuario;
+        try {
+            usuario = usuarioService.buscaPorEmpresaId(id);
+        } catch (UsuarioNaoEncontradoException e) {
+            throw new RuntimeException(e.getMessage());
+        }
+        return usuario;
     }
 
     public void delete(int id) throws VagaNaoEncontradoException {
@@ -107,17 +151,18 @@ public class VagaService {
         return salvarVaga(vagaBuscadaPorId);
     }
 
-    /**
-     * 
-     * @param id    é a identificação da vaga
-     * @param aluno é a entidade que será salva
-     * @return
-     * @throws VagaNaoEncontradoException
-     * @throws VagaNaoCadastradaException
-     */
-    public Vaga addAlunoParaVaga(int id, Aluno aluno) throws VagaNaoEncontradoException, VagaNaoCadastradaException {
-        final Vaga vaga = buscarPorId(id);
-        vaga.addAluno(aluno);
-        return salvarVaga(vaga);
+    public VagaGetDTO addAlunoParaVaga(int vagaId, int alunoId)
+            throws VagaNaoEncontradoException, UsuarioNaoEncontradoException {
+        final Vaga vaga = buscarPorId(vagaId);
+        final Usuario usuario = usuarioService.buscaPorAlunoId(alunoId);
+        vaga.addAluno(usuario.getAluno());
+        VagaGetDTO dto = new VagaGetDTO();
+        VagaGetDTO convertedToDto = dto.convertEntityToDto(vaga);
+        try {
+            salvarVaga(vaga);
+        } catch (VagaNaoCadastradaException e) {
+            throw new RuntimeException(e.getMessage());
+        }
+        return convertedToDto;
     }
 }
