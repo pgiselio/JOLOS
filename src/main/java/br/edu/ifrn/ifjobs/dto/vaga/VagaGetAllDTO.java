@@ -8,7 +8,7 @@ import java.util.stream.Collectors;
 import org.modelmapper.ModelMapper;
 
 import br.edu.ifrn.ifjobs.dto.Dto;
-import br.edu.ifrn.ifjobs.model.Empresa;
+import br.edu.ifrn.ifjobs.dto.empresa.EmpresaGetDTO;
 import br.edu.ifrn.ifjobs.model.Usuario;
 import br.edu.ifrn.ifjobs.model.Vaga;
 import br.edu.ifrn.ifjobs.model.enums.StatusVaga;
@@ -31,7 +31,7 @@ public class VagaGetAllDTO implements Dto<Vaga, VagaGetAllDTO> {
 
     private Set<Usuario> alunos = new HashSet<>();
 
-    private Empresa empresa;
+    private EmpresaGetDTO empresa;
 
     private ModelMapper modelMapper;
 
@@ -165,14 +165,14 @@ public class VagaGetAllDTO implements Dto<Vaga, VagaGetAllDTO> {
     /**
      * @return Empresa return the empresa
      */
-    public Empresa getEmpresa() {
+    public EmpresaGetDTO getEmpresa() {
         return empresa;
     }
 
     /**
      * @param empresa the empresa to set
      */
-    public void setEmpresa(Empresa empresa) {
+    public void setEmpresa(EmpresaGetDTO empresa) {
         this.empresa = empresa;
     }
 
