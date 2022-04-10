@@ -73,6 +73,20 @@ public class CurriculoService {
                 () -> new CurriculoNaoEncontradoException("Currículo não encontrado!!"));
     }
 
+    public void atualizaArquivo(MultipartFile multipartFile, String email)
+            throws IOException, UsuarioNaoEncontradoException {
+        Usuario usuario = usuarioService.buscaPorEmail(email);
+        Aluno aluno = usuario.getAluno();
+        Curriculo curriculo = aluno.getCurriculo();
+        Arquivo arquivo = curriculo.getPdf();
+
+        arquivo.setDados(multipartFile.getBytes());
+        curriculo.setPdf(arquivo);
+        curriculo.setDataImport(Date.valueOf(LocalDate.now()));
+
+        curriculoRepository.save(curriculo);
+    }
+
     private Curriculo construcaoCurriculoBaseadoNoArquivo(final Arquivo arquivo) {
         final Curriculo curriculo = new Curriculo();
         curriculo.setPdf(arquivo);
