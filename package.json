@@ -34,6 +34,9 @@
     "@types/file-saver": "^2.0.5",
     "@types/styled-components": "^5.1.24"
   },
+  "resolutions": {
+    "minimist": "1.2.6"
+  },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",

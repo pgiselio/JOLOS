@@ -36,9 +36,7 @@ export default function VagaPage() {
   });
   const user = useUser();
   async function inscreverAluno() {
-    await api.post(`/vaga/${params.id}/addAluno`, {
-      id: user.id,
-    });
+    await api.post(`/vaga/${params.id}/addAluno/${user.aluno?.id}`);
   }
 
   let date;
