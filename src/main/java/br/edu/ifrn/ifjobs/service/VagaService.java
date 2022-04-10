@@ -90,7 +90,6 @@ public class VagaService {
 
         return vagas.stream().map(vaga -> {
             Empresa empresa = vaga.getEmpresa();
-            System.out.println(empresa);
             Usuario usuario = usuarioBuscadoPorEmpresaId(empresa.getId());
 
             VagaGetAllDTO dto = new VagaGetAllDTO();
