@@ -61,6 +61,16 @@ public class CurriculoController {
         }
     }
 
+    @PatchMapping(path = "/atualizaArquivo/{email}")
+    public void atualizaArquivo(@RequestParam(name = "arquivo") MultipartFile arquivo,
+            @PathVariable(name = "email") String email) {
+        try {
+            service.atualizaArquivo(arquivo, email);
+        } catch (IOException | UsuarioNaoEncontradoException e) {
+            throw new RuntimeException("Não foi possível salvar o arquivo");
+        }
+    }
+
     @GetMapping("/download/{id}")
     public ResponseEntity<ByteArrayResource> downloadPorId(@PathVariable(name = "id") int id) {
         Curriculo curriculo;
