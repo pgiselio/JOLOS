@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
+import br.edu.ifrn.ifjobs.dto.usuario.UsuarioGetDTO;
 import br.edu.ifrn.ifjobs.dto.usuario.UsuarioInsertDTO;
 import br.edu.ifrn.ifjobs.dto.usuario.UsuarioLoginGetDTO;
 import br.edu.ifrn.ifjobs.exception.UsuarioNaoCadastradoException;
@@ -35,7 +36,7 @@ public class UsuarioController {
 
     @CrossOrigin("*")
     @PostMapping("/create")
-    public ResponseEntity<Usuario> createAluno(@RequestBody @Valid UsuarioInsertDTO dto) {
+    public ResponseEntity<UsuarioGetDTO> createAluno(@RequestBody @Valid UsuarioInsertDTO dto) {
         Usuario usuarioSalvo;
 
         try {
@@ -44,11 +45,14 @@ public class UsuarioController {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
         }
 
-        return new ResponseEntity<>(usuarioSalvo, HttpStatus.CREATED);
+        UsuarioGetDTO dtoConvert = new UsuarioGetDTO();
+        UsuarioGetDTO entityToDto = dtoConvert.convertEntityToDto(usuarioSalvo);
+
+        return new ResponseEntity<>(entityToDto, HttpStatus.CREATED);
     }
 
     @GetMapping("/email/{email}")
-    public ResponseEntity<Usuario> buscaPorEmail(@PathVariable(name = "email") String email) {
+    public ResponseEntity<UsuarioGetDTO> buscaPorEmail(@PathVariable(name = "email") String email) {
         Usuario usuario;
 
         try {
@@ -57,11 +61,14 @@ public class UsuarioController {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
         }
 
-        return ResponseEntity.ok(usuario);
+        UsuarioGetDTO dtoConvert = new UsuarioGetDTO();
+        UsuarioGetDTO entityToDto = dtoConvert.convertEntityToDto(usuario);
+
+        return ResponseEntity.ok(entityToDto);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Usuario> buscarPorId(@PathVariable(name = "id") int id) {
+    public ResponseEntity<UsuarioGetDTO> buscarPorId(@PathVariable(name = "id") int id) {
         Usuario usuario;
 
         try {
@@ -70,7 +77,10 @@ public class UsuarioController {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
         }
 
-        return ResponseEntity.ok().body(usuario);
+        UsuarioGetDTO dtoConvert = new UsuarioGetDTO();
+        UsuarioGetDTO entityToDto = dtoConvert.convertEntityToDto(usuario);
+
+        return ResponseEntity.ok().body(entityToDto);
     }
 
     @GetMapping("/empresa/{id}")
@@ -99,7 +109,7 @@ public class UsuarioController {
     }
 
     @PatchMapping("/{id}")
-    public ResponseEntity<Usuario> atualizaCampo(@PathVariable(name = "id") int id,
+    public ResponseEntity<UsuarioGetDTO> atualizaCampo(@PathVariable(name = "id") int id,
             @RequestBody Map<Object, Object> campos) {
         Usuario usuarioAtualizado;
 
@@ -109,11 +119,14 @@ public class UsuarioController {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
         }
 
-        return ResponseEntity.ok(usuarioAtualizado);
+        UsuarioGetDTO dtoConvert = new UsuarioGetDTO();
+        UsuarioGetDTO entityToDto = dtoConvert.convertEntityToDto(usuarioAtualizado);
+
+        return ResponseEntity.ok(entityToDto);
     }
 
     @DeleteMapping("/delete")
-    public ResponseEntity<Usuario> deletaUsuario(UsuarioInsertDTO dto) {
+    public ResponseEntity<UsuarioGetDTO> deletaUsuario(UsuarioInsertDTO dto) {
         Usuario usuario = dto.convertDtoToEntity();
         Usuario usuarioDeletado;
         try {
@@ -121,6 +134,8 @@ public class UsuarioController {
         } catch (Exception e) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
         }
-        return ResponseEntity.ok().body(usuarioDeletado);
+        UsuarioGetDTO dtoConvert = new UsuarioGetDTO();
+        UsuarioGetDTO entityToDto = dtoConvert.convertEntityToDto(usuarioDeletado);
+        return ResponseEntity.ok().body(entityToDto);
     }
 }
