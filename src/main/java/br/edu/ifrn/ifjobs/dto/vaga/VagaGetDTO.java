@@ -8,8 +8,8 @@ import java.util.stream.Collectors;
 import org.modelmapper.ModelMapper;
 
 import br.edu.ifrn.ifjobs.dto.Dto;
-import br.edu.ifrn.ifjobs.model.Aluno;
 import br.edu.ifrn.ifjobs.model.Empresa;
+import br.edu.ifrn.ifjobs.model.Usuario;
 import br.edu.ifrn.ifjobs.model.Vaga;
 import br.edu.ifrn.ifjobs.model.enums.StatusVaga;
 
@@ -29,7 +29,7 @@ public class VagaGetDTO implements Dto<Vaga, VagaGetDTO> {
 
     private StatusVaga status;
 
-    private Set<Aluno> alunos = new HashSet<>();
+    private Set<Usuario> alunos = new HashSet<>();
 
     private Empresa empresa;
 
@@ -105,15 +105,16 @@ public class VagaGetDTO implements Dto<Vaga, VagaGetDTO> {
 
     public Set<Integer> getAlunos() {
         return this.alunos.stream()
-                .map(Aluno::getId)
+                .filter(aluno -> aluno.getAluno() != null)
+                .map(Usuario::getId)
                 .collect(Collectors.toSet());
     }
 
-    public void setAlunos(Set<Aluno> alunos) {
+    public void setAlunos(Set<Usuario> alunos) {
         this.alunos = alunos;
     }
 
-    public void addAluno(Aluno aluno) {
+    public void addAluno(Usuario aluno) {
         this.alunos.add(aluno);
     }
 
