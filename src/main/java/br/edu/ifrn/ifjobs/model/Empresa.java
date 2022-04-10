@@ -117,4 +117,10 @@ public class Empresa implements Serializable {
         this.telefone = telefone;
     }
 
+    @Override
+    public String toString() {
+        return "Empresa [cnpj=" + cnpj + ", dadosPessoa=" + dadosPessoa + ", id=" + id + ", resumo=" + resumo
+                + ", telefone=" + telefone + "]";
+    }
+
 }
