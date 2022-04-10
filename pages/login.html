@@ -42,7 +42,7 @@
                         <label for="checkbox">Mostrar senha</label>
                     </div>
                     <input type="submit" class="btn-accent" value="Entrar" />
-                    <a href="/password-reset/" class="pwrst-link">Esqueceu a senha?</a>
+                    <a href="#" class="pwrst-link">Esqueceu a senha?</a>
                 </form>
             </div>
             <div>
@@ -61,7 +61,7 @@
 
             if (user.value == "admin" && pass.value == "ADMIN") {
                 window.sessionStorage.setItem('isloggedin', 'true');
-                window.location.href = "/pages/logado.html";
+                window.location.href = "logado.html";
             } else {
                 msg.classList.add('show');
             }
