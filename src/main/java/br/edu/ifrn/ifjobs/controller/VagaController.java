@@ -7,6 +7,7 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.CachePut;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -19,11 +20,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
+import br.edu.ifrn.ifjobs.dto.vaga.VagaGetAllDTO;
 import br.edu.ifrn.ifjobs.dto.vaga.VagaGetDTO;
 import br.edu.ifrn.ifjobs.dto.vaga.VagaInsertDto;
+import br.edu.ifrn.ifjobs.exception.UsuarioNaoEncontradoException;
 import br.edu.ifrn.ifjobs.exception.VagaNaoCadastradaException;
 import br.edu.ifrn.ifjobs.exception.VagaNaoEncontradoException;
-import br.edu.ifrn.ifjobs.model.Aluno;
 import br.edu.ifrn.ifjobs.model.Vaga;
 import br.edu.ifrn.ifjobs.service.VagaService;
 
@@ -62,13 +64,10 @@ public class VagaController {
 
     @GetMapping("/")
     @CacheEvict(value = "vagas", allEntries = true)
-    public ResponseEntity<List<VagaGetDTO>> buscaTodasVagas() {
-        List<Vaga> todasVagas = vagaService.buscaTodasVagas();
-        List<VagaGetDTO> listDto = todasVagas.stream().map(vaga -> {
-            VagaGetDTO dto = new VagaGetDTO();
-            return dto.convertEntityToDto(vaga);
-        }).toList();
-        return ResponseEntity.ok(listDto);
+    @CachePut(value = "vagas")
+    public ResponseEntity<List<VagaGetAllDTO>> buscaTodasVagas() {
+        List<VagaGetAllDTO> vagas = vagaService.buscaTodasVagas();
+        return ResponseEntity.ok(vagas);
     }
 
     @GetMapping("/lista/{id}")
@@ -105,20 +104,18 @@ public class VagaController {
         return ResponseEntity.ok(vagaAtualizada);
     }
 
-    @PostMapping("/{id}/addAluno")
-    public ResponseEntity<VagaGetDTO> addAluno(@PathVariable(name = "id") int id, @RequestBody Aluno aluno) {
-        Vaga vaga;
+    @PostMapping("/{vagaId}/addAluno/{alunoId}")
+    public ResponseEntity<VagaGetDTO> addAluno(@PathVariable(name = "vagaId") int vagaId,
+            @PathVariable(name = "alunoId") int alunoId) {
+        VagaGetDTO vaga;
 
         try {
-            vaga = vagaService.addAlunoParaVaga(id, aluno);
-        } catch (VagaNaoEncontradoException | VagaNaoCadastradaException e) {
+            vaga = vagaService.addAlunoParaVaga(vagaId, alunoId);
+        } catch (VagaNaoEncontradoException | UsuarioNaoEncontradoException e) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
         }
 
-        VagaGetDTO dto = new VagaGetDTO();
-        VagaGetDTO vagaConvertidaParaDto = dto.convertEntityToDto(vaga);
-
-        return ResponseEntity.ok(vagaConvertidaParaDto);
+        return ResponseEntity.ok(vaga);
     }
 
     @DeleteMapping("/delete/{id}")
