@@ -82,7 +82,7 @@ export default function ProfilePage({ email }: { email?: string }) {
                       {usertype === "ALUNO"
                         ? data.email
                         : usertype === "EMPRESA"
-                        ? cnpjMask(data.empresa.cnpj) 
+                        ? cnpjMask(data.empresa.cnpj)
                         : data?.email}
                     </span>
                   </>
@@ -130,24 +130,35 @@ export default function ProfilePage({ email }: { email?: string }) {
           <div className="content">
             <div className="profile-page-info">
               <PillList>
-                <PillItem>
-                  <i className="fas fa-calendar-day"></i>
-                  <span>
-                    {getFormattedDate(data?.aluno?.dadosPessoa.dataNasc)}
-                  </span>
-                </PillItem>
-                <PillItem>
-                  <i className="fas fa-map-marker-alt"></i>
-                  <span>{data?.aluno?.dadosPessoa.localizacao}</span>
-                </PillItem>
-                <PillItem title="Curso">
-                  <i className="fas fa-book-open"></i>
-                  <span>{data?.aluno?.curso} - </span>
-                  <span title="Período do curso">
-                    <i className="fas fa-clock"></i>
-                    <span>{data?.aluno?.periodo}</span>
-                  </span>
-                </PillItem>
+                {usertype === "ALUNO" && (
+                  <PillItem>
+                    <i className="fas fa-calendar-day"></i>
+                    <span>
+                      {getFormattedDate(data?.aluno?.dadosPessoa.dataNasc)}
+                    </span>
+                  </PillItem>
+                )}
+                {usertype !== "ADMIN" && (
+                  <PillItem>
+                    <i className="fas fa-map-marker-alt"></i>
+                    <span>
+                      {usertype === "ALUNO"
+                        ? data?.aluno?.dadosPessoa.localizacao
+                        : data?.empresa?.dadosPessoa.localizacao}
+                    </span>
+                  </PillItem>
+                )}
+
+                {usertype === "ALUNO" && (
+                  <PillItem title="Curso">
+                    <i className="fas fa-book-open"></i>
+                    <span>{data?.aluno?.curso} - </span>
+                    <span title="Período do curso">
+                      <i className="fas fa-clock"></i>
+                      <span>{data?.aluno?.periodo}</span>
+                    </span>
+                  </PillItem>
+                )}
               </PillList>
             </div>
             {usertype === "ALUNO" && (
@@ -169,7 +180,7 @@ export default function ProfilePage({ email }: { email?: string }) {
                     </BoxTitle>
                     <BoxContent>
                       <div className="vaga-page-description">
-                        <p>{data?.empresa?.descricao}</p>
+                        <p>{data?.empresa?.resumo}</p>
                       </div>
                     </BoxContent>
                   </Box>

@@ -18,17 +18,18 @@ export const StyledNotifications = styled.div`
   }
 
   .notification-header .buttons button {
-    background: #f7f7f7;
+    background: var(--secondary-bg);
     padding: 5px 15px;
-    border: 1px solid rgb(221, 221, 221);
+    border: 1px solid var(--outline-color);
     border-right: none;
     float: left;
     cursor: pointer;
-    color: #666;
+    color: var(--text-b);
   }
 
   .notification-header .buttons button.active {
-    background: #fff;
+    background: var(--primary-bg);
+    color: var(--text-a);
   }
 
   .notification-header .buttons button:first-child {
@@ -39,7 +40,7 @@ export const StyledNotifications = styled.div`
   .notification-header .buttons button:last-child {
     border-top-right-radius: 5px;
     border-bottom-right-radius: 5px;
-    border-right: 1px solid rgb(221, 221, 221);
+    border-right: 1px solid var(--outline-color);
   }
 
   .notification-header .buttons button:hover + button {
@@ -47,7 +48,7 @@ export const StyledNotifications = styled.div`
   }
 
   .notification-header .buttons button:hover {
-    color: #333;
+    color: var(--text-a);
     border-color: rgb(172, 172, 172);
   }
 

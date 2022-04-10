@@ -73,7 +73,7 @@ export default function VagaPage() {
             </div>
             {isFetching ? (
               <>
-                <Skeleton variant="text" width="300px" height="33px" />
+                <Skeleton variant="text" width="300px" height="43px" />
                 <Skeleton variant="text" width="150px" height="25px" />
               </>
             ) : (

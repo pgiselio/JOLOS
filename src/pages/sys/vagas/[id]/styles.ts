@@ -15,6 +15,7 @@ export const VagaPageStyle = styled.section`
       height: 40px;
     }
     h2 {
+      padding-top: 10px;
       color: var(--text-a);
       font-weight: 500;
       font-size: 20px;
@@ -26,7 +27,7 @@ export const VagaPageStyle = styled.section`
       flex-direction: column;
 
       flex-wrap: wrap;
-      gap: 5px;
+      gap: 10px;
       justify-content: end;
       .vaga-status {
         color: #b3001e;
@@ -74,6 +75,7 @@ export const VagaPageStyle = styled.section`
       padding: 0 30px;
       border-bottom-left-radius: 5px;
       border-bottom-right-radius: 5px;
+      max-width: 1280px;
     }
   }
 `;
