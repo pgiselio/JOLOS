@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import java.sql.Date;
 import java.time.LocalDate;
+import java.util.Optional;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,9 +16,11 @@ import org.springframework.test.annotation.Rollback;
 
 import br.edu.ifrn.ifjobs.model.Aluno;
 import br.edu.ifrn.ifjobs.model.Pessoa;
+import br.edu.ifrn.ifjobs.model.Usuario;
 import br.edu.ifrn.ifjobs.model.Vaga;
 import br.edu.ifrn.ifjobs.model.enums.StatusVaga;
 import br.edu.ifrn.ifjobs.repository.AlunoRespository;
+import br.edu.ifrn.ifjobs.repository.UsuarioRepository;
 import br.edu.ifrn.ifjobs.repository.VagaRepository;
 
 @DataJpaTest
@@ -30,6 +33,9 @@ public class VagaRepositoryTest {
 
     @Autowired
     private AlunoRespository alunoRespository;
+
+    @Autowired
+    private UsuarioRepository usuarioRepository;
 
     @Test
     void testCriandoVaga() {
@@ -91,5 +97,14 @@ public class VagaRepositoryTest {
         Vaga vagaSalva = vagaRepository.save(vaga);
 
         assertEquals(vaga, vagaSalva);
+    }
+
+    @Test
+    void testBuscaVagaPorEmpresaId() {
+        var empresaId = 1;
+        Optional<Usuario> usuarioOptional;
+        usuarioOptional = usuarioRepository.findUsuarioByEmpresaId(empresaId);
+
+        assertNotNull(usuarioOptional.get());
     }
 }
