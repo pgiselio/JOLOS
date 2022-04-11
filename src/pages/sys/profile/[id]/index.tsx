@@ -101,9 +101,7 @@ export default function ProfilePage({ email }: { email?: string }) {
                 </>
               )}
               {usertype === "ALUNO" && (
-                
                 <Button className="outlined" onClick={() => {
-                  console.log(data?.aluno);
                   window.open(`/download/curriculo/${data?.aluno?.curriculo}`, '_blank');
                 }}>
                   <i className="fas fa-arrow-down"></i>

@@ -1,4 +1,3 @@
-import { saveAs } from "file-saver";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { LoadingPage } from "../../../../../components/loadingPage";
@@ -10,13 +9,14 @@ export default function DownloadCurriculoPage() {
   useEffect(() => {
     async function getCurriculo() {
       const response = await api
-        .get(`/curriculo/download/${params.id}`)
+        .get(`/curriculo/download/${params.id}`, { responseType: 'blob'})
         .catch((error) =>
           error.response.status === 401 || error.response.status === 403
             ? (window.location.href = "/logout")
             : error
         );
-      setCurriculo(response?.data);
+      setCurriculo(response.data);
+
     }
     getCurriculo();
   }, []);
@@ -24,16 +24,14 @@ export default function DownloadCurriculoPage() {
   if (!curriculo) {
     return <LoadingPage />;
   }
-  var blob = new Blob([curriculo], { type: "application/pdf" });
-  const url = URL.createObjectURL(blob);
-  return ( 
-    <span>{url}</span>
-    // <object
-    //   data={url}
-    //   type="application/pdf"
-    //   width="100%"
-    //   height="100%"
-    // >
-    // </object>
+  const url = URL.createObjectURL(curriculo);
+  return (
+    <object
+      data={url}
+      type="application/pdf"
+      width="100%"
+      height="100%"
+    >
+    </object>
   );
 }
