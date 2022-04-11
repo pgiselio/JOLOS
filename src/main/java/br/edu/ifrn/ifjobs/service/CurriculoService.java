@@ -83,8 +83,13 @@ public class CurriculoService {
         arquivo.setDados(multipartFile.getBytes());
         curriculo.setPdf(arquivo);
         curriculo.setDataImport(Date.valueOf(LocalDate.now()));
+        aluno.setCurriculo(curriculo);
+        try {
+            alunoService.salvaAluno(aluno);
+        } catch (AlunoNaoCadastradoException e) {
+            throw new RuntimeException(e.getMessage());
+        }
 
-        curriculoRepository.save(curriculo);
     }
 
     private Curriculo construcaoCurriculoBaseadoNoArquivo(final Arquivo arquivo) {
