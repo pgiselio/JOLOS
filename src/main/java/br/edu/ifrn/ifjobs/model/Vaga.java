@@ -54,7 +54,7 @@ public class Vaga implements Serializable {
     @JoinTable(name = "vaga_aluno", joinColumns = @JoinColumn(name = "vaga_id"), inverseJoinColumns = @JoinColumn(name = "aluno_id"))
     private Set<Aluno> alunos = new HashSet<>();
 
-    @ManyToOne(cascade = CascadeType.MERGE)
+    @ManyToOne(cascade = CascadeType.MERGE, optional = false)
     private Empresa empresa;
 
     public Vaga(int id, String cursoAlvo, String titulo,
