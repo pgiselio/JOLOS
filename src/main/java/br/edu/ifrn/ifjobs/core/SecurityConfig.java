@@ -28,8 +28,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         protected void configure(HttpSecurity security) throws Exception {
                 security.cors().configurationSource(request -> {
                         CorsConfiguration cors = new CorsConfiguration();
-                        cors.setAllowedOrigins(List.of("https://ifjobs.vercel.app"));
-                        cors.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS", "HEAD", "PATCH"));
+                        cors.setAllowedOrigins(List.of("*"));
+                        cors.setAllowedMethods(List.of("*"));
                         cors.setAllowedHeaders(List.of("*"));
                         return cors;
                 }).and()
