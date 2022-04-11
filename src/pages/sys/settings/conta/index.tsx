@@ -21,13 +21,8 @@ export default function SettingContaPage() {
     const file = data.arquivo[0];
     formData.append("arquivo", file);
     await api
-      .post(
-        `/curriculo/upload/${user.email}`, formData,
-        {
-          headers: {
-            "Content-Type": "multipart/form-data",
-          },
-        }
+      .patch(
+        `/curriculo/atualizaArquivo/${user.email}`, formData
       )
       .then((response) => {
         if (response.status === 200) {
@@ -38,7 +33,7 @@ export default function SettingContaPage() {
         if (err.status === 500) {
           toast.error("Ops... algo não deu certo!", {});
         }
-        if (err.response.status === 403 || err.response.status === 401) {
+        if (err.status === 403 || err.status === 401) {
           toast.error("Você não tem autorização para executar essa ação!");
         } else {
           console.error(err);

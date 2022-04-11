@@ -23,6 +23,7 @@ import { CadastroLayout } from "./pages/cadastro/layout";
 import { LoadingPage } from "./components/loadingPage";
 import { LoadingPageLogo } from "./components/loadingPage/logo";
 import SettingContaPage from "./pages/sys/settings/conta";
+import DownloadCurriculoPage from "./pages/sys/download/curriculo/[id]";
 
 const ForumPage = lazy(() => import("./pages/sys/forum"));
 const ProfilePage = lazy(() => import("./pages/sys/profile/[id]"));
@@ -42,6 +43,7 @@ export const AppRoutes = () => {
           <Route index element={<CadastroPage />} />
         </Route>
         <Route path="logout" element={<LogoutPage />} />
+        <Route path="download/curriculo/:id" element={<DownloadCurriculoPage />} />
         <Route
           path="sys"
           element={

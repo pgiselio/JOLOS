@@ -8,6 +8,7 @@ import { ProfilePic } from "../../../../components/profile-pic/profile-pic";
 import { Skeleton } from "../../../../components/skeleton-load";
 import { useAuth } from "../../../../hooks/useAuth";
 import { api } from "../../../../services/api";
+import { User } from "../../../../types/user";
 import { cnpjMask } from "../../../../utils/cnpjMask";
 import Error404 from "../../../404";
 import { ProfilePageStyle } from "../styles";
@@ -16,7 +17,7 @@ export default function ProfilePage({ email }: { email?: string }) {
   let params = useParams();
   let usertype;
   const auth = useAuth();
-  const { data, isFetching } = useQuery(
+  const { data, isFetching } = useQuery<User>(
     ["profile", email ? email : params.id],
     async () => {
       const response = await api.get(
@@ -73,16 +74,16 @@ export default function ProfilePage({ email }: { email?: string }) {
                   <>
                     <h2>
                       {usertype === "ALUNO"
-                        ? data.aluno.dadosPessoa.nome
+                        ? data?.aluno?.dadosPessoa.nome
                         : usertype === "EMPRESA"
-                        ? data.empresa.dadosPessoa.nome
+                        ? data?.empresa?.dadosPessoa.nome
                         : data?.email}
                     </h2>
                     <span>
                       {usertype === "ALUNO"
-                        ? data.email
-                        : usertype === "EMPRESA"
-                        ? cnpjMask(data.empresa.cnpj)
+                        ? data?.email
+                        :  data?.empresa?.dadosPessoa
+                        ? cnpjMask(data?.empresa?.cnpj)
                         : data?.email}
                     </span>
                   </>
@@ -100,7 +101,11 @@ export default function ProfilePage({ email }: { email?: string }) {
                 </>
               )}
               {usertype === "ALUNO" && (
-                <Button className="outlined">
+                
+                <Button className="outlined" onClick={() => {
+                  console.log(data?.aluno);
+                  window.open(`/download/curriculo/${data?.aluno?.curriculo}`, '_blank');
+                }}>
                   <i className="fas fa-arrow-down"></i>
                   Baixar currículo
                 </Button>
@@ -130,7 +135,7 @@ export default function ProfilePage({ email }: { email?: string }) {
           <div className="content">
             <div className="profile-page-info">
               <PillList>
-                {usertype === "ALUNO" && (
+                {data?.aluno?.dadosPessoa && (
                   <PillItem>
                     <i className="fas fa-calendar-day"></i>
                     <span>
