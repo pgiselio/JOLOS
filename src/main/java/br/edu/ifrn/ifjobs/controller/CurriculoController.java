@@ -51,7 +51,7 @@ public class CurriculoController {
         return ResponseEntity.ok(curriculo);
     }
 
-    @PostMapping(path = "/upload/{email}")
+    @PatchMapping(path = "/upload/{email}")
     public void upload(@RequestParam(name = "arquivo") MultipartFile arquivo,
             @PathVariable(name = "email") String email) {
         try {
