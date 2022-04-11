@@ -61,7 +61,7 @@ public class CurriculoController {
         }
     }
 
-    @PatchMapping(path = "/atualizaArquivo/{email}")
+    @PostMapping(path = "/atualizaArquivo/{email}")
     public void atualizaArquivo(@RequestParam(name = "arquivo") MultipartFile arquivo,
             @PathVariable(name = "email") String email) {
         try {
