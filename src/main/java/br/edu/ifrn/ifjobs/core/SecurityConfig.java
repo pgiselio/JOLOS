@@ -1,5 +1,7 @@
 package br.edu.ifrn.ifjobs.core;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -24,7 +26,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
         @Override
         protected void configure(HttpSecurity security) throws Exception {
-                security.cors().configurationSource(request -> new CorsConfiguration().applyPermitDefaultValues()).and()
+                security.cors().configurationSource(request -> {
+                        CorsConfiguration cors = new CorsConfiguration();
+                        cors.setAllowedOrigins(List.of("https://ifjobs.vercel.app"));
+                        cors.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS", "HEAD", "PATCH"));
+                        cors.setAllowedHeaders(List.of("*"));
+                        return cors;
+                }).and()
                                 .csrf().csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse())
                                 .disable().authorizeRequests()
                                 .antMatchers("/").permitAll()
