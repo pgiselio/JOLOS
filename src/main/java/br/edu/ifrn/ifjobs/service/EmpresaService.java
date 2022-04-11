@@ -53,7 +53,10 @@ public class EmpresaService {
 
         String cnpjNaoNulo = optional.orElseThrow(excessao);
 
-        return repository.findByCnpj(cnpjNaoNulo);
+        Optional<Empresa> empresaOptional;
+        empresaOptional = Optional.ofNullable(repository.findByCnpj(cnpjNaoNulo));
+
+        return empresaOptional.orElseThrow(excessao);
     }
 
     public Empresa atualizaCampos(int id, Map<Object, Object> campos)
