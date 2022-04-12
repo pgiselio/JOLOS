@@ -98,8 +98,10 @@ public class VagaService {
         }).collect(Collectors.toSet());
 
         VagaGetDTO vagaGetDTO = new VagaGetDTO();
-        vagaGetDTO.setAlunos(usuarios);
-        return vagaGetDTO;
+        VagaGetDTO convertEntityToDto = vagaGetDTO.convertEntityToDto(vagaBuscadaPorId);
+
+        convertEntityToDto.setAlunos(usuarios);
+        return convertEntityToDto;
     }
 
     public List<VagaGetAllDTO> buscaTodasVagas() {
