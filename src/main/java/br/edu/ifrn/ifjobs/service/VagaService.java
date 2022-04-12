@@ -85,6 +85,23 @@ public class VagaService {
         return vagaBuscadaPorId.orElseThrow(excessao);
     }
 
+    public VagaGetDTO buscaPorId(int id) throws VagaNaoEncontradoException {
+        Vaga vagaBuscadaPorId = buscarPorId(id);
+
+        Set<Aluno> alunos = vagaBuscadaPorId.getAlunos();
+        Set<Usuario> usuarios = alunos.stream().map(aluno -> {
+            try {
+                return usuarioService.buscaPorAlunoId(aluno.getId());
+            } catch (UsuarioNaoEncontradoException e) {
+                throw new RuntimeException(e.getMessage());
+            }
+        }).collect(Collectors.toSet());
+
+        VagaGetDTO vagaGetDTO = new VagaGetDTO();
+        vagaGetDTO.setAlunos(usuarios);
+        return vagaGetDTO;
+    }
+
     public List<VagaGetAllDTO> buscaTodasVagas() {
         List<Vaga> vagas = vagaRepository.findAll();
 
