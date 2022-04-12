@@ -21,7 +21,6 @@ import javax.persistence.OneToOne;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-import org.hibernate.annotations.Type;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -42,10 +41,6 @@ public class Usuario implements UserDetails {
 
     @Column(nullable = false)
     private String senha;
-
-    @Column
-    @Type(type = "text")
-    private String resumo;
 
     @Column(nullable = false, length = 25)
     @Enumerated(EnumType.STRING)
