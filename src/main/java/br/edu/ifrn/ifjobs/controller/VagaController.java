@@ -73,20 +73,15 @@ public class VagaController {
     @GetMapping("/lista/{id}")
     public ResponseEntity<VagaGetDTO> dtoVagaBuscadaPorId(
             @PathVariable(name = "id") int id) {
-        Vaga vagaBuscadaPorId;
+        VagaGetDTO vagaBuscadaPorId;
 
         try {
-            vagaBuscadaPorId = vagaService.buscarPorId(id);
+            vagaBuscadaPorId = vagaService.buscaPorId(id);
         } catch (VagaNaoEncontradoException e) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
         }
 
-        final var dto = new VagaGetDTO();
-
-        final VagaGetDTO entidadeConvertidaParaDto;
-        entidadeConvertidaParaDto = dto.convertEntityToDto(vagaBuscadaPorId);
-
-        return ResponseEntity.ok(entidadeConvertidaParaDto);
+        return ResponseEntity.ok(vagaBuscadaPorId);
     }
 
     @PatchMapping("/{id}")
