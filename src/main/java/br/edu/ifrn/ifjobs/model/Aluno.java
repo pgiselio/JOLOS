@@ -13,6 +13,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
 
+import org.hibernate.annotations.Type;
 import org.springframework.stereotype.Component;
 
 @Entity
@@ -27,6 +28,10 @@ public class Aluno implements Serializable {
 
     @Embedded
     private Pessoa dadosPessoa;
+
+    @Column
+    @Type(type = "text")
+    private String resumo;
 
     @Column(nullable = false, length = 100)
     private String curso;
