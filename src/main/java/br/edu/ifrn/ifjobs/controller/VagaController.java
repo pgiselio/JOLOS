@@ -77,7 +77,7 @@ public class VagaController {
 
         try {
             vagaBuscadaPorId = vagaService.buscaPorId(id);
-        } catch (VagaNaoEncontradoException e) {
+        } catch (VagaNaoEncontradoException | UsuarioNaoEncontradoException e) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
         }
 
