@@ -139,6 +139,10 @@ public class Vaga implements Serializable {
         this.alunos.add(aluno);
     }
 
+    public void removeAluno(Aluno aluno) {
+        this.alunos.remove(aluno);
+    }
+
     public Empresa getEmpresa() {
         return empresa;
     }
