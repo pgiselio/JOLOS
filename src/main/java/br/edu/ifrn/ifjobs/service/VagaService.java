@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.ReflectionUtils;
 
+import br.edu.ifrn.ifjobs.dto.usuario.UsuarioGetDTO;
 import br.edu.ifrn.ifjobs.dto.vaga.VagaGetAllDTO;
 import br.edu.ifrn.ifjobs.dto.vaga.VagaGetDTO;
 import br.edu.ifrn.ifjobs.dto.vaga.VagaInsertDto;
@@ -99,7 +100,7 @@ public class VagaService {
         return vagaBuscadaPorId.orElseThrow(excessao);
     }
 
-    public VagaGetDTO buscaPorId(int id) throws VagaNaoEncontradoException {
+    public VagaGetDTO buscaPorId(int id) throws VagaNaoEncontradoException, UsuarioNaoEncontradoException {
         Vaga vagaBuscadaPorId = buscarPorId(id);
 
         Set<Aluno> alunos = vagaBuscadaPorId.getAlunos();
@@ -111,10 +112,17 @@ public class VagaService {
             }
         }).collect(Collectors.toSet());
 
-        VagaGetDTO vagaGetDTO = new VagaGetDTO();
+        Empresa empresa = vagaBuscadaPorId.getEmpresa();
+        Usuario usuarioEmpresa = usuarioService.buscaPorEmpresaId(empresa.getId());
+
+        var usuarioEmpresaDTO = new UsuarioGetDTO()
+                .convertEntityToDto(usuarioEmpresa);
+
+        var vagaGetDTO = new VagaGetDTO();
         VagaGetDTO convertEntityToDto = vagaGetDTO.convertEntityToDto(vagaBuscadaPorId);
 
         convertEntityToDto.setAlunos(usuarios);
+        convertEntityToDto.setEmpresa(usuarioEmpresaDTO);
         return convertEntityToDto;
     }
 
