@@ -189,4 +189,17 @@ public class VagaService {
         }
         return convertedToDto;
     }
+
+    public void desinscreverAlunoDaVaga(int vagaId, int alunoId)
+            throws VagaNaoEncontradoException, UsuarioNaoEncontradoException {
+        final Vaga vaga = buscarPorId(vagaId);
+        final Usuario usuario = usuarioService.buscaPorAlunoId(alunoId);
+        vaga.removeAluno(usuario.getAluno());
+        try {
+            salvarVaga(vaga);
+        } catch (VagaNaoCadastradaException e) {
+            throw new RuntimeException(e.getMessage());
+        }
+
+    }
 }
