@@ -1,6 +1,8 @@
 import React from "react";
 import ReactDOM from "react-dom";
+
 import App from "./App";
+
 import { QueryClientProvider } from "react-query"
 import { queryClient } from "./services/queryClient";
 

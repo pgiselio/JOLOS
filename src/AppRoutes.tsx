@@ -1,23 +1,22 @@
 import { lazy, Suspense } from "react";
 import { Routes, Route, useLocation } from "react-router-dom";
 
+import { ModalRouter } from "./components/modal-router";
+import { RequireAuth } from "./contexts/AuthContext/RequireAuth";
+
+//Pages
 import Error404 from "./pages/404";
-// import ForumPage from "./pages/sys/forum";
 import { HomePage } from "./pages/sys/home/homePage";
-// import ProfilePage from "./pages/sys/profile";
 import CriarNovaVagaPage from "./pages/sys/vagas/criar-nova";
-// import VagaPage from "./pages/sys/vagas/[id]";
 import { VagaCandidatoPage } from "./pages/sys/vagas/[id]/candidatos";
 import { VagaSobrePage } from "./pages/sys/vagas/[id]/sobre";
 import { VagasList } from "./pages/sys/vagas";
-import { RequireAuth } from "./contexts/AuthContext/RequireAuth";
 import LogoutPage from "./pages/logout";
 import SettingsPage from "./pages/sys/settings";
 import LandingPage from "./pages/Landing";
 import LoginPage from "./pages/entrar";
 import CadastroPage from "./pages/cadastro";
 import VagaPage from "./pages/sys/vagas/[id]";
-import { ModalRouter } from "./components/modal-router";
 import { CriarNovaVagaForm } from "./pages/sys/vagas/criar-nova/_form";
 import { CadastroLayout } from "./pages/cadastro/layout";
 import { LoadingPage } from "./components/loadingPage";
@@ -43,7 +42,10 @@ export const AppRoutes = () => {
           <Route index element={<CadastroPage />} />
         </Route>
         <Route path="logout" element={<LogoutPage />} />
-        <Route path="download/curriculo/:id" element={<DownloadCurriculoPage />} />
+        <Route
+          path="download/curriculo/:id"
+          element={<DownloadCurriculoPage />}
+        />
         <Route
           path="sys"
           element={
@@ -59,7 +61,7 @@ export const AppRoutes = () => {
           <Route
             path="profile/:id"
             element={
-              <Suspense fallback={<LoadingPage/>}>
+              <Suspense fallback={<LoadingPage />}>
                 <ProfilePage />
               </Suspense>
             }
@@ -73,12 +75,12 @@ export const AppRoutes = () => {
           <Route
             path="forum"
             element={
-              <Suspense fallback={<LoadingPage/>}>
+              <Suspense fallback={<LoadingPage />}>
                 <ForumPage />
               </Suspense>
             }
           />
-          <Route path="settings" element={<SettingsPage />} >
+          <Route path="settings" element={<SettingsPage />}>
             <Route path="conta" element={<SettingContaPage />} />
           </Route>
         </Route>

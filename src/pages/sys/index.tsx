@@ -27,7 +27,6 @@ export default function SystemLayout() {
           newestOnTop={false}
           closeOnClick
           rtl={false}
-          theme="dark"
           pauseOnFocusLoss
           draggable
           pauseOnHover

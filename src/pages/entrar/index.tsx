@@ -26,27 +26,30 @@ export default function LoginPage() {
   const RedirectForSystem = () => {
     navigate("/sys");
   };
-
+  const paramsError = searchParams.getAll("error");
   useEffect(() => {
     if (auth.email) {
       RedirectForSystem();
     }
-
-    const paramsError = searchParams.get("error");
-    if (paramsError) {
-      if (paramsError === "needsLogin") {
-        toast.error("Você precisa fazer login primeiro!", {});
-        setSearchParams("");
-      }
+    if (paramsError) {      
+      paramsError.forEach((error) => {
+        if (error === "needsLogin") {
+          toast.error("Você precisa fazer login primeiro!", {});
+        }else
+        if (error === "invalidCredentials") {
+          toast.error("Credenciais inválidas, faça login novamente!", {});
+        }
+      });
+      setSearchParams("");      
     }
-  });
+  }, []);
 
   async function onSubmit(data: any) {
     try {
       setIsLoading(true);
       await auth.signin(data.email, data.password);
 
-      RedirectForSystem();
+      window.location.href = "/sys";
     } catch (error: any) {
       setIsLoading(false);
       toast.error("Usuário ou senha inválidos!", {});

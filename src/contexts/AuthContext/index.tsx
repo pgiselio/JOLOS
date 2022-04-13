@@ -30,7 +30,8 @@ export function AuthProvider({ children }: IAuthProvider) {
   function logout() {
     setUser(null);
     setUserLocalStorage(null);
-    queryClient.invalidateQueries(["meUser"]);
+    queryClient.setQueryData("meUser", undefined);
+    queryClient.invalidateQueries("meUser");
   }
   return (
     <AuthContext.Provider value={{ ...user, signin, logout, loadingUserFromLocalStorage }}>

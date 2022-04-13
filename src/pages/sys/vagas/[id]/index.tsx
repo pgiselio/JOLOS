@@ -1,4 +1,4 @@
-import { Link, Outlet, useParams } from "react-router-dom";
+import { Link, Outlet, useOutletContext, useParams } from "react-router-dom";
 import Error404 from "../../../404";
 import { TabsMenu, TabsMenuItem } from "../../../../components/tabs-menu";
 import { vaga } from "../vagaType";
@@ -51,7 +51,7 @@ export default function VagaPage() {
     await api
       .patch(`/vaga/${params.id}/removeAluno/${user.aluno?.id}`)
       .then(() => {
-        toast.info("Você se desincreveu da vaga!", {position: "bottom-center", hideProgressBar: true});
+        toast.info("Você se desinscreveu da vaga!", {position: "bottom-center", hideProgressBar: true});
         queryClient.invalidateQueries([`vaga-${params.id}`]);
         queryClient.invalidateQueries("vagas");
       });
@@ -188,11 +188,17 @@ export default function VagaPage() {
                 style={{ marginTop: "20px" }}
               />
             ) : (
-              <Outlet context={data} />
+              <Outlet context={{data}} />
             )}
           </div>
         </div>
       </VagaPageStyle>
     </>
   );
+}
+type ContextType = {
+  data: vaga | null;
+}
+export function useVaga() {
+  return useOutletContext<ContextType>();
 }
