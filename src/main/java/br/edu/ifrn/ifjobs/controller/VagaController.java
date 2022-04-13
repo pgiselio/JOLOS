@@ -99,7 +99,7 @@ public class VagaController {
         return ResponseEntity.ok(vagaAtualizada);
     }
 
-    @PostMapping("/{vagaId}/addAluno/{alunoId}")
+    @PatchMapping("/{vagaId}/addAluno/{alunoId}")
     public ResponseEntity<VagaGetDTO> addAluno(@PathVariable(name = "vagaId") int vagaId,
             @PathVariable(name = "alunoId") int alunoId) {
         VagaGetDTO vaga;
@@ -111,6 +111,19 @@ public class VagaController {
         }
 
         return ResponseEntity.ok(vaga);
+    }
+
+    @PatchMapping("/{vagaId}/removeAluno/{alunoId}")
+    public ResponseEntity<VagaGetDTO> desinscreveAluno(@PathVariable(name = "vagaId") int vagaId,
+            @PathVariable(name = "alunoId") int alunoId) {
+
+        try {
+            vagaService.desinscreverAlunoDaVaga(vagaId, alunoId);
+        } catch (VagaNaoEncontradoException | UsuarioNaoEncontradoException e) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
+        }
+
+        return ResponseEntity.ok().build();
     }
 
     @DeleteMapping("/delete/{id}")
