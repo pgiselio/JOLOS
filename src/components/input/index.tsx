@@ -8,7 +8,7 @@ interface input{
   [x:string]: any;
 };
 
-export const Input = React.forwardRef(({ name, type, icon, ...rest }: input, ref) => {
+export const Input = React.forwardRef( function ({ name, type, icon, ...rest }: input, ref: React.ForwardedRef<any>) {
   const [showPassword, setShowPassword] = useState(false);
 
   if(type.match("text")){

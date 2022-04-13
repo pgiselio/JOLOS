@@ -4,53 +4,77 @@ export function LandNavBar() {
   const [menuState, setMenuState] = useState(false);
   const [accessState, setAccessState] = useState(false);
   return (
-    <header className="landing navigate-container">
-      <nav className="navigate">
-        <div className="menu-container">
-          <a href="/" className="logo-nav">
-            <img src="images/logo.svg" alt="" />
-          </a>
-          <ul className={"menu " + (menuState && "active")}>
-            <LandBarItem href="#1" label="Tadah" setMenuState={setMenuState} />
-            <LandBarItem href="#2" label="Cursos" setMenuState={setMenuState} />
-            <LandBarItem href="#3" label="Sobre" setMenuState={setMenuState} />
-            <LandBarItem
-              href="#4"
-              label="Contato"
-              setMenuState={setMenuState}
-            />
-          </ul>
-          <div className="acesso">
-            <Acesso />
-          </div>
-          <div className="mobile-buttons">
-            <button
-              type="button"
-              className={"access-bt " + (accessState && "active")}
-              onClick={() => {
-                setMenuState(false);
-                setAccessState(!accessState);
-              }}
-            ></button>
-            <div className={"acesso-mobile " + (accessState && "active")}>
+    <>
+      <header className="landing navigate-container">
+        <nav className="navigate">
+          <div className="menu-container">
+            <a href="/" className="logo-nav">
+              <img src="images/logo.svg" alt="" />
+            </a>
+            <div className={"menu " + (menuState ? "active" : "")}>
+              <ul>
+                <LandBarItem
+                  href="#1"
+                  label="Tadah"
+                  setMenuState={setMenuState}
+                />
+                <LandBarItem
+                  href="#2"
+                  label="Cursos"
+                  setMenuState={setMenuState}
+                />
+                <LandBarItem
+                  href="#3"
+                  label="Sobre"
+                  setMenuState={setMenuState}
+                />
+                <LandBarItem
+                  href="#4"
+                  label="Contato"
+                  setMenuState={setMenuState}
+                />
+              </ul>
+            </div>
+            <div className="acesso">
               <Acesso />
             </div>
-            <div
-              id="botao-ham"
-              className={"botao-ham " + (menuState && "active")}
-              onClick={() => {
-                setMenuState(!menuState);
-                setAccessState(false);
-              }}
-            >
-              <span></span>
-              <span></span>
-              <span></span>
+            <div className="mobile-buttons">
+              <button
+                type="button"
+                className={"access-bt " + (accessState ? "active" : "")}
+                onClick={() => {
+                  setMenuState(false);
+                  setAccessState(!accessState);
+                }}
+              ></button>
+              <div className={"acesso-mobile " + (accessState ? "active" : "")}>
+                <Acesso />
+              </div>
+              <div
+                id="botao-ham"
+                className={"botao-ham " + (menuState && "active")}
+                onClick={() => {
+                  setMenuState(!menuState);
+                  setAccessState(false);
+                }}
+              >
+                <span></span>
+                <span></span>
+                <span></span>
+              </div>
             </div>
           </div>
-        </div>
-      </nav>
-    </header>
+        </nav>
+      </header>
+      <div
+        className={"backshadow " + (accessState || menuState ? "active" : "")}
+        onClick={() => {
+          setMenuState(false);
+          setAccessState(false);
+        }}
+
+      ></div>
+    </>
   );
 }
 function LandBarItem({ href, label, setMenuState }: any) {

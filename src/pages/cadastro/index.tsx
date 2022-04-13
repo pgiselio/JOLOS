@@ -1,7 +1,6 @@
-import { ReactNode, useState } from "react";
 import { useTabs } from "react-headless-tabs";
-import { Link, useOutletContext } from "react-router-dom";
-import { toast, ToastContainer } from "react-toastify";
+import { useOutletContext } from "react-router-dom";
+import { toast } from "react-toastify";
 import { Input } from "../../components/input";
 import { api } from "../../services/api";
 
@@ -18,8 +17,8 @@ type signupType = {
 
 export default function CadastroPage() {
   const [selectedTab, setSelectedTab] = useTabs(["ALUNO", "EMPRESA"], "ALUNO");
-  const setIsLoading: React.Dispatch<React.SetStateAction<boolean>> = useOutletContext();
-
+  const setIsLoading: React.Dispatch<React.SetStateAction<boolean>> =
+    useOutletContext();
 
   const validationSchema = Yup.object().shape({
     email: Yup.string()

@@ -2,7 +2,6 @@ import { LandNavBar } from "./navbar";
 import { LandingStyle } from "./style";
 
 export default function LandingPage() {
-    window.location.href = "/entrar";
     return (
         <LandingStyle id="landing-page">
             <LandNavBar />
@@ -11,7 +10,7 @@ export default function LandingPage() {
                     CARROUSEL
                 </section>
                 <section id="2">
-
+                    <button onClick={()=> alert("SIMMMM")}>CLICA AQUI O</button>
                 </section>
                 <section id="3">
 

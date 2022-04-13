@@ -21,12 +21,13 @@ export default function SystemLayout() {
         <SysGlobalStyle />
         <ToastContainer
           position="top-right"
-          style={{top: "var(--top-bar-height)"}}
+          style={{marginTop: "var(--top-bar-height)"}}
           autoClose={5000}
           hideProgressBar={false}
           newestOnTop={false}
           closeOnClick
           rtl={false}
+          theme="dark"
           pauseOnFocusLoss
           draggable
           pauseOnHover

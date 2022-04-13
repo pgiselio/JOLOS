@@ -9,7 +9,7 @@ export const ProfilePageStyle = styled.section`
     display: flex;
     padding: 20px 15px;
     z-index: 5;
-    background: var(--secondary-bg);
+    background: var(--primary-bg);
     box-shadow: 0 1px 2px rgb(0 0 0 / 10%);
   }
 

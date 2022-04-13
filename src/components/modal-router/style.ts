@@ -8,7 +8,21 @@ export const ModalRouterStyle = styled(Dialog)`
   background: var(--secondary-bg);
   outline: none;
   border-radius: 5px;
-
+  .close-button {
+    display: flex;
+    align-items: center;
+    padding: 10px 12px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+  }
+  .close-button i{
+    font-size: 17px;
+    color: var(--text-a);
+  }
+  .close-button:hover i {
+    color: red;
+  }
   @media (max-width: 700px) {
     margin: 0;
     min-width: initial;

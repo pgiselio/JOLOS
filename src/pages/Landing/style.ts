@@ -23,6 +23,7 @@ export const LandingStyle = styled.div`
     top: 0;
     width: 100%;
     margin-bottom: 200px;
+    z-index: 5;
   }
   .logo-nav {
     display: flex;
@@ -54,28 +55,32 @@ export const LandingStyle = styled.div`
   }
 
   .menu {
-    display: flex;
-    flex-direction: column;
     position: absolute;
     background: #ffffff;
     box-shadow: 5px 5px 6px 0 rgba(0, 0, 0, 0.1);
     width: 100%;
-    padding: 30px;
     top: 78px;
     left: 0;
-    transition: transform 0.5s cubic-bezier(0.77, 0.2, 0.05, 1);
-    transform: translateY(-150vh);
+    transition: height 0.5s cubic-bezier(0.77, 0.2, 0.05, 1);
+    height: 0;
     pointer-events: none;
     user-select: none;
     max-height: calc(100vh - 80px);
     overflow: hidden;
     overflow-y: auto;
   }
+
   .menu.active {
-    transform: none;
+    height: 320px;
     pointer-events: initial;
   }
-
+  .menu ul {
+    display: flex;
+    flex-direction: column;
+    padding: 30px;
+    padding-top: 0;
+    display: flex;
+  }
   .menu li {
     display: flex;
     justify-content: center;
@@ -111,16 +116,14 @@ export const LandingStyle = styled.div`
     background: #ffffff;
     box-shadow: 5px 5px 6px 0 rgba(0, 0, 0, 0.1);
     width: 100%;
-    padding: 30px;
     top: 78px;
     left: 0;
-    transition: transform 0.5s cubic-bezier(0.77, 0.2, 0.05, 1);
-    transform: translateY(-150vh);
+    height: 0;
+    transition: all 0.5s cubic-bezier(0.77, 0.2, 0.05, 1);
     pointer-events: none;
     user-select: none;
     max-height: calc(100vh - 80px);
     overflow: hidden;
-    overflow-y: auto;
   }
   .acesso-mobile a {
     text-align: center;
@@ -135,7 +138,8 @@ export const LandingStyle = styled.div`
     margin-bottom: 10px;
   }
   .acesso-mobile.active {
-    transform: none;
+    height: 170px;
+    padding: 30px;
     pointer-events: initial;
   }
 
@@ -175,7 +179,7 @@ export const LandingStyle = styled.div`
     color: #000;
     color: #333;
     border-color: #333;
-    transition: all .2s linear;
+    transition: all 0.2s linear;
     z-index: 1;
   }
   .access-bt.active::before {
@@ -208,6 +212,18 @@ export const LandingStyle = styled.div`
     color: #fff;
     background: var(--accent-color);
   }
+  .backshadow{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: none;
+    z-index: 1;
+  }
+  .backshadow.active{
+    display: block;
+  }
 
   @media (min-width: 766px) {
     .logo-index {
@@ -219,7 +235,8 @@ export const LandingStyle = styled.div`
     .menu-container {
       height: 100%;
     }
-    .menu {
+    .menu,
+    .menu ul {
       transform: none;
       padding-top: 30px;
       flex-direction: row;
@@ -232,6 +249,11 @@ export const LandingStyle = styled.div`
       left: initial;
       pointer-events: initial;
       height: 100%;
+    }
+
+    .menu.active {
+      height: initial;
+      pointer-events: initial;
     }
 
     .menu,
@@ -275,6 +297,8 @@ export const LandingStyle = styled.div`
       display: block;
       position: absolute;
       bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
       background: var(--accent-color);
       transition: 0.13s linear;
     }

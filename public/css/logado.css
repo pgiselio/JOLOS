@@ -130,25 +130,6 @@ footer {
 } */
 
 
-.vaga-page-description {
-  font-size: 14px;
-  display: flex;
-  flex-direction: column;
-  word-break: break-all;
-}
-
-.vaga-page-description ul,
-ol {
-  margin-block-start: 15px;
-  margin-block-end: 15px;
-  padding-left: 18px;
-}
-
-.vaga-page-description ul li,
-ol li {
-  margin-left: 16px;
-}
-
 .vaga-page-actions {
   display: flex;
   flex-wrap: wrap;

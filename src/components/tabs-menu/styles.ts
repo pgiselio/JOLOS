@@ -10,10 +10,10 @@ export const TabsMenuStyle = styled.div<TabsMenuProps>`
   display: flex;
   flex-direction: column;
   width: 100%;
+  max-width: 100vw;
   position: ${(props) => (props.sticky ? "sticky" : "initial")};
   z-index: 10;
   top: var(--top-bar-height);
-
   .spacer {
     background: var(--bg-body);
     display: none;
@@ -25,12 +25,22 @@ export const TabsMenuStyle = styled.div<TabsMenuProps>`
     width: 100%;
     max-width: 1280px;
     margin: 0 auto;
-    height: ${(props) => (props.size === "large" && "65px") || (props.size === "medium" && "50px") || (props.size === "small" && "45px") || "65px"};
+    height: ${(props) =>
+      (props.size === "large" && "65px") ||
+      (props.size === "medium" && "50px") ||
+      (props.size === "small" && "45px") ||
+      "65px"};
     align-items: center;
-    font-size: ${(props) => (props.size === "large" && "16px") || (props.size === "medium" && "14px") || (props.size === "small" && "13px") || "16px"};
+    font-size: ${(props) =>
+      (props.size === "large" && "16px") ||
+      (props.size === "medium" && "14px") ||
+      (props.size === "small" && "13px") ||
+      "16px"};
     background: var(--navs-bg);
     font-weight: 500;
-    box-shadow: ${(props) => (props.style?.boxShadow && props.style?.boxShadow) || "0 1px 2px rgb(0 0 0 / 10%)"};
+    box-shadow: ${(props) =>
+      (props.style?.boxShadow && props.style?.boxShadow) ||
+      "0 1px 2px rgb(0 0 0 / 10%)"};
   }
 
   ul {
@@ -41,10 +51,25 @@ export const TabsMenuStyle = styled.div<TabsMenuProps>`
     overflow: hidden;
     white-space: nowrap;
   }
+  .react-horizontal-scrolling-menu--wrapper {
+    width: 100%;
+  }
+  .react-horizontal-scrolling-menu--scroll-container::-webkit-scrollbar {
+    display: none;
+  }
+
+  .react-horizontal-scrolling-menu--scroll-container {
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
+    height: initial;
+  }
   @media (min-width: 766px) {
     z-index: ${(props) => (props.isOnTop ? "10" : "4")};
     padding: ${(props) => (props.isOnTop ? "0" : "0 30px")};
-    
+    width: calc(100vw - 280px);
+    body.toggle-sidemenu & {
+      width: calc(100vw - 80px);
+    }
 
     &.ontop {
       z-index: 10;
@@ -58,6 +83,7 @@ export const TabsMenuStyle = styled.div<TabsMenuProps>`
     .tabs-menu-container {
       border-radius: ${(props) => (props.isOnTop ? "0" : "5px")};
       padding-left: 10px;
+      width: 100%;
     }
 
     &.ontop .tabs-menu-container {
@@ -71,9 +97,10 @@ export const TabsMenuItemStyle = styled.li`
   display: flex;
   align-items: center;
   height: 100%;
+  width: fit-content;
   a {
     display: flex;
-    align-items: center ;
+    align-items: center;
     padding: 0 15px;
     border-radius: 2px;
     text-decoration: none;
@@ -81,7 +108,7 @@ export const TabsMenuItemStyle = styled.li`
     position: relative;
     height: 100%;
     color: var(--text-a);
-    transition: font .2s ease-in;
+    transition: font 0.2s ease-in;
   }
   a::after {
     content: " ";
@@ -91,10 +118,10 @@ export const TabsMenuItemStyle = styled.li`
     position: absolute;
     bottom: -2px;
     left: 0;
-    transition: height .2s ease-in ;
+    transition: height 0.2s ease-in;
   }
   a span {
-    padding: 2px 6px;
+    padding: 0 6px;
     background: var(--primary-bg);
     color: var(--accent-color);
     border-radius: 5px;
@@ -112,7 +139,7 @@ export const TabsMenuItemStyle = styled.li`
     background: var(--accent-color);
     color: #fff;
   }
-  a:hover{
-      background-color: var(--primary-bg);
+  a:hover {
+    background-color: var(--primary-bg);
   }
 `;

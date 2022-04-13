@@ -7,10 +7,10 @@ export function RequireAuth({ children }: { children: JSX.Element }) {
   const location = useLocation();
   const auth = useAuth();
   const user = useUser();
-  if (!auth.email && !auth.loadingUserState) {
+  if (!auth.email && !auth.loadingUserFromLocalStorage) {
     return <Navigate to="/entrar?error=needsLogin" state={{from: location}} replace/>; 
   }
-  if (auth.loadingUserState || user.loadingData) {
+  if (auth.loadingUserFromLocalStorage || user.loadingData) {
     return (
       <LoadingPageLogo/>
     );

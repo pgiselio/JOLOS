@@ -10,7 +10,7 @@ export const Skeleton = styled.span<SkeletonType>`
   ${(props) => (props.height && "height: " + props.height + ";") || "height: auto;"}
   ${(props) => (props.width && " width: " + props.width+ ";")}
   margin-top: ${(props) => (props.variant === "square" && "8px") || "0px"};
-  margin-bottom: 0px;
+  margin-bottom: 0;
   transform-origin: ${(props) =>
     (props.variant === "circle" && "55%") ||
     (props.variant === "text" && "0 55%") ||

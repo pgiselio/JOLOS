@@ -76,7 +76,8 @@ export const GlobalStyle = createGlobalStyle`
     line-height: 16px !important;
     width: 100%;
     position: absolute;
-    top: 0;
+    top: 50%;
+    transform: translateY(-50%);
     left: 0;
     text-align: center;
     font-style: normal;
@@ -249,6 +250,13 @@ export const GlobalStyle = createGlobalStyle`
     opacity: 1;
     -webkit-transform: rotate(45deg) translate(2px, 2px);
     transform: rotate(45deg) translate(2px, 2px);
+  }
+  .input-error{
+    color: #c91f1f;
+    padding: 0 3px;
+    padding-top: 1px;
+    font-size: 13px;
+    font-weight: 500;
   }
   @media (max-width: 766px) {
     input[type="checkbox"] {

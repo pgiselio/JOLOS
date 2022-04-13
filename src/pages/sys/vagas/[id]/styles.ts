@@ -11,8 +11,8 @@ export const VagaPageStyle = styled.section`
     background-color: var(--navs-bg);
     box-shadow: 0 1px 2px rgb(0 0 0 / 10%);
     .profile-pic {
-      width: 40px;
-      height: 40px;
+      width: 50px;
+      height: 50px;
     }
     h2 {
       padding-top: 10px;
@@ -49,6 +49,24 @@ export const VagaPageStyle = styled.section`
     display: flex;
     margin-top: 10px;
     width: 100%;
+  }
+  .vaga-page-description {
+    font-size: 14px;
+    display: flex;
+    flex-direction: column;
+    word-break: break-all;
+    white-space: pre-wrap;
+  }
+  .vaga-page-description ul,
+  ol {
+    margin-block-start: 15px;
+    margin-block-end: 15px;
+    padding-left: 18px;
+  }
+
+  .vaga-page-description ul li,
+  ol li {
+    margin-left: 16px;
   }
   @media (min-width: 766px) {
     .vaga-page-header {

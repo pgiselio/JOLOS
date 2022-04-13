@@ -7,13 +7,13 @@ export const AuthContext = createContext<IContext>({} as IContext);
 
 export function AuthProvider({ children }: IAuthProvider) {
   const [user, setUser] = useState<IUser | null>();
-  const [loadingUserState, setLoadingUserState] = useState(true);
+  const [loadingUserFromLocalStorage, setLoadingUserFromLocalStorage] = useState(true);
   useEffect(() => {
     const user = getUserLocalStorage();
     if (user) {
       setUser(user);
     }
-    setLoadingUserState(false);
+    setLoadingUserFromLocalStorage(false);
   }, []);
 
   async function signin(email: string, password: string) {
@@ -33,7 +33,7 @@ export function AuthProvider({ children }: IAuthProvider) {
     queryClient.invalidateQueries(["meUser"]);
   }
   return (
-    <AuthContext.Provider value={{ ...user, signin, logout, loadingUserState }}>
+    <AuthContext.Provider value={{ ...user, signin, logout, loadingUserFromLocalStorage }}>
       {children}
     </AuthContext.Provider>
   );

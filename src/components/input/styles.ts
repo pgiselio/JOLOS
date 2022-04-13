@@ -6,6 +6,7 @@ interface InputProps {
 }
 
 export const InputStyled = styled.input<InputProps>`
+  font-family: 'Roboto', sans-serif;
   border: 1px solid var(--outline-color);
   border-radius: 5px;
   padding: 10px 8px;
@@ -19,7 +20,7 @@ export const InputStyled = styled.input<InputProps>`
     box-shadow: 0 0 0 0.2rem rgba(45, 143, 65, 0.308);
   }
   &.danger{
-    border-color: #cb0404;
+    border-color: #c91f1f;
   }
 `;
 

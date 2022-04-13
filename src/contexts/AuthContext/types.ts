@@ -7,7 +7,7 @@ export interface IUser{
 export interface IContext extends IUser {
     signin: (email: string, password: string) => Promise<void>;
     logout: () => void;
-    loadingUserState: boolean;
+    loadingUserFromLocalStorage: boolean;
 }
 
 export interface IAuthProvider {

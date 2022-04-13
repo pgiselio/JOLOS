@@ -57,12 +57,7 @@ export const StyledAccess = styled.main`
     flex-direction: column;
     row-gap: 10px;
   }
-  .input-error{
-    color: #cb0404;
-    padding: 0 3px;
-    padding-top: 1px;
-    font-size: 13px;
-  }
+  
   .pwrst-link {
     font-weight: 500;
     color: var(--accent-color);
