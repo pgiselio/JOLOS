@@ -55,6 +55,20 @@ public class VagaService {
         return vagaOptional.orElseThrow(excessao);
     }
 
+    public Vaga atualizarVaga(Vaga vaga) throws VagaNaoCadastradaException {
+        Optional<Vaga> vagaOptional;
+        vagaOptional = Optional.ofNullable(vaga);
+
+        Supplier<VagaNaoCadastradaException> excessao;
+        excessao = () -> new VagaNaoCadastradaException("Dados inválidos!!");
+
+        vagaOptional.ifPresent(vaguinha -> {
+            vagaRepository.save(vaguinha);
+        });
+
+        return vagaOptional.orElseThrow(excessao);
+    }
+
     public Vaga salvarVaga(VagaInsertDto dto) throws VagaNaoCadastradaException {
         Optional<VagaInsertDto> dtoOptional;
         dtoOptional = Optional.ofNullable(dto);
@@ -167,7 +181,7 @@ public class VagaService {
             ReflectionUtils.setField(campo, vagaBuscadaPorId, valor);
         });
 
-        return salvarVaga(vagaBuscadaPorId);
+        return atualizarVaga(vagaBuscadaPorId);
     }
 
     public VagaGetDTO addAlunoParaVaga(int vagaId, int alunoId)
@@ -183,7 +197,7 @@ public class VagaService {
         VagaGetDTO dto = new VagaGetDTO();
         VagaGetDTO convertedToDto = dto.convertEntityToDto(vaga);
         try {
-            salvarVaga(vaga);
+            atualizarVaga(vaga);
         } catch (VagaNaoCadastradaException e) {
             throw new RuntimeException(e.getMessage());
         }
@@ -196,10 +210,9 @@ public class VagaService {
         final Usuario usuario = usuarioService.buscaPorAlunoId(alunoId);
         vaga.removeAluno(usuario.getAluno());
         try {
-            salvarVaga(vaga);
+            atualizarVaga(vaga);
         } catch (VagaNaoCadastradaException e) {
             throw new RuntimeException(e.getMessage());
         }
-
     }
 }
