@@ -173,6 +173,11 @@ public class VagaService {
     public VagaGetDTO addAlunoParaVaga(int vagaId, int alunoId)
             throws VagaNaoEncontradoException, UsuarioNaoEncontradoException {
         final Vaga vaga = buscarPorId(vagaId);
+
+        if (vaga.getStatus() == StatusVaga.INATIVO) {
+            throw new RuntimeException("vaga inativa, não é possível adicionar aluno");
+        }
+
         final Usuario usuario = usuarioService.buscaPorAlunoId(alunoId);
         vaga.addAluno(usuario.getAluno());
         VagaGetDTO dto = new VagaGetDTO();
