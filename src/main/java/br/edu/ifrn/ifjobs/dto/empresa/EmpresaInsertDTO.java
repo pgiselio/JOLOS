@@ -8,6 +8,7 @@ import org.modelmapper.ModelMapper;
 import br.edu.ifrn.ifjobs.dto.Dto;
 import br.edu.ifrn.ifjobs.model.Empresa;
 import br.edu.ifrn.ifjobs.model.Pessoa;
+import br.edu.ifrn.ifjobs.model.RedesSociais;
 
 public class EmpresaInsertDTO implements Dto<Empresa, EmpresaInsertDTO> {
 
@@ -21,6 +22,8 @@ public class EmpresaInsertDTO implements Dto<Empresa, EmpresaInsertDTO> {
 
     @NotBlank(message = "Telefone não informado!")
     private String telefone;
+
+    private RedesSociais redesSociais;
 
     private ModelMapper modelMapper;
 
@@ -101,6 +104,14 @@ public class EmpresaInsertDTO implements Dto<Empresa, EmpresaInsertDTO> {
      */
     public void setTelefone(String telefone) {
         this.telefone = telefone;
+    }
+
+    public RedesSociais getRedesSociais() {
+        return redesSociais;
+    }
+
+    public void setRedesSociais(RedesSociais redesSociais) {
+        this.redesSociais = redesSociais;
     }
 
 }
