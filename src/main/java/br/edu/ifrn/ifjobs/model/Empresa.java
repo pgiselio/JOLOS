@@ -9,7 +9,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
-import org.hibernate.annotations.Type;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -28,12 +27,21 @@ public class Empresa implements Serializable {
     @Column(nullable = false, length = 400, unique = true)
     private String cnpj;
 
-    @Column(nullable = false)
-    @Type(type = "text")
+    @Column(nullable = false, columnDefinition = "TEXT")
     private String resumo;
 
     @Column(nullable = false, length = 12)
     private String telefone;
+
+    private RedesSociais redesSociais;
+
+    public RedesSociais getRedesSociais() {
+        return redesSociais;
+    }
+
+    public void setRedesSociais(RedesSociais redesSociais) {
+        this.redesSociais = redesSociais;
+    }
 
     public Empresa() {
     }
