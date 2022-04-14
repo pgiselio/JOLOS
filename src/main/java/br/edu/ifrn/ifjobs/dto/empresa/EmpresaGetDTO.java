@@ -1,6 +1,7 @@
 package br.edu.ifrn.ifjobs.dto.empresa;
 
 import br.edu.ifrn.ifjobs.model.Pessoa;
+import br.edu.ifrn.ifjobs.model.RedesSociais;
 
 public class EmpresaGetDTO {
 
@@ -13,6 +14,8 @@ public class EmpresaGetDTO {
     private String resumo;
 
     private String telefone;
+
+    private RedesSociais redesSociais;
 
     /**
      * @return int return the id
@@ -82,6 +85,14 @@ public class EmpresaGetDTO {
      */
     public void setTelefone(String telefone) {
         this.telefone = telefone;
+    }
+
+    public RedesSociais getRedesSociais() {
+        return redesSociais;
+    }
+
+    public void setRedesSociais(RedesSociais redesSociais) {
+        this.redesSociais = redesSociais;
     }
 
 }
