@@ -1,17 +1,16 @@
-main{
-    margin-top: 80px;
+main {
+  margin-top: 80px;
 }
 
 section {
-    height: 50vh;
-    background: #f1f1f1;
-    margin-top: 10px;
+  height: 50vh;
+  background: #f1f1f1;
+  margin-top: 10px;
 }
 
-
 footer {
-    margin-top: 100px;
-    height: 500px;
-    display: flex;
-    background: #810016;
+  margin-top: 100px;
+  height: 500px;
+  display: flex;
+  background: #810016;
 }
