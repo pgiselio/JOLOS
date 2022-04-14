@@ -75,7 +75,7 @@ export default function SettingsPage() {
           </TabSelector>
         </div>
       </nav>
-      <div className="content-settings">
+      <div className={`content-settings ${selectedTab ? "active" : ""}`}>
         {selectedTab && (
           <div className="setting">
             {!mq.matches && (

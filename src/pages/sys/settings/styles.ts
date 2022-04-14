@@ -65,10 +65,16 @@ export const SettingPageStyle = styled.section`
     }
     .content-settings {
       position: absolute;
+      display: none;
+    }
+    .content-settings.active {
+      position: absolute;
+      display: block;
+      background: var(--bg-body);
+      min-height: calc(100vh - var(--top-bar-height));
     }
     .content-settings .setting {
       z-index: 3;
-      background: var(--bg-body);
     }
   }
 `;

@@ -32,12 +32,12 @@ function verifyQuantity() {
     }
 }
 candidatosChk.forEach(candidato => {
-    candidato.addEventListener('change', () => {
+    candidato.addEventListener("change", () => {
         verifyQuantity();
     });
 });
 
-checkAll.addEventListener('change', () => {
+checkAll.addEventListener("change", () => {
     if (checkAll.checked) {
         candidatosChk.forEach(candidatoCheck => {
             candidatoCheck.checked = true;
@@ -50,14 +50,14 @@ checkAll.addEventListener('change', () => {
     verifyQuantity();
 });
 
-for (var i = 0; i < candidatoLink.length; i++) {
+for (let i = 0; i < candidatoLink.length; i++) {
     let link = candidatoLink[i];
     let check = candidatosChk[i];
-    check.id = 'check-' + i;
-    link.id = 'candidato-' + i;
+    check.id = "check-" + i;
+    link.id = "candidato-" + i;
     link.addEventListener('click', function (e) {
         if (selectionMode) {
-            let selected = document.getElementById(e.target.id.replace('candidato-', 'check-'));
+            let selected = document.getElementById(e.target.id.replace("candidato-", "check-"));
             selected.checked = !selected.checked;
             verifyQuantity();
             e.preventDefault();
