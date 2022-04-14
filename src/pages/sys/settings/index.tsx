@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { useTabs } from "react-headless-tabs";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { LoadingPage } from "../../../components/loadingPage";
+import { OutsetHeadersCornerRadius } from "../../../components/outset-radius-to-headers";
 import { TabSelector } from "../../../components/Tabs/TabSelector";
 import { useUser } from "../../../hooks/useUser";
 import SettingContaPage from "./conta";
@@ -29,69 +30,84 @@ export default function SettingsPage() {
 
   return (
     <SettingPageStyle>
-      <nav className="nav-settings-container">
-        <div className="items">
-          <h3>Configurações</h3>
-          <TabSelector
-            isActive={selectedTab === "profile"}
-            onClick={() => {
-              setSearchParams({ tab: "profile" });
-            }}
-            className="tab-selector-profile"
-            vertical
-          >
-            <i className="fas fa-user"></i>
-            Perfil
-          </TabSelector>
-          <TabSelector
-            isActive={selectedTab === "security"}
-            onClick={() => {
-              setSearchParams({ tab: "security" });
-            }}
-            vertical
-          >
-            <i className="fas fa-lock"></i>
-            Conta e Segurança
-          </TabSelector>
-          <TabSelector
-            isActive={selectedTab === "notifications"}
-            onClick={() => {
-              setSearchParams({ tab: "notifications" });
-            }}
-            vertical
-          >
-            <i className="fas fa-bell"></i>
-            Notificações
-          </TabSelector>
-          <TabSelector
-            isActive={selectedTab === "themes"}
-            onClick={() => {
-              setSearchParams({ tab: "themes" });
-            }}
-            vertical
-          >
-            <i className="fas fa-palette"></i>
-            Temas
-          </TabSelector>
+      <nav className={`nav-settings-container ${selectedTab ? "toggle" : ""}`}>
+        <div className="nav">
+          <OutsetHeadersCornerRadius className="rounded-corner">
+            <div className="header">
+              <h3>Configurações</h3>
+            </div>
+          </OutsetHeadersCornerRadius>
+          <div className="items">
+            <TabSelector
+              isActive={selectedTab === "profile"}
+              onClick={() => {
+                setSearchParams({ tab: "profile" });
+              }}
+              className="tab-selector-profile"
+              vertical
+            >
+              <i className="fas fa-user"></i>
+              Perfil
+            </TabSelector>
+            <TabSelector
+              isActive={selectedTab === "security"}
+              onClick={() => {
+                setSearchParams({ tab: "security" });
+              }}
+              vertical
+            >
+              <i className="fas fa-lock"></i>
+              Conta e Segurança
+            </TabSelector>
+            <TabSelector
+              isActive={selectedTab === "notifications"}
+              onClick={() => {
+                setSearchParams({ tab: "notifications" });
+              }}
+              vertical
+            >
+              <i className="fas fa-bell"></i>
+              Notificações
+            </TabSelector>
+            <TabSelector
+              isActive={selectedTab === "themes"}
+              onClick={() => {
+                setSearchParams({ tab: "themes" });
+              }}
+              vertical
+            >
+              <i className="fas fa-palette"></i>
+              Temas
+            </TabSelector>
+          </div>
         </div>
       </nav>
-      <div className={`content-settings ${selectedTab ? "active" : ""}`}>
+      <div className={`setting-container ${selectedTab ? "active" : ""}`}>
         {selectedTab && (
           <div className="setting">
-            {!mq.matches && (
-              <button type="button" onClick={() => navigate(-1)}>
-                Voltar
-              </button>
-            )}
-            {selectedTab === "profile" && (
-              <>
-                <h3>Configurações de conta</h3>
-                <SettingContaPage />
-              </>
-            )}
-            {selectedTab === "security" && <h3>Segurança</h3>}
-            {selectedTab === "notifications" && <h3>Notificações</h3>}
-            {selectedTab === "themes" && <h3>Temas</h3>}
+            <OutsetHeadersCornerRadius className="rounded-corner">
+              <div className="header">
+                {!mq.matches && (
+                  <button
+                    className="back-button"
+                    type="button"
+                    onClick={() => navigate(-1)}
+                  >
+                    <i className="fas fa-arrow-left"></i>
+                  </button>
+                )}
+                {selectedTab === "profile" && <h3>Configurações de conta</h3>}
+                {selectedTab === "security" && <h3>Segurança</h3>}
+                {selectedTab === "notifications" && <h3>Notificações</h3>}
+                {selectedTab === "themes" && <h3>Temas</h3>}
+              </div>
+            </OutsetHeadersCornerRadius>
+            <div className="content">
+              {selectedTab === "profile" && <SettingContaPage />}
+              {selectedTab === "security" && <div>conteudo aqui</div>}
+              {selectedTab === "notifications" && <div>Notificações</div>}
+              {selectedTab === "themes" && <div>Temas</div>}
+            </div>
           </div>
         )}
       </div>
