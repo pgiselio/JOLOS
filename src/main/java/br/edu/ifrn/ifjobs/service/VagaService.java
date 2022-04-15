@@ -204,7 +204,7 @@ public class VagaService {
         final Usuario usuario = usuarioService.buscaPorAlunoId(alunoId);
         final Aluno aluno = usuario.getAluno();
 
-        if (aluno.getCurso().equalsIgnoreCase(vaga.getCursoAlvo())) {
+        if (!aluno.getCurso().equalsIgnoreCase(vaga.getCursoAlvo())) {
             throw new RuntimeException("Curso diferente do que está vaga");
         }
 
