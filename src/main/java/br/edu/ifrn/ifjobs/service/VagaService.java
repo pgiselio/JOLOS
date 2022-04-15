@@ -202,7 +202,13 @@ public class VagaService {
         }
 
         final Usuario usuario = usuarioService.buscaPorAlunoId(alunoId);
-        vaga.addAluno(usuario.getAluno());
+        final Aluno aluno = usuario.getAluno();
+
+        if (aluno.getCurso().equalsIgnoreCase(vaga.getCursoAlvo())) {
+            throw new RuntimeException("Curso diferente do que está vaga");
+        }
+
+        vaga.addAluno(aluno);
         VagaGetDTO dto = new VagaGetDTO();
         VagaGetDTO convertedToDto = dto.convertEntityToDto(vaga);
         try {
