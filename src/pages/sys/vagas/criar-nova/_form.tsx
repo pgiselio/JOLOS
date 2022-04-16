@@ -4,7 +4,7 @@
 import { useEffect, useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 import { toast } from "react-toastify";
-import MaskedInput from "react-input-mask";
+import InputMask from "react-input-mask";
 
 import { Input } from "../../../../components/input";
 import { useAuth } from "../../../../hooks/useAuth";
@@ -26,13 +26,21 @@ export function CriarNovaVagaForm() {
   useEffect(() => {
     setEmpresaCNPJ(user?.empresa?.cnpj);
   }, [user]);
-
+  let courses = [
+    "Informática",
+    "Administração",
+    "Eletrotécnica",
+    "Energias Renováveis",
+    "Física",
+  ];
   let validationSchema;
   if (empresaCNPJ) {
     validationSchema = Yup.object().shape({
       titulo: Yup.string().required("Este campo é obrigatório"),
       localidade: Yup.string().required("Este campo é obrigatório"),
-      cursoAlvo: Yup.string().required("Este campo é obrigatório"),
+      cursoAlvo: Yup.string()
+        .oneOf([...courses], "O curso selecionado não é válido")
+        .required("Este campo é obrigatório"),
       descricao: Yup.string().required("Este campo é obrigatório"),
       cnpj: Yup.string().notRequired(),
     });
@@ -40,16 +48,20 @@ export function CriarNovaVagaForm() {
     validationSchema = Yup.object().shape({
       titulo: Yup.string().required("Este campo é obrigatório"),
       localidade: Yup.string().required("Este campo é obrigatório"),
-      cursoAlvo: Yup.string().required("Este campo é obrigatório"),
+      cursoAlvo: Yup.string()
+        .oneOf([...courses], "O curso selecionado não é válido")
+        .required("Este campo é obrigatório"),
       descricao: Yup.string().required("Este campo é obrigatório"),
-      cnpj: Yup.string().required("Este campo é obrigatório"),
+      cnpj: Yup.string()
+        .required("Este campo é obrigatório")
+        .min(18, "CNPJ inválido"),
     });
   }
   const {
     control,
-    formState: { errors, isDirty,  },
+    formState: { errors, isDirty },
     handleSubmit,
-    reset
+    reset,
   } = useForm({
     defaultValues: {
       titulo: "",
@@ -92,7 +104,10 @@ export function CriarNovaVagaForm() {
         titulo,
         localizacao: localidade,
         descricao,
-        cnpj: auth.type === "EMPRESA" ? empresaCNPJ : cnpj.replaceAll(".", "").replaceAll("/", "").replaceAll("-", ""),
+        cnpj:
+          auth.type === "EMPRESA"
+            ? empresaCNPJ
+            : cnpj.replaceAll(".", "").replaceAll("/", "").replaceAll("-", ""),
         dataCriacao: new Date(),
       })
       .then((response) => {
@@ -138,7 +153,7 @@ export function CriarNovaVagaForm() {
       </div>
       <div className="form-item-group" style={{ width: "100%" }}>
         <div className="lbl">
-          <label htmlFor="vaga-location">Localidade da vaga: </label>
+          <label htmlFor="vaga-location">Localização da vaga: </label>
           <Controller
             name="localidade"
             control={control}
@@ -152,7 +167,7 @@ export function CriarNovaVagaForm() {
               />
             )}
           />
-          <p className="input-error">{errors.cursoAlvo?.message}</p>
+          <p className="input-error">{errors.localidade?.message}</p>
         </div>
         <div className="lbl">
           <label htmlFor="change-courses">Curso alvo: </label>
@@ -174,11 +189,9 @@ export function CriarNovaVagaForm() {
           <p className="input-error">{errors.cursoAlvo?.message}</p>
 
           <datalist id="courses">
-            <option value="Informática"></option>
-            <option value="Energias Renováveis"></option>
-            <option value="Eletrotécnica"></option>
-            <option value="Administração"></option>
-            <option value="Física"></option>
+            {courses.map((course) => (
+              <option value={course} key={course}></option>
+            ))}
           </datalist>
         </div>
       </div>
@@ -189,11 +202,18 @@ export function CriarNovaVagaForm() {
             name="cnpj"
             control={control}
             render={({ field }) => (
-              <MaskedInput mask="99.999.999/9999-99" {...field}>
-                {
-                  () => <Input type="text" id="cnpj" placeholder="CNPJ" {...(errors.cnpj && { className: "danger" })} />
-                }
-              </MaskedInput>
+              <InputMask
+                maskPlaceholder={null}
+                mask="99.999.999/9999-99"
+                {...field}
+              >
+                <Input
+                  type="text"
+                  id="cnpj"
+                  placeholder="CNPJ"
+                  {...(errors.cnpj && { className: "danger" })}
+                />
+              </InputMask>
             )}
           />
           <p className="input-error">{errors.cnpj?.message}</p>

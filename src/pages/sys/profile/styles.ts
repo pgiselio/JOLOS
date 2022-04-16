@@ -72,6 +72,60 @@ export const ProfilePageStyle = styled.section`
     white-space: nowrap;
   }
 
+  .contacts {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .contacts > * {
+    list-style: none;
+  }
+
+  .essential-info {
+    display: flex;
+    flex-direction: column;
+    font-size: 16px;
+    gap: 10px;
+    li a {
+      display: flex;
+      align-items: center;
+      width: 100%;
+      span {
+        display: flex;
+        width: calc(100% - 25px);
+        overflow-wrap: anywhere;
+      }
+      i {
+        display: flex;
+        width: 25px;
+      }
+    }
+  }
+  .social-info {
+    display: flex;
+    width: 100%;
+    justify-content: space-evenly;
+    li {
+      display: flex;
+      a {
+        padding: 10px;
+        border-radius: 30px;
+        color: var(--accent-color);
+        &:hover {
+          background: var(--accent-color-opacity);
+        }
+        i {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          font-size: 20px;
+          height: 30px;
+          width: 30px;
+        }
+      }
+    }
+  }
+
   @media (min-width: 766px) {
     .profile-page-header {
       padding: 35px 40px;

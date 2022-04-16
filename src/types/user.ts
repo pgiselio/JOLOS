@@ -34,6 +34,12 @@ export type User = {
     cnpj: string;
     resumo?: string;
     telefone?: string;
+    redesSociais?: {
+      linkedin?: string;
+      facebook?: string;
+      twitter?: string;
+      intagram?: string;
+    }
   };
   authorities?: [
     {

@@ -1,5 +1,5 @@
 import { useQuery } from "react-query";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import {
   Box,
   BoxContent,
@@ -21,6 +21,7 @@ import { ProfilePageStyle } from "../styles";
 export default function ProfilePage({ email }: { email?: string }) {
   let params = useParams();
   let usertype;
+  let navigate = useNavigate();
   const auth = useAuth();
   const { data, isFetching } = useQuery<User>(
     ["profile", email ? email : params.id],
@@ -98,7 +99,9 @@ export default function ProfilePage({ email }: { email?: string }) {
             <div className="user-actions">
               {data?.email === auth.email && (
                 <>
-                  <Button>
+                  <Button onClick={()=>{
+                    navigate("/sys/settings?tab=profile");
+                  }}>
                     <i className="fas fa-pencil-alt"></i>
 
                     <span>Editar perfil</span>
@@ -214,47 +217,57 @@ export default function ProfilePage({ email }: { email?: string }) {
                       <div className="contacts">
                         <ul className="essential-info">
                           <li>
-                            <a href="#oi">
+                            <a href={"mailto:" + data?.email}>
                               <i className="fas fa-envelope"></i>{" "}
-                              <span>email@seusite.com.br</span>
+                              <span>{data?.email}</span>
                             </a>
                           </li>
                           <li>
-                            <a href="#oi">
+                            <a href={"tel:" + data?.empresa?.telefone}>
                               <i className="fas fa-phone-alt"></i>{" "}
-                              <span>(84) 0000-0000</span>
+                              <span>{data?.empresa?.telefone}</span>
                             </a>
                           </li>
                         </ul>
                       </div>
                     </BoxContent>
                   </Box>
-                  <Box>
-                    <BoxContent>
-                      <ul className="social-info">
-                        <li>
-                          <a href="#oi" target="_blank">
-                            <i className="fab fa-linkedin"></i>
-                          </a>
-                        </li>
-                        <li>
-                          <a href="#oi" target="_blank">
-                            <i className="fab fa-facebook"></i>
-                          </a>
-                        </li>
-                        <li>
-                          <a href="#oi" target="_blank">
-                            <i className="fab fa-instagram"></i>
-                          </a>
-                        </li>
-                        <li>
-                          <a href="#oi" target="_blank">
-                            <i className="fab fa-twitter"></i>
-                          </a>
-                        </li>
-                      </ul>
-                    </BoxContent>
-                  </Box>
+                  {data?.empresa?.redesSociais && (
+                    <Box>
+                      <BoxContent>
+                        <ul className="social-info">
+                          {data?.empresa?.redesSociais.linkedin && (
+                            <li>
+                              <a href={data?.empresa?.redesSociais.linkedin} rel="noreferrer" target="_blank">
+                                <i className="fab fa-linkedin"></i>
+                              </a>
+                            </li>
+                          )}
+                          {data?.empresa?.redesSociais.facebook && (
+                            <li>
+                              <a href={data?.empresa?.redesSociais.facebook} rel="noreferrer" target="_blank">
+                                <i className="fab fa-facebook"></i>
+                              </a>
+                            </li>
+                          )}
+                          {data?.empresa?.redesSociais.intagram && (
+                            <li>
+                              <a href={data?.empresa?.redesSociais.intagram} rel="noreferrer" target="_blank">
+                                <i className="fab fa-instagram"></i>
+                              </a>
+                            </li>
+                          )}
+                          {data?.empresa?.redesSociais.twitter && (
+                            <li>
+                              <a href={data?.empresa?.redesSociais.twitter} rel="noreferrer" target="_blank">
+                                <i className="fab fa-twitter"></i>
+                              </a>
+                            </li>
+                          )}
+                        </ul>
+                      </BoxContent>
+                    </Box>
+                  )}
                 </div>
               </div>
             )}

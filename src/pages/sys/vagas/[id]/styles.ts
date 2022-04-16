@@ -68,6 +68,18 @@ export const VagaPageStyle = styled.section`
   ol li {
     margin-left: 16px;
   }
+
+  .vaga-page-actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .vaga-page-actions > * {
+    width: 100%;
+  }
+
   @media (min-width: 766px) {
     .vaga-page-header {
       padding: 0 40px;
