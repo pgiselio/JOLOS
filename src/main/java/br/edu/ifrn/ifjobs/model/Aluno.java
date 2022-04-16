@@ -141,4 +141,12 @@ public class Aluno implements Serializable {
         this.dadosPessoa = dadosPessoa;
     }
 
+    public String getResumo() {
+        return resumo;
+    }
+
+    public void setResumo(String resumo) {
+        this.resumo = resumo;
+    }
+
 }
