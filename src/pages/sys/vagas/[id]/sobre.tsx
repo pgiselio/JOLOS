@@ -47,7 +47,6 @@ export function VagaSobrePage() {
           </BoxContent>
         </Box>
       </div>
-      {console.log((!user.aluno && !user.empresa))}
       
       {( (!isAluno && user?.id === data.empresa?.id) || (!user.aluno && !user.empresa) ) &&(
         <div className="column-2">

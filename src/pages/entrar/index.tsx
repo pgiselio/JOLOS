@@ -21,26 +21,26 @@ export default function LoginPage() {
       password: "jolos",
     },
   });
+  
   let [searchParams, setSearchParams] = useSearchParams();
 
-  const RedirectForSystem = () => {
-    navigate("/sys");
-  };
-  const paramsError = searchParams.getAll("error");
   useEffect(() => {
     if (auth.email) {
-      RedirectForSystem();
+      navigate("/sys");
     }
-    if (paramsError) {      
+  });
+
+  const paramsError = searchParams.getAll("error");
+  useEffect(() => {
+    if (paramsError) {
       paramsError.forEach((error) => {
         if (error === "needsLogin") {
           toast.error("Você precisa fazer login primeiro!", {});
-        }else
-        if (error === "invalidCredentials") {
+        } else if (error === "invalidCredentials") {
           toast.error("Credenciais inválidas, faça login novamente!", {});
         }
       });
-      setSearchParams("");      
+      setSearchParams("");
     }
   }, []);
 
@@ -58,7 +58,6 @@ export default function LoginPage() {
 
   return (
     <StyledAccess>
-
       <ToastContainer
         position="top-right"
         autoClose={5000}

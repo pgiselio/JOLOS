@@ -80,6 +80,13 @@ footer {
   margin-top: 5px;
 }
 
+.lista-candidatos .candidato button{
+  display: flex ;
+  width: 100%;
+  background: transparent;
+  border: none;
+}
+
 .candidato-group {
   display: flex;
   align-items: center;
@@ -87,7 +94,7 @@ footer {
   padding: 10px;
   padding-left: 50px;
   position: relative;
-  color: #333;
+  color: var(--text-b);
   width: 100%;
   user-select: none;
 }
@@ -105,16 +112,17 @@ footer {
   position: absolute !important;
   z-index: 2 !important;
   left: 15px !important;
-  top: 35% !important;
+  top: 50% !important;
+  transform: translateY(-50%) !important;
 }
 
 .candidato-list-check:checked ~ .candidato-group {
-  background: #f4fff6;
+  background: #00ff2e12;
   color: var(--accent-color);
 }
 
 .candidato-group:hover {
-  background: #f1f1f1 !important;
+  background: var(--secondary-bg);
 }
 
 .candidato-pic {

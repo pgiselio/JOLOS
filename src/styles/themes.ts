@@ -78,7 +78,7 @@ export const darkTheme: DefaultTheme = {
     secondary: "magenta",
     bodyBackground: "24 24 24",
     systemMenu: {
-      border: "transparent",
+      border: "#2b2936",
       background: "33 33 33",
       link: "#000",
       icon: "",
