@@ -34,7 +34,7 @@ export function CriarNovaVagaForm() {
       localidade: Yup.string().required("Este campo é obrigatório"),
       cursoAlvo: Yup.string().required("Este campo é obrigatório"),
       descricao: Yup.string().required("Este campo é obrigatório"),
-      cnpj: Yup.string().required("Este campo é obrigatório"),
+      cnpj: Yup.string().notRequired(),
     });
   } else {
     validationSchema = Yup.object().shape({
@@ -188,9 +188,9 @@ export function CriarNovaVagaForm() {
             name="cnpj"
             control={control}
             render={({ field }) => (
-              <MaskedInput mask="99.999.999/9999-99" {...field} alwaysShowMask>
+              <MaskedInput mask="99.999.999/9999-99" {...field}>
                 {
-                  () => <Input type="text" id="cnpj" placeholder="CNPJ" {...(errors.cursoAlvo && { className: "danger" })} />
+                  () => <Input type="text" id="cnpj" placeholder="CNPJ" {...(errors.cnpj && { className: "danger" })} />
                 }
               </MaskedInput>
             )}
@@ -213,7 +213,7 @@ export function CriarNovaVagaForm() {
                 resize: "vertical",
                 minHeight: "150px",
                 maxHeight: "250px",
-                height: 200,
+                height: 150,
                 background: "#ffffff1a",
                 padding: "5px",
                 borderRadius: "5px",
