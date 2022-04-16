@@ -9,7 +9,6 @@ import InputMask from "react-input-mask";
 import { Input } from "../../../../components/input";
 import { useAuth } from "../../../../hooks/useAuth";
 import { usePrompt } from "../../../../hooks/usePrompt";
-import { useUser } from "../../../../hooks/useUser";
 import { api } from "../../../../services/api";
 import * as Yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -21,11 +20,10 @@ export function CriarNovaVagaForm() {
   // );
   const [empresaCNPJ, setEmpresaCNPJ] = useState<string | null>();
   const auth = useAuth();
-  const user = useUser();
 
   useEffect(() => {
-    setEmpresaCNPJ(user?.empresa?.cnpj);
-  }, [user]);
+    setEmpresaCNPJ(auth.userInfo?.empresa?.cnpj);
+  }, [auth.userInfo]);
   let courses = [
     "Informática",
     "Administração",

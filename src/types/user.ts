@@ -11,7 +11,7 @@ export type User = {
       localizacao: string;
     };
     resumo?: string;
-    curso?: string;
+    curso: string;
     periodo?: number;
     cpf: string;
     curriculo?: number | {

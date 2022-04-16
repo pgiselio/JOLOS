@@ -1,11 +1,11 @@
 import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
 import { Button } from "../../../../components/button";
-import { useUser } from "../../../../hooks/useUser";
+import { useAuth } from "../../../../hooks/useAuth";
 import { api } from "../../../../services/api";
 
 export default function SettingContaPage() {
-  const user = useUser();
+  const auth = useAuth();
   const {
     register,
     formState: { errors },
@@ -20,7 +20,7 @@ export default function SettingContaPage() {
     const file = data.arquivo[0];
     formData.append("arquivo", file);
     await api
-      .patch(`/curriculo/atualizaArquivo/${user.email}`, formData)
+      .patch(`/curriculo/atualizaArquivo/${auth.userInfo?.email}`, formData)
       .then((response) => {
         if (response.status === 200) {
           toast.success("Currículo enviado com sucesso!");
@@ -40,7 +40,7 @@ export default function SettingContaPage() {
   return (
     <>
       <div>
-        {user.aluno && (
+        {auth.userInfo?.aluno && (
           <>
             <div>Currículo</div>
             <form onSubmit={handleSubmit(onSubmit)}>

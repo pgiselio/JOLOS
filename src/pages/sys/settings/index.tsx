@@ -4,7 +4,7 @@ import { useNavigate, useSearchParams } from "react-router-dom";
 import { LoadingPage } from "../../../components/loadingPage";
 import { OutsetHeadersCornerRadius } from "../../../components/outset-radius-to-headers";
 import { TabSelector } from "../../../components/Tabs/TabSelector";
-import { useUser } from "../../../hooks/useUser";
+import { useAuth } from "../../../hooks/useAuth";
 import SettingContaPage from "./conta";
 import { SettingPageStyle } from "./styles";
 
@@ -15,7 +15,7 @@ export default function SettingsPage() {
     searchParams.get("tab") || "profile"
   );
   let navigate = useNavigate();
-  const user = useUser();
+  const auth = useAuth();
   const mq = window.matchMedia("(min-width: 1000px)");
   useEffect(() => {
     if (!searchParams.get("tab") && mq.matches) {
@@ -24,7 +24,7 @@ export default function SettingsPage() {
       setSelectedTab(searchParams.get("tab"));
     }
   });
-  if (user.loadingData) {
+  if (!auth.userInfo?.id) {
     return <LoadingPage />;
   }
 

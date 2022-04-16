@@ -11,7 +11,6 @@ import { AppRoutes } from "./AppRoutes";
 import ScrollToTop from "./utils/scrollToTop";
 import { QueryClientProvider } from "react-query";
 import { queryClient } from "./services/queryClient";
-import { UserProvider } from "./contexts/UserContext";
 function App() {
   return (
     <>
@@ -19,12 +18,10 @@ function App() {
         <GlobalStyle />
         <AuthProvider>
           <QueryClientProvider client={queryClient}>
-            <UserProvider>
               <BrowserRouter>
                 <ScrollToTop />
                 <AppRoutes />
               </BrowserRouter>
-            </UserProvider>
           </QueryClientProvider>
         </AuthProvider>
       </ThemeProvider>

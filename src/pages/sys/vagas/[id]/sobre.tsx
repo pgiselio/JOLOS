@@ -8,12 +8,10 @@ import {
 import { Button } from "../../../../components/button";
 import CircularProgressFluent from "../../../../components/circular-progress-fluent";
 import { useAuth } from "../../../../hooks/useAuth";
-import { useUser } from "../../../../hooks/useUser";
 
 export function VagaSobrePage() {
   const { data } = useVaga();
   const auth = useAuth();
-  const user = useUser();
   const isAluno = auth.type === "ALUNO";
   if (!data) {
     return (
@@ -48,7 +46,7 @@ export function VagaSobrePage() {
         </Box>
       </div>
       
-      {( (!isAluno && user?.id === data.empresa?.id) || (!user.aluno && !user.empresa) ) &&(
+      {( (!isAluno && auth.userInfo?.id === data.empresa?.id) || (!auth.userInfo?.aluno && !auth.userInfo?.empresa) ) &&(
         <div className="column-2">
           <Box>
             <BoxTitle>

@@ -1,5 +1,4 @@
 import { useAuth } from "../../hooks/useAuth";
-import { useUser } from "../../hooks/useUser";
 import { ProfilePic } from "../profile-pic/profile-pic";
 import { SidebarItem } from "./sidebar-item";
 import { SidebarAside } from "./style";
@@ -14,12 +13,11 @@ export function SidebarList() {
   }
   checkSidebarState();
   const auth = useAuth();
-  const user = useUser();
   function nomePessoa(): string {
-    if(user.loadingData){
+    if(!auth.userInfo?.id){
       return "Carregando...";
     }
-    return user?.aluno?.dadosPessoa.nome || user?.empresa?.dadosPessoa.nome || "ADMIN";
+    return auth.userInfo?.aluno?.dadosPessoa.nome || auth.userInfo?.empresa?.dadosPessoa.nome || "ADMIN";
   }
   return (
     <SidebarAside className="side-bar">
@@ -38,7 +36,7 @@ export function SidebarList() {
             <SidebarItem to="vagas" icon="fas fa-briefcase" label="Vagas" />
             <SidebarItem to="forum" icon="fas fa-comments" label="Fórum" />
             {nomePessoa() !== "ADMIN" && (
-              <SidebarItem to={`profile/${user?.id}`} icon="fas fa-user" label="Perfil" />
+              <SidebarItem to={`profile/${auth.userInfo?.id}`} icon="fas fa-user" label="Perfil" />
             )}
 
             <SidebarItem

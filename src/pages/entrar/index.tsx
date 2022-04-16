@@ -37,7 +37,7 @@ export default function LoginPage() {
         if (error === "needsLogin") {
           toast.error("Você precisa fazer login primeiro!", {});
         } else if (error === "invalidCredentials") {
-          toast.error("Credenciais inválidas, faça login novamente!", {});
+          toast.error("Sua sessão expirou, faça login novamente!", {});
         }
       });
       setSearchParams("");

@@ -10,10 +10,10 @@ import { VagaPageStyle } from "./styles";
 import { PillItem, PillList } from "../../../../components/pill";
 import { Button } from "../../../../components/button";
 import { useForm } from "react-hook-form";
-import { useUser } from "../../../../hooks/useUser";
 import { toast } from "react-toastify";
 import { queryClient } from "../../../../services/queryClient";
 import { useEffect, useState } from "react";
+import { useAuth } from "../../../../hooks/useAuth";
 
 export default function VagaPage() {
   let params = useParams();
@@ -37,10 +37,10 @@ export default function VagaPage() {
       id: "",
     },
   });
-  const user = useUser();
+  const auth = useAuth();
   async function inscreverAluno() {
     await api
-      .patch(`/vaga/${params.id}/addAluno/${user.aluno?.id}`)
+      .patch(`/vaga/${params.id}/addAluno/${auth.userInfo?.aluno?.id}`)
       .then(() => {
         toast.success("Você se increveu na vaga!", {position: "bottom-center", hideProgressBar: true});
         queryClient.invalidateQueries([`vaga-${params.id}`]);
@@ -49,7 +49,7 @@ export default function VagaPage() {
   }
   async function desinscreverAluno() {
     await api
-      .patch(`/vaga/${params.id}/removeAluno/${user.aluno?.id}`)
+      .patch(`/vaga/${params.id}/removeAluno/${auth.userInfo?.aluno?.id}`)
       .then(() => {
         toast.info("Você se desinscreveu da vaga!", {position: "bottom-center", hideProgressBar: true});
         queryClient.invalidateQueries([`vaga-${params.id}`]);
@@ -61,12 +61,13 @@ export default function VagaPage() {
   let dateFormatted;
   const [isCandidatoSubscribed, setIsCandidatoSubscribed] = useState(false);
   useEffect(() => {
-    if (user.id && data?.alunos.includes(user.id)) {
+    if (auth.userInfo?.id && data?.alunos.includes(auth.userInfo?.id)) {
       setIsCandidatoSubscribed(true) ;
     }else{
       setIsCandidatoSubscribed(false);
     }
-  }, [user.id, data?.alunos]);
+    
+  }, [auth.userInfo?.id, data?.alunos]);
   if (data) {
     date = new Date(data.dataCriacao);
     dateFormatted = new Intl.DateTimeFormat(undefined, {
@@ -116,19 +117,20 @@ export default function VagaPage() {
               >
                 {data?.status === "ATIVO" ? "ATIVO" : "INATIVO"}
               </div>
-              {user.aluno?.dadosPessoa && (
+              {auth.userInfo?.aluno?.dadosPessoa && (
                 <form
                   action=""
                   onSubmit={handleSubmit(
                     isCandidatoSubscribed ? desinscreverAluno : inscreverAluno
                   )}
                 >
+                  
                   <Button
                     type="submit"
                     className={`less-radius ${isCandidatoSubscribed ? "red" : ""}`}
-                    {...(data?.status === "INATIVO" && {
+                    {...( (data?.status === "INATIVO" || data?.cursoAlvo.localeCompare(auth.userInfo?.aluno?.curso, undefined, { sensitivity: 'accent' }) ) && {
                       disabled: true,
-                      title: "A vaga não aceita novas inscrições",
+                      title: (data?.status === "INATIVO") ? "A vaga não aceita novas inscrições" : "Voce não tem o curso alvo para esta vaga",
                     })}
                   >
                     <span>
