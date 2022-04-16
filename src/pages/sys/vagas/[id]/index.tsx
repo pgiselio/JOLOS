@@ -1,4 +1,6 @@
+import { useEffect, useRef, useState } from "react";
 import { Link, Outlet, useOutletContext, useParams } from "react-router-dom";
+
 import Error404 from "../../../404";
 import { TabsMenu, TabsMenuItem } from "../../../../components/tabs-menu";
 import { vaga } from "../vagaType";
@@ -12,12 +14,12 @@ import { Button } from "../../../../components/button";
 import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
 import { queryClient } from "../../../../services/queryClient";
-import { useEffect, useState } from "react";
+
 import { useAuth } from "../../../../hooks/useAuth";
 
 export default function VagaPage() {
   let params = useParams();
-
+  let subscribeBtnRef = useRef<HTMLButtonElement>(null);
   const { data, isFetching } = useQuery<vaga>(
     [`vaga-${params.id}`],
     async () => {
@@ -127,10 +129,12 @@ export default function VagaPage() {
                   
                   <Button
                     type="submit"
+                    ref={subscribeBtnRef}
                     className={`less-radius ${isCandidatoSubscribed ? "red" : ""}`}
                     {...( (data?.status === "INATIVO" || data?.cursoAlvo.localeCompare(auth.userInfo?.aluno?.curso, undefined, { sensitivity: 'accent' }) ) && {
                       disabled: true,
                       title: (data?.status === "INATIVO") ? "A vaga não aceita novas inscrições" : "Voce não tem o curso alvo para esta vaga",
+                      onTouchEnd: () => toast.error(subscribeBtnRef.current?.title, {position: "bottom-center", hideProgressBar: true, toastId: "subscribe-btn-disabled"})
                     })}
                   >
                     <span>

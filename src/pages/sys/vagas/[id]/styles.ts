@@ -19,6 +19,10 @@ export const VagaPageStyle = styled.section`
       color: var(--text-a);
       font-weight: 500;
       font-size: 20px;
+      line-height: 30px;      
+      overflow: hidden;
+      word-wrap: break-word;
+      text-overflow: ellipsis;
     }
 
     .subscribe {
@@ -90,6 +94,7 @@ export const VagaPageStyle = styled.section`
       }
       h2 {
         font-size: 22px;
+        max-width: calc(100vw - 280px - 80px);
       }
       .subscribe {
         flex-direction: row;
@@ -103,6 +108,7 @@ export const VagaPageStyle = styled.section`
     }
     .tabs {
       padding: 0 30px;
+      border-radius: 0;
       border-bottom-left-radius: 5px;
       border-bottom-right-radius: 5px;
       max-width: 1280px;

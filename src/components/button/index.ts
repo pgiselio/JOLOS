@@ -60,5 +60,6 @@ export const Button = styled.button`
   &:disabled {
     opacity: .4;
     cursor: not-allowed;
+    user-select: none;
   }
 `;
