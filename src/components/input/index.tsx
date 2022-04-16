@@ -1,11 +1,9 @@
-import React, { HTMLInputTypeAttribute, useState } from "react";
+import React, { HTMLInputTypeAttribute, InputHTMLAttributes, useState } from "react";
 import { InputContainer, InputPassStyled, InputStyled, ShowPasswordButton } from "./styles";
 
-interface input{
-  name?: string;
+interface input extends InputHTMLAttributes<HTMLInputElement>{
   type: HTMLInputTypeAttribute;
   icon?: string;
-  [x:string]: any;
 };
 
 export const Input = React.forwardRef( function ({ name, type, icon, ...rest }: input, ref: React.ForwardedRef<any>) {

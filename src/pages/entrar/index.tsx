@@ -118,7 +118,6 @@ export default function LoginPage() {
                     <Input
                       type="password"
                       id="password"
-                      refs="password"
                       icon="fas fa-lock"
                       placeholder="Senha"
                       {...field}

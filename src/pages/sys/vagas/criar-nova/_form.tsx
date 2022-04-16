@@ -164,6 +164,7 @@ export function CriarNovaVagaForm() {
                 type="text"
                 id="change-courses"
                 placeholder="Administração, Informática etc"
+                autoComplete="off"
                 list="courses"
                 {...field}
                 {...(errors.cursoAlvo && { className: "danger" })}
