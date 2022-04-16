@@ -133,7 +133,7 @@ export default function VagaPage() {
                     className={`less-radius ${isCandidatoSubscribed ? "red" : ""}`}
                     {...( (data?.status === "INATIVO" || data?.cursoAlvo.localeCompare(auth.userInfo?.aluno?.curso, undefined, { sensitivity: 'accent' }) ) && {
                       disabled: true,
-                      title: (data?.status === "INATIVO") ? "A vaga não aceita novas inscrições" : "Voce não tem o curso alvo para esta vaga",
+                      title: (data?.status === "INATIVO") ? "A vaga não aceita novas inscrições" : "Voce não está no curso alvo para esta vaga",
                       onTouchEnd: () => toast.error(subscribeBtnRef.current?.title, {position: "bottom-center", hideProgressBar: true, toastId: "subscribe-btn-disabled"})
                     })}
                   >
