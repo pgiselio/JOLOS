@@ -186,7 +186,7 @@ export default function ProfilePage({ email }: { email?: string }) {
                   </BoxContent>
                 ) : (
                   <BoxMessage>
-                    <span>Parece alguém esqueceu de fazer o sobre mim</span>
+                    <span>Parece que alguém esqueceu de fazer o sobre mim</span>
                   </BoxMessage>
                 )}
               </Box>
