@@ -16,6 +16,9 @@ public class AlunoInsertDTO implements Dto<Aluno, AlunoInsertDTO> {
 
     private Pessoa dadosPessoa;
 
+    @NotBlank(message = "O campo resumo é obrigatório")
+    private String resumo;
+
     @NotBlank(message = "O curso não foi informado!!")
     @Length(max = 100, message = "Você excedeu a quantidade de caracteres")
     private String curso;
@@ -55,6 +58,14 @@ public class AlunoInsertDTO implements Dto<Aluno, AlunoInsertDTO> {
      */
     public void setDadosPessoa(Pessoa dadosPessoa) {
         this.dadosPessoa = dadosPessoa;
+    }
+
+    public String getResumo() {
+        return resumo;
+    }
+
+    public void setResumo(String resumo) {
+        this.resumo = resumo;
     }
 
     /**

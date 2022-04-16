@@ -13,6 +13,8 @@ public class AlunoGetDTO implements Dto<Aluno, AlunoGetDTO> {
 
     private Pessoa dadosPessoa;
 
+    private String resumo;
+
     private String curso;
 
     private int periodo;
@@ -37,6 +39,14 @@ public class AlunoGetDTO implements Dto<Aluno, AlunoGetDTO> {
 
     public void setDadosPessoa(Pessoa dadosPessoa) {
         this.dadosPessoa = dadosPessoa;
+    }
+
+    public String getResumo() {
+        return resumo;
+    }
+
+    public void setResumo(String resumo) {
+        this.resumo = resumo;
     }
 
     public String getCurso() {
