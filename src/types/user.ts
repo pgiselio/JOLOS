@@ -1,20 +1,21 @@
 export type User = {
-  id?: 0;
+  id?: number;
   email?: string;
   senha?: string;
   status?: string;
   aluno?: {
-    id: 0;
+    id: number;
     dadosPessoa: {
       nome: string;
       dataNasc: Date;
       localizacao: string;
     };
+    resumo?: string;
     curso?: string;
-    periodo?: 0;
+    periodo?: number;
     cpf: string;
-    curriculo?: {
-      id: 0;
+    curriculo?: number | {
+      id: number;
       pdf: {
         nome: string;
         tipoArquivo: string;

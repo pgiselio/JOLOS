@@ -1,6 +1,11 @@
 import { useQuery } from "react-query";
 import { useParams } from "react-router-dom";
-import { Box, BoxContent, BoxTitle } from "../../../../components/box";
+import {
+  Box,
+  BoxContent,
+  BoxMessage,
+  BoxTitle,
+} from "../../../../components/box";
 import { Button } from "../../../../components/button";
 import CircularProgressFluent from "../../../../components/circular-progress-fluent";
 import { PillItem, PillList } from "../../../../components/pill";
@@ -82,7 +87,7 @@ export default function ProfilePage({ email }: { email?: string }) {
                     <span>
                       {usertype === "ALUNO"
                         ? data?.email
-                        :  data?.empresa?.dadosPessoa
+                        : data?.empresa?.dadosPessoa
                         ? cnpjMask(data?.empresa?.cnpj)
                         : data?.email}
                     </span>
@@ -101,9 +106,15 @@ export default function ProfilePage({ email }: { email?: string }) {
                 </>
               )}
               {usertype === "ALUNO" && (
-                <Button className="outlined" onClick={() => {
-                  window.open(`/download/curriculo/${data?.aluno?.curriculo}`, '_blank');
-                }}>
+                <Button
+                  className="outlined"
+                  onClick={() => {
+                    window.open(
+                      `/download/curriculo/${data?.aluno?.curriculo}`,
+                      "_blank"
+                    );
+                  }}
+                >
                   <i className="fas fa-arrow-down"></i>
                   Baixar currículo
                 </Button>
@@ -169,9 +180,15 @@ export default function ProfilePage({ email }: { email?: string }) {
                 <BoxTitle>
                   <h3>Sobre</h3>
                 </BoxTitle>
-                <BoxContent>
-                  <p>{data?.status}</p>
-                </BoxContent>
+                {data?.aluno?.resumo ? (
+                  <BoxContent>
+                    <p>{data?.aluno?.resumo}</p>
+                  </BoxContent>
+                ) : (
+                  <BoxMessage>
+                    <span>Parece alguém esqueceu de fazer o sobre mim</span>
+                  </BoxMessage>
+                )}
               </Box>
             )}
             {usertype === "EMPRESA" && (

@@ -96,8 +96,8 @@ export default function SettingsPage() {
                     <i className="fas fa-arrow-left"></i>
                   </button>
                 )}
-                {selectedTab === "profile" && <h3>Configurações de conta</h3>}
-                {selectedTab === "security" && <h3>Segurança</h3>}
+                {selectedTab === "profile" && <h3>Perfil</h3>}
+                {selectedTab === "security" && <h3>Conta e Segurança</h3>}
                 {selectedTab === "notifications" && <h3>Notificações</h3>}
                 {selectedTab === "themes" && <h3>Temas</h3>}
               </div>
