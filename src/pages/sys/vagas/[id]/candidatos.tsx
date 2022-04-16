@@ -3,7 +3,6 @@ import { useVaga } from ".";
 import { Box, BoxMessage, BoxTitle } from "../../../../components/box";
 import { Button } from "../../../../components/button";
 import CircularProgressFluent from "../../../../components/circular-progress-fluent";
-import { LoadingPage } from "../../../../components/loadingPage";
 import { ProfilePic } from "../../../../components/profile-pic/profile-pic";
 import { api } from "../../../../services/api";
 import { User } from "../../../../types/user";
@@ -14,20 +13,17 @@ export function VagaCandidatoPage() {
   const [checked, setChecked] = useState([]);
 
   useEffect(() => {
-    MapCandidatos();
-  }, []);
-  async function MapCandidatos() {
     data?.alunos.forEach(async (candidato) => {
       await api
-        .get(`/usuario/${candidato}`)
+        .get<User>(`/usuario/${candidato}`)
         .then((response) => {
-          setCandidatos([...candidatos, response.data]);
+          setCandidatos(c => c.concat(response.data));          
         })
         .catch((error) => {
           console.log(error);
         });
     });
-  }
+  }, []);
   if (!data) {
     return (
       <p
@@ -74,6 +70,7 @@ export function VagaCandidatoPage() {
                         href={"../../profile/" + candidato.id}
                         className="candidato-group"
                         target="_blank"
+                        rel="noreferrer"
                       >
                         <ProfilePic className="candidato-pic" />
                         <div className="candidato-info">

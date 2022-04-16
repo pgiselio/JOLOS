@@ -130,11 +130,11 @@ footer {
   width: 50px;
 }
 
-.candidato-info {
+.candidato-info {  
   display: flex;
-  padding-left: 10px;
-  display: flex;
+  text-align: left;
   flex-direction: column;
+  padding-left: 10px;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
