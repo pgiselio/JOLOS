@@ -95,9 +95,8 @@ export function VagaSobrePage() {
                       </AlertDialogLabel>
 
                       <AlertDialogDescription>
-                        Uma vez desativada, esta ação não poderá ser desfeita. 
-                        Ninguém mais poderá se inscrever
-                        e ela nem poderá mais ser editada.
+                        Uma vez desativada, esta ação não poderá ser desfeita.
+                        Ela não poderá ser editada e nem aceitará novas inscrições.
                       </AlertDialogDescription>
 
                       <div
