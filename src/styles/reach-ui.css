@@ -1,0 +1,44 @@
+
+
+
+/* --- Alert Dialog --- */
+[data-reach-alert-dialog-label] {
+    display: block;
+    font-size: 0.875rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+}
+
+[data-reach-alert-dialog-description] {
+    color: var(--text-b);
+    font-size: 0.875rem;
+    font-weight: 500;
+    margin-bottom: 1.5rem;
+}
+
+[data-reach-alert-dialog-overlay] {
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+[data-reach-alert-dialog-content] {
+    margin: 20px;
+    max-width: 50rem;
+    background-color: var(--primary-bg);
+    border-radius: 0.5rem;
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+    padding: 1.5rem;
+}
+[data-reach-alert-dialog-content].small {
+    max-width: 30rem;
+}
+
+[data-reach-alert-dialog-actions] {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 1.5rem;
+    gap: 5px;
+}
+

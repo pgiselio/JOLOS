@@ -125,6 +125,13 @@ export const ProfilePageStyle = styled.section`
       }
     }
   }
+  .no-about-message{
+    padding-top: 30px;
+  }
+  .no-about-message::before{
+    content: ":(";
+    font-family: "Roboto";
+  }
 
   @media (min-width: 766px) {
     .profile-page-header {

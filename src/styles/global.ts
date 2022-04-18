@@ -6,6 +6,7 @@ export const GlobalStyle = createGlobalStyle`
     --accent-color: ${(props) => props.theme.colors.main};
     --accent-color-active: ${(props) => props.theme.colors.mainActive};
     --accent-color-opacity: ${(props) => props.theme.colors.main}26;
+    --secondary-color: ${(props) => props.theme.colors.secondary};
     --outline-color: ${(props) => props.theme.colors.outlineColor};
     --info-msg-bg: #e6e6e69a;
     --info-msg-color: #363636;

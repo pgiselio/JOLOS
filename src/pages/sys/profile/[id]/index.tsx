@@ -188,8 +188,8 @@ export default function ProfilePage({ email }: { email?: string }) {
                     <p>{data?.aluno?.resumo}</p>
                   </BoxContent>
                 ) : (
-                  <BoxMessage>
-                    <span>Parece que alguém esqueceu de fazer o sobre mim</span>
+                  <BoxMessage className="no-about-message">
+                    <span>Oops... parece que alguém esqueceu de fazer o "sobre mim"</span>
                   </BoxMessage>
                 )}
               </Box>

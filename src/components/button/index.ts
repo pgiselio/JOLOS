@@ -6,7 +6,7 @@ export const Button = styled.button`
   justify-content: center;
   column-gap: 12px;
   padding: 7px 20px;
-  font-size: 14px;
+  font-size: 13px;
   font-weight: 500;
   cursor: pointer;
   border: none;
@@ -20,6 +20,14 @@ export const Button = styled.button`
     background: var(--accent-color-active);
     border: 2px solid var(--accent-color-active);
   }
+  &.secondary {
+    background: var(--secondary-color) ;
+    border: 2px solid var(--secondary-color);
+    :not(:disabled):hover{
+      background: #5e5d65;
+      border: 2px solid #5e5d65;
+    }
+  }
   &.red {
     background: #c91f1f;
     border: 2px solid #c91f1f;
@@ -27,9 +35,6 @@ export const Button = styled.button`
   &.red:not(:disabled):hover {
     background: #ac0000;
     border: 2px solid #ac0000;
-  }
-  &.less-radius {
-    border-radius: 6px;
   }
   &.outlined {
     color: var(--accent-color);
@@ -56,6 +61,9 @@ export const Button = styled.button`
       color: #fff;
       background: #ac0000;
     }
+  }
+  &.less-radius {
+    border-radius: 6px;
   }
   &:disabled {
     opacity: .4;

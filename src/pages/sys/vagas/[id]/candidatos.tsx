@@ -33,7 +33,7 @@ export function VagaCandidatoPage() {
           justifyContent: "center",
           alignItems: "center",
           gap: "10px",
-          paddingTop: "30px",
+          padding: "30px",
         }}
       >
         <CircularProgressFluent
@@ -90,7 +90,7 @@ export function VagaCandidatoPage() {
                   justifyContent: "center",
                   alignItems: "center",
                   gap: "10px",
-                  paddingTop: "30px",
+                  padding: "30px",
                 }}
               >
                 <CircularProgressFluent

@@ -50,7 +50,7 @@ export const lightTheme: DefaultTheme = {
   colors: {
     main: defaultColors.green[7],
     mainActive: defaultColors.green[8],
-    secondary: "magenta",
+    secondary: "#888695",
     bodyBackground: "247 247 247",
     systemMenu: {
       border: "#ced4da",
@@ -75,7 +75,7 @@ export const darkTheme: DefaultTheme = {
   colors: {
     main: defaultColors.green[6],
     mainActive: defaultColors.green[7],
-    secondary: "magenta",
+    secondary: "#48474f",
     bodyBackground: "24 24 24",
     systemMenu: {
       border: "#2b2936",
@@ -100,7 +100,7 @@ export const midnightBlueTheme: DefaultTheme = {
   colors: {
     main: defaultColors.green[6],
     mainActive: defaultColors.green[7],
-    secondary: "magenta",
+    secondary: "#48474f",
     bodyBackground: "20 19 24",
     systemMenu: {
       border: "#2b2936",
