@@ -2,6 +2,7 @@ import { Box, BoxContent, BoxTitle } from "../../../components/box";
 import { Button } from "../../../components/button";
 import { HeaderTitle } from "../../../components/header-title";
 import { OutsetHeadersCornerRadius } from "../../../components/outset-radius-to-headers";
+import { ProfilePic } from "../../../components/profile-pic/profile-pic";
 
 export default function ForumPage() {
   return (
@@ -34,11 +35,7 @@ export default function ForumPage() {
               <div className="ask-box">
                 <div className="ask">
                   <a href="ask-unanswered.html" className="pessoa-forum-group">
-                    <img
-                      src="../../images/male-avatar-3.png"
-                      alt="Imagem de Perfil"
-                      className="candidato-pic"
-                    />
+                    <ProfilePic className="candidato-pic" />
                     <div className="pessoa-forum-info">
                       <h3>Estágio</h3>
                       <span>
@@ -62,11 +59,7 @@ export default function ForumPage() {
                 </div>
                 <div className="ask">
                   <a href="#oi" className="pessoa-forum-group">
-                    <img
-                      src="../../images/male-avatar-3.png"
-                      alt="Imagem de Perfil"
-                      className="candidato-pic"
-                    />
+                    <ProfilePic className="candidato-pic" />
                     <div className="pessoa-forum-info">
                       <h3>Jovem Aprendiz</h3>
                       <span>
