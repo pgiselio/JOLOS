@@ -5,9 +5,10 @@ export const ModalRouterStyle = styled(Dialog)`
   min-width: 600px;
   width: 50vw;
   margin: 5vh auto;
-  background: var(--secondary-bg);
+  background: var(--primary-bg);
   outline: none;
   border-radius: 5px;
+  animation: slide-up 0.3s ease-in-out;
   .close-button {
     display: flex;
     align-items: center;

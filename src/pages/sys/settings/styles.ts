@@ -18,8 +18,15 @@ export const SettingPageStyle = styled.section`
     top: var(--top-bar-height);
     align-items: center;
     padding: 30px;
-    gap: 10px;
     z-index: 15;
+    .header-items {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .header-items.slide-left {
+      animation: slide-left 1s cubic-bezier(0.075, 0.82, 0.165, 1);
+    }
     .back-button {
       display: flex;
       align-items: center;
@@ -93,7 +100,9 @@ export const SettingPageStyle = styled.section`
       min-height: 100%;
       .content {
         padding: 0 30px;
+        gap: 30px;
         padding-top: 10px;
+        animation: slide-left 0.5s cubic-bezier(0.075, 0.82, 0.165, 1);
         min-height: calc(100vh - var(--top-bar-height));
       }
     }
@@ -117,10 +126,10 @@ export const SettingPageStyle = styled.section`
       border-bottom: 1px solid var(--outline-color);
       z-index: 15;
       font-size: 14px;
-      h3{
+      h3 {
         padding-left: 10px;
       }
-      button ~ h3{
+      button ~ h3 {
         padding-left: 0;
       }
     }
@@ -161,6 +170,11 @@ export const SettingPageStyle = styled.section`
     }
   }
   @media (max-width: 766px) {
+    .nav-settings-container{
+      .items, .header-items{
+        animation: slide-right 0.5s cubic-bezier(0.075, 0.82, 0.165, 1);
+      }
+    }
     .rounded-corner {
       ::after {
         display: none;

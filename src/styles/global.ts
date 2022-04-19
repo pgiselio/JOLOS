@@ -90,7 +90,11 @@ export const GlobalStyle = createGlobalStyle`
     clip-path: circle(0px at 2px 50%);
     transition: clip-path 0.5s ease;
   }
-
+  .inputs {
+    display: flex;
+    flex-direction: column;
+    row-gap: 10px;
+  }
   input[type="checkbox"]:checked {
     background: var(--accent-color);
     transition: 0.1s linear;
@@ -138,16 +142,19 @@ export const GlobalStyle = createGlobalStyle`
   }
 
   .lbl-icon label {
-    width: 40px;
     text-align: center;
+    padding: 0 10px;
+  }
+  .lbl-icon label i ~ *{
+    padding-left: 10px;
   }
 
-  .lbl-icon label:first-child {
+  .lbl-icon label {
     display: flex;
     align-items: center;
     justify-content: center;
-    color: #070707;
-    background: #e4e4e4;
+    color: var(--text-a);
+    background: var(--outline-color);
     border: 1px solid var(--outline-color);
     border-right: none;
     border-radius: 5px 0 0 5px;
@@ -156,8 +163,6 @@ export const GlobalStyle = createGlobalStyle`
 
   .lbl-icon input {
     border-radius: 0 5px 5px 0;
-    width: calc(100% - 18px);
-    outline-color: var(--accent-color);
   }
 
   .info-message {
@@ -196,8 +201,8 @@ export const GlobalStyle = createGlobalStyle`
   }
 
   .form-item-group{
-    display: flex;
-    flex-direction: row;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
     gap: 10px;
   }
 
@@ -260,6 +265,10 @@ export const GlobalStyle = createGlobalStyle`
     font-weight: 500;
   }
   @media (max-width: 766px) {
+    .form-item-group{
+      grid-template-columns: 1fr;
+      gap: 0;
+    }
     input[type="checkbox"] {
       width: 20px;
       height: 20px;
@@ -269,8 +278,9 @@ export const GlobalStyle = createGlobalStyle`
       line-height: 20px !important;
       font-size: 12px;
     }
+    .lbl-icon label {
+      font-size: 11px;
+    }
   }
-
-
 
 `;

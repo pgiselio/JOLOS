@@ -6,7 +6,7 @@ interface input extends InputHTMLAttributes<HTMLInputElement>{
   icon?: string;
 };
 
-export const Input = React.forwardRef( function ({ name, type, icon, ...rest }: input, ref: React.ForwardedRef<any>) {
+export const Input = React.forwardRef( function ({ name, type, icon, ...rest }: input, ref: React.ForwardedRef<HTMLInputElement>) {
   const [showPassword, setShowPassword] = useState(false);
 
   if(type.match("text")){

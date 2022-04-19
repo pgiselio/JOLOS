@@ -4,6 +4,7 @@ import { AuthProvider } from "./contexts/AuthContext";
 
 import { ThemeProvider } from "styled-components";
 import { lightTheme } from "./styles/themes";
+import "@reach/accordion/styles.css";
 import "./styles/reach-ui.css";
 import { GlobalStyle } from "./styles/global";
 import { BrowserRouter } from "react-router-dom";

@@ -34,7 +34,9 @@ export default function SettingsPage() {
         <div className="nav">
           <OutsetHeadersCornerRadius className="rounded-corner">
             <div className="header">
-              <h3>Configurações</h3>
+              <div className="header-items">
+                <h3>Configurações</h3>
+              </div>
             </div>
           </OutsetHeadersCornerRadius>
           <div className="items">
@@ -87,19 +89,21 @@ export default function SettingsPage() {
           <div className="setting">
             <OutsetHeadersCornerRadius className="rounded-corner">
               <div className="header">
-                {!mq.matches && (
-                  <button
-                    className="back-button"
-                    type="button"
-                    onClick={() => navigate(-1)}
-                  >
-                    <i className="fas fa-arrow-left"></i>
-                  </button>
-                )}
-                {selectedTab === "profile" && <h3>Perfil</h3>}
-                {selectedTab === "security" && <h3>Conta e Segurança</h3>}
-                {selectedTab === "notifications" && <h3>Notificações</h3>}
-                {selectedTab === "themes" && <h3>Temas</h3>}
+                <div className="header-items slide-left">
+                  {!mq.matches && (
+                    <button
+                      className="back-button"
+                      type="button"
+                      onClick={() => navigate(-1)}
+                    >
+                      <i className="fas fa-arrow-left"></i>
+                    </button>
+                  )}
+                  {selectedTab === "profile" && <h3>Perfil</h3>}
+                  {selectedTab === "security" && <h3>Conta e Segurança</h3>}
+                  {selectedTab === "notifications" && <h3>Notificações</h3>}
+                  {selectedTab === "themes" && <h3>Temas</h3>}
+                </div>
               </div>
             </OutsetHeadersCornerRadius>
             <div className="content">

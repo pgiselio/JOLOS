@@ -52,11 +52,6 @@ export const StyledAccess = styled.main`
     row-gap: 12px;
     position: relative;
   }
-  .inputs {
-    display: flex;
-    flex-direction: column;
-    row-gap: 10px;
-  }
   
   .pwrst-link {
     font-weight: 500;

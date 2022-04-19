@@ -63,6 +63,7 @@ export function AuthProvider({ children }: IAuthProvider) {
     setUserLocalStorage(null);
     queryClient.setQueryData("meUser", undefined);
     queryClient.invalidateQueries("meUser");
+    queryClient.removeQueries("meUser");
   }
   return (
     <AuthContext.Provider
