@@ -30,14 +30,6 @@ public class RedesSociais implements Serializable {
         this.linkedin = linkedin;
     }
 
-    public String getInstagram() {
-        return instagram;
-    }
-
-    public void setInstagram(String instagram) {
-        this.instagram = instagram;
-    }
-
     public String getFacebook() {
         return facebook;
     }
