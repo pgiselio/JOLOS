@@ -25,6 +25,7 @@ import br.edu.ifrn.ifjobs.exception.EmpresaNaoCadastradaException;
 import br.edu.ifrn.ifjobs.exception.EmpresaNaoEncontradaException;
 import br.edu.ifrn.ifjobs.model.Empresa;
 import br.edu.ifrn.ifjobs.service.EmpresaService;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
 
 @RestController
 @RequestMapping(path = "/empresa")
@@ -61,6 +62,7 @@ public class EmpresaController {
     }
 
     @GetMapping("/cnpj")
+    @ApiResponse(responseCode = "200", description = "Retorna uma empresa baseada no cnpj")
     public ResponseEntity<Empresa> buscaPorCnpj(@RequestParam String cnpj) {
         Empresa empresa;
 

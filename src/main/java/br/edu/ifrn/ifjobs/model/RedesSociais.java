@@ -14,6 +14,9 @@ public class RedesSociais implements Serializable {
     private String linkedin;
 
     @Column(length = 300)
+    private String instagram;
+
+    @Column(length = 300)
     private String facebook;
 
     @Column(length = 300)
@@ -25,6 +28,14 @@ public class RedesSociais implements Serializable {
 
     public void setLinkedin(String linkedin) {
         this.linkedin = linkedin;
+    }
+
+    public String getInstagram() {
+        return instagram;
+    }
+
+    public void setInstagram(String instagram) {
+        this.instagram = instagram;
     }
 
     public String getFacebook() {
