@@ -14,9 +14,6 @@ public class RedesSociais implements Serializable {
     private String linkedin;
 
     @Column(length = 300)
-    private String instagram;
-
-    @Column(length = 300)
     private String facebook;
 
     @Column(length = 300)
