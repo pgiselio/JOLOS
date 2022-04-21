@@ -5,6 +5,10 @@ import java.util.Map;
 
 import javax.validation.Valid;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.github.fge.jsonpatch.JsonPatch;
+import com.github.fge.jsonpatch.JsonPatchException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.CachePut;
@@ -86,14 +90,16 @@ public class VagaController {
 
     @PatchMapping("/{id}")
     public ResponseEntity<Vaga> atualizaCampos(@PathVariable(name = "id") int id,
-            @RequestBody Map<Object, Object> campos) {
+            @RequestBody JsonPatch jsonPatch) {
 
         Vaga vagaAtualizada;
 
         try {
-            vagaAtualizada = vagaService.atualizaCampos(id, campos);
+            vagaAtualizada = vagaService.atualizaCampos(id, jsonPatch);
         } catch (VagaNaoEncontradoException | VagaNaoCadastradaException e) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
+        } catch (JsonProcessingException | IllegalArgumentException | JsonPatchException e) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
         }
 
         return ResponseEntity.ok(vagaAtualizada);

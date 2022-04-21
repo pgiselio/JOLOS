@@ -10,6 +10,12 @@ import java.util.Set;
 import java.util.function.Supplier;
 import java.util.stream.Collectors;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.github.fge.jsonpatch.JsonPatch;
+import com.github.fge.jsonpatch.JsonPatchException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.ReflectionUtils;
@@ -179,18 +185,26 @@ public class VagaService {
      * @return vaga atualizada
      * @throws VagaNaoEncontradoException
      * @throws VagaNaoCadastradaException
+     * @throws JsonPatchException
+     * @throws IllegalArgumentException
+     * @throws JsonProcessingException
      */
-    public Vaga atualizaCampos(int id, Map<Object, Object> campos)
-            throws VagaNaoEncontradoException, VagaNaoCadastradaException {
-        Vaga vagaBuscadaPorId = buscarPorId(id);
+    public Vaga atualizaCampos(int id, JsonPatch patch)
+            throws VagaNaoEncontradoException, VagaNaoCadastradaException, JsonPatchException, JsonProcessingException,
+            IllegalArgumentException {
+        ObjectMapper mapper = new ObjectMapper();
 
-        campos.forEach((chave, valor) -> {
-            Field campo = ReflectionUtils.findField(Vaga.class, (String) chave);
-            campo.setAccessible(true);
-            ReflectionUtils.setField(campo, vagaBuscadaPorId, valor);
-        });
+        Vaga vaga = buscarPorId(id);
 
-        return atualizarVaga(vagaBuscadaPorId);
+        JsonNode convertValue;
+        convertValue = mapper.convertValue(vaga, JsonNode.class);
+
+        JsonNode patched = patch.apply(convertValue);
+
+        atualizarVaga(vaga);
+
+        return mapper.treeToValue(patched, Vaga.class);
+
     }
 
     public VagaGetDTO addAlunoParaVaga(int vagaId, int alunoId)
