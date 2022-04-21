@@ -1,10 +1,8 @@
 package br.edu.ifrn.ifjobs.service;
 
-import java.lang.reflect.Field;
 import java.sql.Date;
 import java.time.LocalDate;
 import java.util.List;
-import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
 import java.util.function.Supplier;
@@ -18,7 +16,6 @@ import com.github.fge.jsonpatch.JsonPatchException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.util.ReflectionUtils;
 
 import br.edu.ifrn.ifjobs.dto.empresa.EmpresaGetDTO;
 import br.edu.ifrn.ifjobs.dto.vaga.VagaGetAllDTO;
@@ -69,9 +66,7 @@ public class VagaService {
         Supplier<VagaNaoCadastradaException> excessao;
         excessao = () -> new VagaNaoCadastradaException("Dados inválidos!!");
 
-        vagaOptional.ifPresent(vaguinha -> {
-            vagaRepository.save(vaguinha);
-        });
+        vagaOptional.ifPresent(vagaRepository::save);
 
         return vagaOptional.orElseThrow(excessao);
     }
