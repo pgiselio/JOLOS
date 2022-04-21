@@ -1,18 +1,21 @@
 package br.edu.ifrn.ifjobs.service;
 
-import java.lang.reflect.Field;
 import java.sql.Date;
 import java.time.LocalDate;
 import java.util.List;
-import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
 import java.util.function.Supplier;
 import java.util.stream.Collectors;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.github.fge.jsonpatch.JsonPatch;
+import com.github.fge.jsonpatch.JsonPatchException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.util.ReflectionUtils;
 
 import br.edu.ifrn.ifjobs.dto.empresa.EmpresaGetDTO;
 import br.edu.ifrn.ifjobs.dto.vaga.VagaGetAllDTO;
@@ -63,9 +66,7 @@ public class VagaService {
         Supplier<VagaNaoCadastradaException> excessao;
         excessao = () -> new VagaNaoCadastradaException("Dados inválidos!!");
 
-        vagaOptional.ifPresent(vaguinha -> {
-            vagaRepository.save(vaguinha);
-        });
+        vagaOptional.ifPresent(vagaRepository::save);
 
         return vagaOptional.orElseThrow(excessao);
     }
@@ -179,18 +180,24 @@ public class VagaService {
      * @return vaga atualizada
      * @throws VagaNaoEncontradoException
      * @throws VagaNaoCadastradaException
+     * @throws JsonPatchException
+     * @throws IllegalArgumentException
+     * @throws JsonProcessingException
      */
-    public Vaga atualizaCampos(int id, Map<Object, Object> campos)
-            throws VagaNaoEncontradoException, VagaNaoCadastradaException {
+    public Vaga atualizaCampos(int id, JsonPatch patch)
+            throws VagaNaoEncontradoException, VagaNaoCadastradaException, JsonPatchException, JsonProcessingException,
+            IllegalArgumentException {
         Vaga vagaBuscadaPorId = buscarPorId(id);
 
-        campos.forEach((chave, valor) -> {
-            Field campo = ReflectionUtils.findField(Vaga.class, (String) chave);
-            campo.setAccessible(true);
-            ReflectionUtils.setField(campo, vagaBuscadaPorId, valor);
-        });
+        ObjectMapper mapper = new ObjectMapper();
+        JsonNode convertValue;
+        convertValue = mapper.convertValue(vagaBuscadaPorId,
+                JsonNode.class);
+        JsonNode patched = patch.apply(convertValue);
 
-        return atualizarVaga(vagaBuscadaPorId);
+        atualizarVaga(vagaBuscadaPorId);
+
+        return mapper.treeToValue(patched, Vaga.class);
     }
 
     public VagaGetDTO addAlunoParaVaga(int vagaId, int alunoId)
