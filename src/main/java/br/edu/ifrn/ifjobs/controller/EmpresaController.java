@@ -5,6 +5,10 @@ import java.util.Map;
 
 import javax.validation.Valid;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.github.fge.jsonpatch.JsonPatch;
+import com.github.fge.jsonpatch.JsonPatchException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -84,13 +88,15 @@ public class EmpresaController {
 
     @PatchMapping("/{id}")
     public ResponseEntity<Empresa> atualizaCampo(@PathVariable(name = "id") int id,
-            Map<Object, Object> campos) {
+            @RequestBody JsonPatch jsonPatch) {
         Empresa empresaAtualizada;
 
         try {
-            empresaAtualizada = empresaService.atualizaCampos(id, campos);
+            empresaAtualizada = empresaService.atualizaCampos(id, jsonPatch);
         } catch (EmpresaNaoEncontradaException | EmpresaNaoCadastradaException e) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
+        } catch (JsonProcessingException | JsonPatchException e) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "JsonPatch inválido");
         }
 
         return ResponseEntity.ok(empresaAtualizada);
