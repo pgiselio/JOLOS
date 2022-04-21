@@ -6,6 +6,12 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.function.Supplier;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.github.fge.jsonpatch.JsonPatch;
+import com.github.fge.jsonpatch.JsonPatchException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.ReflectionUtils;
@@ -59,17 +65,20 @@ public class EmpresaService {
         return empresaOptional.orElseThrow(excessao);
     }
 
-    public Empresa atualizaCampos(int id, Map<Object, Object> campos)
-            throws EmpresaNaoEncontradaException, EmpresaNaoCadastradaException {
+    public Empresa atualizaCampos(int id, JsonPatch patch)
+            throws EmpresaNaoEncontradaException, EmpresaNaoCadastradaException, JsonPatchException,
+            JsonProcessingException {
         Empresa buscadaPorId = buscaPorId(id);
 
-        campos.forEach((chave, valor) -> {
-            Field campo = ReflectionUtils.findField(Empresa.class, (String) chave);
-            campo.setAccessible(true);
-            ReflectionUtils.setField(campo, buscadaPorId, valor);
-        });
+        final ObjectMapper objectMapper = new ObjectMapper();
+        final JsonNode convertValue;
+        convertValue = objectMapper.convertValue(buscadaPorId, JsonNode.class);
 
-        return createEmpresa(buscadaPorId);
+        final JsonNode patched = patch.apply(convertValue);
+
+        createEmpresa(buscadaPorId);
+
+        return objectMapper.treeToValue(patched, Empresa.class);
     }
 
     public void delete(Empresa empresa) {
