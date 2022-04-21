@@ -38,7 +38,7 @@ export type User = {
       linkedin?: string;
       facebook?: string;
       twitter?: string;
-      intagram?: string;
+      instagram?: string;
     }
   };
   authorities?: [

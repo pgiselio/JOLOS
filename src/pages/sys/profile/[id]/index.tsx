@@ -250,9 +250,9 @@ export default function ProfilePage({ email }: { email?: string }) {
                               </a>
                             </li>
                           )}
-                          {data?.empresa?.redesSociais.intagram && (
+                          {data?.empresa?.redesSociais.instagram && (
                             <li>
-                              <a href={data?.empresa?.redesSociais.intagram} rel="noreferrer" target="_blank">
+                              <a href={data?.empresa?.redesSociais.instagram} rel="noreferrer" target="_blank">
                                 <i className="fab fa-instagram"></i>
                               </a>
                             </li>

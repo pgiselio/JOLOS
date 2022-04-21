@@ -153,7 +153,7 @@ export default function VagaPage() {
           <TabsMenuItem
             to="candidatos"
             title="Candidatos"
-            highlighted={data && !isFetching ? data?.alunos.length + "" : ""}
+            highlighted={data ? data?.alunos.length + "" : ""}
           />
         </TabsMenu>
         <div className="content">

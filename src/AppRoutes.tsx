@@ -23,6 +23,7 @@ import { LoadingPage } from "./components/loadingPage";
 import { LoadingPageLogo } from "./components/loadingPage/logo";
 import SettingContaPage from "./pages/sys/settings/conta";
 import DownloadCurriculoPage from "./pages/sys/download/curriculo/[id]";
+import { VerifiqueOSeuEmailPage } from "./pages/cadastro/verifique-seu-email";
 
 const ForumPage = lazy(() => import("./pages/sys/forum"));
 const ProfilePage = lazy(() => import("./pages/sys/profile/[id]"));
@@ -40,6 +41,7 @@ export const AppRoutes = () => {
         <Route path="entrar" element={<LoginPage />} />
         <Route path="cadastro" element={<CadastroLayout />}>
           <Route index element={<CadastroPage />} />
+          <Route path="confirmacao" element={<VerifiqueOSeuEmailPage/>}/>
         </Route>
         <Route path="logout" element={<LogoutPage />} />
         <Route

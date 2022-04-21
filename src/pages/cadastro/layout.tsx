@@ -5,8 +5,6 @@ import CircularProgressFluent from "../../components/circular-progress-fluent";
 import { AccessGlobalStyle, StyledAccess } from "../../styles/LoginSignupStyle";
 
 export function CadastroLayout() {
-  const [isLoading, setIsLoading] = useState(false);
-
   return (
     <StyledAccess>
       <ToastContainer
@@ -35,43 +33,7 @@ export function CadastroLayout() {
             </div>
           </div>
           <div className="cadastro-content">
-            <Outlet context={setIsLoading}/>
-          </div>
-          <div className="bottom-actions">
-            <div className="flex-btn-login">
-              <Link
-                to="/entrar"
-                className="btn-login"
-                title="Já tem uma conta? Faça Login!"
-              >
-                Ou... faça login
-              </Link>
-            </div>
-            <div className="flex-btn-next">
-              <button
-                type="submit"
-                className="btn-next"
-                title="Confirmar cadastro"
-                form="cadastroStep1"
-                id="cadastroSubmit"
-                disabled={isLoading}
-              >
-                <span>Próximo</span>
-                <span className="next-arrow">
-                  {isLoading ? (
-                    <CircularProgressFluent
-                      color="white"
-                      height="2em"
-                      width="2em"
-                      duration="1.5s"
-                      style={{ position: "absolute" }}
-                    />
-                  ) : (
-                    <i className="fas fa-arrow-right"></i>
-                  )}
-                </span>
-              </button>
-            </div>
+            <Outlet/>
           </div>
         </div>
       </section>

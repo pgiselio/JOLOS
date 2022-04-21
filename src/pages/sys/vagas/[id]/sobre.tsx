@@ -17,6 +17,7 @@ import CircularProgressFluent from "../../../../components/circular-progress-flu
 import { useAuth } from "../../../../hooks/useAuth";
 import { api } from "../../../../services/api";
 import { queryClient } from "../../../../services/queryClient";
+import { vaga } from "../vagaType";
 
 export function VagaSobrePage() {
   const { data } = useVaga();
@@ -26,15 +27,43 @@ export function VagaSobrePage() {
   const openDialog = () => setShowDialog(true);
   const closeDialog = () => setShowDialog(false);
   const cancelRef = useRef(null);
+  function abrirEncerrarInscricoes() {
+    if(data?.status === "ATIVO"){
+      openDialog();
+    }else{
+      abrirInscricoes();
+    }
+  }
   async function encerrarInscricoes() {
     closeDialog();
     if (!data) {
       return;
     }
-    await api.patch(`/vaga/${data.id}`, { "status" : "INATIVO" });
+    await api.patch<vaga>(`/vaga/${data.id}`, [
+      {
+        op: "replace",
+        path: "/status",
+        value: "INATIVO",
+      },
+    ]);
     queryClient.invalidateQueries([`vaga-${data.id}`]);
     queryClient.invalidateQueries("vagas");
-    toast.success("Vaga encerrada com sucesso!");
+    toast.success("Vaga encerrada com sucesso!", {toastId: "vaga-encerrada"});
+  }
+  async function abrirInscricoes() {
+    if (!data) {
+      return;
+    }
+    await api.patch<vaga>(`/vaga/${data.id}`, [
+      {
+        op: "replace",
+        path: "/status",
+        value: "ATIVO",
+      },
+    ]);
+    queryClient.invalidateQueries([`vaga-${data.id}`]);
+    queryClient.invalidateQueries("vagas");
+    toast.success("Incrições reabertas com sucesso!", {toastId: "vaga-aberta"});
   }
 
   if (!data) {
@@ -82,8 +111,8 @@ export function VagaSobrePage() {
             {data.status ? (
               <BoxContent>
                 <div className="vaga-page-actions">
-                  <Button className="red less-radius" onClick={openDialog}>
-                    Fechar inscrições
+                  <Button className={`less-radius ${data.status === "ATIVO" ? "red" : "secondary" }`} onClick={abrirEncerrarInscricoes}>
+                    {data.status === "ATIVO" ? "Encerrar inscrições" : "Reabrir inscrições"}
                   </Button>
                   {showDialog && (
                     <AlertDialog
@@ -95,8 +124,8 @@ export function VagaSobrePage() {
                       </AlertDialogLabel>
 
                       <AlertDialogDescription>
-                        Uma vez desativada, esta ação não poderá ser desfeita.
-                        A vaga não poderá ser editada e nem aceitará novas inscrições.
+                        A vaga não poderá ser editada e nem aceitará novas
+                        inscrições.
                       </AlertDialogDescription>
 
                       <div
