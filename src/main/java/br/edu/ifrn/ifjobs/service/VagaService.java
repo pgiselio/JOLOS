@@ -196,9 +196,9 @@ public class VagaService {
 
         JsonNode patched = patch.apply(convertValue);
 
-        atualizarVaga(vaga);
+        Vaga vagaConvertida = mapper.treeToValue(patched, Vaga.class);
 
-        return mapper.treeToValue(patched, Vaga.class);
+        return atualizarVaga(vagaConvertida);
 
     }
 
