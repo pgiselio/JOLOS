@@ -126,6 +126,9 @@ public class UsuarioService {
     private void mensagemEmailBaseadoNoTipoUsuario(TipoUsuario tipoUsuario, Email email) throws IOException {
         final Document doc;
 
+        System.out.println(caminhoArquivoEmailAluno);
+        System.out.println(caminhoArquivoEmailEmpresa);
+
         switch (tipoUsuario) {
             case ALUNO:
                 doc = Jsoup.parse(new File(caminhoArquivoEmailAluno), "UTF-8");
