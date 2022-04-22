@@ -15,6 +15,7 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.util.ReflectionUtils;
@@ -123,11 +124,9 @@ public class UsuarioService {
         return usuarioOptional.orElseThrow(() -> new UsuarioNaoCadastradoException("Usuário não cadastrado!"));
     }
 
+    @Async
     private void mensagemEmailBaseadoNoTipoUsuario(TipoUsuario tipoUsuario, Email email) throws IOException {
         final Document doc;
-
-        System.out.println(caminhoArquivoEmailAluno);
-        System.out.println(caminhoArquivoEmailEmpresa);
 
         switch (tipoUsuario) {
             case ALUNO:
