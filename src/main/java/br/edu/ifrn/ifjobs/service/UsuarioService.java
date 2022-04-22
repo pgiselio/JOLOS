@@ -15,7 +15,6 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.scheduling.annotation.Async;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.util.ReflectionUtils;
@@ -85,7 +84,7 @@ public class UsuarioService {
         try {
             mensagemEmailBaseadoNoTipoUsuario(dto.getTipoUsuario(), email);
         } catch (IOException e) {
-            throw new RuntimeException("Erro ao tentar encontrar arquivo de email");
+            throw new RuntimeException(e.getMessage());
         }
     }
 
@@ -124,7 +123,6 @@ public class UsuarioService {
         return usuarioOptional.orElseThrow(() -> new UsuarioNaoCadastradoException("Usuário não cadastrado!"));
     }
 
-    @Async
     private void mensagemEmailBaseadoNoTipoUsuario(TipoUsuario tipoUsuario, Email email) throws IOException {
         final Document doc;
 
