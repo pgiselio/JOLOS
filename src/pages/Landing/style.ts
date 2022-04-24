@@ -36,6 +36,7 @@ export const LandingStyle = styled.div`
   }
   .logo-nav img {
     height: 40px;
+    width: 110px;
   }
   .navigate {
     display: flex;
