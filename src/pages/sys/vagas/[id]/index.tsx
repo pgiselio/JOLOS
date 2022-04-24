@@ -16,10 +16,14 @@ import { toast } from "react-toastify";
 import { queryClient } from "../../../../services/queryClient";
 
 import { useAuth } from "../../../../hooks/useAuth";
+import { AlertDialog, AlertDialogLabel } from "@reach/alert-dialog";
 
 export default function VagaPage() {
   let params = useParams();
   let subscribeBtnRef = useRef<HTMLButtonElement>(null);
+  const [showUnsubDialog, setShowUnsubDialog] = useState(false);
+  const openUnsubDialog = () => setShowUnsubDialog(true);
+  const closeUnsubDialog = () => setShowUnsubDialog(false);
   const { data, isFetching } = useQuery<vaga>(
     [`vaga-${params.id}`],
     async () => {
@@ -40,6 +44,14 @@ export default function VagaPage() {
     },
   });
   const auth = useAuth();
+  const cancelRef = useRef(null);
+  function inscreverOuDesinscreverAluno(){
+    if(isCandidatoSubscribed){
+      openUnsubDialog();
+    }else{
+      inscreverAluno();
+    }
+  }
   async function inscreverAluno() {
     await api
       .patch(`/vaga/${params.id}/addAluno/${auth.userInfo?.aluno?.id}`)
@@ -50,6 +62,7 @@ export default function VagaPage() {
       });
   }
   async function desinscreverAluno() {
+    closeUnsubDialog();
     await api
       .patch(`/vaga/${params.id}/removeAluno/${auth.userInfo?.aluno?.id}`)
       .then(() => {
@@ -122,9 +135,7 @@ export default function VagaPage() {
               {auth.userInfo?.aluno?.dadosPessoa && (
                 <form
                   action=""
-                  onSubmit={handleSubmit(
-                    isCandidatoSubscribed ? desinscreverAluno : inscreverAluno
-                  )}
+                  onSubmit={handleSubmit(inscreverOuDesinscreverAluno)}
                 >
                   
                   <Button
@@ -143,6 +154,36 @@ export default function VagaPage() {
                         : "Inscrever-se"}
                     </span>
                   </Button>
+                  {showUnsubDialog && (
+                    <AlertDialog
+                      leastDestructiveRef={cancelRef}
+                      className="small"
+                    >
+                      <AlertDialogLabel>
+                        Tem certeza que deseja se desinscrever desta vaga?
+                      </AlertDialogLabel>
+
+                      <div
+                        className="alert-buttons"
+                        data-reach-alert-dialog-actions
+                      >
+                        <Button
+                          className="secondary less-radius"
+                          onClick={desinscreverAluno}
+                        >
+                          Sim
+                        </Button>
+                        <br />
+                        <Button
+                          className="less-radius"
+                          ref={cancelRef}
+                          onClick={closeUnsubDialog}
+                        >
+                          Cancelar
+                        </Button>
+                      </div>
+                    </AlertDialog>
+                  )}
                 </form>
               )}
             </div>

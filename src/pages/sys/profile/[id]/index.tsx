@@ -189,7 +189,7 @@ export default function ProfilePage({ email }: { email?: string }) {
                   </BoxContent>
                 ) : (
                   <BoxMessage className="no-about-message">
-                    <span>Oops... parece que alguém esqueceu de fazer o "sobre mim"</span>
+                    <span>Oops... parece que alguém se esqueceu de fazer o "sobre mim"</span>
                   </BoxMessage>
                 )}
               </Box>
@@ -238,28 +238,28 @@ export default function ProfilePage({ email }: { email?: string }) {
                         <ul className="social-info">
                           {data?.empresa?.redesSociais.linkedin && (
                             <li>
-                              <a href={data?.empresa?.redesSociais.linkedin} rel="noreferrer" target="_blank">
+                              <a href={`https://www.linkedin.com/company/${data?.empresa?.redesSociais.linkedin}`} rel="noreferrer" target="_blank">
                                 <i className="fab fa-linkedin"></i>
                               </a>
                             </li>
                           )}
                           {data?.empresa?.redesSociais.facebook && (
                             <li>
-                              <a href={data?.empresa?.redesSociais.facebook} rel="noreferrer" target="_blank">
+                              <a href={`https://www.facebook.com/${data?.empresa?.redesSociais.facebook}`} rel="noreferrer" target="_blank">
                                 <i className="fab fa-facebook"></i>
                               </a>
                             </li>
                           )}
                           {data?.empresa?.redesSociais.instagram && (
                             <li>
-                              <a href={data?.empresa?.redesSociais.instagram} rel="noreferrer" target="_blank">
+                              <a href={`https://www.instagram.com/${data?.empresa?.redesSociais.instagram}`} rel="noreferrer" target="_blank">
                                 <i className="fab fa-instagram"></i>
                               </a>
                             </li>
                           )}
                           {data?.empresa?.redesSociais.twitter && (
                             <li>
-                              <a href={data?.empresa?.redesSociais.twitter} rel="noreferrer" target="_blank">
+                              <a href={`https://www.twitter.com/${data?.empresa?.redesSociais.twitter}`} rel="noreferrer" target="_blank">
                                 <i className="fab fa-twitter"></i>
                               </a>
                             </li>

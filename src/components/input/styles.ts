@@ -1,16 +1,14 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
 interface InputProps {
   hasIcon?: boolean;
-  [x:string]: any;
+  [x: string]: any;
 }
-
-export const InputStyled = styled.input<InputProps>`
-  font-family: 'Roboto', sans-serif;
+export const InputStyle = css`
+  font-family: "Roboto", sans-serif;
   border: 1px solid var(--outline-color);
   border-radius: 5px;
   padding: 10px 8px;
-  padding-left: ${(props) => (props.hasIcon ? "40px" : "10px")};
   outline: 0;
   transition: 0.2s linear;
   color: var(--text-a);
@@ -19,9 +17,13 @@ export const InputStyled = styled.input<InputProps>`
     border-color: var(--accent-color);
     box-shadow: 0 0 0 0.2rem rgba(45, 143, 65, 0.308);
   }
-  &.danger{
+  &.danger {
     border-color: #c91f1f;
   }
+`;
+export const InputStyled = styled.input<InputProps>`
+  ${InputStyle}
+  padding-left: ${(props) => (props.hasIcon ? "40px" : "10px")};
 `;
 
 export const InputPassStyled = styled(InputStyled)`

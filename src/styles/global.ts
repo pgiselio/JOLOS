@@ -1,4 +1,5 @@
 import { createGlobalStyle } from "styled-components";
+import { InputStyle } from "../components/input/styles";
 
 export const GlobalStyle = createGlobalStyle`
   :root {
@@ -55,6 +56,10 @@ export const GlobalStyle = createGlobalStyle`
 
   .section {
     text-align: center;
+  }
+
+  textarea{
+    ${InputStyle}
   }
 
   input[type="checkbox"] {

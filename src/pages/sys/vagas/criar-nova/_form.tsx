@@ -233,13 +233,10 @@ export function CriarNovaVagaForm() {
                 minHeight: "150px",
                 maxHeight: "250px",
                 height: 150,
-                background: "#ffffff1a",
                 padding: "5px",
-                borderRadius: "5px",
-                color: "var(--text-a)",
               }}
               placeholder="Descrição da vaga..."
-              className="txt-input"
+              {...(errors.descricao && { className: "danger" })}
               id="desc"
               rows={10}
               onKeyUp={counter}

@@ -10,19 +10,24 @@ import { SettingPageStyle } from "./styles";
 
 export default function SettingsPage() {
   const [searchParams, setSearchParams] = useSearchParams();
+  const mq = window.matchMedia("(min-width: 1000px)");
+  let tabs = ["security", "profile", "notifications", "themes"];
   const [selectedTab, setSelectedTab] = useTabs(
-    ["security", "profile", "notifications", "themes"],
-    searchParams.get("tab") || "profile"
+    tabs,
+    searchParams.get("tab")
   );
   let navigate = useNavigate();
   const auth = useAuth();
-  const mq = window.matchMedia("(min-width: 1000px)");
   useEffect(() => {
-    if (!searchParams.get("tab") && mq.matches) {
+    if(mq.matches && !searchParams.get("tab")){
       setSearchParams({ tab: "profile" });
-    } else {
-      setSelectedTab(searchParams.get("tab"));
     }
+  }, [])
+  useEffect(() => {
+    window.scrollTo(0, 0);
+    if ([...tabs, null, undefined].includes(searchParams.get("tab"))) {
+      setSelectedTab(searchParams.get("tab"));
+    }    
   });
   if (!auth.userInfo?.id) {
     return <LoadingPage />;

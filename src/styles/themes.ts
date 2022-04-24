@@ -51,7 +51,7 @@ export const lightTheme: DefaultTheme = {
     main: defaultColors.green[7],
     mainActive: defaultColors.green[8],
     secondary: "#888695",
-    bodyBackground: "247 247 247",
+    bodyBackground: "243 243 243",
     systemMenu: {
       border: "#ced4da",
       background: "255 255 255",

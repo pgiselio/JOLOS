@@ -4,35 +4,70 @@ import {
   AccordionItem,
   AccordionPanel,
 } from "@reach/accordion";
-import { useForm } from "react-hook-form";
+import { useState } from "react";
+import { Controller, useForm } from "react-hook-form";
 import { toast } from "react-toastify";
-import { Button } from "../../../../components/button";
+import CircularProgressFluent from "../../../../components/circular-progress-fluent";
+import { FabButton } from "../../../../components/fab";
 import { Input } from "../../../../components/input";
 import { ProfilePic } from "../../../../components/profile-pic/profile-pic";
 import { useAuth } from "../../../../hooks/useAuth";
 import { api } from "../../../../services/api";
+import { queryClient } from "../../../../services/queryClient";
+import { User } from "../../../../types/user";
+import { CurriculoForm } from "./_curriculoForm";
 
 export default function SettingContaPage() {
   const auth = useAuth();
+  const [isLoading, setIsLoading] = useState(false);
   const {
+    control,
     register,
-    formState: { errors },
+    formState: { isDirty },
     handleSubmit,
   } = useForm({
     defaultValues: {
-      arquivo: "",
+      nome:
+        auth.userInfo?.aluno?.dadosPessoa.nome ||
+        auth.userInfo?.empresa?.dadosPessoa.nome,
+      resumo:
+        auth.userInfo?.aluno?.resumo || auth.userInfo?.empresa?.resumo || "",
+      facebook: auth.userInfo?.empresa?.redesSociais?.facebook || "",
+      instagram: auth.userInfo?.empresa?.redesSociais?.instagram || "",
+      linkedin: auth.userInfo?.empresa?.redesSociais?.linkedin || "",
+      twitter: auth.userInfo?.empresa?.redesSociais?.twitter || "",
     },
   });
   async function onSubmit(data: any) {
-    const formData = new FormData();
-    const file = data.arquivo[0];
-    formData.append("arquivo", file);
+    setIsLoading(true);
     await api
-      .patch(`/curriculo/atualizaArquivo/${auth.userInfo?.email}`, formData)
+      .patch(`/usuario/${auth.userInfo?.id}`, auth.userInfo?.aluno?.id ?
+        {
+          "aluno" : {
+            dadosPessoa: {
+              nome: data.nome,
+            },
+            resumo: data.resumo,
+          }
+          
+        } : auth.userInfo?.empresa?.id ? {
+          "empresa": {
+            dadosPessoa: {
+              nome: data.nome,
+            },
+            redesSociais: {
+              facebook: data.facebook,
+              instagram: data.instagram,
+              linkedin: data.linkedin,
+              twitter: data.twitter,
+            }
+          }
+        } : null)
       .then((response) => {
         if (response.status === 200) {
-          toast.success("Currículo enviado com sucesso!");
+          toast.success("Mudanças salvas com sucesso!");
         }
+        queryClient.invalidateQueries("meUser");
       })
       .catch((err) => {
         if (err.status === 500) {
@@ -41,9 +76,12 @@ export default function SettingContaPage() {
         if (err.status === 403 || err.status === 401) {
           toast.error("Você não tem autorização para executar essa ação!");
         } else {
+          toast.error("Ops... algo não deu certo!");
           console.error(err);
         }
       });
+    setIsLoading(false);
+
   }
   return (
     <>
@@ -52,106 +90,146 @@ export default function SettingContaPage() {
       </div>
 
       <Accordion collapsible multiple>
-        <AccordionItem>
-          <AccordionButton className="has-sub">
-            <h4>Nome</h4>
-            <span className="subtittle">
-              {auth.userInfo?.aluno?.dadosPessoa.nome ||
-                auth.userInfo?.empresa?.dadosPessoa.nome}
-            </span>
-          </AccordionButton>
-          <AccordionPanel>
-            <Input
-              type="text"
-              id="nome"
-              defaultValue={
-                auth.userInfo?.aluno?.dadosPessoa.nome ||
-                auth.userInfo?.empresa?.dadosPessoa.nome
-              }
-            />
-          </AccordionPanel>
-        </AccordionItem>
-        <AccordionItem>
-          <AccordionButton className="has-sub">
-            <h4>Sobre mim</h4>
-            <span className="subtittle">
-              Uma breve descrição sobre{" "}
-              {auth.type === "ALUNO" ? "você" : "a sua empresa"}
-            </span>
-          </AccordionButton>
-          <AccordionPanel>
-            <textarea
-              style={{
-                resize: "vertical",
-                minHeight: "150px",
-                maxHeight: "250px",
-                height: 150,
-                width: "100%",
-                background: "#ffffff1a",
-                padding: "5px",
-                borderRadius: "5px",
-                color: "var(--text-a)",
-              }}
-              placeholder="Faça uma breve descrição sobre você"
-              className="txt-input"
-              defaultValue={auth.userInfo?.aluno?.resumo}
-              id="desc"
-              rows={10}
-            ></textarea>
-          </AccordionPanel>
-        </AccordionItem>
-        {auth.userInfo?.empresa && (
+        <form>
+          {isDirty && (
+            <FabButton type="button" onClick={handleSubmit(onSubmit)}>
+              {isLoading && (
+                <CircularProgressFluent
+                  color="white"
+                  height="25px"
+                  width="25px"
+                  duration=".8s"
+                  style={{ position: "absolute" }}
+                />
+              )}
+              <span {...(isLoading && { style: { opacity: 0 } })}>
+                <i className="fas fa-floppy-disk"></i> Salvar alterações
+              </span>
+            </FabButton>
+          )}
           <AccordionItem>
-            <AccordionButton className="has-sub">
-              <h4>Redes Sociais</h4>{" "}
+            <AccordionButton className="autohide-sub">
+              <h4>Nome</h4>
               <span className="subtittle">
-                Facebook, Instagram, LinkedIn e Twitter
+                {auth.userInfo?.aluno?.dadosPessoa.nome ||
+                  auth.userInfo?.empresa?.dadosPessoa.nome}
               </span>
             </AccordionButton>
             <AccordionPanel>
-              <div className="inputs">
-                <div className="lbl-icon">
-                  <label>
-                    <i className="fa-brands fa-facebook-f"></i>
-                    <span>facebook.com</span>/
-                  </label>
-                  <Input type="text" />
-                </div>
-                <div className="lbl-icon">
-                  <label>
-                    <i className="fa-brands fa-instagram"></i>
-                    <span>instagram.com</span>/
-                  </label>
-                  <Input type="text" />
-                </div>
-                <div className="lbl-icon">
-                  <label>
-                    <i className="fa-brands fa-linkedin"></i>
-                    <span>linkedin.com/company/</span>
-                  </label>
-                  <Input type="text" />
-                </div>
-                <div className="lbl-icon">
-                  <label>
-                    <i className="fa-brands fa-twitter"></i>
-                    <span>twitter.com/</span>
-                  </label>
-                  <Input type="text" />
-                </div>
-              </div>
+              <Controller
+                name="nome"
+                control={control}
+                render={({ field }) => (
+                  <Input type="text" id="nome" {...field} />
+                )}
+              />
             </AccordionPanel>
           </AccordionItem>
-        )}
-        {auth.userInfo?.aluno && (
           <AccordionItem>
+            <AccordionButton className="has-sub">
+              <h4>Sobre mim</h4>
+              <span className="subtittle">
+                Uma breve descrição sobre{" "}
+                {auth.type === "ALUNO" ? "você" : "a sua empresa"}
+              </span>
+            </AccordionButton>
+            <AccordionPanel>
+              <Controller
+                name="resumo"
+                control={control}
+                render={({ field }) => (
+                  <textarea
+                    style={{
+                      resize: "vertical",
+                      minHeight: "150px",
+                      maxHeight: "250px",
+                      height: 150,
+                      width: "100%",
+                    }}
+                    placeholder="Faça uma breve descrição sobre você"
+                    className="txt-input"
+                    {...field}
+                    id="desc"
+                    rows={10}
+                  ></textarea>
+                )}
+              />
+            </AccordionPanel>
+          </AccordionItem>
+          {auth.userInfo?.empresa && (
+            <AccordionItem>
+              <AccordionButton className="has-sub">
+                <h4>Redes Sociais</h4>{" "}
+                <span className="subtittle">
+                  Facebook, Instagram, LinkedIn e Twitter
+                </span>
+              </AccordionButton>
+              <AccordionPanel>
+                <div className="inputs">
+                  <div className="lbl-icon">
+                    <label>
+                      <i className="fa-brands fa-facebook-f"></i>
+                      <span>facebook.com</span>/
+                    </label>
+                    <Controller
+                      name="facebook"
+                      control={control}
+                      render={({ field }) => (
+                        <Input type="text" id="facebook" {...field} />
+                      )}
+                    />
+                  </div>
+                  <div className="lbl-icon">
+                    <label>
+                      <i className="fa-brands fa-instagram"></i>
+                      <span>instagram.com</span>/
+                    </label>
+                    <Controller
+                      name="instagram"
+                      control={control}
+                      render={({ field }) => (
+                        <Input type="text" id="instagram" {...field} />
+                      )}
+                    />
+                  </div>
+                  <div className="lbl-icon">
+                    <label>
+                      <i className="fa-brands fa-linkedin"></i>
+                      <span>linkedin.com/company/</span>
+                    </label>
+                    <Controller
+                      name="linkedin"
+                      control={control}
+                      render={({ field }) => (
+                        <Input type="text" id="linkedin" {...field} />
+                      )}
+                    />
+                  </div>
+                  <div className="lbl-icon">
+                    <label>
+                      <i className="fa-brands fa-twitter"></i>
+                      <span>twitter.com/</span>
+                    </label>
+                    <Controller
+                      name="twitter"
+                      control={control}
+                      render={({ field }) => (
+                        <Input type="text" id="twitter" {...field} />
+                      )}
+                    />
+                  </div>
+                </div>
+              </AccordionPanel>
+            </AccordionItem>
+          )}
+        </form>
+        {auth.userInfo?.aluno && (
+          <AccordionItem style={{ marginTop: 14 }}>
             <AccordionButton>
               <h4>Currículo</h4>
             </AccordionButton>
             <AccordionPanel>
-              <form onSubmit={handleSubmit(onSubmit)}>
-                <input type="file" accept=".pdf" {...register("arquivo")} />
-                <Button type="submit">Enviar</Button>
-              </form>
+              <CurriculoForm />
             </AccordionPanel>
           </AccordionItem>
         )}
