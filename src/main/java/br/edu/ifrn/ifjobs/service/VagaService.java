@@ -174,9 +174,8 @@ public class VagaService {
 
     /**
      * 
-     * @param id     é a identificação da vaga
-     * @param campos os campos que irão ser modificados, exceto o campo ALUNOS, pois
-     *               ainda não está pronto para modificações
+     * @param id    é a identificação da vaga
+     * @param patch os campos que irão ser modificados
      * @return vaga atualizada
      * @throws VagaNaoEncontradoException
      * @throws VagaNaoCadastradaException
