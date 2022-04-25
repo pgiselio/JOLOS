@@ -1,9 +1,12 @@
 package br.edu.ifrn.ifjobs.controller;
 
 import java.util.List;
-import java.util.Map;
 
 import javax.validation.Valid;
+
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.github.fge.jsonpatch.JsonPatch;
+import com.github.fge.jsonpatch.JsonPatchException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheEvict;
@@ -72,6 +75,8 @@ public class UsuarioController {
     }
 
     @GetMapping("/{id}")
+    @CacheEvict(value = "usuario", allEntries = true)
+    @CachePut(value = "usuario")
     public ResponseEntity<UsuarioGetDTO> buscarPorId(@PathVariable(name = "id") int id) {
         Usuario usuario;
 
@@ -114,13 +119,15 @@ public class UsuarioController {
 
     @PatchMapping("/{id}")
     public ResponseEntity<UsuarioGetDTO> atualizaCampo(@PathVariable(name = "id") int id,
-            @RequestBody Map<Object, Object> campos) {
+            @RequestBody JsonPatch jsonPatch) {
         Usuario usuarioAtualizado;
 
         try {
-            usuarioAtualizado = usuarioService.atualizaCampos(id, campos);
+            usuarioAtualizado = usuarioService.atualizaCampos(id, jsonPatch);
         } catch (UsuarioNaoEncontradoException | UsuarioNaoCadastradoException e) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
+        } catch (JsonProcessingException | IllegalArgumentException | JsonPatchException e) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
         }
 
         UsuarioGetDTO dtoConvert = new UsuarioGetDTO();

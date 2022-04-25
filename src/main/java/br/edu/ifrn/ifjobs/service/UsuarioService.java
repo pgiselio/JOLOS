@@ -3,13 +3,17 @@ package br.edu.ifrn.ifjobs.service;
 import java.io.File;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
-import java.lang.reflect.Field;
 import java.util.List;
-import java.util.Map;
 import java.util.Optional;
 import java.util.function.Supplier;
 
 import javax.mail.MessagingException;
+
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.github.fge.jsonpatch.JsonPatch;
+import com.github.fge.jsonpatch.JsonPatchException;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -18,7 +22,6 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
-import org.springframework.util.ReflectionUtils;
 
 import br.edu.ifrn.ifjobs.dto.usuario.UsuarioInsertDTO;
 import br.edu.ifrn.ifjobs.exception.UsuarioNaoCadastradoException;
@@ -204,17 +207,21 @@ public class UsuarioService {
         return usuarioRepository.findAll();
     }
 
-    public Usuario atualizaCampos(int id, Map<Object, Object> campos)
-            throws UsuarioNaoEncontradoException, UsuarioNaoCadastradoException {
-        Usuario buscadoPorId = buscaPorId(id);
+    public Usuario atualizaCampos(int id, JsonPatch patch)
+            throws UsuarioNaoEncontradoException, UsuarioNaoCadastradoException, JsonProcessingException,
+            IllegalArgumentException, JsonPatchException {
+        ObjectMapper mapper = new ObjectMapper();
 
-        campos.forEach((chave, valor) -> {
-            Field campo = ReflectionUtils.findField(Usuario.class, (String) chave);
-            campo.setAccessible(true);
-            ReflectionUtils.setField(campo, buscadoPorId, valor);
-        });
+        Usuario usuarioBuscadoPorId = buscaPorId(id);
 
-        return create(buscadoPorId);
+        JsonNode convertValue;
+        convertValue = mapper.convertValue(usuarioBuscadoPorId, JsonNode.class);
+
+        JsonNode patched = patch.apply(convertValue);
+
+        Usuario usuarioModificado = mapper.treeToValue(patched, Usuario.class);
+
+        return create(usuarioModificado);
     }
 
     public Usuario delete(Usuario usuario) throws Exception {
