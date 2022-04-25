@@ -1,15 +1,16 @@
 package br.edu.ifrn.ifjobs.controller;
 
-import java.lang.reflect.Field;
 import java.util.List;
-import java.util.Map;
 
 import javax.validation.Valid;
+
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.github.fge.jsonpatch.JsonPatch;
+import com.github.fge.jsonpatch.JsonPatchException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.util.ReflectionUtils;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
@@ -84,27 +85,15 @@ public class AlunoController {
 
     @PatchMapping("/{id}")
     public ResponseEntity<Aluno> atualizaCampo(@PathVariable(name = "id") int id,
-            Map<Object, Object> campos) {
-        Aluno buscadoPorId;
-
-        try {
-            buscadoPorId = alunoService.buscarPorId(id);
-        } catch (AlunoNaoEncontradoException e) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
-        }
-
-        campos.forEach((chave, valor) -> {
-            Field campo = ReflectionUtils.findField(Aluno.class, (String) chave);
-            campo.setAccessible(true);
-            ReflectionUtils.setField(campo, buscadoPorId, valor);
-        });
-
+            @RequestBody JsonPatch jsonPatch) {
         Aluno alunoAtualizado;
 
         try {
-            alunoAtualizado = alunoService.salvaAluno(buscadoPorId);
-        } catch (AlunoNaoCadastradoException e) {
+            alunoAtualizado = alunoService.atualizaCampo(id, jsonPatch);
+        } catch (AlunoNaoEncontradoException | AlunoNaoCadastradoException e) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
+        } catch (JsonProcessingException | IllegalArgumentException | JsonPatchException e) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
         }
 
         return ResponseEntity.ok().body(alunoAtualizado);
