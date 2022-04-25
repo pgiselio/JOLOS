@@ -4,6 +4,12 @@ import java.util.List;
 import java.util.Optional;
 import java.util.function.Supplier;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.github.fge.jsonpatch.JsonPatch;
+import com.github.fge.jsonpatch.JsonPatchException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -48,6 +54,22 @@ public class AlunoService {
         String cpfNaoNulo = optional.orElseThrow(argumentoIlegal);
 
         return respository.findByCpf(cpfNaoNulo);
+    }
+
+    public Aluno atualizaCampo(int id, JsonPatch patch) throws AlunoNaoEncontradoException, AlunoNaoCadastradoException,
+            JsonProcessingException, IllegalArgumentException, JsonPatchException {
+        ObjectMapper mapper = new ObjectMapper();
+
+        Aluno alunoBuscadoPorId = buscarPorId(id);
+
+        JsonNode convertValue;
+        convertValue = mapper.convertValue(alunoBuscadoPorId, JsonNode.class);
+
+        JsonNode patched = patch.apply(convertValue);
+
+        Aluno alunoModificado = mapper.treeToValue(patched, Aluno.class);
+
+        return salvaAluno(alunoModificado);
     }
 
     public void delete(Aluno aluno) {
