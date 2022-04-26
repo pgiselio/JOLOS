@@ -64,13 +64,15 @@ public class CurriculoController {
     }
 
     @PatchMapping(path = "/atualizaArquivo/{email}")
-    public void atualizaArquivo(@RequestParam(name = "arquivo") MultipartFile arquivo,
+    public ResponseEntity<String> atualizaArquivo(@RequestParam(name = "arquivo") MultipartFile arquivo,
             @PathVariable(name = "email") String email) {
         try {
             service.atualizaArquivo(arquivo, email);
         } catch (IOException | UsuarioNaoEncontradoException e) {
             throw new RuntimeException("Não foi possível salvar o arquivo");
         }
+
+        return ResponseEntity.ok("Arquivo salvo com sucesso");
     }
 
     @GetMapping("/download/{id}")
