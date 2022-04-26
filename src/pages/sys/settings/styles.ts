@@ -6,6 +6,8 @@ export const SettingPageStyle = styled.section`
   grid-template-columns: auto 1fr;
   .rounded-corner {
     z-index: 5;
+    top: calc(var(--top-bar-height) - 1px);
+    
     ::after {
       display: none;
     }
@@ -139,6 +141,9 @@ export const SettingPageStyle = styled.section`
       width: 100%;
       max-width: initial;
       top: 0;
+      .items, .header-items{
+        animation: slide-right 0.5s cubic-bezier(0.075, 0.82, 0.165, 1);
+      }
       &.toggle {
         display: none;
       }
@@ -170,11 +175,6 @@ export const SettingPageStyle = styled.section`
     }
   }
   @media (max-width: 766px) {
-    .nav-settings-container{
-      .items, .header-items{
-        animation: slide-right 0.5s cubic-bezier(0.075, 0.82, 0.165, 1);
-      }
-    }
     .rounded-corner {
       ::after {
         display: none;
