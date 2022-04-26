@@ -52,13 +52,15 @@ public class CurriculoController {
     }
 
     @PostMapping(path = "/upload/{email}")
-    public void upload(@RequestParam(name = "arquivo") MultipartFile arquivo,
+    public ResponseEntity<String> upload(@RequestParam(name = "arquivo") MultipartFile arquivo,
             @PathVariable(name = "email") String email) {
         try {
             service.uploadArquivo(arquivo, email);
         } catch (IOException | UsuarioNaoEncontradoException e) {
-            throw new RuntimeException("Não foi possível salvar o arquivo");
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
         }
+
+        return ResponseEntity.ok("Arquivo salvo com sucesso");
     }
 
     @PatchMapping(path = "/atualizaArquivo/{email}")
