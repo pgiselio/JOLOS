@@ -11,23 +11,20 @@ import { SettingPageStyle } from "./styles";
 export default function SettingsPage() {
   const [searchParams, setSearchParams] = useSearchParams();
   const mq = window.matchMedia("(min-width: 1000px)");
-  let tabs = ["security", "profile", "notifications", "themes"];
-  const [selectedTab, setSelectedTab] = useTabs(
-    tabs,
-    searchParams.get("tab")
-  );
+  let tabs = ["account", "profile", "notifications", "themes"];
+  const [selectedTab, setSelectedTab] = useTabs(tabs, searchParams.get("tab"));
   let navigate = useNavigate();
   const auth = useAuth();
   useEffect(() => {
-    if(mq.matches && !searchParams.get("tab")){
-      setSearchParams({ tab: "profile" });
+    if (mq.matches && !searchParams.get("tab")) {
+      setSearchParams({ tab: "account" });
     }
-  }, [])
+  }, []);
   useEffect(() => {
     window.scrollTo(0, 0);
     if ([...tabs, null, undefined].includes(searchParams.get("tab"))) {
       setSelectedTab(searchParams.get("tab"));
-    }    
+    }
   });
   if (!auth.userInfo?.id) {
     return <LoadingPage />;
@@ -46,26 +43,28 @@ export default function SettingsPage() {
           </OutsetHeadersCornerRadius>
           <div className="items">
             <TabSelector
-              isActive={selectedTab === "profile"}
+              isActive={selectedTab === "account"}
               onClick={() => {
-                setSearchParams({ tab: "profile" });
-              }}
-              className="tab-selector-profile"
-              vertical
-            >
-              <i className="fas fa-user"></i>
-              Perfil
-            </TabSelector>
-            <TabSelector
-              isActive={selectedTab === "security"}
-              onClick={() => {
-                setSearchParams({ tab: "security" });
+                setSearchParams({ tab: "account" });
               }}
               vertical
             >
               <i className="fas fa-lock"></i>
               Conta e Segurança
             </TabSelector>
+            {(auth.userInfo?.aluno?.id || auth.userInfo.empresa?.id) && (
+              <TabSelector
+                isActive={selectedTab === "profile"}
+                onClick={() => {
+                  setSearchParams({ tab: "profile" });
+                }}
+                className="tab-selector-profile"
+                vertical
+              >
+                <i className="fas fa-user"></i>
+                Perfil
+              </TabSelector>
+            )}
             <TabSelector
               isActive={selectedTab === "notifications"}
               onClick={() => {
@@ -105,7 +104,7 @@ export default function SettingsPage() {
                     </button>
                   )}
                   {selectedTab === "profile" && <h3>Perfil</h3>}
-                  {selectedTab === "security" && <h3>Conta e Segurança</h3>}
+                  {selectedTab === "account" && <h3>Conta e Segurança</h3>}
                   {selectedTab === "notifications" && <h3>Notificações</h3>}
                   {selectedTab === "themes" && <h3>Temas</h3>}
                 </div>
@@ -113,7 +112,7 @@ export default function SettingsPage() {
             </OutsetHeadersCornerRadius>
             <div className="content">
               {selectedTab === "profile" && <SettingContaPage />}
-              {selectedTab === "security" && <div>conteudo aqui</div>}
+              {selectedTab === "account" && <div>conteudo aqui</div>}
               {selectedTab === "notifications" && <div>Notificações</div>}
               {selectedTab === "themes" && <div>Temas</div>}
             </div>
