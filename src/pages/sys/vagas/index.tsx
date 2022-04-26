@@ -1,13 +1,28 @@
 import { useQuery } from "react-query";
 import { useLocation, useNavigate } from "react-router-dom";
+import styled from "styled-components";
 import { Button } from "../../../components/button";
 import CircularProgressFluent from "../../../components/circular-progress-fluent";
+import { FabButton } from "../../../components/fab";
 import { HeaderTitle } from "../../../components/header-title";
 import { OutsetHeadersCornerRadius } from "../../../components/outset-radius-to-headers";
 import { VagaCard } from "../../../components/vagaCard";
 import { useAuth } from "../../../hooks/useAuth";
 import { api } from "../../../services/api";
 import { vaga } from "./vagaType";
+
+const CreateNewFAB = styled(FabButton)`
+  display: fixed;
+  @media (min-width: 766px) {
+    display: none
+  }
+`;
+const CreateNewButton = styled(Button)`
+  display: none;
+  @media (min-width: 766px) {
+    display: flex;
+  }
+`;
 
 export function VagasList() {
   const navigate = useNavigate();
@@ -28,14 +43,23 @@ export function VagasList() {
     <section>
       <OutsetHeadersCornerRadius>
         <HeaderTitle>
-          {isAluno ? <h2>Vagas disponíveis</h2>
-          
-          : (
+          <CreateNewFAB
+            className="FabCreateNew"
+            type="button"
+            onClick={() =>
+              navigate("criar", { state: { modalLocation: location } })
+            }
+          >
+            <i className="fa-solid fa-plus"></i>
+          </CreateNewFAB>
+          {isAluno ? (
+            <h2>Vagas disponíveis</h2>
+          ) : (
             <>
               <h2>Vagas criadas</h2>
-              <Button
+              <CreateNewButton
                 className="outlined"
-                id="newVaga"
+                id="newVagaButton"
                 onClick={() =>
                   navigate("criar", { state: { modalLocation: location } })
                 }
@@ -43,7 +67,7 @@ export function VagasList() {
               >
                 <i className="fa-solid fa-plus"></i>
                 Criar nova
-              </Button>
+              </CreateNewButton>
             </>
           )}
         </HeaderTitle>

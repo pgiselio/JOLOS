@@ -33,6 +33,9 @@ export const FabButton = styled.button<FabButtonProps>`
       gap: 5px;
       align-items: center;
   }
+  :active{
+    transform: scale(.95);
+  }
   i.fas,
   i.far,
   i.fa-solid,
@@ -40,7 +43,6 @@ export const FabButton = styled.button<FabButtonProps>`
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 15px;
     height: 25px;
     width: 25px;
   }
