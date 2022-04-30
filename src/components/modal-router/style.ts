@@ -6,6 +6,7 @@ export const ModalRouterStyle = styled(Dialog)`
   width: 50vw;
   margin: 5vh auto;
   background: var(--primary-bg);
+  padding: 0;
   outline: none;
   border-radius: 5px;
   animation: slide-up 0.3s ease-in-out;

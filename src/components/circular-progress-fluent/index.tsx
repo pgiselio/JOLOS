@@ -8,11 +8,11 @@ interface CircularProgressProps {
   duration?: string;
 }
 
-export function CircularProgressFluent({
+export default function CircularProgressFluent({
   className = "",
   color = "#1d8c37",
   width = "50px",
-  height = "50px",
+  height = width,
   style,
   duration = "1s",
   ...rest
@@ -20,12 +20,12 @@ export function CircularProgressFluent({
   return (
     <CircularProgressFluentStyle
       style={{
-        ...style,
-        ["--width" as any]: width,
-        ["--height" as any]: height,
-        ["--color" as any]: color,
-        ["--duration" as any]: duration,
+        ...style
       }}
+      width={width}
+      height={height}
+      color={color}
+      duration={duration}
     >
       <svg
         {...rest}
@@ -44,24 +44,32 @@ export function CircularProgressFluent({
   );
 }
 
-const CircularProgressFluentStyle = styled.b`
+const CircularProgressFluentStyle = styled.b<CircularProgressProps>`
   display: flex;
   .circular-progress-circle-fluent-svg {
-    width: var(--width);
-    height: var(--width);
+    width: ${(props) =>
+      typeof props.width === "number" ? `${props.width}px` : props.width};
+    height: ${(props) =>
+      props.height
+        ? typeof props.height === "number"
+          ? `${props.height}px`
+          : props.height
+        : typeof props.width === "number"
+        ? `${props.width}px`
+        : props.width};
     transform-origin: center;
-    animation: circular-progress-rotate-1 var(--duration) linear infinite;
+    animation: circular-progress-rotate-1 ${(props) => props.duration} linear infinite;
   }
 
   .circular-progress-circle-fluent {
     fill: none;
-    stroke: var(--color);
+    stroke: ${(props) => props.color};
     stroke-width: 3;
     stroke-dasharray: 1, 200;
     stroke-dashoffset: 0;
     stroke-linecap: round;
-    animation: circular-progress-fluent-dash calc(var(--duration) * 3)
-      ease-in-out infinite;
+    animation: circular-progress-fluent-dash
+      calc(${(props) => props.duration} * 3) ease-in-out infinite;
   }
 
   @keyframes circular-progress-rotate-1 {
@@ -85,5 +93,3 @@ const CircularProgressFluentStyle = styled.b`
     }
   }
 `;
-
-export default CircularProgressFluent;

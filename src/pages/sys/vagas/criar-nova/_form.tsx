@@ -24,22 +24,27 @@ export function CriarNovaVagaForm() {
   useEffect(() => {
     setEmpresaCNPJ(auth.userInfo?.empresa?.cnpj);
   }, [auth.userInfo]);
-  let courses = [
+  let cursos = [
     "Informática",
     "Administração",
     "Eletrotécnica",
     "Energias Renováveis",
     "Física",
   ];
+  const maxDescriptionLength = 1000;
+  const [remainigDescriptionLength, setRemainigDescriptionLength] = useState(maxDescriptionLength);
+
   let validationSchema;
   if (empresaCNPJ) {
     validationSchema = Yup.object().shape({
       titulo: Yup.string().required("Este campo é obrigatório"),
       localidade: Yup.string().required("Este campo é obrigatório"),
       cursoAlvo: Yup.string()
-        .oneOf([...courses], "O curso selecionado não é válido")
+        .oneOf([...cursos], "O curso selecionado não é válido")
         .required("Este campo é obrigatório"),
-      descricao: Yup.string().required("Este campo é obrigatório"),
+      descricao: Yup.string()
+        .required("Este campo é obrigatório")
+        .max(maxDescriptionLength, "Máximo de 1000 caracteres"),
       cnpj: Yup.string().notRequired(),
     });
   } else {
@@ -47,7 +52,7 @@ export function CriarNovaVagaForm() {
       titulo: Yup.string().required("Este campo é obrigatório"),
       localidade: Yup.string().required("Este campo é obrigatório"),
       cursoAlvo: Yup.string()
-        .oneOf([...courses], "O curso selecionado não é válido")
+        .oneOf([...cursos], "O curso selecionado não é válido")
         .required("Este campo é obrigatório"),
       descricao: Yup.string().required("Este campo é obrigatório"),
       cnpj: Yup.string()
@@ -75,20 +80,6 @@ export function CriarNovaVagaForm() {
     isDirty
   );
 
-  function counter() {
-    const descriptionVaga: any = document.querySelector("#desc");
-    let countChar: any = document.querySelector("#count");
-
-    const maxChars = 1000;
-    let currentValue = maxChars - descriptionVaga.value.length;
-
-    if (currentValue <= 0) {
-      currentValue = 0;
-      descriptionVaga.setAttribute("maxlength", maxChars);
-    }
-
-    countChar.innerHTML = currentValue + "";
-  }
   async function onSubmit({
     titulo,
     localidade,
@@ -187,7 +178,7 @@ export function CriarNovaVagaForm() {
           <p className="input-error">{errors.cursoAlvo?.message}</p>
 
           <datalist id="courses">
-            {courses.map((course) => (
+            {cursos.map((course) => (
               <option value={course} key={course}></option>
             ))}
           </datalist>
@@ -239,7 +230,11 @@ export function CriarNovaVagaForm() {
               {...(errors.descricao && { className: "danger" })}
               id="desc"
               rows={10}
-              onKeyUp={counter}
+              maxLength={maxDescriptionLength}
+              onKeyUp={() => {
+                let currentValue = maxDescriptionLength - field.value.length;
+                setRemainigDescriptionLength(currentValue);
+              }}
               {...field}
             ></textarea>
           )}
@@ -248,7 +243,7 @@ export function CriarNovaVagaForm() {
 
         <div className="counter-box">
           <p>
-            Limite de caracteres: <span id="count">1000</span>
+            Limite de caracteres: <span id="count">{remainigDescriptionLength}</span>
           </p>
         </div>
       </div>

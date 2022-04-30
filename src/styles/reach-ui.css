@@ -23,6 +23,7 @@
 
 [data-reach-alert-dialog-content] {
   margin: 20px;
+  width: initial;
   max-width: 50rem;
   background-color: var(--primary-bg);
   border-radius: 0.5rem;
@@ -56,6 +57,7 @@
   background-color: var(--primary-bg);
 }
 [data-reach-accordion-button] h4 {
+  text-align: left;
   transition: transform 0.2s ease;
 }
 [data-reach-accordion-button] .subtittle {

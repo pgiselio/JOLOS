@@ -112,9 +112,8 @@ export default function ProfilePage({ email }: { email?: string }) {
                 <Button
                   className="outlined"
                   onClick={() => {
-                    window.open(
-                      `/download/curriculo/${data?.aluno?.curriculo}`,
-                      "_blank"
+                    navigate(
+                      `/download/curriculo/${data?.aluno?.curriculo}`
                     );
                   }}
                 >

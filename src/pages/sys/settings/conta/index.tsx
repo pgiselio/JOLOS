@@ -42,27 +42,49 @@ export default function SettingContaPage() {
     setIsLoading(true);
     await api
       .patch(`/usuario/${auth.userInfo?.id}`, auth.userInfo?.aluno?.id ?
+      [
         {
-          "aluno" : {
-            dadosPessoa: {
-              nome: data.nome,
-            },
-            resumo: data.resumo,
-          }
-          
-        } : auth.userInfo?.empresa?.id ? {
-          "empresa": {
-            dadosPessoa: {
-              nome: data.nome,
-            },
-            redesSociais: {
-              facebook: data.facebook,
-              instagram: data.instagram,
-              linkedin: data.linkedin,
-              twitter: data.twitter,
-            }
-          }
-        } : null)
+          op: "replace",
+          path: "/aluno/dadosPessoa/nome",
+          value: data.nome,
+        },
+        {
+          op: "replace",
+          path: "/aluno/resumo",
+          value:  data.resumo,
+        },        
+      ]
+         : auth.userInfo?.empresa?.id ? [
+          {
+            op: "replace",
+            path: "/empresa/dadosPessoa/nome",
+            value: data.nome,
+          },
+          {
+            op: "replace",
+            path: "/empresa/resumo",
+            value:  data.resumo,
+          },   {
+            op: "replace",
+            path: "/empresa/redesSociais/facebook",
+            value:  data.facebook,
+          },
+          {
+            op: "replace",
+            path: "/empresa/redesSociais/instagram",
+            value: data.instagram,
+          },
+          {
+            op: "replace",
+            path: "/empresa/redesSociais/linkedin",
+            value: data.linkedin,
+          },
+          {
+            op: "replace",
+            path: "/empresa/redesSociais/twitter",
+            value: data.twitter,
+          }  
+        ] : null)
       .then((response) => {
         if (response.status === 200) {
           toast.success("Mudanças salvas com sucesso!");

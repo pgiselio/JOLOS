@@ -80,16 +80,35 @@ export const HeaderSysStyle = styled.header`
     height: 35px;
     padding: 5px;
     box-sizing: border-box;
+    background-color: transparent;
     border: none;
-    background: #f1f1f1;
     border-radius: 5px;
   }
-
-  #btn-collapse-sidemenu:hover {
-    background: #e4e4e4;
+  .botao-ham span {
+      background-color: var(--text-b);
+    }
+  .header-button {
+    i {
+      color: var(--navs-bg);
+      transition: color 0.2s ease;
+    }
+    :hover i {
+      color: var(--text-a);
+    }
   }
 
   @media (min-width: 766px) {
+    #btn-collapse-sidemenu {
+    background: var(--accent-color-opacity);
+
+    }
+    #btn-collapse-sidemenu:hover {
+      background: var(--accent-color);
+    }
+
+    #btn-collapse-sidemenu:hover span {
+      background: var(--navs-bg);
+    }
     .menu-container {
       width: 100%;
       padding: 0 15px;
@@ -100,6 +119,7 @@ export const HeaderSysStyle = styled.header`
       align-items: center;
       justify-content: center;
       min-width: calc(100% + 10px);
+      transition: transform 0.2s ease;
     }
 
     .botao-ham span {
@@ -108,10 +128,11 @@ export const HeaderSysStyle = styled.header`
       height: 2px;
       margin-bottom: 5px;
       position: relative;
-      background: #000;
+      background: var(--accent-color);
       border-radius: 3px;
       transition: width 0.2s ease;
     }
+
     .botao-ham.active span {
       -webkit-transform: none;
       transform: none !important;
@@ -125,18 +146,18 @@ export const HeaderSysStyle = styled.header`
 
     .botao-ham.active span:nth-last-child(2) {
       opacity: 1;
-      transform: none ;
+      transform: none;
     }
 
     .botao-ham.active span:nth-last-child(3) {
       opacity: 1;
-      transform: none ;
-    }
-    #btn-collapse-sidemenu:hover .botao-ham span {
-      width: 14px;
+      transform: none;
     }
     #btn-collapse-sidemenu:active .botao-ham span {
-      width: 8px;
+      width: 14px;
+    }
+    #btn-collapse-sidemenu:active {
+      transform: scale(0.98);
     }
 
     .botao-ham span:last-child {
@@ -146,11 +167,8 @@ export const HeaderSysStyle = styled.header`
     body.toggle-sidemenu & #btn-collapse-sidemenu .botao-ham span {
       width: 6px;
     }
-    body.toggle-sidemenu & #btn-collapse-sidemenu:hover .botao-ham span {
-      width: 12px;
-    }
     body.toggle-sidemenu & #btn-collapse-sidemenu:active .botao-ham span {
-      width: 16px;
+      width: 12px;
     }
   }
 `;

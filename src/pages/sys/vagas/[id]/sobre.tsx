@@ -133,14 +133,13 @@ export function VagaSobrePage() {
                         data-reach-alert-dialog-actions
                       >
                         <Button
-                          className="secondary less-radius"
+                          className="secondary "
                           onClick={encerrarInscricoes}
                         >
                           Sim
                         </Button>
                         <br />
                         <Button
-                          className="less-radius"
                           ref={cancelRef}
                           onClick={closeDialog}
                         >
