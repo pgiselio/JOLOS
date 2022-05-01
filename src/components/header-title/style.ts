@@ -29,7 +29,7 @@ export const HeaderTitleStyle = styled.div`
     position: sticky;
     margin-top: 0;
     background: var(--navs-bg-opacity);
-    box-shadow: 0px 1px 4px rgb(0 0 0 / 8%) ,inset var(--navs-bg) 10px 9px 8px;
+    box-shadow: 0px 1px 4px rgb(0 0 0 / 8%);
     border-bottom: 1px solid ${(props) => props.theme.colors.systemMenu.border};
 
     .header-section {

@@ -117,6 +117,9 @@ export function CriarNovaVagaForm() {
         }
       });
   }
+  if (auth.type === "ALUNO") {
+    return <h2>SEM PERMISÃO</h2>;
+  }
   return (
     <form
       className="form-create-vaga"

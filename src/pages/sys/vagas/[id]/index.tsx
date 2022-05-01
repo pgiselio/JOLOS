@@ -3,7 +3,7 @@ import { Link, Outlet, useOutletContext, useParams } from "react-router-dom";
 
 import Error404 from "../../../404";
 import { TabsMenu, TabsMenuItem } from "../../../../components/tabs-menu";
-import { vaga } from "../vagaType";
+import { vaga } from "../../../../types/vagaType";
 import { useQuery } from "react-query";
 import { api } from "../../../../services/api";
 import { Skeleton } from "../../../../components/skeleton-load";

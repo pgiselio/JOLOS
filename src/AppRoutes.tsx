@@ -1,5 +1,5 @@
-import { lazy, Suspense } from "react";
-import { Routes, Route, useLocation } from "react-router-dom";
+import { lazy, Suspense, useEffect } from "react";
+import { Routes, Route, useLocation, useNavigate } from "react-router-dom";
 
 import { ModalRouter } from "./components/modal-router";
 import { RequireAuth } from "./contexts/AuthContext/RequireAuth";
@@ -24,15 +24,18 @@ import { LoadingPageLogo } from "./components/loadingPage/logo";
 import SettingContaPage from "./pages/sys/settings/conta";
 import DownloadCurriculoPage from "./pages/sys/download/curriculo/[id]";
 import { VerifiqueOSeuEmailPage } from "./pages/cadastro/verifique-seu-email";
+import NewAnswerForm from "./pages/sys/forum/[id]/reply";
 
 const ForumPage = lazy(() => import("./pages/sys/forum"));
+const ForumTopicPage = lazy(() => import("./pages/sys/forum/[id]"));
 const ProfilePage = lazy(() => import("./pages/sys/profile/[id]"));
 const SystemLayout = lazy(() => import("./pages/sys"));
 
 export const AppRoutes = () => {
   let location = useLocation();
-  let state = location.state as { modalLocation?: Location };
-
+  let state = location.state as {
+    modalLocation?: Location;
+  };
   return (
     <>
       <Routes location={state?.modalLocation || location}>
@@ -41,7 +44,7 @@ export const AppRoutes = () => {
         <Route path="entrar" element={<LoginPage />} />
         <Route path="cadastro" element={<CadastroLayout />}>
           <Route index element={<CadastroPage />} />
-          <Route path="confirmacao" element={<VerifiqueOSeuEmailPage/>}/>
+          <Route path="confirmacao" element={<VerifiqueOSeuEmailPage />} />
         </Route>
         <Route path="logout" element={<LogoutPage />} />
         <Route
@@ -82,6 +85,24 @@ export const AppRoutes = () => {
               </Suspense>
             }
           />
+          <Route
+            path="forum/:id"
+            element={
+              <Suspense fallback={<LoadingPage />}>
+                <ForumTopicPage />
+              </Suspense>
+            }
+          >
+            <Route
+              path="responder"
+              element={
+                <ModalRouter title="" toForm="new-answer-form">
+                  <NewAnswerForm />
+                </ModalRouter>
+              }
+            />
+          </Route>
+
           <Route path="settings" element={<SettingsPage />}>
             <Route path="conta" element={<SettingContaPage />} />
           </Route>

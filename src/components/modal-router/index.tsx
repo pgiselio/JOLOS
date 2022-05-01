@@ -19,17 +19,16 @@ export function ModalRouter({
   let closeRef = useRef<HTMLButtonElement>(null);
   const [closeClassNames, setCloseClassNames] = useState("");
   const preventDataLost = (event: any) => {
-    // Cancel the event as stated by the standard.
     event.preventDefault();
-
-    //Para customizar o texto, e é necessário para funcionar no Safari e Chrome, IE e Firefox anterior a versão 4
     event.returnValue = "";
   };
   useEffect(() => {
     window.addEventListener("beforeunload", preventDataLost);
+    return () => {
+      window.removeEventListener("beforeunload", preventDataLost);
+    };
   }, []);
   function onDismiss() {
-    window.removeEventListener("beforeunload", preventDataLost);
     navigate(-1);
   }
   function attentionToX() {

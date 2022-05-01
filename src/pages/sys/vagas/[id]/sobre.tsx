@@ -17,7 +17,7 @@ import CircularProgressFluent from "../../../../components/circular-progress-flu
 import { useAuth } from "../../../../hooks/useAuth";
 import { api } from "../../../../services/api";
 import { queryClient } from "../../../../services/queryClient";
-import { vaga } from "../vagaType";
+import { vaga } from "../../../../types/vagaType";
 
 export function VagaSobrePage() {
   const { data } = useVaga();

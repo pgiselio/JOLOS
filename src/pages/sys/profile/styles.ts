@@ -48,7 +48,6 @@ export const ProfilePageStyle = styled.section`
 
     gap: 10px;
     width: 100%;
-    min-width: 169px;
   }
 
   .user-actions button {

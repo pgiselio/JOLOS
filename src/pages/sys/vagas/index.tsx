@@ -9,7 +9,7 @@ import { OutsetHeadersCornerRadius } from "../../../components/outset-radius-to-
 import { VagaCard } from "../../../components/vagaCard";
 import { useAuth } from "../../../hooks/useAuth";
 import { api } from "../../../services/api";
-import { vaga } from "./vagaType";
+import { vaga } from "../../../types/vagaType";
 
 const CreateNewFAB = styled(FabButton)`
   display: fixed;
