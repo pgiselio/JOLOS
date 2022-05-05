@@ -1,8 +1,14 @@
 export type User = {
   id?: number;
   email?: string;
-  senha?: string;
-  status?: string;
+  status?: "PENDENTE" | "CONCLUIDO" | "DESATIVADO";
+  roles?: [
+    {
+      id: number;
+      nomeRole: string;
+      authority: string;
+    }
+  ];
   aluno?: {
     id: number;
     dadosPessoa: {
@@ -13,7 +19,7 @@ export type User = {
     resumo?: string;
     curso: string;
     periodo?: number;
-    cpf: string;
+    cpf?: string;
     curriculo?: number | {
       id: number;
       pdf: {
@@ -41,9 +47,5 @@ export type User = {
       instagram?: string;
     }
   };
-  authorities?: [
-    {
-      authority: string;
-    }
-  ];
+  
 };

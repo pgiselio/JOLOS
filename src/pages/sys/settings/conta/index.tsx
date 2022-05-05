@@ -151,7 +151,7 @@ export default function SettingContaPage() {
               <h4>Sobre mim</h4>
               <span className="subtittle">
                 Uma breve descrição sobre{" "}
-                {auth.type === "ALUNO" ? "você" : "a sua empresa"}
+                {auth?.authorities?.includes("ALUNO") ? "você" : "a sua empresa"}
               </span>
             </AccordionButton>
             <AccordionPanel>

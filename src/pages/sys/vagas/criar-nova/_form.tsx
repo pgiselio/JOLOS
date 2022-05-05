@@ -94,7 +94,7 @@ export function CriarNovaVagaForm() {
         localizacao: localidade,
         descricao,
         cnpj:
-          auth.type === "EMPRESA"
+          auth?.authorities?.includes("EMPRESA")
             ? empresaCNPJ
             : cnpj.replaceAll(".", "").replaceAll("/", "").replaceAll("-", ""),
         dataCriacao: new Date(),
@@ -117,7 +117,7 @@ export function CriarNovaVagaForm() {
         }
       });
   }
-  if (auth.type === "ALUNO") {
+  if (auth?.authorities?.includes("ALUNO")) {
     return <h2>SEM PERMISÃO</h2>;
   }
   return (
@@ -187,7 +187,7 @@ export function CriarNovaVagaForm() {
           </datalist>
         </div>
       </div>
-      {auth.type !== "EMPRESA" && (
+      {auth?.authorities?.includes("ADMIN") && (
         <div className="lbl">
           <label htmlFor="cnpj">CNPJ da empresa: </label>
           <Controller

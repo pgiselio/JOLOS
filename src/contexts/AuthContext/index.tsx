@@ -1,4 +1,4 @@
-import { createContext, useEffect, useState } from "react";
+import { createContext, useEffect, useRef, useState } from "react";
 import { useQuery } from "react-query";
 import { api } from "../../services/api";
 import { queryClient } from "../../services/queryClient";
@@ -10,8 +10,8 @@ export const AuthContext = createContext<IContext>({} as IContext);
 
 export function AuthProvider({ children }: IAuthProvider) {
   const [user, setUser] = useState<IUser | null>();
-  const [loadingUserFromLocalStorage, setLoadingUserFromLocalStorage] = useState(true);
-
+  const [loadingUserFromLocalStorage, setLoadingUserFromLocalStorage] =
+    useState(true);
   useEffect(() => {
     const user = getUserLocalStorage();
     if (user) {
@@ -19,12 +19,12 @@ export function AuthProvider({ children }: IAuthProvider) {
     }
     setLoadingUserFromLocalStorage(false);
   }, []);
-  
+
   const { data: userInfo } = useQuery<User>(
     ["meUser"],
     async () => {
       let user = getUserLocalStorage();
-      if (!user.email) {
+      if (!user?.email) {
         window.location.href = "/logout";
       }
       const response = await api
@@ -42,10 +42,20 @@ export function AuthProvider({ children }: IAuthProvider) {
     {
       enabled: !!user?.token,
       refetchOnWindowFocus: true,
-      staleTime: 1000 * 60, // 1 minute
+      staleTime: 1000 * 1, // 1 minute
       refetchInterval: 1000 * 60 * 5, // 5 minutes to refetch automatically
     }
   );
+
+  let authorities = useRef<string[]>([]);
+  useEffect(() => {
+    let authoritiesAux: string[] = [];
+    userInfo?.roles?.forEach((role: any) => {
+      authoritiesAux.push(role.nomeRole);
+    });
+    authorities.current = authoritiesAux;
+  }, [userInfo?.roles]);
+
   async function signin(email: string, password: string) {
     const response = await LoginRequest(email, password);
 
@@ -73,6 +83,7 @@ export function AuthProvider({ children }: IAuthProvider) {
         logout,
         loadingUserFromLocalStorage,
         userInfo,
+        authorities: authorities.current,
       }}
     >
       {children}

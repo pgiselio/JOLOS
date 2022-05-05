@@ -14,7 +14,7 @@ import { vaga } from "../../../types/vagaType";
 const CreateNewFAB = styled(FabButton)`
   display: fixed;
   @media (min-width: 766px) {
-    display: none
+    display: none;
   }
 `;
 const CreateNewButton = styled(Button)`
@@ -38,24 +38,24 @@ export function VagasList() {
   );
   let location = useLocation();
   const auth = useAuth();
-  const isAluno = auth.type === "ALUNO";
+  const isAluno = auth?.authorities?.includes("ALUNO");
   return (
     <section>
       <OutsetHeadersCornerRadius>
         <HeaderTitle>
-          <CreateNewFAB
-            className="FabCreateNew"
-            type="button"
-            onClick={() =>
-              navigate("criar", { state: { modalLocation: location } })
-            }
-          >
-            <i className="fa-solid fa-plus"></i>
-          </CreateNewFAB>
           {isAluno ? (
             <h2>Vagas disponíveis</h2>
           ) : (
             <>
+              <CreateNewFAB
+                className="FabCreateNew"
+                type="button"
+                onClick={() =>
+                  navigate("criar", { state: { modalLocation: location } })
+                }
+              >
+                <i className="fa-solid fa-plus"></i>
+              </CreateNewFAB>
               <h2>Vagas criadas</h2>
               <CreateNewButton
                 className="outlined"

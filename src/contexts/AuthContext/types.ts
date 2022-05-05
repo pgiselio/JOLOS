@@ -3,7 +3,6 @@ import { User } from "../../types/user";
 export interface IUser{
     email?: string;
     token?: string;
-    type?: string;
 }
 
 export interface IContext extends IUser {
@@ -11,6 +10,7 @@ export interface IContext extends IUser {
     logout: () => void;
     loadingUserFromLocalStorage: boolean;
     userInfo?: User;
+    authorities?: string[];
 }
 
 export interface IAuthProvider {

@@ -22,7 +22,7 @@ import { vaga } from "../../../../types/vagaType";
 export function VagaSobrePage() {
   const { data } = useVaga();
   const auth = useAuth();
-  const isAluno = auth.type === "ALUNO";
+  const isAluno = auth?.authorities?.includes("ALUNO");
   const [showDialog, setShowDialog] = useState(false);
   const openDialog = () => setShowDialog(true);
   const closeDialog = () => setShowDialog(false);

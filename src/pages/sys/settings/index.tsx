@@ -52,7 +52,7 @@ export default function SettingsPage() {
               <i className="fas fa-lock"></i>
               Conta e Segurança
             </TabSelector>
-            {(auth.userInfo?.aluno?.id || auth.userInfo.empresa?.id) && (
+            {!auth?.authorities?.includes("ADMIN") && (
               <TabSelector
                 isActive={selectedTab === "profile"}
                 onClick={() => {

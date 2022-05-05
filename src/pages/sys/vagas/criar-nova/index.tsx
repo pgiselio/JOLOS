@@ -5,7 +5,7 @@ import { CriarNovaVagaForm } from "./_form";
 
 export default function CriarNovaVagaPage() {
   const auth = useAuth();
-  if (auth.type === "ALUNO") {
+  if (auth?.authorities?.includes("ALUNO")) {
     return <h2>SEM PERMISÃO</h2>;
   }
   return (
