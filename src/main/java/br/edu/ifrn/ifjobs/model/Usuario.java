@@ -23,6 +23,7 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonSubTypes.Type;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -63,7 +64,6 @@ public class Usuario implements UserDetails {
     @Column(name = "codigo_auth")
     private String codigoAutenticacao;
 
-    @JsonCreator(mode = JsonCreator.Mode.DEFAULT)
     public Usuario() {
         super();
     }
@@ -194,6 +194,7 @@ public class Usuario implements UserDetails {
     }
 
     @Override
+    @JsonDeserialize(using = DescerializadorDeAutoridades.class)
     public Collection<? extends GrantedAuthority> getAuthorities() {
         List<SimpleGrantedAuthority> authorities = new ArrayList<>();
 
