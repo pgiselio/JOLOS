@@ -61,6 +61,7 @@ public class Usuario implements UserDetails {
     private String codigoAutenticacao;
 
     public Usuario() {
+        super();
     }
 
     public Usuario(int id, String email, String senha, StatusUsuario status) {
