@@ -185,7 +185,7 @@ public class Usuario implements UserDetails {
 
     @Override
     @JsonSubTypes({
-            @Type(value = SimpleGrantedAuthority.class, name = "autoridades")
+            @Type(value = Usuario.class, name = "usuario")
     })
     public Collection<? extends GrantedAuthority> getAuthorities() {
         List<SimpleGrantedAuthority> authorities = new ArrayList<>();
