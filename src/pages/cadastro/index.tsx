@@ -1,5 +1,5 @@
 import { useTabs } from "react-headless-tabs";
-import { Link, useNavigate, useOutletContext } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { Input } from "../../components/input";
 import { api } from "../../services/api";
@@ -72,7 +72,7 @@ export default function CadastroPage() {
       .then((response) => {
         if (response.status === 201) {
           toast.success("Cadastro realizado com sucesso!");
-          navigate("confirmacao");
+          navigate("step2");
         }
       })
       .catch(() => {

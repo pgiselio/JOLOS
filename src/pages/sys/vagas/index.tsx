@@ -43,9 +43,7 @@ export function VagasList() {
     <section>
       <OutsetHeadersCornerRadius>
         <HeaderTitle>
-          {isAluno ? (
-            <h2>Vagas disponíveis</h2>
-          ) : (
+          {!isAluno ? (
             <>
               <CreateNewFAB
                 className="FabCreateNew"
@@ -69,6 +67,8 @@ export function VagasList() {
                 Criar nova
               </CreateNewButton>
             </>
+          ) : (
+            <h2>Vagas disponíveis</h2>
           )}
         </HeaderTitle>
       </OutsetHeadersCornerRadius>

@@ -1,5 +1,5 @@
-import { lazy, Suspense, useEffect } from "react";
-import { Routes, Route, useLocation, useNavigate } from "react-router-dom";
+import { lazy, Suspense } from "react";
+import { Routes, Route, useLocation } from "react-router-dom";
 
 import { ModalRouter } from "./components/modal-router";
 import { RequireAuth } from "./contexts/AuthContext/RequireAuth";
@@ -23,8 +23,9 @@ import { LoadingPage } from "./components/loadingPage";
 import { LoadingPageLogo } from "./components/loadingPage/logo";
 import SettingContaPage from "./pages/sys/settings/conta";
 import DownloadCurriculoPage from "./pages/sys/download/curriculo/[id]";
-import { VerifiqueOSeuEmailPage } from "./pages/cadastro/verifique-seu-email";
+import VerifiqueOSeuEmailPage from "./pages/cadastro/step2";
 import NewAnswerForm from "./pages/sys/forum/[id]/reply";
+import { CadastroStep3 } from "./pages/cadastro/step3";
 
 const ForumPage = lazy(() => import("./pages/sys/forum"));
 const ForumTopicPage = lazy(() => import("./pages/sys/forum/[id]"));
@@ -44,7 +45,8 @@ export const AppRoutes = () => {
         <Route path="entrar" element={<LoginPage />} />
         <Route path="cadastro" element={<CadastroLayout />}>
           <Route index element={<CadastroPage />} />
-          <Route path="confirmacao" element={<VerifiqueOSeuEmailPage />} />
+          <Route path="step2" element={<VerifiqueOSeuEmailPage />} />
+          <Route path="step3" element={<CadastroStep3 />} />
         </Route>
         <Route path="logout" element={<LogoutPage />} />
         <Route

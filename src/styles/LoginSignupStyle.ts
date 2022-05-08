@@ -110,9 +110,10 @@ export const StyledAccess = styled.main`
     height: 8px;
     border-radius: 10px;
     background: var(--outline-color);
+    transition: width .4s ease, background .4s ease;
   }
   .progress > span.active {
-    background: var(--accent-color);
+    background: var(--accent-color-active);
     width: 20px;
   }
   .progress > span.done {
@@ -122,6 +123,9 @@ export const StyledAccess = styled.main`
     display: flex;
     flex-direction: column;
     gap: 10px;
+  }
+  .input-group.no-wrap{
+    flex-direction: row;
   }
   .desc {
     margin-top: 0;

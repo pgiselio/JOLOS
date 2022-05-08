@@ -45,6 +45,7 @@ export const Input = React.forwardRef( function ({ name, type, icon, ...rest }: 
       </InputContainer>
     );
   }else{
-    return <InputStyled type={type} name={name} ref={ref} {...rest} />;
+    return <InputContainer><InputStyled type={type} {...icon && {hasIcon: true}} name={name} ref={ref} {...rest} /> {icon && <i className={icon}></i>}
+    </InputContainer>;
   }
 })

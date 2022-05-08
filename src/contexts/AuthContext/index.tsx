@@ -46,7 +46,7 @@ export function AuthProvider({ children }: IAuthProvider) {
       refetchInterval: 1000 * 60 * 5, // 5 minutes to refetch automatically
     }
   );
-
+  
   let authorities = useRef<string[]>([]);
   useEffect(() => {
     let authoritiesAux: string[] = [];
