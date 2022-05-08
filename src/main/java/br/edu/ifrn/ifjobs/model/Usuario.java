@@ -57,9 +57,8 @@ public class Usuario implements UserDetails {
     @OneToOne
     private Empresa empresa;
 
-    public void addRole(Role role) {
-        this.roles.add(role);
-    }
+    @Column(name = "codigo_auth")
+    private String codigoAutenticacao;
 
     public Usuario() {
     }
@@ -167,6 +166,18 @@ public class Usuario implements UserDetails {
      */
     public void setRoles(Set<Role> roles) {
         this.roles = roles;
+    }
+
+    public String getCodigoAutenticacao() {
+        return codigoAutenticacao;
+    }
+
+    public void setCodigoAutenticacao(String codigoAutenticacao) {
+        this.codigoAutenticacao = codigoAutenticacao;
+    }
+
+    public void addRole(Role role) {
+        this.roles.add(role);
     }
 
     @Override
