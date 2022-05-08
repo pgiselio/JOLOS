@@ -223,6 +223,8 @@ public class UsuarioService {
 
         JsonNode patched = patch.apply(convertValue);
 
+        System.out.println(patched);
+
         Usuario usuarioModificado = mapper.treeToValue(patched, Usuario.class);
 
         return usuarioRepository.save(usuarioModificado);
