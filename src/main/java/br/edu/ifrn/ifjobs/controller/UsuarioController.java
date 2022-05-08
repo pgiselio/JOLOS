@@ -120,15 +120,14 @@ public class UsuarioController {
     @PatchMapping("/{id}")
     public ResponseEntity<UsuarioGetDTO> atualizaCampo(@PathVariable(name = "id") int id,
             @RequestBody JsonPatch jsonPatch) {
-        Usuario usuarioAtualizado = null;
+        Usuario usuarioAtualizado;
 
         try {
             usuarioAtualizado = usuarioService.atualizaCampos(id, jsonPatch);
         } catch (UsuarioNaoEncontradoException e) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
         } catch (JsonProcessingException | IllegalArgumentException | JsonPatchException e) {
-            e.printStackTrace();
-            // throw new ResponseStatusException(HttpStatus.BAD_GATEWAY, e.getMessage());
+            throw new ResponseStatusException(HttpStatus.BAD_GATEWAY, e.getMessage());
         }
 
         UsuarioGetDTO dtoConvert = new UsuarioGetDTO();
