@@ -8,12 +8,15 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+
 import org.springframework.security.core.GrantedAuthority;
 
 import br.edu.ifrn.ifjobs.model.enums.TipoUsuario;
 
 @Entity
 @Table(name = "role_tb")
+@JsonDeserialize(as = Usuario.class)
 public class Role implements GrantedAuthority {
 
     private static final Long serialVersionUID = 54L;
