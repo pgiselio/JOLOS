@@ -4,15 +4,17 @@ import { AuthProvider } from "./contexts/AuthContext";
 
 import { ThemeProvider } from "styled-components";
 import { lightTheme } from "./styles/themes";
-import "@reach/accordion/styles.css";
-import "@reach/dialog/styles.css";
-import "./styles/reach-ui.css";
 import { GlobalStyle } from "./styles/global";
 import { BrowserRouter } from "react-router-dom";
 import { AppRoutes } from "./AppRoutes";
 import ScrollToTop from "./utils/scrollToTop";
 import { QueryClientProvider } from "react-query";
 import { queryClient } from "./services/queryClient";
+
+import "@reach/accordion/styles.css";
+import "@reach/dialog/styles.css";
+import "./styles/reach-ui.css";
+import "react-toastify/dist/ReactToastify.min.css";
 function App() {
   return (
     <>

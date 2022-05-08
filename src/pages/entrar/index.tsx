@@ -7,7 +7,6 @@ import { useEffect, useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 
 import { AccessGlobalStyle, StyledAccess } from "../../styles/LoginSignupStyle";
-import "react-toastify/dist/ReactToastify.min.css";
 import CircularProgressFluent from "../../components/circular-progress-fluent";
 
 export default function LoginPage() {
@@ -17,7 +16,7 @@ export default function LoginPage() {
   const { control, formState, handleSubmit } = useForm({
     mode: "onChange",
     defaultValues: {
-      email: "jolos@jolos.com",
+      email: "jolos.aluno@jolos.com",
       password: "jolos",
     },
   });
@@ -32,7 +31,7 @@ export default function LoginPage() {
 
   const paramsError = searchParams.getAll("error");
   useEffect(() => {
-    if (paramsError) {
+    if (searchParams.has("error")) {
       paramsError.forEach((error) => {
         if (error === "needsLogin") {
           toast.error("Você precisa fazer login primeiro!", {});
@@ -40,7 +39,8 @@ export default function LoginPage() {
           toast.error("Sua sessão expirou, faça login novamente!", {});
         }
       });
-      setSearchParams("");
+      searchParams.delete("error");
+      setSearchParams(searchParams);
     }
   }, []);
 

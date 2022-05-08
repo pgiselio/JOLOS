@@ -1,8 +1,10 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 export function LandNavBar() {
   const [menuState, setMenuState] = useState(false);
   const [accessState, setAccessState] = useState(false);
+  let navigate = useNavigate();
   return (
     <>
       <header className="landing navigate-container">
@@ -43,8 +45,7 @@ export function LandNavBar() {
                 type="button"
                 className={"access-bt " + (accessState ? "active" : "")}
                 onClick={() => {
-                  setMenuState(false);
-                  setAccessState(!accessState);
+                  navigate("entrar");
                 }}
               ></button>
               <div className={"acesso-mobile " + (accessState ? "active" : "")}>
