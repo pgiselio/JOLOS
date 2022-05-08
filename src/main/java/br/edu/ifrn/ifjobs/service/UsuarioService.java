@@ -218,7 +218,6 @@ public class UsuarioService {
 
         Usuario usuarioBuscadoPorId = buscaPorId(id);
 
-        System.out.println(usuarioBuscadoPorId.getAluno().getDadosPessoa().getNome());
         JsonNode convertValue;
         convertValue = mapper.convertValue(usuarioBuscadoPorId, JsonNode.class);
 
@@ -226,7 +225,6 @@ public class UsuarioService {
 
         Usuario usuarioModificado = mapper.treeToValue(patched, Usuario.class);
 
-        System.out.println(usuarioModificado.getAluno().getDadosPessoa().getNome());
         return usuarioRepository.save(usuarioModificado);
     }
 
