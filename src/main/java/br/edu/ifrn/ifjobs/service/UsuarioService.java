@@ -218,13 +218,15 @@ public class UsuarioService {
 
         Usuario usuarioBuscadoPorId = buscaPorId(id);
 
+        System.out.println(usuarioBuscadoPorId);
         JsonNode convertValue;
         convertValue = mapper.convertValue(usuarioBuscadoPorId, JsonNode.class);
 
         JsonNode patched = patch.apply(convertValue);
 
+        System.out.println(patched);
         Usuario usuarioModificado = mapper.treeToValue(patched, Usuario.class);
-
+        System.out.println(usuarioModificado);
         return create(usuarioModificado);
     }
 
