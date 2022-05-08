@@ -130,6 +130,7 @@ public class UsuarioController {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
         }
 
+        System.out.println(usuarioAtualizado);
         UsuarioGetDTO dtoConvert = new UsuarioGetDTO();
         UsuarioGetDTO entityToDto = dtoConvert.convertEntityToDto(usuarioAtualizado);
 
