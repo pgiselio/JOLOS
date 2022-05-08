@@ -125,10 +125,8 @@ public class UsuarioController {
         try {
             usuarioAtualizado = usuarioService.atualizaCampos(id, jsonPatch);
         } catch (UsuarioNaoEncontradoException | UsuarioNaoCadastradoException e) {
-            System.out.println(e.getMessage());
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
         } catch (JsonProcessingException | IllegalArgumentException | JsonPatchException e) {
-            System.out.println(e.getMessage());
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
         }
 
