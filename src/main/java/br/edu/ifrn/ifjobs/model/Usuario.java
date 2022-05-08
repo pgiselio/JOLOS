@@ -63,7 +63,7 @@ public class Usuario implements UserDetails {
     @Column(name = "codigo_auth")
     private String codigoAutenticacao;
 
-    @JsonCreator
+    @JsonCreator(mode = JsonCreator.Mode.DEFAULT)
     public Usuario() {
         super();
     }
