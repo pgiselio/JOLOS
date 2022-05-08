@@ -225,7 +225,7 @@ public class UsuarioService {
 
         Usuario usuarioModificado = mapper.treeToValue(patched, Usuario.class);
 
-        return usuarioRepository.save(usuarioModificado);
+        return usuarioRepository.saveAndFlush(usuarioModificado);
     }
 
     public Usuario delete(Usuario usuario) throws Exception {
