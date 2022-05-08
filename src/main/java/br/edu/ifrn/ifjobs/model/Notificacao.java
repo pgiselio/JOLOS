@@ -1,5 +1,6 @@
 package br.edu.ifrn.ifjobs.model;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 
 import javax.persistence.Column;
@@ -9,7 +10,9 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
-public class Notificacao {
+public class Notificacao implements Serializable {
+
+    private static final long serialVersionUID = 12313425L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
