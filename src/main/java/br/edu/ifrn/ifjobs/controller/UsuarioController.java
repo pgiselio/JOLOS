@@ -124,6 +124,7 @@ public class UsuarioController {
 
         try {
             usuarioAtualizado = usuarioService.atualizaCampos(id, jsonPatch);
+            System.out.println(usuarioAtualizado);
         } catch (UsuarioNaoEncontradoException e) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
         } catch (JsonProcessingException | IllegalArgumentException | JsonPatchException e) {
