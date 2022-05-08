@@ -125,12 +125,10 @@ public class UsuarioController {
         try {
             usuarioAtualizado = usuarioService.atualizaCampos(id, jsonPatch);
             System.out.println(usuarioAtualizado);
-        } catch (UsuarioNaoEncontradoException | UsuarioNaoCadastradoException e) {
-            e.printStackTrace();
-            // throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
+        } catch (UsuarioNaoEncontradoException e) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
         } catch (JsonProcessingException | IllegalArgumentException | JsonPatchException e) {
-            e.printStackTrace();
-            // throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
         }
 
         UsuarioGetDTO dtoConvert = new UsuarioGetDTO();
