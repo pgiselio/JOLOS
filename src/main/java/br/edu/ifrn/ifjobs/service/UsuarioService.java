@@ -127,6 +127,15 @@ public class UsuarioService {
         return usuarioOptional.orElseThrow(() -> new UsuarioNaoCadastradoException("Usuário não cadastrado!"));
     }
 
+    public Usuario atualizaUsuario(Usuario usuario) throws UsuarioNaoCadastradoException {
+        Optional<Usuario> optional;
+        optional = Optional.ofNullable(usuario);
+
+        optional.ifPresent(usuarioRepository::save);
+
+        return optional.orElseThrow(() -> new UsuarioNaoCadastradoException("Usuário não cadastrado!"));
+    }
+
     private void mensagemEmailBaseadoNoTipoUsuario(TipoUsuario tipoUsuario, Email email) throws IOException {
         final Document doc;
 
@@ -213,7 +222,7 @@ public class UsuarioService {
 
     public Usuario atualizaCampos(int id, JsonPatch patch)
             throws UsuarioNaoEncontradoException, JsonProcessingException,
-            IllegalArgumentException, JsonPatchException {
+            IllegalArgumentException, JsonPatchException, UsuarioNaoCadastradoException {
         ObjectMapper mapper = new ObjectMapper();
 
         Usuario usuarioBuscadoPorId = buscaPorId(id);
@@ -224,8 +233,8 @@ public class UsuarioService {
         JsonNode patched = patch.apply(convertValue);
 
         Usuario usuarioModificado = mapper.treeToValue(patched, Usuario.class);
-        System.out.println(usuarioModificado.getAluno().getDadosPessoa().getNome());
-        return usuarioRepository.saveAndFlush(usuarioModificado);
+
+        return atualizaUsuario(usuarioModificado);
     }
 
     public Usuario delete(Usuario usuario) throws Exception {
