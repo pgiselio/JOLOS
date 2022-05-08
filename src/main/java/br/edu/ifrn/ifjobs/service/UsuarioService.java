@@ -163,6 +163,10 @@ public class UsuarioService {
         }
     }
 
+    public List<Usuario> buscaTodosPorStatus(StatusUsuario status) {
+        return usuarioRepository.findAllByStatus(status);
+    }
+
     public Usuario buscaPorId(int id) throws UsuarioNaoEncontradoException {
         Optional<Usuario> usuarioFindById = usuarioRepository.findById(id);
         return usuarioFindById.orElseThrow(() -> new UsuarioNaoEncontradoException("Usuário não encontrado!!"));
