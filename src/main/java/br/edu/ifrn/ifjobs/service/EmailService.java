@@ -23,6 +23,9 @@ public class EmailService {
     @Value("${spring.mail.username}")
     private String emailBase;
 
+    @Value("${spring.mail.properties.EnderecoEmailCoex}")
+    private String emailCoex;
+
     public void enviaEmail(Email email) throws MessagingException, UnsupportedEncodingException {
         MimeMessage mimeMessage = envio.createMimeMessage();
         MimeMessageHelper mimeMessageHelper = new MimeMessageHelper(mimeMessage, false, "utf-8");
@@ -34,5 +37,13 @@ public class EmailService {
         mimeMessageHelper.setFrom(new InternetAddress(emailBase, "IF Jobs"));
 
         envio.send(mimeMessage);
+    }
+
+    public String getEmailBase() {
+        return emailBase;
+    }
+
+    public String getEmailCoex() {
+        return emailCoex;
     }
 }
