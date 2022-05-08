@@ -122,6 +122,7 @@ public class UsuarioController {
             @RequestBody JsonPatch jsonPatch) {
         Usuario usuarioAtualizado;
 
+        System.out.println(jsonPatch.toString());
         try {
             usuarioAtualizado = usuarioService.atualizaCampos(id, jsonPatch);
         } catch (UsuarioNaoEncontradoException | UsuarioNaoCadastradoException e) {
