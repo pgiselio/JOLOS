@@ -19,6 +19,7 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonSubTypes.Type;
@@ -62,6 +63,7 @@ public class Usuario implements UserDetails {
     @Column(name = "codigo_auth")
     private String codigoAutenticacao;
 
+    @JsonCreator
     public Usuario() {
         super();
     }
@@ -71,6 +73,14 @@ public class Usuario implements UserDetails {
         this.email = email;
         this.senha = senha;
         this.status = status;
+    }
+
+    public Usuario(int id, String email, StatusUsuario status, Aluno aluno, Empresa empresa) {
+        this.id = id;
+        this.email = email;
+        this.status = status;
+        this.aluno = aluno;
+        this.empresa = empresa;
     }
 
     /**
@@ -184,9 +194,6 @@ public class Usuario implements UserDetails {
     }
 
     @Override
-    @JsonSubTypes({
-            @Type(value = Usuario.class, name = "usuario")
-    })
     public Collection<? extends GrantedAuthority> getAuthorities() {
         List<SimpleGrantedAuthority> authorities = new ArrayList<>();
 
