@@ -1,5 +1,21 @@
 import styled from "styled-components";
 
+export const SidebarOverlay = styled.div`
+  body.toggle-sidemenu & {
+    background: hsla(0, 0%, 0%, 0.33);
+    position: fixed;
+    top: calc(var(--top-bar-height) + 1px);
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 19;
+    animation: fade 0.2s ease;
+  }
+  @media (min-width: 768px) {
+    display: none;
+    pointer-events: none;
+  }
+`;
 export const SidebarAside = styled.aside`
   //Sidebar List
   grid-area: menu;
@@ -32,7 +48,7 @@ export const SidebarAside = styled.aside`
     align-items: center;
     justify-content: center;
     gap: 10px;
-    transition: gap .3s ease ;
+    transition: gap 0.3s ease;
   }
 
   .profile-pic {
