@@ -224,7 +224,7 @@ public class UsuarioService {
         JsonNode patched = patch.apply(convertValue);
 
         Usuario usuarioModificado = mapper.treeToValue(patched, Usuario.class);
-        System.out.println(usuarioModificado);
+        System.out.println(usuarioModificado.getAluno().getDadosPessoa().getNome());
         return usuarioRepository.saveAndFlush(usuarioModificado);
     }
 
