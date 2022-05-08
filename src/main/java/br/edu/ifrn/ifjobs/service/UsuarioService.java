@@ -212,7 +212,7 @@ public class UsuarioService {
     }
 
     public Usuario atualizaCampos(int id, JsonPatch patch)
-            throws UsuarioNaoEncontradoException, UsuarioNaoCadastradoException, JsonProcessingException,
+            throws UsuarioNaoEncontradoException, JsonProcessingException,
             IllegalArgumentException, JsonPatchException {
         ObjectMapper mapper = new ObjectMapper();
 
@@ -222,8 +222,6 @@ public class UsuarioService {
         convertValue = mapper.convertValue(usuarioBuscadoPorId, JsonNode.class);
 
         JsonNode patched = patch.apply(convertValue);
-
-        System.out.println(patched);
 
         Usuario usuarioModificado = mapper.treeToValue(patched, Usuario.class);
 
