@@ -127,7 +127,7 @@ public class UsuarioController {
         } catch (UsuarioNaoEncontradoException | UsuarioNaoCadastradoException e) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
         } catch (JsonProcessingException | IllegalArgumentException | JsonPatchException e) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
         }
 
         UsuarioGetDTO dtoConvert = new UsuarioGetDTO();
