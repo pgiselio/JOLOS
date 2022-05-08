@@ -36,7 +36,7 @@ public class CurriculoService {
             throws IOException, UsuarioNaoEncontradoException {
         final Arquivo arquivo = construcaoArquivoBaseadoNoMultipartFile(multipartFile, email);
 
-        final Curriculo curriculo = construcaoCurriculoBaseadoNoArquivo(arquivo);
+        construcaoCurriculoBaseadoNoArquivo(arquivo);
 
     }
 
