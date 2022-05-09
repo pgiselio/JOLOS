@@ -105,6 +105,17 @@ public class UsuarioController {
         return ResponseEntity.ok().body(usuario);
     }
 
+    @GetMapping("/validacao/{email}/{codigo}")
+    public ResponseEntity<String> validaCodigo(@PathVariable(name = "email") String email,
+            @PathVariable(name = "codigo") String codigo) {
+        try {
+            usuarioService.validaCodigo(email, codigo);
+        } catch (UsuarioNaoEncontradoException | RuntimeException e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+        return ResponseEntity.ok().body("Código validado com sucesso!");
+    }
+
     @GetMapping("/")
     public ResponseEntity<List<UsuarioLoginGetDTO>> buscaUsuarios() {
         List<Usuario> usuarios = usuarioService.getAll();
