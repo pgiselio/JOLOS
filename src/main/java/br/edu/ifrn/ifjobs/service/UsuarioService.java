@@ -1,10 +1,9 @@
 package br.edu.ifrn.ifjobs.service;
 
-import java.io.File;
 import java.io.IOException;
-import java.io.UnsupportedEncodingException;
 import java.util.List;
 import java.util.Optional;
+import java.util.Random;
 import java.util.function.Supplier;
 
 import javax.mail.MessagingException;
@@ -15,30 +14,24 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.fge.jsonpatch.JsonPatch;
 import com.github.fge.jsonpatch.JsonPatchException;
 
-import org.jsoup.Jsoup;
-import org.jsoup.nodes.Document;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.scheduling.annotation.Async;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import br.edu.ifrn.ifjobs.dto.usuario.UsuarioInsertDTO;
 import br.edu.ifrn.ifjobs.exception.UsuarioNaoCadastradoException;
 import br.edu.ifrn.ifjobs.exception.UsuarioNaoEncontradoException;
-import br.edu.ifrn.ifjobs.model.Email;
 import br.edu.ifrn.ifjobs.model.Role;
 import br.edu.ifrn.ifjobs.model.Usuario;
 import br.edu.ifrn.ifjobs.model.enums.StatusUsuario;
 import br.edu.ifrn.ifjobs.model.enums.TipoUsuario;
 import br.edu.ifrn.ifjobs.repository.RoleRepository;
 import br.edu.ifrn.ifjobs.repository.UsuarioRepository;
+import freemarker.template.TemplateException;
 
 @Service
 public class UsuarioService {
-
-    @Value("${spring.mail.username}")
-    private String emailBase;
 
     @Value("${spring.html.CadastroAluno}")
     private String caminhoArquivoEmailAluno;
@@ -68,15 +61,18 @@ public class UsuarioService {
     private Optional<Usuario> processoDeSalvarUsuarioeDispararEmail(Optional<UsuarioInsertDTO> optional) {
         return optional.map(dto -> {
             Usuario usuario = dto.convertDtoToEntity();
+            usuario.setSenha(dto.getSenha());
 
-            Email email = new Email();
-            email.setAssunto("IF Jobs - Confirmação de cadastro");
+            Random random = new Random();
+            int numero = random.nextInt(999999);
+            String codigo = String.format("%06d", numero);
+            usuario.setCodigoAutenticacao(codigo);
+            usuario.setStatus(StatusUsuario.PENDENTE);
+            usuario.addRole(new Role(TipoUsuario.USUARIO));
 
-            configPadraoAoCriarUsuario(usuario, email);
+            usuarioRepository.save(usuario);
 
-            verificaSeEPossivelEnviarEmail(dto, email);
-
-            enviaEmail(email);
+            enviaEmailParaUsuarioBaseadoNoTipoUsuario(dto.getTipoUsuario(), usuario);
 
             addRolesParaUsuarioBaseadoNoTipoUsuario(usuario, dto.getTipoUsuario());
 
@@ -84,10 +80,11 @@ public class UsuarioService {
         });
     }
 
-    private void verificaSeEPossivelEnviarEmail(UsuarioInsertDTO dto, Email email) {
+    @Async
+    private void enviaEmailParaUsuarioBaseadoNoTipoUsuario(TipoUsuario tipoUsuario, Usuario usuario) {
         try {
-            mensagemEmailBaseadoNoTipoUsuario(dto.getTipoUsuario(), email);
-        } catch (IOException e) {
+            mensagemEmailBaseadoNoTipoUsuario(tipoUsuario, usuario);
+        } catch (IOException | MessagingException | TemplateException e) {
             throw new RuntimeException(e.getMessage());
         }
     }
@@ -95,36 +92,6 @@ public class UsuarioService {
     private void addRolesParaUsuarioBaseadoNoTipoUsuario(Usuario usuario, TipoUsuario tipoUsuario) {
         Role role = roleRepository.findByTipoUsuario(tipoUsuario);
         usuario.addRole(role);
-    }
-
-    private void configPadraoAoCriarUsuario(Usuario usuario, Email email) {
-        criptografaSenha(usuario);
-        usuario.setStatus(StatusUsuario.PENDENTE);
-        addRolePadraoParaUsuario(usuario);
-
-        configPadraoAoCriarEmail(email, usuario);
-    }
-
-    private void configPadraoAoCriarEmail(Email email, Usuario usuario) {
-        email.setHtml(true);
-        email.setDestinatario(usuario.getEmail());
-        email.setRemetente(this.emailBase);
-    }
-
-    public Usuario create(Usuario usuario) throws UsuarioNaoCadastradoException {
-        Optional<Usuario> optional;
-        optional = Optional.ofNullable(usuario);
-
-        Optional<Usuario> usuarioOptional;
-        usuarioOptional = optional.map(user -> {
-            Email email = new Email();
-            configPadraoAoCriarUsuario(user, email);
-            enviaEmail(email);
-
-            return usuarioRepository.save(user);
-        });
-
-        return usuarioOptional.orElseThrow(() -> new UsuarioNaoCadastradoException("Usuário não cadastrado!"));
     }
 
     public Usuario atualizaUsuario(Usuario usuario) throws UsuarioNaoCadastradoException {
@@ -139,39 +106,19 @@ public class UsuarioService {
         return optional.orElseThrow(() -> new UsuarioNaoCadastradoException("Usuário não cadastrado!"));
     }
 
-    private void mensagemEmailBaseadoNoTipoUsuario(TipoUsuario tipoUsuario, Email email) throws IOException {
-        final Document doc;
+    private void mensagemEmailBaseadoNoTipoUsuario(TipoUsuario tipoUsuario, Usuario usuario)
+            throws IOException, MessagingException, TemplateException {
+        final String assuntoConfirmacao = "IF Jobs - Confirmação de cadastro";
 
         switch (tipoUsuario) {
             case ALUNO:
-                doc = Jsoup.parse(new File(caminhoArquivoEmailAluno), "UTF-8");
-                email.setMensagem(doc.toString());
+                emailService.enviaEmail(usuario, caminhoArquivoEmailAluno, assuntoConfirmacao);
                 break;
             case EMPRESA:
-                doc = Jsoup.parse(new File(caminhoArquivoEmailEmpresa), "UTF-8");
-                email.setMensagem(doc.toString());
+                emailService.enviaEmail(usuario, caminhoArquivoEmailEmpresa, assuntoConfirmacao);
                 break;
             default:
                 throw new IllegalArgumentException("Tipo de usuário inválido para criação!");
-        }
-    }
-
-    private void addRolePadraoParaUsuario(Usuario user) {
-        Role roleUsuario = roleRepository.findByTipoUsuario(TipoUsuario.USUARIO);
-        user.addRole(roleUsuario);
-    }
-
-    private void criptografaSenha(Usuario usuario) {
-        BCryptPasswordEncoder ciptografo = new BCryptPasswordEncoder();
-        usuario.setSenha(ciptografo.encode(usuario.getSenha()));
-    }
-
-    @Async
-    private void enviaEmail(Email email) {
-        try {
-            emailService.enviaEmail(email);
-        } catch (UnsupportedEncodingException | MessagingException e) {
-            throw new RuntimeException("Erro ao enviar email, logo não cadastrado!");
         }
     }
 
