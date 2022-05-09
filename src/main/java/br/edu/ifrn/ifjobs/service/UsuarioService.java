@@ -99,7 +99,8 @@ public class UsuarioService {
         optional = Optional.ofNullable(usuario);
 
         optional.ifPresent(user -> {
-            final Usuario usuarioSalvo = user;
+            Usuario usuarioSalvo = usuarioRepository.save(user);
+            usuarioSalvo = user;
             usuarioRepository.save(usuarioSalvo);
         });
 
