@@ -17,6 +17,7 @@ import com.github.fge.jsonpatch.JsonPatchException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.scheduling.annotation.Async;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import br.edu.ifrn.ifjobs.dto.usuario.UsuarioInsertDTO;
@@ -61,7 +62,7 @@ public class UsuarioService {
     private Optional<Usuario> processoDeSalvarUsuarioeDispararEmail(Optional<UsuarioInsertDTO> optional) {
         return optional.map(dto -> {
             Usuario usuario = dto.convertDtoToEntity();
-            usuario.setSenha(dto.getSenha());
+            usuario.setSenha(new BCryptPasswordEncoder().encode(dto.getSenha()));
 
             Random random = new Random();
             int numero = random.nextInt(999999);
@@ -98,11 +99,7 @@ public class UsuarioService {
         Optional<Usuario> optional;
         optional = Optional.ofNullable(usuario);
 
-        optional.ifPresent(user -> {
-            Usuario salvo = usuarioRepository.save(user);
-
-            usuarioRepository.save(salvo);
-        });
+        optional.ifPresent(usuarioRepository::save);
 
         return optional.orElseThrow(() -> new UsuarioNaoCadastradoException("Usuário não cadastrado!"));
     }
