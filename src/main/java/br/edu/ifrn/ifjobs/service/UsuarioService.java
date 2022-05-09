@@ -104,8 +104,12 @@ public class UsuarioService {
             u.setEmail(user.getEmail());
             if (user.getEmpresa() != null) {
                 u.getEmpresa().setDadosPessoa(user.getEmpresa().getDadosPessoa());
+                u.getEmpresa().setRedesSociais(user.getEmpresa().getRedesSociais());
+                u.getEmpresa().setResumo(user.getEmpresa().getResumo());
+                u.getEmpresa().setTelefone(user.getEmpresa().getTelefone());
             } else if (user.getAluno() != null) {
                 u.getAluno().setDadosPessoa(user.getAluno().getDadosPessoa());
+                u.getAluno().setResumo(user.getAluno().getResumo());
             }
             u.setCodigoAutenticacao(user.getCodigoAutenticacao());
             u.setStatus(user.getStatus());
