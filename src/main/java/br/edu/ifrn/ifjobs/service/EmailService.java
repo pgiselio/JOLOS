@@ -1,6 +1,11 @@
 package br.edu.ifrn.ifjobs.service;
 
+import java.io.File;
+import java.io.IOException;
+import java.io.StringWriter;
 import java.io.UnsupportedEncodingException;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.mail.MessagingException;
 import javax.mail.internet.InternetAddress;
@@ -12,7 +17,10 @@ import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
 
-import br.edu.ifrn.ifjobs.model.Email;
+import br.edu.ifrn.ifjobs.dto.usuario.UsuarioEmailDTO;
+import br.edu.ifrn.ifjobs.model.Usuario;
+import freemarker.template.Configuration;
+import freemarker.template.TemplateException;
 
 @Service
 public class EmailService {
@@ -20,23 +28,39 @@ public class EmailService {
     @Autowired
     private JavaMailSender envio;
 
+    @Autowired
+    private Configuration configuration;
+
     @Value("${spring.mail.username}")
     private String emailBase;
 
     @Value("${spring.mail.properties.EnderecoEmailCoex}")
     private String emailCoex;
 
-    public void enviaEmail(Email email) throws MessagingException, UnsupportedEncodingException {
+    public void enviaEmail(Usuario usuario, String caminhoArquivo, String assunto)
+            throws MessagingException, UnsupportedEncodingException, IOException, TemplateException {
         MimeMessage mimeMessage = envio.createMimeMessage();
         MimeMessageHelper mimeMessageHelper = new MimeMessageHelper(mimeMessage, false, "utf-8");
 
-        mimeMessageHelper.setText(email.getMensagem(), email.isHtml());
-        mimeMessageHelper.setReplyTo(email.getRemetente());
-        mimeMessageHelper.setSubject(email.getAssunto());
-        mimeMessageHelper.setTo(email.getDestinatario());
+        mimeMessageHelper.setReplyTo(emailCoex);
+        mimeMessageHelper.setSubject(assunto);
+        mimeMessageHelper.setTo(usuario.getEmail());
         mimeMessageHelper.setFrom(new InternetAddress(emailBase, "IF Jobs"));
+        String conteudoEmail = getEmailContent(usuario, caminhoArquivo);
+        mimeMessageHelper.setText(conteudoEmail, true);
 
         envio.send(mimeMessage);
+    }
+
+    private String getEmailContent(Usuario usuario, String caminhoArquivo) throws IOException, TemplateException {
+        StringWriter stringWriter = new StringWriter();
+        Map<String, Object> model = new HashMap<>();
+        UsuarioEmailDTO dto = new UsuarioEmailDTO(usuario);
+        model.put("usuario", dto);
+        configuration.setDirectoryForTemplateLoading(new File("src/main/resources/template/"));
+        freemarker.template.Template template = configuration.getTemplate(caminhoArquivo);
+        template.process(model, stringWriter);
+        return stringWriter.getBuffer().toString();
     }
 
     public String getEmailBase() {
