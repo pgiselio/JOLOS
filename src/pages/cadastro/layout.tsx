@@ -8,7 +8,11 @@ export function CadastroLayout() {
   let location = useLocation();
   let navigate = useNavigate();
   const auth = useAuth();
-  
+  useEffect(() => {
+    if (auth.email) {
+      navigate("/sys");
+    }
+  });
   return (
     <StyledAccess>
       <ToastContainer
@@ -31,13 +35,33 @@ export function CadastroLayout() {
               <img src="../images/logo.svg" alt="" className="logo-signup" />
             </a>
             <div className="progress">
-              <span {...(location.pathname === "/cadastro" ? {className: "active"} : ((location.pathname === "/cadastro/step2" || location.pathname === "/cadastro/step3") && {className: "done"}))} title="Cadastro básico"></span>
-              <span {...(location.pathname === "/cadastro/step2" ? {className: "active"}: ((location.pathname === "/cadastro/step3") && {className: "done"}))} title="Confirmação do e-mail"></span>
-              <span {...(location.pathname === "/cadastro/step3" && {className: "active"})} title="Cadastramento de dados"></span>
+                <span
+                  {...(location.pathname === "/cadastro"
+                    ? { className: "active" }
+                    : (location.pathname === "/cadastro/step2" ||
+                        location.pathname === "/cadastro/step3") && {
+                        className: "done",
+                      })}
+                  title="Cadastro básico"
+                ></span>
+                <span
+                  {...(location.pathname === "/cadastro/step2"
+                    ? { className: "active" }
+                    : location.pathname === "/cadastro/step3" && {
+                        className: "done",
+                      })}
+                  title="Confirmação do e-mail"
+                ></span>
+                <span
+                  {...(location.pathname === "/cadastro/step3" && {
+                    className: "active",
+                  })}
+                  title="Cadastramento de dados"
+                ></span>
             </div>
           </div>
           <div className="cadastro-content">
-            <Outlet/>
+            <Outlet />
           </div>
         </div>
       </section>

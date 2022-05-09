@@ -14,7 +14,6 @@ import { ProfilePic } from "../../../../components/profile-pic/profile-pic";
 import { useAuth } from "../../../../hooks/useAuth";
 import { api } from "../../../../services/api";
 import { queryClient } from "../../../../services/queryClient";
-import { User } from "../../../../types/user";
 import { CurriculoForm } from "./_curriculoForm";
 
 export default function SettingContaPage() {
@@ -22,7 +21,6 @@ export default function SettingContaPage() {
   const [isLoading, setIsLoading] = useState(false);
   const {
     control,
-    register,
     formState: { isDirty },
     handleSubmit,
   } = useForm({
@@ -90,6 +88,7 @@ export default function SettingContaPage() {
           toast.success("Mudanças salvas com sucesso!");
         }
         queryClient.invalidateQueries("meUser");
+        queryClient.fetchQuery("meUser");
       })
       .catch((err) => {
         if (err.status === 500) {

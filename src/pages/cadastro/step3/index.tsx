@@ -3,13 +3,14 @@ import ReactInputMask from "react-input-mask";
 import { useNavigate } from "react-router-dom";
 import CircularProgressFluent from "../../../components/circular-progress-fluent";
 import { Input } from "../../../components/input";
+import { CadastroStep3Style } from "./styles";
 
 export function CadastroStep3() {
   const [isLoading, setIsLoading] = useState(false);
   let navigate = useNavigate();
 
   return (
-    <>
+    <CadastroStep3Style>
       <div className="content">
         <h2 className="desc">Seus Dados</h2>
         <div className="inputs">
@@ -103,6 +104,6 @@ export function CadastroStep3() {
           </button>
         </div>
       </div>
-    </>
+    </CadastroStep3Style>
   );
 }

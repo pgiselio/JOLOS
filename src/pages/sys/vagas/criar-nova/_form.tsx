@@ -234,6 +234,10 @@ export function CriarNovaVagaForm() {
               id="desc"
               rows={10}
               maxLength={maxDescriptionLength}
+              onKeyDown={() => {
+                let currentValue = maxDescriptionLength - field.value.length;
+                setRemainigDescriptionLength(currentValue);
+              }}
               onKeyUp={() => {
                 let currentValue = maxDescriptionLength - field.value.length;
                 setRemainigDescriptionLength(currentValue);
