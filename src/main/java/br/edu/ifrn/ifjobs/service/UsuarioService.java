@@ -99,7 +99,10 @@ public class UsuarioService {
         Optional<Usuario> optional;
         optional = Optional.ofNullable(usuario);
 
-        optional.ifPresent(usuarioRepository::save);
+        optional.ifPresent(user -> {
+            usuarioRepository.findById(user.getId())
+                    .ifPresent(u -> usuarioRepository.save(user));
+        });
 
         return optional.orElseThrow(() -> new UsuarioNaoCadastradoException("Usuário não cadastrado!"));
     }
