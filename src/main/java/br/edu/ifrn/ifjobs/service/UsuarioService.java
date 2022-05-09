@@ -102,11 +102,14 @@ public class UsuarioService {
         optional.ifPresent(user -> {
             Usuario u = usuarioRepository.getById(user.getId());
             u.setEmail(user.getEmail());
-            u.setEmpresa(user.getEmpresa());
+            if (user.getEmpresa() != null) {
+                u.getEmpresa().setDadosPessoa(user.getEmpresa().getDadosPessoa());
+            } else if (user.getAluno() != null) {
+                u.getAluno().setDadosPessoa(user.getAluno().getDadosPessoa());
+            }
             u.setCodigoAutenticacao(user.getCodigoAutenticacao());
             u.setStatus(user.getStatus());
             u.setSenha(user.getSenha());
-            u.setAluno(user.getAluno());
             usuarioRepository.save(u);
         });
 
