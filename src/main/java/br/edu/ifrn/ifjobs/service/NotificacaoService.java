@@ -24,6 +24,7 @@ import br.edu.ifrn.ifjobs.model.Notificacao;
 import br.edu.ifrn.ifjobs.model.Usuario;
 import br.edu.ifrn.ifjobs.model.enums.StatusUsuario;
 import br.edu.ifrn.ifjobs.repository.NotificacaoRepository;
+import freemarker.template.TemplateException;
 
 /**
  * @author Lucas-dev-back
@@ -43,9 +44,6 @@ public class NotificacaoService {
     @Autowired
     private EmailService emailService;
 
-    @Autowired
-    private Email email;
-
     private final String ASSUNTO_EMAIL_PENDENTE = "IFJobs - Notificação de pendência";
 
     @Value("${spring.html.CadastroPendente}")
@@ -60,24 +58,12 @@ public class NotificacaoService {
     void disparaEmailParaUsuariosPedentesACada48Horas() {
         List<Usuario> usuarios = usuarioService.buscaTodosPorStatus(StatusUsuario.PENDENTE);
         usuarios.stream().forEach(usuario -> {
-            Document documento = criaDocumentoBaseadoNaUrlDoArquivo();
-            email.setDestinatario(usuario.getEmail());
-            email.setAssunto(ASSUNTO_EMAIL_PENDENTE);
-            email.setMensagem(documento.toString());
-            email.setRemetente(emailService.getEmailCoex());
-            enviaViaHtml(email);
+            try {
+                emailService.enviaEmail(usuario, URL_HTML_EMAIL_PENDENTE, ASSUNTO_EMAIL_PENDENTE);
+            } catch (MessagingException | IOException | TemplateException e) {
+                throw new RuntimeException(e);
+            }
         });
-    }
-
-    private Document criaDocumentoBaseadoNaUrlDoArquivo() {
-        Document documento;
-        try {
-            documento = Jsoup.parse(new File(URL_HTML_EMAIL_PENDENTE), "UTF-8");
-        } catch (IOException e) {
-            throw new NotificacaoNaoCadastradaException(
-                    "Não foi possível encontrar o conteúdo do email de pendência");
-        }
-        return documento;
     }
 
     public Notificacao salva(Notificacao notificacao) {
@@ -103,15 +89,6 @@ public class NotificacaoService {
                 notificacaoRepository.delete(notificacao);
             }
         });
-    }
-
-    private void enviaViaHtml(Email email) {
-        email.setHtml(true);
-        try {
-            emailService.enviaEmail(email);
-        } catch (MessagingException | UnsupportedEncodingException e) {
-            throw new RuntimeException("Erro ao enviar email para o usuário");
-        }
     }
 
 }
