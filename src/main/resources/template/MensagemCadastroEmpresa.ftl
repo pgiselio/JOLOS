@@ -6,7 +6,7 @@
     </h1>
 
     <p style="color: rgb(88, 88, 88);">
-        Estamos a um passo de terminar esses laços burocráticos, 
+        Estamos a um passo de terminar esses laços burocráticos 
         para que você possa se cadastrar e começar a usar o nosso sistema.
     </p>
     
@@ -21,7 +21,7 @@
             </strong>
             <br>
             <strong>
-                Equipe de Suporte
+                COEX
             </strong>
         </p>
     </footer>

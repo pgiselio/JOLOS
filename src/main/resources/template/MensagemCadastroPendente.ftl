@@ -6,7 +6,8 @@
     </h1>
 
     <p style="color: rgb(88, 88, 88);">
-        Por favor prossiga com seu cadastro, você tem até 7 dias após o seu cadastro para concluir.
+        Por favor prossiga com seu cadastro, você tem até 7 dias para concluir.
+        Depois desse período, apagaremos os seus dados do nosso sistema.
     </p>
     
     <p style="color: rgb(88, 88, 88);">
@@ -20,7 +21,7 @@
             </strong>
             <br>
             <strong>
-                Equipe de Suporte
+                COEX
             </strong>
         </p>
     </footer>
