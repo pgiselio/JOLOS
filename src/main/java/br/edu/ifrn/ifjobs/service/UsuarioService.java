@@ -68,7 +68,7 @@ public class UsuarioService {
             String codigo = String.format("%06d", numero);
             usuario.setCodigoAutenticacao(codigo);
             usuario.setStatus(StatusUsuario.PENDENTE);
-            usuario.addRole(new Role(TipoUsuario.USUARIO));
+            usuario.addRole(roleRepository.findByTipoUsuario(TipoUsuario.USUARIO));
 
             usuarioRepository.save(usuario);
 
