@@ -100,11 +100,7 @@ public class UsuarioService {
 
         optional.ifPresent(user -> {
             Usuario salvo = usuarioRepository.save(user);
-            salvo.setEmail(user.getEmail());
-            salvo.setAluno(user.getAluno());
-            salvo.setEmpresa(user.getEmpresa());
-            salvo.setStatus(user.getStatus());
-            salvo.setCodigoAutenticacao(user.getCodigoAutenticacao());
+
             usuarioRepository.save(salvo);
         });
 
@@ -125,6 +121,14 @@ public class UsuarioService {
             default:
                 throw new IllegalArgumentException("Tipo de usuário inválido para criação!");
         }
+    }
+
+    public void validaCodigo(String email, String codigo) throws UsuarioNaoEncontradoException {
+        Usuario usuario = buscaPorEmail(email);
+        if (usuario.getCodigoAutenticacao().equals(codigo)) {
+            return;
+        }
+        throw new RuntimeException("Código inválido!");
     }
 
     public List<Usuario> buscaTodosPorStatus(StatusUsuario status) {
