@@ -1,8 +1,6 @@
 package br.edu.ifrn.ifjobs.service;
 
-import java.io.File;
 import java.io.IOException;
-import java.io.UnsupportedEncodingException;
 import java.time.Duration;
 import java.time.LocalDateTime;
 import java.util.List;
@@ -10,8 +8,6 @@ import java.util.Optional;
 
 import javax.mail.MessagingException;
 
-import org.jsoup.Jsoup;
-import org.jsoup.nodes.Document;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.scheduling.annotation.Async;
@@ -19,7 +15,6 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
 import br.edu.ifrn.ifjobs.exception.NotificacaoNaoCadastradaException;
-import br.edu.ifrn.ifjobs.model.Email;
 import br.edu.ifrn.ifjobs.model.Notificacao;
 import br.edu.ifrn.ifjobs.model.Usuario;
 import br.edu.ifrn.ifjobs.model.enums.StatusUsuario;
