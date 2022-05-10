@@ -1,40 +1,53 @@
 import { useEffect, useRef, useState } from "react";
-import { Controller, useForm } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import { Link, useNavigate, useSearchParams } from "react-router-dom";
 import { toast } from "react-toastify";
 import ReactCodeInput from "react-verification-code-input";
 import CircularProgressFluent from "../../../components/circular-progress-fluent";
+import { useCadastroSteps } from "../../../hooks/useCadastroAluno";
 import { api } from "../../../services/api";
 import { CadastroStep2Style } from "./styles";
 
 export default function VerifiqueOSeuEmailPage() {
   const [isLoading, setIsLoading] = useState(false);
   let navigate = useNavigate();
-  let [searchParams] = useSearchParams();
+  let [searchParams, setSearchParams] = useSearchParams();
   let ReactCodeInputRef = useRef<ReactCodeInput>(null);
   let codeAfterCompleteFields = useRef<string>();
   let email = searchParams.get("email");
   let codeParam = searchParams.get("codigo");
+  const cadastroSteps = useCadastroSteps();
 
-  const { handleSubmit } = useForm({
+  const { handleSubmit, getValues } = useForm({
     defaultValues: {
       email: email || "",
     },
   });
-
+  useEffect(() => {
+    if (cadastroSteps.step === 3) {
+      cadastroSteps.setVerificationCode(
+        codeParam?.length === 6 ? codeParam : codeAfterCompleteFields.current
+      );
+      cadastroSteps.setEmail(getValues(["email"])[0]);
+      navigate("../step3");
+    }
+  });
+  useEffect(() => {
+    if (cadastroSteps.step !== 3 && cadastroSteps.step !== 2) {
+      cadastroSteps.setStep(2);
+    }
+  });
   useEffect(() => {
     if (codeParam?.length === 6) {
       let codeArray = Array.from(codeParam);
       ReactCodeInputRef.current?.setState({ values: codeArray });
-      console.log(ReactCodeInputRef.current);
       if (email) {
         handleSubmit(onSubmit)();
       }
     }
-  },[]);
+  }, []);
 
   async function onSubmit({ email }: { email: string }) {
-    console.log("FOI EM FOI" + email);
     setIsLoading(true);
     await api
       .get(
@@ -42,7 +55,14 @@ export default function VerifiqueOSeuEmailPage() {
           codeParam?.length === 6 ? codeParam : codeAfterCompleteFields.current
         }`
       )
-      .then(() => toast.info("FOI"))
+      .then(() => {
+        cadastroSteps.setStep(3);
+      })
+      .catch(() => {
+        toast.error("Codigo inválido!");
+        searchParams.delete("codigo");
+        setSearchParams(searchParams);
+      })
       .finally(() => setIsLoading(false));
   }
 
@@ -72,6 +92,7 @@ export default function VerifiqueOSeuEmailPage() {
               className="code-field"
               fieldWidth={40}
               fieldHeight={40}
+              {...(codeParam?.length === 6 ? { disabled: true } : {})}
               {...(isLoading && { disabled: true })}
             />
           </div>

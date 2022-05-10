@@ -41,7 +41,10 @@ export const ProfilePageStyle = styled.section`
     margin-top: 15px;
     width: 100%;
   }
-
+  .profile-description {
+    font-size: 14px;
+    white-space: pre-wrap;
+  }
   .user-actions {
     display: flex;
     flex-direction: column;

@@ -18,16 +18,16 @@ import { cnpjMask } from "../../../../utils/cnpjMask";
 import Error404 from "../../../404";
 import { ProfilePageStyle } from "../styles";
 
-export default function ProfilePage({ email }: { email?: string }) {
+export default function ProfilePage() {
   let params = useParams();
   let usertype;
   let navigate = useNavigate();
   const auth = useAuth();
   const { data, isFetching } = useQuery<User>(
-    ["profile", email ? email : params.id],
+    ["profile" + params.id],
     async () => {
       const response = await api.get(
-        `/usuario/${email ? "email/" + email : params.id}`
+        `/usuario/${params.id}`
       );
       return response.data;
     },
@@ -201,7 +201,7 @@ export default function ProfilePage({ email }: { email?: string }) {
                       <h3>Sobre nós</h3>
                     </BoxTitle>
                     <BoxContent>
-                      <div className="vaga-page-description">
+                      <div className="profile-description">
                         <p>{data?.empresa?.resumo}</p>
                       </div>
                     </BoxContent>

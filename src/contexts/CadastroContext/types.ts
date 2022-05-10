@@ -1,8 +1,8 @@
-export type CadastroContextType = {
+export interface CadastroContextType {
   step: number;
   setStep: (step: number) => void;
-  verificationCode: string;
-  setVerificationCode: (verificationCode: string) => void;
+  verificationCode: string | undefined;
+  setVerificationCode: (verificationCode: string | undefined) => void;
   email: string;
   setEmail: (email: string) => void;
 };
@@ -13,7 +13,6 @@ export type userAlunoType = {
     dataNasc: Date;
     localizacao: string;
   };
-  resumo: string;
   curso: string;
   periodo: 0;
   cpf: string;

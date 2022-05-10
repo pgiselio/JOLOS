@@ -88,6 +88,7 @@ export default function SettingContaPage() {
           toast.success("Mudanças salvas com sucesso!");
         }
         queryClient.invalidateQueries("meUser");
+        queryClient.invalidateQueries("profile" + auth.userInfo?.id);
         queryClient.fetchQuery("meUser");
       })
       .catch((err) => {

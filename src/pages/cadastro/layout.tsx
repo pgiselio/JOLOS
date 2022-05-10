@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { Outlet, useLocation, useNavigate } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
+import { CadastroProvider } from "../../contexts/CadastroContext";
 import { useAuth } from "../../hooks/useAuth";
 import { AccessGlobalStyle, StyledAccess } from "../../styles/LoginSignupStyle";
 
@@ -14,27 +15,28 @@ export function CadastroLayout() {
     }
   });
   return (
-    <StyledAccess>
-      <ToastContainer
-        position="top-right"
-        autoClose={5000}
-        hideProgressBar={false}
-        newestOnTop={false}
-        closeOnClick
-        rtl={false}
-        pauseOnFocusLoss
-        draggable
-        pauseOnHover
-      />
-      <AccessGlobalStyle />
+    <CadastroProvider>
+      <StyledAccess>
+        <ToastContainer
+          position="top-right"
+          autoClose={5000}
+          hideProgressBar={false}
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+        />
+        <AccessGlobalStyle />
 
-      <section className="access-container">
-        <div className="login-form signup-form">
-          <div className="header-signup">
-            <a href="../">
-              <img src="../images/logo.svg" alt="" className="logo-signup" />
-            </a>
-            <div className="progress">
+        <section className="access-container">
+          <div className="login-form signup-form">
+            <div className="header-signup">
+              <a href="../">
+                <img src="../images/logo.svg" alt="" className="logo-signup" />
+              </a>
+              <div className="progress">
                 <span
                   {...(location.pathname === "/cadastro"
                     ? { className: "active" }
@@ -58,13 +60,14 @@ export function CadastroLayout() {
                   })}
                   title="Cadastramento de dados"
                 ></span>
+              </div>
+            </div>
+            <div className="cadastro-content">
+              <Outlet />
             </div>
           </div>
-          <div className="cadastro-content">
-            <Outlet />
-          </div>
-        </div>
-      </section>
-    </StyledAccess>
+        </section>
+      </StyledAccess>
+    </CadastroProvider>
   );
 }
