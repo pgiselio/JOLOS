@@ -11,8 +11,7 @@ import io.jsonwebtoken.SignatureAlgorithm;
 @Service
 public class GeradorTokenService {
 
-    @Value("${spring.jwt.secret}")
-    private static String SECRET_KEY_JWT;
+    private static String SECRET_KEY_JWT = "SEnHaDiFIciL1";
 
     public static String geraToken(String email, int tempoExpiracao) {
         final String JWT = Jwts.builder()
