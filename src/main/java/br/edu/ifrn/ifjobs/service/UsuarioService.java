@@ -1,6 +1,7 @@
 package br.edu.ifrn.ifjobs.service;
 
 import java.io.IOException;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 import java.util.Random;
@@ -136,10 +137,12 @@ public class UsuarioService {
         }
     }
 
-    public void validaCodigo(String email, String codigo) throws UsuarioNaoEncontradoException {
+    public String validaCodigo(String email, String codigo) throws UsuarioNaoEncontradoException {
         Usuario usuario = buscaPorEmail(email);
         if (usuario.getCodigoAutenticacao().equals(codigo)) {
-            return;
+            int umMinuto = 60 * 1000;
+            int dezMinutos = umMinuto * 10;
+            return GeradorTokenService.geraToken(usuario.getEmail(), dezMinutos);
         }
         throw new RuntimeException("Código inválido!");
     }
