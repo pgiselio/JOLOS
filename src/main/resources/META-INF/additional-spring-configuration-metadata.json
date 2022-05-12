@@ -1,5 +1,22 @@
-{"properties": [{
-  "name": "spring.html.caminhoRaizMensagemCadastroHtml",
-  "type": "java.lang.String",
-  "description": "caminho relativo de 'MensagemCadastro.html'"
-}]}
+{"properties": [
+  {
+    "name": "spring.html.CadastroAluno",
+    "type": "java.lang.String",
+    "description": "nome do arquivo de email para cadastro de aluno"
+  },
+  {
+    "name": "spring.html.CadastroEmpresa",
+    "type": "java.lang.String",
+    "description": "nome do arquivo de email para cadastro de empresa"
+  },
+  {
+    "name": "spring.html.CadastroPendente",
+    "type": "java.lang.String",
+    "description": "nome do arquivo de email para cadastro pendente"
+  },
+  {
+    "name": "spring.html.RecuperacaoSenha",
+    "type": "java.lang.String",
+    "description": "nome do arquivo de email para recuperação de senha"
+  }
+]}
