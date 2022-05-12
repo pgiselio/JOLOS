@@ -10,6 +10,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { Controller, useForm } from "react-hook-form";
 import { api } from "../../../services/api";
 import { toast } from "react-toastify";
+import { userAlunoType } from "../../../contexts/CadastroContext/types";
 
 export function CadastroStep3() {
   const [isLoading, setIsLoading] = useState(false);
@@ -17,7 +18,7 @@ export function CadastroStep3() {
   const cadastroSteps = useCadastroSteps();
 
   useEffect(() => {
-    if (cadastroSteps.step !== 3) {
+    if (cadastroSteps.step < 3) {
       navigate("..");
     }
   });
@@ -32,10 +33,14 @@ export function CadastroStep3() {
 
   let validationSchema = Yup.object().shape({
     nome: Yup.string().required("Este campo é obrigatório"),
-    cpf: Yup.string().required("Este campo é obrigatório").min(14, "CPF inválido"),
-    dataNascimento: Yup.string().required("Este campo é obrigatório").min(10, "Data inválida"),
+    cpf: Yup.string()
+      .required("Este campo é obrigatório")
+      .min(14, "CPF inválido"),
+    dataNascimento: Yup.string()
+      .required("Este campo é obrigatório")
+      .min(10, "Data inválida"),
     cidade: Yup.string().required("Este campo é obrigatório"),
-    UF: Yup.string().required(""),
+    UF: Yup.string().required("").min(2, ""),
     curso: Yup.string()
       .oneOf([...cursos], "O curso selecionado não é válido")
       .required("Este campo é obrigatório"),
@@ -44,7 +49,7 @@ export function CadastroStep3() {
   const {
     control,
     formState: { errors },
-    handleSubmit
+    handleSubmit,
   } = useForm({
     defaultValues: {
       nome: "",
@@ -58,8 +63,36 @@ export function CadastroStep3() {
     resolver: yupResolver(validationSchema),
   });
 
-  async function onHandleSubmit(props : any) {    
-    await api.post("/aluno/create", {props}).catch(() => {toast.error("Erro ao cadastrar aluno")});
+  async function onHandleSubmit(props: any) {
+    setIsLoading(true);
+    await api
+      .post<userAlunoType>(
+        "/aluno/create",
+        {
+          dadosPessoa: {
+            nome: props.nome,
+            dataNasc: Date.parse(props.dataNascimento),
+            localizacao: props.cidade + "/" + props.UF,
+          },
+          curso: props.curso,
+          periodo: props.periodo,
+          cpf: props.cpf,
+        },
+        {
+          headers: {
+            Authorization: cadastroSteps.token,
+          },
+        }
+      )
+      .then(() => {
+        cadastroSteps.setStep(4);
+        navigate("../confirmacao");
+      })
+      .catch(() => {
+        toast.error("Erro ao cadastrar aluno");
+      }).finally(() => {
+        setIsLoading(false)
+      });
   }
   return (
     <CadastroStep3Style>
@@ -119,13 +152,13 @@ export function CadastroStep3() {
                     mask="99/99/9999"
                     {...field}
                   >
-                  <Input
-                    type="text"
-                    placeholder="Data de nascimento"
-                    icon="fas fa-calendar"
-                    id="dataNascimento"
-                    {...(errors.dataNascimento && { className: "danger" })}
-                  />
+                    <Input
+                      type="text"
+                      placeholder="Data de nascimento"
+                      icon="fas fa-calendar"
+                      id="dataNascimento"
+                      {...(errors.dataNascimento && { className: "danger" })}
+                    />
                   </ReactInputMask>
                 )}
               />
@@ -157,7 +190,12 @@ export function CadastroStep3() {
                   control={control}
                   render={({ field }) => (
                     <ReactInputMask maskPlaceholder={null} mask="aa" {...field}>
-                      <Input type="text" id="UF" placeholder="UF" {...(errors.UF && { className: "danger" })}/>
+                      <Input
+                        type="text"
+                        id="UF"
+                        placeholder="UF"
+                        {...(errors.UF && { className: "danger" })}
+                      />
                     </ReactInputMask>
                   )}
                 />

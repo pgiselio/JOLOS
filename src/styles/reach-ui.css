@@ -60,7 +60,7 @@
   text-align: left;
   transition: transform 0.2s ease;
 }
-[data-reach-accordion-button] .subtittle {
+[data-reach-accordion-button] .subtitle {
   text-align: left;
   font-size: 13px;
   height: 20px;
@@ -86,7 +86,7 @@
 [data-reach-accordion-button][aria-expanded="true"].autohide-sub h4 {
   transform: translateY(10px);
 }
-[data-reach-accordion-button][aria-expanded="true"].autohide-sub .subtittle {
+[data-reach-accordion-button][aria-expanded="true"].autohide-sub .subtitle {
   transform: translateY(10px);
   opacity: 0;
 }

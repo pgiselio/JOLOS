@@ -5,6 +5,8 @@ export interface CadastroContextType {
   setVerificationCode: (verificationCode: string | undefined) => void;
   email: string;
   setEmail: (email: string) => void;
+  token: string;
+  setToken: (token: string) => void;
 };
 
 export type userAlunoType = {

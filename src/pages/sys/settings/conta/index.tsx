@@ -6,6 +6,7 @@ import {
 } from "@reach/accordion";
 import { useState } from "react";
 import { Controller, useForm } from "react-hook-form";
+import ReactInputMask from "react-input-mask";
 import { toast } from "react-toastify";
 import CircularProgressFluent from "../../../../components/circular-progress-fluent";
 import { FabButton } from "../../../../components/fab";
@@ -21,7 +22,7 @@ export default function SettingContaPage() {
   const [isLoading, setIsLoading] = useState(false);
   const {
     control,
-    formState: { isDirty },
+    formState: { isDirty, errors },
     handleSubmit,
   } = useForm({
     defaultValues: {
@@ -34,55 +35,84 @@ export default function SettingContaPage() {
       instagram: auth.userInfo?.empresa?.redesSociais?.instagram || "",
       linkedin: auth.userInfo?.empresa?.redesSociais?.linkedin || "",
       twitter: auth.userInfo?.empresa?.redesSociais?.twitter || "",
+      telefone: auth.userInfo?.empresa?.telefone || "",
+      uf:
+        auth.userInfo?.empresa?.dadosPessoa?.localizacao.split("/")[1] ||
+        auth.userInfo?.aluno?.dadosPessoa?.localizacao.split("/")[1],
+      cidade:
+        auth.userInfo?.empresa?.dadosPessoa?.localizacao.split("/")[0] ||
+        auth.userInfo?.aluno?.dadosPessoa?.localizacao.split("/")[0],
+      curso: auth.userInfo?.aluno?.curso || "",
     },
   });
   async function onSubmit(data: any) {
     setIsLoading(true);
     await api
-      .patch(`/usuario/${auth.userInfo?.id}`, auth.userInfo?.aluno?.id ?
-      [
-        {
-          op: "replace",
-          path: "/aluno/dadosPessoa/nome",
-          value: data.nome,
-        },
-        {
-          op: "replace",
-          path: "/aluno/resumo",
-          value:  data.resumo,
-        },        
-      ]
-         : auth.userInfo?.empresa?.id ? [
-          {
-            op: "replace",
-            path: "/empresa/dadosPessoa/nome",
-            value: data.nome,
-          },
-          {
-            op: "replace",
-            path: "/empresa/resumo",
-            value:  data.resumo,
-          },   {
-            op: "replace",
-            path: "/empresa/redesSociais/facebook",
-            value:  data.facebook,
-          },
-          {
-            op: "replace",
-            path: "/empresa/redesSociais/instagram",
-            value: data.instagram,
-          },
-          {
-            op: "replace",
-            path: "/empresa/redesSociais/linkedin",
-            value: data.linkedin,
-          },
-          {
-            op: "replace",
-            path: "/empresa/redesSociais/twitter",
-            value: data.twitter,
-          }  
-        ] : null)
+      .patch(
+        `/usuario/${auth.userInfo?.id}`,
+        auth.userInfo?.aluno?.id
+          ? [
+              {
+                op: "replace",
+                path: "/aluno/dadosPessoa/nome",
+                value: data.nome,
+              },
+              {
+                op: "replace",
+                path: "/aluno/dadosPessoa/localizacao",
+                value: data.cidade.trim() + "/" + data.uf.trim().toUpperCase(),
+              },
+              {
+                op: "replace",
+                path: "/aluno/resumo",
+                value: data.resumo,
+              },
+            ]
+          : auth.userInfo?.empresa?.id
+          ? [
+              {
+                op: "replace",
+                path: "/empresa/dadosPessoa/nome",
+                value: data.nome,
+              },
+              {
+                op: "replace",
+                path: "/empresa/dadosPessoa/localizacao",
+                value: data.cidade.trim() + "/" + data.uf.trim().toUpperCase(),
+              },
+              {
+                op: "replace",
+                path: "/empresa/resumo",
+                value: data.resumo,
+              },
+              {
+                op: "replace",
+                path: "/empresa/redesSociais/facebook",
+                value: data.facebook,
+              },
+              {
+                op: "replace",
+                path: "/empresa/redesSociais/instagram",
+                value: data.instagram,
+              },
+              {
+                op: "replace",
+                path: "/empresa/redesSociais/linkedin",
+                value: data.linkedin,
+              },
+              {
+                op: "replace",
+                path: "/empresa/redesSociais/twitter",
+                value: data.twitter,
+              },
+              {
+                op: "replace",
+                path: "/empresa/telefone",
+                value: data.telefone,
+              },
+            ]
+          : null
+      )
       .then((response) => {
         if (response.status === 200) {
           toast.success("Mudanças salvas com sucesso!");
@@ -112,26 +142,10 @@ export default function SettingContaPage() {
 
       <Accordion collapsible multiple>
         <form>
-          {isDirty && (
-            <FabButton type="button" onClick={handleSubmit(onSubmit)}>
-              {isLoading && (
-                <CircularProgressFluent
-                  color="white"
-                  height="25px"
-                  width="25px"
-                  duration=".8s"
-                  style={{ position: "absolute" }}
-                />
-              )}
-              <span {...(isLoading && { style: { opacity: 0 } })}>
-                <i className="fas fa-floppy-disk"></i> Salvar alterações
-              </span>
-            </FabButton>
-          )}
           <AccordionItem>
             <AccordionButton className="autohide-sub">
               <h4>Nome</h4>
-              <span className="subtittle">
+              <span className="subtitle">
                 {auth.userInfo?.aluno?.dadosPessoa.nome ||
                   auth.userInfo?.empresa?.dadosPessoa.nome}
               </span>
@@ -146,12 +160,34 @@ export default function SettingContaPage() {
               />
             </AccordionPanel>
           </AccordionItem>
+          {auth?.authorities?.includes("ALUNO") && (
+            <AccordionItem>
+              <AccordionButton className="autohide-sub">
+                <h4>Curso</h4>
+                <span className="subtitle">{auth.userInfo?.aluno?.curso}</span>
+              </AccordionButton>
+              <AccordionPanel>
+                <Controller
+                  name="curso"
+                  control={control}
+                  render={({ field }) => (
+                    <Input type="text" id="nome" {...field} />
+                  )}
+                />
+              </AccordionPanel>
+            </AccordionItem>
+          )}
+
           <AccordionItem>
             <AccordionButton className="has-sub">
-              <h4>Sobre mim</h4>
-              <span className="subtittle">
+              <h4>
+                Sobre {auth?.authorities?.includes("ALUNO") ? "mim" : "nós"}
+              </h4>
+              <span className="subtitle">
                 Uma breve descrição sobre{" "}
-                {auth?.authorities?.includes("ALUNO") ? "você" : "a sua empresa"}
+                {auth?.authorities?.includes("ALUNO")
+                  ? "você"
+                  : "a sua empresa"}
               </span>
             </AccordionButton>
             <AccordionPanel>
@@ -177,71 +213,172 @@ export default function SettingContaPage() {
               />
             </AccordionPanel>
           </AccordionItem>
+
+          <AccordionItem>
+            <AccordionButton className="autohide-sub">
+              <h4>Localização</h4>
+              <span className="subtitle">
+                {auth.userInfo?.aluno?.dadosPessoa.localizacao ||
+                  auth.userInfo?.empresa?.dadosPessoa.localizacao}
+              </span>
+            </AccordionButton>
+            <AccordionPanel>
+              <div className="input-group">
+                <div className="lbl">
+                  <label htmlFor="cidade">Cidade: </label>
+                  <Controller
+                    name="cidade"
+                    control={control}
+                    render={({ field }) => (
+                      <Input
+                        type="text"
+                        id="cidade"
+                        placeholder="Cidade"
+                        {...field}
+                        {...(errors.cidade && { className: "danger" })}
+                      />
+                    )}
+                  />
+                  <p className="input-error">{errors.cidade?.message}</p>
+                </div>
+                <div className="lbl" style={{ maxWidth: "60px" }}>
+                  <label htmlFor="uf">UF: </label>
+                  <Controller
+                    name="uf"
+                    control={control}
+                    render={({ field }) => (
+                      <ReactInputMask
+                        maskPlaceholder={null}
+                        mask="aa"
+                        {...field}
+                      >
+                        <Input
+                          type="text"
+                          id="uf"
+                          placeholder="UF"
+                          {...(errors.uf && { className: "danger" })}
+                        />
+                      </ReactInputMask>
+                    )}
+                  />
+                  <p className="input-error">{errors.uf?.message}</p>
+                </div>
+              </div>
+            </AccordionPanel>
+          </AccordionItem>
+
           {auth.userInfo?.empresa && (
-            <AccordionItem>
-              <AccordionButton className="has-sub">
-                <h4>Redes Sociais</h4>{" "}
-                <span className="subtittle">
-                  Facebook, Instagram, LinkedIn e Twitter
-                </span>
-              </AccordionButton>
-              <AccordionPanel>
-                <div className="inputs">
-                  <div className="lbl-icon">
-                    <label>
-                      <i className="fa-brands fa-facebook-f"></i>
-                      <span>facebook.com</span>/
-                    </label>
+            <span>
+              <h4
+                style={{
+                  margin: "15px 0",
+                  marginBottom: "8px",
+                  marginLeft: "5px",
+                }}
+              >
+                Contatos
+              </h4>
+
+              <AccordionItem>
+                <AccordionButton className="autohide-sub">
+                  <h4>Telefone</h4>
+                  <span className="subtitle">
+                    {auth.userInfo?.empresa?.telefone}
+                  </span>
+                </AccordionButton>
+                <AccordionPanel>
+                  <Controller
+                    name="telefone"
+                    control={control}
+                    render={({ field }) => (
+                      <Input type="text" id="telefone" {...field} />
+                    )}
+                  />
+                </AccordionPanel>
+              </AccordionItem>
+
+              <AccordionItem>
+                <AccordionButton className="has-sub">
+                  <h4>Redes Sociais</h4>
+                  <span className="subtitle">
+                    Facebook, Instagram, LinkedIn e Twitter
+                  </span>
+                </AccordionButton>
+                <AccordionPanel>
+                  <div className="inputs">
                     <Controller
                       name="facebook"
                       control={control}
                       render={({ field }) => (
-                        <Input type="text" id="facebook" {...field} />
+                        <Input
+                          icon="fa-brands fa-facebook-f"
+                          type="text"
+                          id="facebook"
+                          {...field}
+                          spellCheck={false}
+                        />
                       )}
                     />
-                  </div>
-                  <div className="lbl-icon">
-                    <label>
-                      <i className="fa-brands fa-instagram"></i>
-                      <span>instagram.com</span>/
-                    </label>
                     <Controller
                       name="instagram"
                       control={control}
                       render={({ field }) => (
-                        <Input type="text" id="instagram" {...field} />
+                        <Input
+                          type="text"
+                          icon="fa-brands fa-instagram"
+                          id="instagram"
+                          {...field}
+                          spellCheck={false}
+                        />
                       )}
                     />
-                  </div>
-                  <div className="lbl-icon">
-                    <label>
-                      <i className="fa-brands fa-linkedin"></i>
-                      <span>linkedin.com/company/</span>
-                    </label>
                     <Controller
                       name="linkedin"
                       control={control}
                       render={({ field }) => (
-                        <Input type="text" id="linkedin" {...field} />
+                        <Input
+                          type="text"
+                          icon="fa-brands fa-linkedin"
+                          id="linkedin"
+                          {...field}
+                          spellCheck={false}
+                        />
                       )}
                     />
-                  </div>
-                  <div className="lbl-icon">
-                    <label>
-                      <i className="fa-brands fa-twitter"></i>
-                      <span>twitter.com/</span>
-                    </label>
                     <Controller
                       name="twitter"
                       control={control}
                       render={({ field }) => (
-                        <Input type="text" id="twitter" {...field} />
+                        <Input
+                          type="text"
+                          icon="fa-brands fa-twitter"
+                          id="twitter"
+                          {...field}
+                          spellCheck={false}
+                        />
                       )}
                     />
                   </div>
-                </div>
-              </AccordionPanel>
-            </AccordionItem>
+                </AccordionPanel>
+              </AccordionItem>
+            </span>
+          )}
+
+          {isDirty && (
+            <FabButton type="button" onClick={handleSubmit(onSubmit)}>
+              {isLoading && (
+                <CircularProgressFluent
+                  color="white"
+                  height="25px"
+                  width="25px"
+                  duration=".8s"
+                  style={{ position: "absolute" }}
+                />
+              )}
+              <span {...(isLoading && { style: { opacity: 0 } })}>
+                <i className="fas fa-floppy-disk"></i> Salvar alterações
+              </span>
+            </FabButton>
           )}
         </form>
         {auth.userInfo?.aluno && (

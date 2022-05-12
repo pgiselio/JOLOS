@@ -7,7 +7,7 @@ export const CadastroStep2Style = styled.div`
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    min-height: 50vh;
+    min-height: 300px;
     animation: slide-left 0.5s ease;
     h1 {
       font-size: 90px;

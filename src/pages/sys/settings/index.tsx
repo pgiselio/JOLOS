@@ -25,7 +25,7 @@ export default function SettingsPage() {
     if ([...tabs, null, undefined].includes(searchParams.get("tab"))) {
       setSelectedTab(searchParams.get("tab"));
     }
-  });
+  }, [searchParams.get("tab")]);
   if (!auth.userInfo?.id) {
     return <LoadingPage />;
   }

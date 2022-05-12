@@ -33,7 +33,7 @@ export default function VerifiqueOSeuEmailPage() {
     }
   });
   useEffect(() => {
-    if (cadastroSteps.step !== 3 && cadastroSteps.step !== 2) {
+    if (cadastroSteps.step < 2) {
       cadastroSteps.setStep(2);
     }
   });
@@ -55,7 +55,8 @@ export default function VerifiqueOSeuEmailPage() {
           codeParam?.length === 6 ? codeParam : codeAfterCompleteFields.current
         }`
       )
-      .then(() => {
+      .then((response) => {
+        cadastroSteps.setToken(response.data);
         cadastroSteps.setStep(3);
       })
       .catch(() => {

@@ -26,6 +26,8 @@ import DownloadCurriculoPage from "./pages/sys/download/curriculo/[id]";
 import VerifiqueOSeuEmailPage from "./pages/cadastro/step2";
 import NewAnswerForm from "./pages/sys/forum/[id]/reply";
 import { CadastroStep3 } from "./pages/cadastro/step3";
+import CadastroConcluidoPage from "./pages/cadastro/confirmacao";
+import { CadastroProvider } from "./contexts/CadastroContext";
 
 const ForumPage = lazy(() => import("./pages/sys/forum"));
 const ForumTopicPage = lazy(() => import("./pages/sys/forum/[id]"));
@@ -43,10 +45,18 @@ export const AppRoutes = () => {
         <Route path="*" element={<Error404 />} />
         <Route path="/" element={<LandingPage />} />
         <Route path="entrar" element={<LoginPage />} />
-        <Route path="cadastro" element={<CadastroLayout />}>
+        <Route
+          path="cadastro"
+          element={
+            <CadastroProvider>
+              <CadastroLayout />
+            </CadastroProvider>
+          }
+        >
           <Route index element={<CadastroPage />} />
           <Route path="step2" element={<VerifiqueOSeuEmailPage />} />
           <Route path="step3" element={<CadastroStep3 />} />
+          <Route path="confirmacao" element={<CadastroConcluidoPage />} />
         </Route>
         <Route path="logout" element={<LogoutPage />} />
         <Route

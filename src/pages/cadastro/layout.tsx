@@ -1,73 +1,72 @@
 import { useEffect } from "react";
-import { Outlet, useLocation, useNavigate } from "react-router-dom";
+import { Outlet, useNavigate } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
-import { CadastroProvider } from "../../contexts/CadastroContext";
 import { useAuth } from "../../hooks/useAuth";
+import { useCadastroSteps } from "../../hooks/useCadastroAluno";
 import { AccessGlobalStyle, StyledAccess } from "../../styles/LoginSignupStyle";
 
 export function CadastroLayout() {
-  let location = useLocation();
   let navigate = useNavigate();
   const auth = useAuth();
+  const cadastroSteps = useCadastroSteps();
   useEffect(() => {
     if (auth.email) {
       navigate("/sys");
     }
   });
   return (
-    <CadastroProvider>
-      <StyledAccess>
-        <ToastContainer
-          position="top-right"
-          autoClose={5000}
-          hideProgressBar={false}
-          newestOnTop={false}
-          closeOnClick
-          rtl={false}
-          pauseOnFocusLoss
-          draggable
-          pauseOnHover
-        />
-        <AccessGlobalStyle />
+    <StyledAccess>
+      <ToastContainer
+        position="top-right"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+      />
+      <AccessGlobalStyle />
 
-        <section className="access-container">
-          <div className="login-form signup-form">
-            <div className="header-signup">
-              <a href="../">
-                <img src="../images/logo.svg" alt="" className="logo-signup" />
-              </a>
-              <div className="progress">
-                <span
-                  {...(location.pathname === "/cadastro"
-                    ? { className: "active" }
-                    : (location.pathname === "/cadastro/step2" ||
-                        location.pathname === "/cadastro/step3") && {
-                        className: "done",
-                      })}
-                  title="Cadastro básico"
-                ></span>
-                <span
-                  {...(location.pathname === "/cadastro/step2"
-                    ? { className: "active" }
-                    : location.pathname === "/cadastro/step3" && {
-                        className: "done",
-                      })}
-                  title="Confirmação do e-mail"
-                ></span>
-                <span
-                  {...(location.pathname === "/cadastro/step3" && {
-                    className: "active",
-                  })}
-                  title="Cadastramento de dados"
-                ></span>
-              </div>
-            </div>
-            <div className="cadastro-content">
-              <Outlet />
+      <section className="access-container">
+        <div className="login-form signup-form">
+          <div className="header-signup">
+            <a href="../">
+              <img src="../images/logo.svg" alt="" className="logo-signup" />
+            </a>
+            <div className="progress">
+              <span
+                {...(cadastroSteps.step === 1
+                  ? { className: "active" }
+                  : cadastroSteps.step > 1 && {
+                      className: "done",
+                    })}
+                title="Cadastro básico"
+              ></span>
+              <span
+                {...(cadastroSteps.step === 2
+                  ? { className: "active" }
+                  : cadastroSteps.step > 2 && {
+                      className: "done",
+                    })}
+                title="Confirmação do e-mail"
+              ></span>
+              <span
+                {...(cadastroSteps.step === 3
+                  ? { className: "active" }
+                  : cadastroSteps.step > 3 && {
+                      className: "done",
+                    })}
+                title="Cadastramento de dados"
+              ></span>
             </div>
           </div>
-        </section>
-      </StyledAccess>
-    </CadastroProvider>
+          <div className="cadastro-content">
+            <Outlet />
+          </div>
+        </div>
+      </section>
+    </StyledAccess>
   );
 }
