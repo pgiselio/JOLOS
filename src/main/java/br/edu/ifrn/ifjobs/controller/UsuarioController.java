@@ -108,12 +108,13 @@ public class UsuarioController {
     @GetMapping("/validacao/{email}/{codigo}")
     public ResponseEntity<String> validaCodigo(@PathVariable(name = "email") String email,
             @PathVariable(name = "codigo") String codigo) {
+        String token;
         try {
-            usuarioService.validaCodigo(email, codigo);
+            token = usuarioService.validaCodigo(email, codigo);
         } catch (UsuarioNaoEncontradoException | RuntimeException e) {
             return ResponseEntity.badRequest().body(e.getMessage());
         }
-        return ResponseEntity.ok().body("Código validado com sucesso!");
+        return ResponseEntity.ok().body(token);
     }
 
     @GetMapping("/")
