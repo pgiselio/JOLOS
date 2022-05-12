@@ -1,7 +1,9 @@
 package br.edu.ifrn.ifjobs.controller;
 
+import java.io.IOException;
 import java.util.List;
 
+import javax.mail.MessagingException;
 import javax.validation.Valid;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -31,6 +33,7 @@ import br.edu.ifrn.ifjobs.exception.UsuarioNaoCadastradoException;
 import br.edu.ifrn.ifjobs.exception.UsuarioNaoEncontradoException;
 import br.edu.ifrn.ifjobs.model.Usuario;
 import br.edu.ifrn.ifjobs.service.UsuarioService;
+import freemarker.template.TemplateException;
 
 @RestController
 @RequestMapping(path = "/usuario")
@@ -127,6 +130,18 @@ public class UsuarioController {
         }).toList();
 
         return ResponseEntity.ok().body(list);
+    }
+
+    @GetMapping("/recuperar/{email}")
+    public ResponseEntity<String> recuperarSenha(@PathVariable(name = "email") String email) {
+        try {
+            usuarioService.recuperaSenha(email);
+        } catch (UsuarioNaoEncontradoException e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        } catch (IOException | MessagingException | TemplateException e) {
+            return ResponseEntity.badRequest().build();
+        }
+        return ResponseEntity.ok().build();
     }
 
     @PatchMapping("/{id}")
