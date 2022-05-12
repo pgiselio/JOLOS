@@ -1,7 +1,6 @@
 package br.edu.ifrn.ifjobs.service;
 
 import java.io.IOException;
-import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 import java.util.Random;
@@ -41,6 +40,9 @@ public class UsuarioService {
     @Value("${spring.html.CadastroEmpresa}")
     private String caminhoArquivoEmailEmpresa;
 
+    @Value("$spring.html.RecuperacaoSenha}")
+    private String caminhoArquivoEmailRecuperacaoSenha;
+
     @Autowired
     private UsuarioRepository usuarioRepository;
 
@@ -65,9 +67,7 @@ public class UsuarioService {
             Usuario usuario = dto.convertDtoToEntity();
             usuario.setSenha(new BCryptPasswordEncoder().encode(dto.getSenha()));
 
-            Random random = new Random();
-            int numero = random.nextInt(999999);
-            String codigo = String.format("%06d", numero);
+            String codigo = geraCodigoVerificacao();
             usuario.setCodigoAutenticacao(codigo);
             usuario.setStatus(StatusUsuario.PENDENTE);
             usuario.addRole(roleRepository.findByTipoUsuario(TipoUsuario.USUARIO));
@@ -80,6 +80,13 @@ public class UsuarioService {
 
             return usuarioRepository.save(usuario);
         });
+    }
+
+    private String geraCodigoVerificacao() {
+        Random random = new Random();
+        int numero = random.nextInt(999999);
+        String codigo = String.format("%06d", numero);
+        return codigo;
     }
 
     @Async
@@ -141,7 +148,7 @@ public class UsuarioService {
         Usuario usuario = buscaPorEmail(email);
         if (usuario.getCodigoAutenticacao().equals(codigo)) {
             int umMinuto = 60 * 1000;
-            int dezMinutos = umMinuto * 10;
+            int dezMinutos = 10 * umMinuto;
             return GeradorTokenService.geraToken(usuario.getEmail(), dezMinutos);
         }
         throw new RuntimeException("Código inválido!");
@@ -210,6 +217,17 @@ public class UsuarioService {
         Usuario usuarioModificado = mapper.treeToValue(patched, Usuario.class);
 
         return atualizaUsuario(usuarioModificado);
+    }
+
+    public void recuperaSenha(String email)
+            throws UsuarioNaoEncontradoException, IOException, MessagingException, TemplateException {
+        Usuario usuario = buscaPorEmail(email);
+        String codigo = geraCodigoVerificacao();
+        usuario.setCodigoAutenticacao(codigo);
+        usuarioRepository.save(usuario);
+
+        emailService.enviaEmail(usuario, caminhoArquivoEmailRecuperacaoSenha, "IF Jobs - Recuperação de senha");
+
     }
 
     public Usuario delete(Usuario usuario) throws Exception {
