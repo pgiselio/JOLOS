@@ -8,6 +8,7 @@ import {
 } from "../../../../components/box";
 import { Button } from "../../../../components/button";
 import CircularProgressFluent from "../../../../components/circular-progress-fluent";
+import LabelWithData from "../../../../components/label-data";
 import { PillItem, PillList } from "../../../../components/pill";
 import { ProfilePic } from "../../../../components/profile-pic/profile-pic";
 import { Skeleton } from "../../../../components/skeleton-load";
@@ -26,9 +27,7 @@ export default function ProfilePage() {
   const { data, isFetching } = useQuery<User>(
     ["profile" + params.id],
     async () => {
-      const response = await api.get(
-        `/usuario/${params.id}`
-      );
+      const response = await api.get(`/usuario/${params.id}`);
       return response.data;
     },
     {
@@ -99,9 +98,11 @@ export default function ProfilePage() {
             <div className="user-actions">
               {data?.email === auth.email && (
                 <>
-                  <Button onClick={()=>{
-                    navigate("/sys/settings?tab=profile");
-                  }}>
+                  <Button
+                    onClick={() => {
+                      navigate("/sys/settings?tab=profile");
+                    }}
+                  >
                     <i className="fas fa-pencil-alt"></i>
 
                     <span>Editar perfil</span>
@@ -112,9 +113,7 @@ export default function ProfilePage() {
                 <Button
                   className="outlined"
                   onClick={() => {
-                    navigate(
-                      `/download/curriculo/${data?.aluno?.curriculo}`
-                    );
+                    navigate(`/download/curriculo/${data?.aluno?.curriculo}`);
                   }}
                 >
                   <i className="fas fa-arrow-down"></i>
@@ -145,37 +144,46 @@ export default function ProfilePage() {
         ) : (
           <div className="content">
             <div className="profile-page-info">
-              <PillList>
+              <div className="labelDatas">
                 {data?.aluno?.dadosPessoa && (
-                  <PillItem>
-                    <i className="fas fa-calendar-day"></i>
-                    <span>
-                      {getFormattedDate(data?.aluno?.dadosPessoa.dataNasc)}
-                    </span>
-                  </PillItem>
+                  <LabelWithData
+                    data={
+                      auth.userInfo?.aluno?.dadosPessoa.dataNasc &&
+                      getFormattedDate(data?.aluno?.dadosPessoa.dataNasc)
+                    }
+                    label="Data de Nascimento:"
+                    icon="fas fa-calendar-day"
+                  />
                 )}
                 {usertype !== "ADMIN" && (
-                  <PillItem>
-                    <i className="fas fa-map-marker-alt"></i>
-                    <span>
-                      {usertype === "ALUNO"
+                  <LabelWithData
+                    data={
+                      usertype === "ALUNO"
                         ? data?.aluno?.dadosPessoa.localizacao
-                        : data?.empresa?.dadosPessoa.localizacao}
-                    </span>
-                  </PillItem>
+                        : data?.empresa?.dadosPessoa.localizacao
+                    }
+                    label="Localização:"
+                    icon="fas fa-map-marker-alt"
+                  />
                 )}
 
                 {usertype === "ALUNO" && (
-                  <PillItem title="Curso">
-                    <i className="fas fa-book-open"></i>
-                    <span>{data?.aluno?.curso} - </span>
-                    <span title="Período do curso">
-                      <i className="fas fa-clock"></i>
-                      <span>{data?.aluno?.periodo}</span>
-                    </span>
-                  </PillItem>
+                  <LabelWithData
+                    data={
+                      <>
+                        <span style={{ textTransform: "capitalize" }}>
+                          {data?.aluno?.curso.toLocaleLowerCase()}{" "}
+                        </span>
+                        <span title="Período do curso">
+                          <span>{data?.aluno?.periodo}º P</span>
+                        </span>
+                      </>
+                    }
+                    label="Curso e Período:"
+                    icon="fas fa-book-open"
+                  />
                 )}
-              </PillList>
+              </div>
             </div>
             {usertype === "ALUNO" && (
               <Box>
@@ -188,7 +196,10 @@ export default function ProfilePage() {
                   </BoxContent>
                 ) : (
                   <BoxMessage className="no-about-message">
-                    <span>Oops... parece que alguém se esqueceu de fazer o "sobre mim"</span>
+                    <span>
+                      Oops... parece que alguém se esqueceu de fazer o "sobre
+                      mim"
+                    </span>
                   </BoxMessage>
                 )}
               </Box>
@@ -237,28 +248,44 @@ export default function ProfilePage() {
                         <ul className="social-info">
                           {data?.empresa?.redesSociais.linkedin && (
                             <li>
-                              <a href={`https://www.linkedin.com/company/${data?.empresa?.redesSociais.linkedin}`} rel="noreferrer" target="_blank">
+                              <a
+                                href={`https://www.linkedin.com/company/${data?.empresa?.redesSociais.linkedin}`}
+                                rel="noreferrer"
+                                target="_blank"
+                              >
                                 <i className="fab fa-linkedin"></i>
                               </a>
                             </li>
                           )}
                           {data?.empresa?.redesSociais.facebook && (
                             <li>
-                              <a href={`https://www.facebook.com/${data?.empresa?.redesSociais.facebook}`} rel="noreferrer" target="_blank">
+                              <a
+                                href={`https://www.facebook.com/${data?.empresa?.redesSociais.facebook}`}
+                                rel="noreferrer"
+                                target="_blank"
+                              >
                                 <i className="fab fa-facebook"></i>
                               </a>
                             </li>
                           )}
                           {data?.empresa?.redesSociais.instagram && (
                             <li>
-                              <a href={`https://www.instagram.com/${data?.empresa?.redesSociais.instagram}`} rel="noreferrer" target="_blank">
+                              <a
+                                href={`https://www.instagram.com/${data?.empresa?.redesSociais.instagram}`}
+                                rel="noreferrer"
+                                target="_blank"
+                              >
                                 <i className="fab fa-instagram"></i>
                               </a>
                             </li>
                           )}
                           {data?.empresa?.redesSociais.twitter && (
                             <li>
-                              <a href={`https://www.twitter.com/${data?.empresa?.redesSociais.twitter}`} rel="noreferrer" target="_blank">
+                              <a
+                                href={`https://www.twitter.com/${data?.empresa?.redesSociais.twitter}`}
+                                rel="noreferrer"
+                                target="_blank"
+                              >
                                 <i className="fab fa-twitter"></i>
                               </a>
                             </li>

@@ -4,6 +4,7 @@ import {
   AccordionItem,
   AccordionPanel,
 } from "@reach/accordion";
+import { userInfo } from "os";
 import { useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 import ReactInputMask from "react-input-mask";
@@ -11,6 +12,7 @@ import { toast } from "react-toastify";
 import CircularProgressFluent from "../../../../components/circular-progress-fluent";
 import { FabButton } from "../../../../components/fab";
 import { Input } from "../../../../components/input";
+import LabelWithData from "../../../../components/label-data";
 import { ProfilePic } from "../../../../components/profile-pic/profile-pic";
 import { useAuth } from "../../../../hooks/useAuth";
 import { api } from "../../../../services/api";
@@ -134,11 +136,34 @@ export default function SettingContaPage() {
       });
     setIsLoading(false);
   }
+
+  function getFormattedDate(date: Date) {
+    if (!date) {
+      return;
+    }
+    date = new Date(date);
+    let dateFormatted = new Intl.DateTimeFormat(undefined, {
+      day: "2-digit",
+      month: "long",
+      year: "numeric",
+    }).format(date.getTime() + Math.abs(date.getTimezoneOffset() * 60000));
+    return dateFormatted;
+  }
+
   return (
     <>
       <div>
         <ProfilePic style={{ height: "80px" }} />
       </div>
+
+      <LabelWithData
+        data={
+          auth.userInfo?.aluno?.dadosPessoa.dataNasc &&
+          getFormattedDate(auth.userInfo?.aluno?.dadosPessoa.dataNasc)
+        }
+        label="Data de Nascimento:"
+        icon="fas fa-calendar-day"
+      />
 
       <Accordion collapsible multiple>
         <form>

@@ -40,6 +40,14 @@ export const ProfilePageStyle = styled.section`
     display: flex;
     margin-top: 15px;
     width: 100%;
+    .labelDatas {
+      display: flex;
+      flex: 1;
+      gap: 20px;
+      column-gap: 60px;
+      flex-wrap: wrap;
+      margin: 10px 0;
+    }
   }
   .profile-description {
     font-size: 14px;
@@ -127,10 +135,10 @@ export const ProfilePageStyle = styled.section`
       }
     }
   }
-  .no-about-message{
+  .no-about-message {
     padding-top: 30px;
   }
-  .no-about-message::before{
+  .no-about-message::before {
     content: ":(";
     font-family: "Roboto";
   }

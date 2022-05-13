@@ -38,12 +38,11 @@ export function VagasList() {
   );
   let location = useLocation();
   const auth = useAuth();
-  const isAluno = auth?.authorities?.includes("ALUNO");
   return (
     <section>
       <OutsetHeadersCornerRadius>
         <HeaderTitle>
-          {!isAluno ? (
+          {auth?.authorities?.includes("EMPRESA") || auth?.authorities?.includes("ADMIN")  ? (
             <>
               <CreateNewFAB
                 className="FabCreateNew"

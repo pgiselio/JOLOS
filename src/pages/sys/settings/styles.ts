@@ -102,6 +102,7 @@ export const SettingPageStyle = styled.section`
       min-height: 100%;
       .content {
         padding: 0 30px;
+        padding-bottom: 30px;
         gap: 30px;
         padding-top: 10px;
         animation: slide-left 0.5s cubic-bezier(0.075, 0.82, 0.165, 1);
