@@ -85,7 +85,7 @@ public class CurriculoService {
         curriculo.setDataImport(Date.valueOf(LocalDate.now()));
         aluno.setCurriculo(curriculo);
         try {
-            alunoService.salvaAluno(aluno);
+            alunoService.atualizaAluno(aluno);
         } catch (AlunoNaoCadastradoException e) {
             throw new RuntimeException(e.getMessage());
         }
@@ -136,7 +136,7 @@ public class CurriculoService {
 
         aluno.setCurriculo(curriculo);
         try {
-            alunoService.salvaAluno(aluno);
+            alunoService.atualizaAluno(aluno);
         } catch (AlunoNaoCadastradoException e) {
             throw new RuntimeException(e.getMessage());
         }
