@@ -16,7 +16,6 @@ public class AlunoInsertDTO implements Dto<Aluno, AlunoInsertDTO> {
 
     private Pessoa dadosPessoa;
 
-    @NotBlank(message = "O campo resumo é obrigatório")
     private String resumo;
 
     @NotBlank(message = "O curso não foi informado!!")
@@ -29,21 +28,17 @@ public class AlunoInsertDTO implements Dto<Aluno, AlunoInsertDTO> {
     @CPF(message = "CPF inválido!!")
     private String cpf;
 
-    @NotNull(message = "O currículo não foi informado!!")
-    private Curriculo curriculo;
-
     private ModelMapper modelMapper;
 
     public AlunoInsertDTO() {
     }
 
     public AlunoInsertDTO(Pessoa dadosPessoa, String curso,
-            int periodo, String cpf, Curriculo curriculo) {
+            int periodo, String cpf) {
         this.dadosPessoa = dadosPessoa;
         this.curso = curso;
         this.periodo = periodo;
         this.cpf = cpf;
-        this.curriculo = curriculo;
     }
 
     /**
@@ -108,20 +103,6 @@ public class AlunoInsertDTO implements Dto<Aluno, AlunoInsertDTO> {
      */
     public void setCpf(String cpf) {
         this.cpf = cpf;
-    }
-
-    /**
-     * @return Curriculo return the curriculo
-     */
-    public Curriculo getCurriculo() {
-        return curriculo;
-    }
-
-    /**
-     * @param curriculo the curriculo to set
-     */
-    public void setCurriculo(Curriculo curriculo) {
-        this.curriculo = curriculo;
     }
 
     @Override
