@@ -1,5 +1,7 @@
 package br.edu.ifrn.ifjobs.service;
 
+import java.time.Instant;
+import java.sql.Date;
 import java.util.List;
 import java.util.Optional;
 import java.util.function.Supplier;
@@ -15,7 +17,12 @@ import org.springframework.stereotype.Service;
 
 import br.edu.ifrn.ifjobs.exception.AlunoNaoCadastradoException;
 import br.edu.ifrn.ifjobs.exception.AlunoNaoEncontradoException;
+import br.edu.ifrn.ifjobs.exception.UsuarioNaoCadastradoException;
+import br.edu.ifrn.ifjobs.exception.UsuarioNaoEncontradoException;
 import br.edu.ifrn.ifjobs.model.Aluno;
+import br.edu.ifrn.ifjobs.model.Arquivo;
+import br.edu.ifrn.ifjobs.model.Curriculo;
+import br.edu.ifrn.ifjobs.model.Usuario;
 import br.edu.ifrn.ifjobs.repository.AlunoRespository;
 
 @Service
@@ -24,9 +31,42 @@ public class AlunoService {
     @Autowired
     private AlunoRespository respository;
 
-    public Aluno salvaAluno(Aluno aluno) throws AlunoNaoCadastradoException {
+    @Autowired
+    private UsuarioService usuarioService;
+
+    public Aluno salvaAluno(Aluno aluno, String token) throws AlunoNaoCadastradoException {
         Optional<Aluno> optional;
-        optional = Optional.ofNullable(respository.saveAndFlush(aluno));
+        optional = Optional.ofNullable(aluno);
+
+        optional.ifPresent(student -> {
+            String email = GeradorTokenService.pegaEmailDoToken(token);
+
+            Usuario usuario;
+            try {
+                usuario = usuarioService.buscaPorEmail(email);
+            } catch (UsuarioNaoEncontradoException e) {
+                throw new RuntimeException(e);
+            }
+
+            var curriculo = new Curriculo();
+            curriculo.setDataImport(new Date(Instant.now().toEpochMilli()));
+            student.setCurriculo(curriculo);
+
+            var pdf = new Arquivo();
+            pdf.setNome("curriculo");
+            pdf.setTipoArquivo("pdf");
+            pdf.setDados(new byte[0]);
+            student.getCurriculo().setPdf(pdf);
+
+            student = respository.save(student);
+            usuario.setAluno(student);
+            try {
+                usuarioService.atualizaUsuario(usuario);
+            } catch (UsuarioNaoCadastradoException e) {
+                throw new RuntimeException(e);
+            }
+        });
+
         return optional.orElseThrow(() -> new AlunoNaoCadastradoException("Dados inválidos!"));
     }
 
@@ -56,6 +96,17 @@ public class AlunoService {
         return respository.findByCpf(cpfNaoNulo);
     }
 
+    public Aluno atualizaAluno(Aluno aluno) throws AlunoNaoCadastradoException {
+        Optional<Aluno> optional;
+        optional = Optional.ofNullable(aluno);
+
+        optional.ifPresent(student -> {
+            respository.save(student);
+        });
+
+        return optional.orElseThrow(() -> new AlunoNaoCadastradoException("Dados inválidos!"));
+    }
+
     public Aluno atualizaCampo(int id, JsonPatch patch) throws AlunoNaoEncontradoException, AlunoNaoCadastradoException,
             JsonProcessingException, IllegalArgumentException, JsonPatchException {
         ObjectMapper mapper = new ObjectMapper();
@@ -69,7 +120,7 @@ public class AlunoService {
 
         Aluno alunoModificado = mapper.treeToValue(patched, Aluno.class);
 
-        return salvaAluno(alunoModificado);
+        return atualizaAluno(alunoModificado);
     }
 
     public void delete(Aluno aluno) {
