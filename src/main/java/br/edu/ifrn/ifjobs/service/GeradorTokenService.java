@@ -22,4 +22,9 @@ public class GeradorTokenService {
         return "Bearer " + JWT;
     }
 
+    public static String pegaEmailDoToken(String token) {
+        return Jwts.parser().setSigningKey(SECRET_KEY_JWT)
+                .parseClaimsJws(token.replace("Bearer ", "")).getBody().getSubject();
+    }
+
 }
