@@ -110,6 +110,8 @@ public class UsuarioService {
         optional.ifPresent(user -> {
             Usuario u = usuarioRepository.getById(user.getId());
             u.setEmail(user.getEmail());
+            u.setEmpresa(user.getEmpresa());
+            u.setAluno(user.getAluno());
             if (user.getEmpresa() != null) {
                 u.getEmpresa().setDadosPessoa(user.getEmpresa().getDadosPessoa());
                 u.getEmpresa().setRedesSociais(user.getEmpresa().getRedesSociais());
