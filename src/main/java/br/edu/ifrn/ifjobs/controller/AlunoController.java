@@ -2,6 +2,7 @@ package br.edu.ifrn.ifjobs.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -37,14 +38,14 @@ public class AlunoController {
     private AlunoService alunoService;
 
     @PostMapping("/create")
-    public ResponseEntity<Aluno> salvaAluno(@RequestBody @Valid AlunoInsertDTO dto) {
+    public ResponseEntity<Aluno> salvaAluno(@RequestBody @Valid AlunoInsertDTO dto, HttpServletRequest request) {
         Aluno aluno = dto.convertDtoToEntity();
         Aluno alunoSalvo;
 
         try {
-            alunoSalvo = alunoService.salvaAluno(aluno);
+            alunoSalvo = alunoService.salvaAluno(aluno, request.getHeader("Authorization"));
         } catch (AlunoNaoCadastradoException e) {
-            return ResponseEntity.status(HttpStatus.CONFLICT).build();
+            return ResponseEntity.badRequest().build();
         }
 
         return ResponseEntity.ok().body(alunoSalvo);
@@ -106,7 +107,7 @@ public class AlunoController {
         Aluno alunoSalvo;
 
         try {
-            alunoSalvo = alunoService.salvaAluno(aluno);
+            alunoSalvo = alunoService.atualizaAluno(aluno);
         } catch (AlunoNaoCadastradoException e) {
             throw new ResponseStatusException(HttpStatus.CONFLICT, e.getMessage());
         }
