@@ -11,6 +11,7 @@ import { Controller, useForm } from "react-hook-form";
 import { api } from "../../../services/api";
 import { toast } from "react-toastify";
 import { userAlunoType } from "../../../contexts/CadastroContext/types";
+import { convertFromStringToDate } from "../../../utils/convertStringToDateFormat";
 
 export function CadastroStep3() {
   const [isLoading, setIsLoading] = useState(false);
@@ -30,13 +31,19 @@ export function CadastroStep3() {
     "Energias Renováveis",
     "Física",
   ];
-
+  let today = new Date();
   let validationSchema = Yup.object().shape({
     nome: Yup.string().required("Este campo é obrigatório"),
     cpf: Yup.string()
       .required("Este campo é obrigatório")
       .min(14, "CPF inválido"),
     dataNascimento: Yup.string()
+      .test(
+        "validacao da data",
+        "Data inválida",
+        (value: any) =>
+          convertFromStringToDate(value).toString() !== "Invalid Date"
+      )
       .required("Este campo é obrigatório")
       .min(10, "Data inválida"),
     cidade: Yup.string().required("Este campo é obrigatório"),
@@ -50,7 +57,9 @@ export function CadastroStep3() {
     control,
     formState: { errors },
     handleSubmit,
+    getValues,
   } = useForm({
+    mode: "onChange",
     defaultValues: {
       nome: "",
       cpf: "",
@@ -65,18 +74,19 @@ export function CadastroStep3() {
 
   async function onHandleSubmit(props: any) {
     setIsLoading(true);
+
     await api
       .post<userAlunoType>(
         "/aluno/create",
         {
           dadosPessoa: {
             nome: props.nome,
-            dataNasc: Date.parse(props.dataNascimento),
+            dataNasc: convertFromStringToDate(props.dataNascimento),
             localizacao: props.cidade + "/" + props.UF,
           },
-          curso: props.curso,
+          curso: props.curso.toUpperCase(),
           periodo: props.periodo,
-          cpf: props.cpf,
+          cpf: props.cpf.replaceAll(".", "").replaceAll("-", ""),
         },
         {
           headers: {
@@ -90,8 +100,9 @@ export function CadastroStep3() {
       })
       .catch(() => {
         toast.error("Erro ao cadastrar aluno");
-      }).finally(() => {
-        setIsLoading(false)
+      })
+      .finally(() => {
+        setIsLoading(false);
       });
   }
   return (
