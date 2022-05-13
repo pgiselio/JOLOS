@@ -53,7 +53,7 @@ public class AlunoService {
             student.setCurriculo(curriculo);
 
             var pdf = new Arquivo();
-            pdf.setNome("curriculo");
+            pdf.setNome("curriculo" + student.getId());
             pdf.setTipoArquivo("pdf");
             pdf.setDados(new byte[0]);
             student.getCurriculo().setPdf(pdf);
