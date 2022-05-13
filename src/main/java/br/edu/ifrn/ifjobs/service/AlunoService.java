@@ -23,6 +23,7 @@ import br.edu.ifrn.ifjobs.model.Aluno;
 import br.edu.ifrn.ifjobs.model.Arquivo;
 import br.edu.ifrn.ifjobs.model.Curriculo;
 import br.edu.ifrn.ifjobs.model.Usuario;
+import br.edu.ifrn.ifjobs.model.enums.StatusUsuario;
 import br.edu.ifrn.ifjobs.repository.AlunoRespository;
 
 @Service
@@ -53,18 +54,20 @@ public class AlunoService {
             student.setCurriculo(curriculo);
 
             var pdf = new Arquivo();
-            pdf.setNome("curriculo" + student.getId());
+            pdf.setNome("curriculo" + usuario.getId());
             pdf.setTipoArquivo("pdf");
             pdf.setDados(new byte[0]);
             student.getCurriculo().setPdf(pdf);
 
             student = respository.save(student);
             usuario.setAluno(student);
+            usuario.setStatus(StatusUsuario.CONCLUIDO);
             try {
                 usuarioService.atualizaUsuario(usuario);
             } catch (UsuarioNaoCadastradoException e) {
                 throw new RuntimeException(e);
             }
+
         });
 
         return optional.orElseThrow(() -> new AlunoNaoCadastradoException("Dados inválidos!"));
