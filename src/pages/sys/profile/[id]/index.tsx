@@ -148,7 +148,6 @@ export default function ProfilePage() {
                 {data?.aluno?.dadosPessoa && (
                   <LabelWithData
                     data={
-                      auth.userInfo?.aluno?.dadosPessoa.dataNasc &&
                       getFormattedDate(data?.aluno?.dadosPessoa.dataNasc)
                     }
                     label="Data de Nascimento:"
