@@ -21,6 +21,7 @@ import org.springframework.stereotype.Service;
 
 import br.edu.ifrn.ifjobs.exception.EmpresaNaoCadastradaException;
 import br.edu.ifrn.ifjobs.exception.EmpresaNaoEncontradaException;
+import br.edu.ifrn.ifjobs.exception.UsuarioNaoCadastradoException;
 import br.edu.ifrn.ifjobs.exception.UsuarioNaoEncontradoException;
 import br.edu.ifrn.ifjobs.model.Empresa;
 import br.edu.ifrn.ifjobs.model.Usuario;
@@ -43,7 +44,7 @@ public class EmpresaService {
     @Autowired
     private EmailService emailService;
 
-    public Empresa createEmpresa(Empresa empresa) throws EmpresaNaoCadastradaException {
+    public Empresa createEmpresa(Empresa empresa, String email) throws EmpresaNaoCadastradaException {
         Optional<Empresa> optional;
         optional = Optional.ofNullable(repository.save(empresa));
 
@@ -52,18 +53,23 @@ public class EmpresaService {
 
         optional.ifPresent(enterprise -> {
             Empresa e = repository.save(enterprise);
-            System.out.println(e);
-            Usuario buscaPorEmpresaId;
+            Usuario buscaPorEmail;
             try {
-                buscaPorEmpresaId = usuarioService.buscaPorEmpresaId(e.getId());
+                buscaPorEmail = usuarioService.buscaPorEmail(email);
             } catch (UsuarioNaoEncontradoException erro) {
                 throw new RuntimeException(erro);
             }
-            buscaPorEmpresaId.setStatus(StatusUsuario.CONCLUIDO);
+            buscaPorEmail.setStatus(StatusUsuario.CONCLUIDO);
             String senha = new BCryptPasswordEncoder().encode(geraSenhaAleatoria());
-            buscaPorEmpresaId.setSenha(senha);
+            buscaPorEmail.setSenha(senha);
+            buscaPorEmail.setEmpresa(e);
             try {
-                emailService.enviaEmailComArquivo(buscaPorEmpresaId, caminhoArquivoEmailSucessoCadastroEmpresa,
+                usuarioService.atualizaUsuario(buscaPorEmail);
+            } catch (UsuarioNaoCadastradoException erro) {
+                throw new RuntimeException(erro);
+            }
+            try {
+                emailService.enviaEmailComArquivo(buscaPorEmail, caminhoArquivoEmailSucessoCadastroEmpresa,
                         "IF Jobs - Cadastro realizado com sucesso",
                         new File("src/main/resources/docs/form_cadastro_empresa.docx"));
             } catch (IOException | TemplateException | MessagingException erro) {
