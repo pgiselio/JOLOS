@@ -1,9 +1,13 @@
 package br.edu.ifrn.ifjobs.dto.usuario;
 
 import org.modelmapper.ModelMapper;
+import org.springframework.security.crypto.bcrypt.BCrypt;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import br.edu.ifrn.ifjobs.dto.Dto;
 import br.edu.ifrn.ifjobs.model.Usuario;
+import io.jsonwebtoken.impl.Base64Codec;
+import io.jsonwebtoken.impl.TextCodec;
 
 /**
  * Essa classe serve para ser dto para envio de email
@@ -21,7 +25,7 @@ public class UsuarioEmailDTO implements Dto<Usuario, UsuarioEmailDTO> {
     public UsuarioEmailDTO(Usuario usuario) {
         this.email = usuario.getEmail();
         this.codigoAutenticacao = usuario.getCodigoAutenticacao();
-        this.senha = usuario.getSenha();
+        this.senha = TextCodec.BASE64.decodeToString(usuario.getSenha());
     }
 
     public String getEmail() {
