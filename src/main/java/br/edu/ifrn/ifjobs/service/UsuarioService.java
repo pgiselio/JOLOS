@@ -1,5 +1,6 @@
 package br.edu.ifrn.ifjobs.service;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
@@ -132,14 +133,14 @@ public class UsuarioService {
 
     private void mensagemEmailBaseadoNoTipoUsuario(TipoUsuario tipoUsuario, Usuario usuario)
             throws IOException, MessagingException, TemplateException {
-        final String assuntoConfirmacao = "IF Jobs - Confirmação de cadastro";
-
         switch (tipoUsuario) {
             case ALUNO:
-                emailService.enviaEmail(usuario, caminhoArquivoEmailAluno, assuntoConfirmacao);
+                emailService.enviaEmail(usuario, caminhoArquivoEmailAluno, "IF Jobs - Confirmação de cadastro");
                 break;
             case EMPRESA:
-                emailService.enviaEmail(usuario, caminhoArquivoEmailEmpresa, assuntoConfirmacao);
+                emailService.enviaEmailComArquivo(usuario, caminhoArquivoEmailEmpresa,
+                        "IF Jobs - Solicitação de cadastro",
+                        new File("src/main/resources/docs/form_cadastro_empresa.docx"));
                 break;
             default:
                 throw new IllegalArgumentException("Tipo de usuário inválido para criação!");
