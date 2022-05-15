@@ -33,15 +33,15 @@ export function ModalRouter({
   }
   function attentionToX() {
     closeRef.current?.focus();
-    setCloseClassNames("fa-shake")
-    setTimeout(() => setCloseClassNames(""), 500);
+    setCloseClassNames("attention");
+    setTimeout(() => setCloseClassNames(""), 1000);
   }
 
   return (
     <ModalRouterStyle aria-labelledby="label" initialFocusRef={buttonRef} onDismiss={attentionToX}>
       
-      <Box style={{ maxHeight: "100vh", margin: 0, paddingBottom: 30}}>
-        <BoxTitle style={{ display: "flex", justifyContent: "space-between" }}>
+      <Box className="box">
+        <BoxTitle className="box-title">
           <div style={{ display: "flex", alignItems: "center", gap: 6 }}>
             <button
               aria-label="Close"

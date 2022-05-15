@@ -31,7 +31,6 @@ export function CadastroStep3() {
     "Energias Renováveis",
     "Física",
   ];
-  let today = new Date();
   let validationSchema = Yup.object().shape({
     nome: Yup.string().required("Este campo é obrigatório"),
     cpf: Yup.string()
@@ -57,7 +56,6 @@ export function CadastroStep3() {
     control,
     formState: { errors },
     handleSubmit,
-    getValues,
   } = useForm({
     mode: "onChange",
     defaultValues: {

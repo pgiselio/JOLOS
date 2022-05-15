@@ -8,7 +8,7 @@ export function RequireAuth({ children }: { children: JSX.Element }) {
   if (!auth.email && !auth.loadingUserFromLocalStorage) {
     return <Navigate to="/entrar?error=needsLogin" state={{from: location}} replace/>; 
   }
-  if (auth.loadingUserFromLocalStorage || !auth.userInfo?.id) {
+  if (auth.loadingUserFromLocalStorage || !auth.userInfo?.id || !auth.authorities?.length) {
     return (
       <LoadingPageLogo/>
     );

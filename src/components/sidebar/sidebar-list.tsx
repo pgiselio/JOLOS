@@ -55,9 +55,16 @@ export function SidebarList() {
           <nav className="sidebar-items">
             <ul>
               <SidebarItem to="" icon="fas fa-home" label="Início" end />
+              {auth?.authorities?.includes("ADMIN") && (
+                <SidebarItem
+                  to={`gerenciamento  `}
+                  icon="fas fa-gauge-high"
+                  label="Gerenciamento"
+                />
+              )}
               <SidebarItem to="vagas" icon="fas fa-briefcase" label="Vagas" />
               <SidebarItem to="forum" icon="fas fa-comments" label="Fórum" />
-              {nomePessoa() !== "ADMIN" && (
+              {!auth?.authorities?.includes("ADMIN") && (
                 <SidebarItem
                   to={`profile/${auth.userInfo?.id}`}
                   icon="fas fa-user"

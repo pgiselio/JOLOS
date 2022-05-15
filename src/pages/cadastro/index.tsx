@@ -72,7 +72,9 @@ export default function CadastroPage() {
       .then((response) => {
         if (response.status === 201) {
           toast.success("Cadastro realizado com sucesso!");
-          navigate(`step2?email=${email}`);
+          if(selectedTab === "ALUNO"){
+            navigate(`step2?email=${email}`);
+          }
         }
       })
       .catch(() => {

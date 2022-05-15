@@ -28,6 +28,8 @@ import NewAnswerForm from "./pages/sys/forum/[id]/reply";
 import { CadastroStep3 } from "./pages/cadastro/step3";
 import CadastroConcluidoPage from "./pages/cadastro/confirmacao";
 import { CadastroProvider } from "./contexts/CadastroContext";
+import GerenciamentoPage from "./pages/gerenciamento";
+import CadastrarEmpresaPage from "./pages/gerenciamento/cadastrar/empresa";
 
 const ForumPage = lazy(() => import("./pages/sys/forum"));
 const ForumTopicPage = lazy(() => import("./pages/sys/forum/[id]"));
@@ -83,6 +85,9 @@ export const AppRoutes = () => {
               </Suspense>
             }
           />
+          <Route path="gerenciamento" element={<GerenciamentoPage />} />
+          <Route path="gerenciamento/cadastrar/empresa" element={<CadastrarEmpresaPage />} />
+
           <Route path="vagas" element={<VagasList />} />
           <Route path="vagas/criar" element={<CriarNovaVagaPage />} />
           <Route path="vagas/:id" element={<VagaPage />}>
