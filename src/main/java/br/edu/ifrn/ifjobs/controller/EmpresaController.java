@@ -36,7 +36,7 @@ public class EmpresaController {
     @Autowired
     private EmpresaService empresaService;
 
-    @PostMapping("/create?email={email}")
+    @PostMapping("/create/{email}")
     public ResponseEntity<Empresa> salvaEmpresa(@RequestBody @Valid EmpresaInsertDTO dto,
             @PathVariable(name = "email") String email) {
         Empresa empresa = dto.convertDtoToEntity();
