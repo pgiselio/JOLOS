@@ -25,7 +25,7 @@ public class UsuarioEmailDTO implements Dto<Usuario, UsuarioEmailDTO> {
     public UsuarioEmailDTO(Usuario usuario) {
         this.email = usuario.getEmail();
         this.codigoAutenticacao = usuario.getCodigoAutenticacao();
-        this.senha = TextCodec.BASE64.decodeToString(usuario.getSenha());
+        this.senha = usuario.getSenha();
     }
 
     public String getEmail() {
