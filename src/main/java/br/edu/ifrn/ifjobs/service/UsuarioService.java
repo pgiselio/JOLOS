@@ -15,6 +15,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.fge.jsonpatch.JsonPatch;
 import com.github.fge.jsonpatch.JsonPatchException;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.scheduling.annotation.Async;
@@ -66,8 +67,11 @@ public class UsuarioService {
     private Optional<Usuario> processoDeSalvarUsuarioeDispararEmail(Optional<UsuarioInsertDTO> optional) {
         return optional.map(dto -> {
             Usuario usuario = dto.convertDtoToEntity();
-            Optional.ofNullable(dto.getSenha())
-                    .ifPresent(senha -> usuario.setSenha(new BCryptPasswordEncoder().encode(senha)));
+            Optional.ofNullable(dto.getSenha()).ifPresentOrElse(senha -> {
+                usuario.setSenha(new BCryptPasswordEncoder().encode(senha));
+            }, () -> {
+                usuario.setSenha(new BCryptPasswordEncoder().encode(StringUtils.EMPTY));
+            });
 
             String codigo = geraCodigoVerificacao();
             usuario.setCodigoAutenticacao(codigo);
