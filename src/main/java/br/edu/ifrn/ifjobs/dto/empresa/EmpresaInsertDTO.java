@@ -17,7 +17,6 @@ public class EmpresaInsertDTO implements Dto<Empresa, EmpresaInsertDTO> {
     @CNPJ(message = "CNPJ inválido!!")
     private String cnpj;
 
-    @NotBlank(message = "Resumo da empresa não informado!")
     private String resumo;
 
     @NotBlank(message = "Telefone não informado!")
