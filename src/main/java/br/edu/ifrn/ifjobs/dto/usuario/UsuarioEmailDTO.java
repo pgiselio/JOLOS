@@ -11,6 +11,7 @@ import br.edu.ifrn.ifjobs.model.Usuario;
 public class UsuarioEmailDTO implements Dto<Usuario, UsuarioEmailDTO> {
 
     public String email;
+    public String senha;
     public String codigoAutenticacao;
 
     public UsuarioEmailDTO() {
@@ -20,22 +21,7 @@ public class UsuarioEmailDTO implements Dto<Usuario, UsuarioEmailDTO> {
     public UsuarioEmailDTO(Usuario usuario) {
         this.email = usuario.getEmail();
         this.codigoAutenticacao = usuario.getCodigoAutenticacao();
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getCodigoAutenticacao() {
-        return codigoAutenticacao;
-    }
-
-    public void setCodigoAutenticacao(String codigoAutenticacao) {
-        this.codigoAutenticacao = codigoAutenticacao;
+        this.senha = usuario.getSenha();
     }
 
     private ModelMapper modelMapper;
