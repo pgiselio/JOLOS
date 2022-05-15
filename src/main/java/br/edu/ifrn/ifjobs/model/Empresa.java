@@ -27,7 +27,7 @@ public class Empresa implements Serializable {
     @Column(nullable = false, length = 400, unique = true)
     private String cnpj;
 
-    @Column(nullable = false, columnDefinition = "TEXT")
+    @Column(columnDefinition = "TEXT")
     private String resumo;
 
     @Column(nullable = false, length = 12)
