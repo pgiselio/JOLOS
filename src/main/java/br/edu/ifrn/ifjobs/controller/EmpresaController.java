@@ -36,13 +36,14 @@ public class EmpresaController {
     @Autowired
     private EmpresaService empresaService;
 
-    @PostMapping("/create")
-    public ResponseEntity<Empresa> salvaEmpresa(@RequestBody @Valid EmpresaInsertDTO dto) {
+    @PostMapping("/create?email={email}")
+    public ResponseEntity<Empresa> salvaEmpresa(@RequestBody @Valid EmpresaInsertDTO dto,
+            @PathVariable(name = "email") String email) {
         Empresa empresa = dto.convertDtoToEntity();
         Empresa empresaSalva;
 
         try {
-            empresaSalva = empresaService.createEmpresa(empresa);
+            empresaSalva = empresaService.createEmpresa(empresa, email);
         } catch (EmpresaNaoCadastradaException e) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
         }
@@ -107,7 +108,7 @@ public class EmpresaController {
         Empresa empresaSalva;
 
         try {
-            empresaSalva = empresaService.createEmpresa(empresa);
+            empresaSalva = empresaService.atualizaEmpresa(empresa);
         } catch (EmpresaNaoCadastradaException e) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
         }
