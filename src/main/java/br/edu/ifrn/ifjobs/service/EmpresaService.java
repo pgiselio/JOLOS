@@ -69,9 +69,8 @@ public class EmpresaService {
                 throw new RuntimeException(erro);
             }
             try {
-                emailService.enviaEmailComArquivo(buscaPorEmail, caminhoArquivoEmailSucessoCadastroEmpresa,
-                        "IF Jobs - Cadastro realizado com sucesso",
-                        new File("src/main/resources/docs/form_cadastro_empresa.docx"));
+                emailService.enviaEmail(buscaPorEmail, caminhoArquivoEmailSucessoCadastroEmpresa,
+                        "IF Jobs - Cadastro realizado com sucesso!");
             } catch (IOException | TemplateException | MessagingException erro) {
                 throw new RuntimeException(erro);
             }
