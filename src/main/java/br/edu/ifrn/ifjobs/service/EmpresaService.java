@@ -52,6 +52,7 @@ public class EmpresaService {
 
         optional.ifPresent(enterprise -> {
             Empresa e = repository.save(enterprise);
+            System.out.println(e);
             Usuario buscaPorEmpresaId;
             try {
                 buscaPorEmpresaId = usuarioService.buscaPorEmpresaId(e.getId());
