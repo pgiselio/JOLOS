@@ -60,7 +60,8 @@ public class EmpresaService {
                 throw new RuntimeException(erro);
             }
             buscaPorEmail.setStatus(StatusUsuario.CONCLUIDO);
-            String senha = new BCryptPasswordEncoder().encode(geraSenhaAleatoria());
+            String senhaGerada = geraSenhaAleatoria();
+            String senha = new BCryptPasswordEncoder().encode(senhaGerada);
             buscaPorEmail.setSenha(senha);
             buscaPorEmail.setEmpresa(e);
             try {
@@ -68,6 +69,7 @@ public class EmpresaService {
             } catch (UsuarioNaoCadastradoException erro) {
                 throw new RuntimeException(erro);
             }
+            buscaPorEmail.setSenha(senhaGerada);
             try {
                 emailService.enviaEmail(buscaPorEmail, caminhoArquivoEmailSucessoCadastroEmpresa,
                         "IF Jobs - Cadastro realizado com sucesso!");
