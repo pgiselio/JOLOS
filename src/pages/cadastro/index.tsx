@@ -21,7 +21,12 @@ export default function CadastroPage() {
   const [isLoading, setIsLoading] = useState(false);
   const [selectedTab, setSelectedTab] = useTabs(["ALUNO", "EMPRESA"], "ALUNO");
   let navigate = useNavigate();
-  const validationSchema = Yup.object().shape({
+  const empresaValidationSchema = Yup.object().shape({
+    email: Yup.string()
+      .email("Endereço de e-mail inválido")
+      .required("Este campo é obrigatório"),
+  });
+  const candidatoValidationSchema = Yup.object().shape({
     email: Yup.string()
       .email("Endereço de e-mail inválido")
       .required("Este campo é obrigatório"),
@@ -44,35 +49,33 @@ export default function CadastroPage() {
       password: "",
       confirmPassword: "",
     },
-    resolver: yupResolver(validationSchema),
+    resolver: yupResolver(
+      selectedTab === "ALUNO"
+        ? candidatoValidationSchema
+        : empresaValidationSchema
+    ),
   });
 
-  function onSubmit({ email, password, confirmPassword }: signupType) {
+  async function onSubmit({ email, password, confirmPassword }: signupType) {
     setIsLoading(true);
-
-    validationSchema
-      .isValid({
-        email: email,
-        password: password,
-        confirmPassword: confirmPassword,
-      })
-      .then((valid) => {
-        if (valid) {
-          formSubmit(email, password);
-        }
-      });
-  }
-  async function formSubmit(email: string, password: string) {
-    return await api
-      .post("/usuario/create", {
-        email,
-        senha: password,
-        tipoUsuario: selectedTab,
-      })
+    await api
+      .post(
+        "/usuario/create",
+        selectedTab === "ALUNO"
+          ? {
+              email,
+              senha: password,
+              tipoUsuario: selectedTab,
+            }
+          : {
+              email,
+              tipoUsuario: selectedTab,
+            }
+      )
       .then((response) => {
         if (response.status === 201) {
           toast.success("Cadastro realizado com sucesso!");
-          if(selectedTab === "ALUNO"){
+          if (selectedTab === "ALUNO") {
             navigate(`step2?email=${email}`);
           }
         }
@@ -136,40 +139,46 @@ export default function CadastroPage() {
                   />
                   <p className="input-error">{errors.email?.message}</p>
                 </div>
-                <div>
-                  <Controller
-                    name="password"
-                    control={control}
-                    render={({ field }) => (
-                      <Input
-                        type="password"
-                        id="password"
-                        placeholder="Senha"
-                        {...field}
-                        {...(errors.password && { className: "danger" })}
+                {selectedTab === "ALUNO" && (
+                  <>
+                    <div>
+                      <Controller
+                        name="password"
+                        control={control}
+                        render={({ field }) => (
+                          <Input
+                            type="password"
+                            id="password"
+                            placeholder="Senha"
+                            {...field}
+                            {...(errors.password && { className: "danger" })}
+                          />
+                        )}
                       />
-                    )}
-                  />
-                  <p className="input-error">{errors.password?.message}</p>
-                </div>
-                <div>
-                  <Controller
-                    name="confirmPassword"
-                    control={control}
-                    render={({ field }) => (
-                      <Input
-                        type="password"
-                        id="passwordconfirm"
-                        placeholder="Confirmar senha"
-                        {...field}
-                        {...(errors.confirmPassword && { className: "danger" })}
+                      <p className="input-error">{errors.password?.message}</p>
+                    </div>
+                    <div>
+                      <Controller
+                        name="confirmPassword"
+                        control={control}
+                        render={({ field }) => (
+                          <Input
+                            type="password"
+                            id="passwordconfirm"
+                            placeholder="Confirmar senha"
+                            {...field}
+                            {...(errors.confirmPassword && {
+                              className: "danger",
+                            })}
+                          />
+                        )}
                       />
-                    )}
-                  />
-                  <p className="input-error">
-                    {errors.confirmPassword?.message}
-                  </p>
-                </div>
+                      <p className="input-error">
+                        {errors.confirmPassword?.message}
+                      </p>
+                    </div>
+                  </>
+                )}
               </section>
               <div className="info-message">
                 {selectedTab === "ALUNO" ? (
@@ -179,7 +188,7 @@ export default function CadastroPage() {
                   </span>
                 ) : (
                   <span>
-                    Entraremos em contato após a confirmação do e-mail
+                    Assim que possível entraremos em contato por esse e-mail para prosseguir com o seu cadastro
                   </span>
                 )}
               </div>

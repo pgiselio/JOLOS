@@ -41,7 +41,7 @@ export function CadastroStep3() {
         "validacao da data",
         "Data inválida",
         (value: any) =>
-          convertFromStringToDate(value).toString() !== "Invalid Date"
+          convertFromStringToDate(value).toString() !== "Invalid Date" && convertFromStringToDate(value) <= new Date()
       )
       .required("Este campo é obrigatório")
       .min(10, "Data inválida"),

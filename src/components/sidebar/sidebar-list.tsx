@@ -57,7 +57,7 @@ export function SidebarList() {
               <SidebarItem to="" icon="fas fa-home" label="Início" end />
               {auth?.authorities?.includes("ADMIN") && (
                 <SidebarItem
-                  to={`gerenciamento  `}
+                  to={`gerenciamento`}
                   icon="fas fa-gauge-high"
                   label="Gerenciamento"
                 />

@@ -28,8 +28,8 @@ import NewAnswerForm from "./pages/sys/forum/[id]/reply";
 import { CadastroStep3 } from "./pages/cadastro/step3";
 import CadastroConcluidoPage from "./pages/cadastro/confirmacao";
 import { CadastroProvider } from "./contexts/CadastroContext";
-import GerenciamentoPage from "./pages/gerenciamento";
-import CadastrarEmpresaPage from "./pages/gerenciamento/cadastrar/empresa";
+import GerenciamentoPage from "./pages/sys/gerenciamento";
+import CadastrarEmpresaPage from "./pages/sys/gerenciamento/cadastrar/empresa";
 
 const ForumPage = lazy(() => import("./pages/sys/forum"));
 const ForumTopicPage = lazy(() => import("./pages/sys/forum/[id]"));
