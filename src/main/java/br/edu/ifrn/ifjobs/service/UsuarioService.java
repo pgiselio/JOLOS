@@ -66,7 +66,8 @@ public class UsuarioService {
     private Optional<Usuario> processoDeSalvarUsuarioeDispararEmail(Optional<UsuarioInsertDTO> optional) {
         return optional.map(dto -> {
             Usuario usuario = dto.convertDtoToEntity();
-            usuario.setSenha(new BCryptPasswordEncoder().encode(dto.getSenha()));
+            Optional.ofNullable(dto.getSenha())
+                    .ifPresent(senha -> usuario.setSenha(new BCryptPasswordEncoder().encode(senha)));
 
             String codigo = geraCodigoVerificacao();
             usuario.setCodigoAutenticacao(codigo);
