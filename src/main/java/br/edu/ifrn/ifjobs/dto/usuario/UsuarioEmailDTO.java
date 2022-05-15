@@ -24,6 +24,30 @@ public class UsuarioEmailDTO implements Dto<Usuario, UsuarioEmailDTO> {
         this.senha = usuario.getSenha();
     }
 
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getSenha() {
+        return senha;
+    }
+
+    public void setSenha(String senha) {
+        this.senha = senha;
+    }
+
+    public String getCodigoAutenticacao() {
+        return codigoAutenticacao;
+    }
+
+    public void setCodigoAutenticacao(String codigoAutenticacao) {
+        this.codigoAutenticacao = codigoAutenticacao;
+    }
+
     private ModelMapper modelMapper;
 
     @Override
