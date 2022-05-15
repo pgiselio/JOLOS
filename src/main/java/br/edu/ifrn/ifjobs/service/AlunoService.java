@@ -12,6 +12,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.fge.jsonpatch.JsonPatch;
 import com.github.fge.jsonpatch.JsonPatchException;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -62,6 +63,7 @@ public class AlunoService {
             student = respository.save(student);
             usuario.setAluno(student);
             usuario.setStatus(StatusUsuario.CONCLUIDO);
+            usuario.setCodigoAutenticacao(StringUtils.EMPTY);
             try {
                 usuarioService.atualizaUsuario(usuario);
             } catch (UsuarioNaoCadastradoException e) {
