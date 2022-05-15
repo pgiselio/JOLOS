@@ -17,7 +17,6 @@ public class UsuarioInsertDTO implements Dto<Usuario, UsuarioInsertDTO> {
     @NotBlank(message = "Email não informado!!")
     private String email;
 
-    @NotBlank(message = "não informada")
     private String senha;
 
     @Enumerated(EnumType.STRING)
