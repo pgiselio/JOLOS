@@ -37,7 +37,7 @@ public class EmailService {
     @Value("${spring.mail.properties.EnderecoEmailCoex}")
     private String emailCoex;
 
-    public void enviaEmail(Usuario usuario, String caminhoArquivo, String assunto)
+    public void enviaEmail(Usuario usuario, String nomeArquivoHTML, String assunto)
             throws MessagingException, UnsupportedEncodingException, IOException, TemplateException {
         MimeMessage mimeMessage = envio.createMimeMessage();
         MimeMessageHelper mimeMessageHelper = new MimeMessageHelper(mimeMessage, false, "utf-8");
@@ -46,19 +46,35 @@ public class EmailService {
         mimeMessageHelper.setSubject(assunto);
         mimeMessageHelper.setTo(usuario.getEmail());
         mimeMessageHelper.setFrom(new InternetAddress(emailBase, "IF Jobs"));
-        String conteudoEmail = getEmailContent(usuario, caminhoArquivo);
+        String conteudoEmail = getEmailContent(usuario, nomeArquivoHTML);
         mimeMessageHelper.setText(conteudoEmail, true);
 
         envio.send(mimeMessage);
     }
 
-    private String getEmailContent(Usuario usuario, String caminhoArquivo) throws IOException, TemplateException {
+    public void enviaEmailComArquivo(Usuario usuario, String nomeArquivoHTML, String assunto, File arquivo)
+            throws MessagingException, UnsupportedEncodingException, IOException, TemplateException {
+        MimeMessage mimeMessage = envio.createMimeMessage();
+        MimeMessageHelper mimeMessageHelper = new MimeMessageHelper(mimeMessage, true, "utf-8");
+
+        mimeMessageHelper.setReplyTo(emailCoex);
+        mimeMessageHelper.setSubject(assunto);
+        mimeMessageHelper.setTo(usuario.getEmail());
+        mimeMessageHelper.setFrom(new InternetAddress(emailBase, "IF Jobs"));
+        String conteudoEmail = getEmailContent(usuario, nomeArquivoHTML);
+        mimeMessageHelper.setText(conteudoEmail, true);
+        mimeMessageHelper.addAttachment(arquivo.getName(), arquivo);
+
+        envio.send(mimeMessage);
+    }
+
+    private String getEmailContent(Usuario usuario, String nomeArquivo) throws IOException, TemplateException {
         StringWriter stringWriter = new StringWriter();
         Map<String, Object> model = new HashMap<>();
         UsuarioEmailDTO dto = new UsuarioEmailDTO(usuario);
         model.put("usuario", dto);
         configuration.setDirectoryForTemplateLoading(new File("src/main/resources/template/"));
-        freemarker.template.Template template = configuration.getTemplate(caminhoArquivo);
+        freemarker.template.Template template = configuration.getTemplate(nomeArquivo);
         template.process(model, stringWriter);
         return stringWriter.getBuffer().toString();
     }
