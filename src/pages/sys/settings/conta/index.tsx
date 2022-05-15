@@ -4,7 +4,6 @@ import {
   AccordionItem,
   AccordionPanel,
 } from "@reach/accordion";
-import { userInfo } from "os";
 import { useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 import ReactInputMask from "react-input-mask";

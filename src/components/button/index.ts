@@ -70,4 +70,7 @@ export const Button = styled.button`
     cursor: not-allowed;
     user-select: none;
   }
+  &:not(:disabled):active {
+    transform: scale(.95);
+  }
 `;

@@ -16,17 +16,6 @@ export default function GerenciamentoPage() {
   );
   return (
     <div className="content">
-      <ul>
-        {data ? (
-          data?.map((usuario: any) => (
-            <li key={usuario.id}>
-              {usuario.email + " "} Tipo: {" " + usuario.tipoUsuario}
-            </li>
-          ))
-        ) : (
-          <CircularProgressFluent />
-        )}
-      </ul>
       <Link to="cadastrar/empresa">Cadastrar Nova Empresa</Link>
     </div>
   );
