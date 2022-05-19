@@ -130,7 +130,7 @@ public class UsuarioService {
             u.setCodigoAutenticacao(user.getCodigoAutenticacao());
             u.setStatus(user.getStatus());
             u.setSenha(user.getSenha());
-            usuarioRepository.save(u);
+            usuarioRepository.saveAndFlush(u);
         });
 
         return optional.orElseThrow(() -> new UsuarioNaoCadastradoException("Usuário não cadastrado!"));
