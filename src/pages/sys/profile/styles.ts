@@ -72,23 +72,26 @@ export const ProfilePageStyle = styled.section`
     text-overflow: ellipsis;
     white-space: nowrap;
     width: calc(100% - 60px);
-  }
 
-  .profile-names h2 {
-    font-size: 20px;
-    font-weight: 500;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
+    h2 {
+      font-size: 20px;
+      font-weight: 500;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    span{
+      font-family: "Roboto", sans-serif;
+    }
   }
 
   .contacts {
     display: flex;
     flex-direction: column;
-  }
-
-  .contacts > * {
-    list-style: none;
+    & > * {
+      list-style: none;
+    }
   }
 
   .essential-info {

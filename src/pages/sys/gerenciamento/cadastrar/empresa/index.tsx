@@ -242,7 +242,7 @@ export default function CadastrarEmpresaPage() {
                 <h4>Campos Opcionais</h4>
               </div>
               <div className="lbl">
-                <label htmlFor="email">Facebook: </label>
+                <label htmlFor="facebook">Facebook: </label>
                 <Controller
                   name="facebook"
                   control={control}
@@ -258,7 +258,7 @@ export default function CadastrarEmpresaPage() {
                 />
               </div>
               <div className="lbl">
-                <label htmlFor="email">Instagram: </label>
+                <label htmlFor="instagram">Instagram: </label>
                 <Controller
                   name="instagram"
                   control={control}
@@ -274,7 +274,7 @@ export default function CadastrarEmpresaPage() {
                 />
               </div>
               <div className="lbl">
-                <label htmlFor="email">LinkedIn: </label>
+                <label htmlFor="linkedin">LinkedIn: </label>
                 <Controller
                   name="linkedin"
                   control={control}
@@ -308,7 +308,7 @@ export default function CadastrarEmpresaPage() {
             </div>
           </form>
           <div style={{alignSelf: "flex-end", paddingTop: "20px"}}>
-              <Button type="submit" form="cadastrar-nova-empresa-form" id="submit-form" className="less-radius"{...isLoading && {disabled: true}}>
+              <Button type="submit" form="cadastrar-nova-empresa-form" id="submit-form" className=""{...isLoading && {disabled: true}}>
               {isLoading && (
                 <CircularProgressFluent
                   color="white"

@@ -252,7 +252,7 @@ export default function ProfilePage() {
                                 rel="noreferrer"
                                 target="_blank"
                               >
-                                <i className="fab fa-linkedin"></i>
+                                <i style={{color: "#0a66c2"}} className="fab fa-linkedin"></i>
                               </a>
                             </li>
                           )}
@@ -263,7 +263,7 @@ export default function ProfilePage() {
                                 rel="noreferrer"
                                 target="_blank"
                               >
-                                <i className="fab fa-facebook"></i>
+                                <i style={{color: "#2374E1"}} className="fab fa-facebook"></i>
                               </a>
                             </li>
                           )}
@@ -274,7 +274,7 @@ export default function ProfilePage() {
                                 rel="noreferrer"
                                 target="_blank"
                               >
-                                <i className="fab fa-instagram"></i>
+                                <i style={{color: "deeppink"}} className="fab fa-instagram"></i>
                               </a>
                             </li>
                           )}
@@ -285,7 +285,7 @@ export default function ProfilePage() {
                                 rel="noreferrer"
                                 target="_blank"
                               >
-                                <i className="fab fa-twitter"></i>
+                                <i style={{color: "#05bcbc"}} className="fab fa-twitter"></i>
                               </a>
                             </li>
                           )}

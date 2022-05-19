@@ -1,6 +1,5 @@
 import { useQuery } from "react-query";
 import { Link } from "react-router-dom";
-import CircularProgressFluent from "../../../components/circular-progress-fluent";
 import { api } from "../../../services/api";
 
 export default function GerenciamentoPage() {

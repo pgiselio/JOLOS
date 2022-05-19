@@ -92,6 +92,10 @@ body.remove-transbar .three-bars-btn *{
   width: 250px;
 }
 
+.vaga-columns-2 {
+  display: flex;
+  flex-direction: column-reverse;
+}
   
 
 @media (min-width: 766px) {
@@ -162,27 +166,25 @@ body.remove-transbar .three-bars-btn *{
     grid-template-columns: 1fr 1fr;
   }
   .vaga-columns-2 {
-    display: flex;
+    display: grid;
+    grid-template-columns: 1fr auto;
     flex-flow: row wrap;
     justify-content: space-between;
     align-items: flex-start;
-  }
 
-  .vaga-columns-2 .column-1 {
-    display: flex;
-    flex: 0 1 70%;
-    padding-right: 20px;
-  }
-
-  .vaga-columns-2 .column-2 {
-    display: flex;
-    flex-direction: column;
-    flex: 0 1 30%;
-    height: 100%;
-  }
-
-  .vaga-columns-2 .column-2 .box {
-    height: 100%;
+    .column-1 {
+      display: flex;
+      padding-right: 20px;
+    }
+    .column-2 {
+      display: flex;
+      flex-direction: column;
+      width: 320px;
+      height: 100%;
+      .box {
+        height: 100%;
+      }
+    }
   }
 }
 @media (min-width: 1200px) {

@@ -154,15 +154,20 @@ export default function SettingContaPage() {
       <div>
         <ProfilePic style={{ height: "80px" }} />
       </div>
-
-      <LabelWithData
-        data={
-          auth.userInfo?.aluno?.dadosPessoa.dataNasc &&
-          getFormattedDate(auth.userInfo?.aluno?.dadosPessoa.dataNasc)
-        }
-        label="Data de Nascimento:"
-        icon="fas fa-calendar-day"
-      />
+      {(auth.userInfo?.aluno?.dadosPessoa.dataNasc ||
+        auth.userInfo?.empresa?.dadosPessoa.dataNasc) && (
+        <LabelWithData
+          data={
+            auth.userInfo?.aluno?.dadosPessoa.dataNasc
+              ? getFormattedDate(auth.userInfo?.aluno?.dadosPessoa.dataNasc)
+              : auth.userInfo?.empresa?.dadosPessoa.dataNasc
+              ? getFormattedDate(auth.userInfo?.empresa?.dadosPessoa.dataNasc)
+              : ""
+          }
+          label={`Data de ${auth.authorities?.includes("ALUNO") ? "nascimento" : "fundação"}:`}
+          icon="fas fa-calendar-day"
+        />
+      )}
 
       <Accordion collapsible multiple>
         <form>
