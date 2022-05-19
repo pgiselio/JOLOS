@@ -53,10 +53,10 @@ public class Usuario implements UserDetails {
     @JoinTable(name = "usuarios_roles", joinColumns = @JoinColumn(name = "usuario_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<Role> roles = new HashSet<>();
 
-    @OneToOne(cascade = CascadeType.MERGE)
+    @OneToOne(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
     private Aluno aluno;
 
-    @OneToOne(cascade = CascadeType.MERGE)
+    @OneToOne(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
     private Empresa empresa;
 
     @Column(name = "codigo_auth")
