@@ -26,6 +26,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
+import br.edu.ifrn.ifjobs.dto.DTOConversor;
 import br.edu.ifrn.ifjobs.dto.usuario.UsuarioGetDTO;
 import br.edu.ifrn.ifjobs.dto.usuario.UsuarioInsertDTO;
 import br.edu.ifrn.ifjobs.dto.usuario.UsuarioLoginGetDTO;
@@ -157,10 +158,10 @@ public class UsuarioController {
             throw new ResponseStatusException(HttpStatus.BAD_GATEWAY, e.getMessage());
         }
 
-        UsuarioGetDTO dtoConvert = new UsuarioGetDTO();
-        UsuarioGetDTO entityToDto = dtoConvert.convertEntityToDto(usuarioAtualizado);
+        UsuarioGetDTO entidadeParaDTO = DTOConversor.convertEntityToDto(usuarioAtualizado,
+                UsuarioGetDTO.class);
 
-        return ResponseEntity.ok(entityToDto);
+        return ResponseEntity.ok(entidadeParaDTO);
     }
 
     @DeleteMapping("/delete")
