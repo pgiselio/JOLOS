@@ -114,12 +114,13 @@ public class UsuarioService {
         optional = Optional.ofNullable(usuario);
 
         optional.ifPresent(user -> {
-            user.setAluno(usuario.getAluno());
-            user.setEmpresa(usuario.getEmpresa());
-            user.setStatus(usuario.getStatus());
-            user.setCodigoAutenticacao(usuario.getCodigoAutenticacao());
+            Usuario otherUser = usuarioRepository.getById(user.getId());
+            otherUser.setAluno(user.getAluno());
+            otherUser.setEmpresa(user.getEmpresa());
+            otherUser.setStatus(user.getStatus());
+            otherUser.setCodigoAutenticacao(user.getCodigoAutenticacao());
 
-            usuarioRepository.save(user);
+            usuarioRepository.save(otherUser);
         });
 
         return optional.orElseThrow(() -> new UsuarioNaoCadastradoException("Usuário não cadastrado!"));
