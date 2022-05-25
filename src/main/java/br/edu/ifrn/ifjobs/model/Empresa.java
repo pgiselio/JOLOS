@@ -24,7 +24,7 @@ public class Empresa implements Serializable {
     @Embedded
     private Pessoa dadosPessoa;
 
-    @Column(nullable = false, length = 400, unique = true)
+    @Column(nullable = false, length = 20, unique = true)
     private String cnpj;
 
     @Column(columnDefinition = "TEXT")
@@ -34,6 +34,8 @@ public class Empresa implements Serializable {
     private String telefone;
 
     private RedesSociais redesSociais;
+
+    private String linkSite;
 
     public RedesSociais getRedesSociais() {
         return redesSociais;
@@ -125,10 +127,18 @@ public class Empresa implements Serializable {
         this.telefone = telefone;
     }
 
+    public String getLinkSite() {
+        return linkSite;
+    }
+
+    public void setLinkSite(String linkSite) {
+        this.linkSite = linkSite;
+    }
+
     @Override
     public String toString() {
         return "Empresa [cnpj=" + cnpj + ", dadosPessoa=" + dadosPessoa + ", id=" + id + ", resumo=" + resumo
-                + ", telefone=" + telefone + "]";
+                + ", telefone=" + telefone + ", linkSite=" + linkSite + "]";
     }
 
 }
