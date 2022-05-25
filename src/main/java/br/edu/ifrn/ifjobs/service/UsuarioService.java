@@ -113,6 +113,8 @@ public class UsuarioService {
         Optional<Usuario> optional;
         optional = Optional.ofNullable(usuario);
 
+        System.out.println(usuario.getAuthorities());
+
         optional.ifPresent(usuarioRepository::save);
 
         return optional.orElseThrow(() -> new UsuarioNaoCadastradoException("Usuário não cadastrado!"));
