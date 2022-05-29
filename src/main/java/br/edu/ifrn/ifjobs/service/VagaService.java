@@ -2,6 +2,7 @@ package br.edu.ifrn.ifjobs.service;
 
 import java.sql.Date;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
@@ -26,6 +27,7 @@ import br.edu.ifrn.ifjobs.exception.VagaNaoCadastradaException;
 import br.edu.ifrn.ifjobs.exception.VagaNaoEncontradoException;
 import br.edu.ifrn.ifjobs.model.Aluno;
 import br.edu.ifrn.ifjobs.model.Empresa;
+import br.edu.ifrn.ifjobs.model.Notificacao;
 import br.edu.ifrn.ifjobs.model.Usuario;
 import br.edu.ifrn.ifjobs.model.Vaga;
 import br.edu.ifrn.ifjobs.model.enums.StatusVaga;
@@ -42,6 +44,9 @@ public class VagaService {
 
     @Autowired
     private UsuarioService usuarioService;
+
+    @Autowired
+    private NotificacaoService notificacaoService;
 
     public Vaga salvarVaga(Vaga vaga) throws VagaNaoCadastradaException {
         Optional<Vaga> vagaOptional;
@@ -201,7 +206,7 @@ public class VagaService {
 
     }
 
-    public VagaGetDTO addAlunoParaVaga(int vagaId, int alunoId)
+    public Vaga addAlunoParaVaga(int vagaId, int alunoId)
             throws VagaNaoEncontradoException, UsuarioNaoEncontradoException {
         final Vaga vaga = buscarPorId(vagaId);
 
@@ -217,14 +222,21 @@ public class VagaService {
         }
 
         vaga.addAluno(aluno);
-        VagaGetDTO dto = new VagaGetDTO();
-        VagaGetDTO convertedToDto = dto.convertEntityToDto(vaga);
+
+        Vaga vagaAtualizada;
         try {
-            atualizarVaga(vaga);
+            vagaAtualizada = atualizarVaga(vaga);
         } catch (VagaNaoCadastradaException e) {
             throw new RuntimeException(e.getMessage());
         }
-        return convertedToDto;
+
+        Notificacao notificacao = new Notificacao();
+        notificacao.setTitulo("Um novo candidato para a vaga " + vaga.getTitulo());
+        notificacao.setData(LocalDateTime.now());
+        notificacao.setUsuario(usuario);
+        notificacaoService.salva(notificacao);
+
+        return vagaAtualizada;
     }
 
     public void desinscreverAlunoDaVaga(int vagaId, int alunoId)
