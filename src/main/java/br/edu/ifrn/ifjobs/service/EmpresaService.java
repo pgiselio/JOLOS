@@ -14,6 +14,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.fge.jsonpatch.JsonPatch;
 import com.github.fge.jsonpatch.JsonPatchException;
 
+import org.apache.commons.lang3.RandomStringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -83,11 +84,7 @@ public class EmpresaService {
     }
 
     private String geraSenhaAleatoria() {
-        String senha = "";
-        for (int i = 0; i < 8; i++) {
-            senha += (char) (Math.random() * 26 + 'a');
-        }
-        return senha;
+        return RandomStringUtils.randomAlphanumeric(8);
     }
 
     public Empresa buscaPorId(int id) throws EmpresaNaoEncontradaException {
