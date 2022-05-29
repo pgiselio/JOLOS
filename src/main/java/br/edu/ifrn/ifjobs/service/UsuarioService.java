@@ -4,7 +4,6 @@ import java.io.File;
 import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
-import java.util.Random;
 import java.util.function.Supplier;
 
 import javax.mail.MessagingException;
@@ -15,6 +14,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.fge.jsonpatch.JsonPatch;
 import com.github.fge.jsonpatch.JsonPatchException;
 
+import org.apache.commons.lang3.RandomStringUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -89,10 +89,7 @@ public class UsuarioService {
     }
 
     private String geraCodigoVerificacao() {
-        Random random = new Random();
-        int numero = random.nextInt(999999);
-        String codigo = String.format("%06d", numero);
-        return codigo;
+        return RandomStringUtils.randomNumeric(6);
     }
 
     @Async
