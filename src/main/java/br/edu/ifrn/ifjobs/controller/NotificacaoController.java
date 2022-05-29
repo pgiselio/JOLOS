@@ -35,7 +35,7 @@ public class NotificacaoController {
         return ResponseEntity.ok(notificacoesDTO);
     }
 
-    @GetMapping("/visualizar/{id}")
+    @GetMapping("/marcarComoLido/{id}")
     public ResponseEntity<ResponseStatus> visualizar(@PathVariable(name = "id") int id) {
         notificacaoService.marcaComoVisualizada(id);
         return ResponseEntity.ok().build();
