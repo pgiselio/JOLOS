@@ -5,6 +5,7 @@ import java.time.Duration;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import javax.mail.MessagingException;
 
@@ -74,13 +75,29 @@ public class NotificacaoService {
         return notificacaoRepository.findAll();
     }
 
+    public List<Notificacao> buscaTodasNaoVisualizadasBaseadaNoEmail(String email) {
+        List<Notificacao> notificacoes = buscaTodos().stream()
+                .collect(Collectors
+                        .groupingBy(notificacao -> notificacao.getUsuario().getEmail()))
+                .get(email);
+        return notificacoes.stream()
+                .filter(notificacao -> !notificacao.isVisualizado())
+                .collect(Collectors.toList());
+    }
+
+    public void marcaComoVisualizada(int id) {
+        Optional<Notificacao> optionalNotificacao = notificacaoRepository.findById(id);
+        optionalNotificacao.ifPresent(notificacao -> notificacao.setVisualizado(true));
+        notificacaoRepository.save(optionalNotificacao.orElseThrow(NotificacaoNaoCadastradaException::new));
+    }
+
     @Async
     @Scheduled(cron = "0 0 0/48 * * *")
     void deletaNotificacoesACada48Horas() {
         List<Notificacao> notificacoes = notificacaoRepository.findAll();
         notificacoes.stream().forEach(notificacao -> {
             Duration duracao = Duration.between(notificacao.getData(), LocalDateTime.now());
-            if (duracao.toHours() >= 48) {
+            if (duracao.toHours() >= 48 && notificacao.isVisualizado()) {
                 notificacaoRepository.delete(notificacao);
             }
         });
