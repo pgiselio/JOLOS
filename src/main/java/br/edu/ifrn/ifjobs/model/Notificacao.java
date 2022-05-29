@@ -3,11 +3,14 @@ package br.edu.ifrn.ifjobs.model;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class Notificacao implements Serializable {
@@ -27,6 +30,10 @@ public class Notificacao implements Serializable {
 
     @Column(nullable = false)
     private boolean visualizado;
+
+    @ManyToOne(cascade = CascadeType.MERGE)
+    @JoinColumn(name = "usuario_id", referencedColumnName = "id")
+    private Usuario usuario;
 
     public int getId() {
         return id;
@@ -66,6 +73,39 @@ public class Notificacao implements Serializable {
 
     public void setVisualizado(boolean visualizado) {
         this.visualizado = visualizado;
+    }
+
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
+    }
+
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int result = 1;
+        result = prime * result + id;
+        return result;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        return obj instanceof Notificacao other && id != other.id;
+    }
+
+    @Override
+    public String toString() {
+        return "Notificacao [data=" + data + ", descricao=" + descricao + ", id=" + id + ", titulo=" + titulo
+                + ", usuario=" + usuario + ", visualizado=" + visualizado + "]";
     }
 
 }
