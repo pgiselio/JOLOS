@@ -17,6 +17,8 @@ public class EmpresaGetDTO {
 
     private RedesSociais redesSociais;
 
+    private String linkSite;
+
     /**
      * @return int return the id
      */
@@ -93,6 +95,14 @@ public class EmpresaGetDTO {
 
     public void setRedesSociais(RedesSociais redesSociais) {
         this.redesSociais = redesSociais;
+    }
+
+    public String getLinkSite() {
+        return linkSite;
+    }
+
+    public void setLinkSite(String linkSite) {
+        this.linkSite = linkSite;
     }
 
 }
