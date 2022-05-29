@@ -40,6 +40,7 @@ export type User = {
     cnpj: string;
     resumo?: string;
     telefone?: string;
+    site?: string;
     redesSociais?: {
       linkedin?: string;
       facebook?: string;

@@ -1,5 +1,5 @@
 import { useQuery } from "react-query";
-import { useNavigate, useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import {
   Box,
   BoxContent,
@@ -9,20 +9,19 @@ import {
 import { Button } from "../../../../components/button";
 import CircularProgressFluent from "../../../../components/circular-progress-fluent";
 import LabelWithData from "../../../../components/label-data";
-import { PillItem, PillList } from "../../../../components/pill";
 import { ProfilePic } from "../../../../components/profile-pic/profile-pic";
 import { Skeleton } from "../../../../components/skeleton-load";
 import { useAuth } from "../../../../hooks/useAuth";
 import { api } from "../../../../services/api";
 import { User } from "../../../../types/user";
 import { cnpjMask } from "../../../../utils/cnpjMask";
+import { isBlank } from "../../../../utils/isBlank";
 import Error404 from "../../../404";
 import { ProfilePageStyle } from "../styles";
 
 export default function ProfilePage() {
   let params = useParams();
   let usertype;
-  let navigate = useNavigate();
   const auth = useAuth();
   const { data, isFetching } = useQuery<User>(
     ["profile" + params.id],
@@ -98,27 +97,21 @@ export default function ProfilePage() {
             <div className="user-actions">
               {data?.email === auth.email && (
                 <>
-                  <Button
-                    onClick={() => {
-                      navigate("/sys/settings?tab=profile");
-                    }}
-                  >
-                    <i className="fas fa-pencil-alt"></i>
+                  <Link to="/sys/settings?tab=profile">
+                    <Button tabIndex={-1}>
+                      <i className="fas fa-pencil-alt"></i>
 
-                    <span>Editar perfil</span>
-                  </Button>
+                      <span>Editar perfil</span>
+                    </Button>
+                  </Link>
                 </>
               )}
               {usertype === "ALUNO" && (
-                <Button
-                  className="outlined"
-                  onClick={() => {
-                    navigate(`/download/curriculo/${data?.aluno?.curriculo}`);
-                  }}
-                >
-                  <i className="fas fa-arrow-down"></i>
-                  Baixar currículo
-                </Button>
+                <Link to={`/download/curriculo/${data?.aluno?.curriculo}`}>
+                  <Button className="outlined" tabIndex={-1}>
+                    Vizualizar currículo
+                  </Button>
+                </Link>
               )}
             </div>
           </div>
@@ -147,9 +140,7 @@ export default function ProfilePage() {
               <div className="labelDatas">
                 {data?.aluno?.dadosPessoa && (
                   <LabelWithData
-                    data={
-                      getFormattedDate(data?.aluno?.dadosPessoa.dataNasc)
-                    }
+                    data={getFormattedDate(data?.aluno?.dadosPessoa.dataNasc)}
                     label="Data de Nascimento:"
                     icon="fas fa-calendar-day"
                   />
@@ -227,72 +218,102 @@ export default function ProfilePage() {
                         <ul className="essential-info">
                           <li>
                             <a href={"mailto:" + data?.email}>
-                              <i className="fas fa-envelope"></i>{" "}
+                              <i className="fas fa-envelope"></i>
                               <span>{data?.email}</span>
                             </a>
                           </li>
                           <li>
                             <a href={"tel:" + data?.empresa?.telefone}>
-                              <i className="fas fa-phone-alt"></i>{" "}
+                              <i className="fas fa-phone-alt"></i>
                               <span>{data?.empresa?.telefone}</span>
+                            </a>
+                          </li>
+                          <li>
+                            <a href={data?.empresa?.site} target="_blank">
+                              <i className="fa-solid fa-link"></i>
+                              <span style={{ gap: 8, alignItems: "center" }}>
+                                Visite nosso site
+                                <i
+                                  className="fa-solid fa-arrow-up-right-from-square"
+                                  style={{ fontSize: 12 }}
+                                ></i>
+                              </span>
                             </a>
                           </li>
                         </ul>
                       </div>
                     </BoxContent>
                   </Box>
-                  {data?.empresa?.redesSociais && (
-                    <Box>
-                      <BoxContent>
-                        <ul className="social-info">
-                          {data?.empresa?.redesSociais.linkedin && (
-                            <li>
-                              <a
-                                href={`https://www.linkedin.com/company/${data?.empresa?.redesSociais.linkedin}`}
-                                rel="noreferrer"
-                                target="_blank"
-                              >
-                                <i style={{color: "#0a66c2"}} className="fab fa-linkedin"></i>
-                              </a>
-                            </li>
-                          )}
-                          {data?.empresa?.redesSociais.facebook && (
-                            <li>
-                              <a
-                                href={`https://www.facebook.com/${data?.empresa?.redesSociais.facebook}`}
-                                rel="noreferrer"
-                                target="_blank"
-                              >
-                                <i style={{color: "#2374E1"}} className="fab fa-facebook"></i>
-                              </a>
-                            </li>
-                          )}
-                          {data?.empresa?.redesSociais.instagram && (
-                            <li>
-                              <a
-                                href={`https://www.instagram.com/${data?.empresa?.redesSociais.instagram}`}
-                                rel="noreferrer"
-                                target="_blank"
-                              >
-                                <i style={{color: "deeppink"}} className="fab fa-instagram"></i>
-                              </a>
-                            </li>
-                          )}
-                          {data?.empresa?.redesSociais.twitter && (
-                            <li>
-                              <a
-                                href={`https://www.twitter.com/${data?.empresa?.redesSociais.twitter}`}
-                                rel="noreferrer"
-                                target="_blank"
-                              >
-                                <i style={{color: "#05bcbc"}} className="fab fa-twitter"></i>
-                              </a>
-                            </li>
-                          )}
-                        </ul>
-                      </BoxContent>
-                    </Box>
-                  )}
+                  {data?.empresa?.redesSociais &&
+                    (!isBlank(data?.empresa?.redesSociais.linkedin) ||
+                      !isBlank(data?.empresa?.redesSociais.facebook) ||
+                      !isBlank(data?.empresa?.redesSociais.instagram) ||
+                      !isBlank(data?.empresa?.redesSociais.twitter)) && (
+                      <Box>
+                        <BoxContent>
+                          <ul className="social-info">
+                            {!isBlank(data?.empresa?.redesSociais.linkedin) && (
+                              <li>
+                                <a
+                                  href={`https://www.linkedin.com/company/${data?.empresa?.redesSociais.linkedin}`}
+                                  rel="noreferrer"
+                                  target="_blank"
+                                >
+                                  <i
+                                    style={{ color: "#0a66c2" }}
+                                    className="fab fa-linkedin"
+                                  ></i>
+                                </a>
+                              </li>
+                            )}
+                            {!isBlank(data?.empresa?.redesSociais.facebook) && (
+                              <li>
+                                <a
+                                  href={`https://www.facebook.com/${data?.empresa?.redesSociais.facebook}`}
+                                  rel="noreferrer"
+                                  target="_blank"
+                                >
+                                  <i
+                                    style={{ color: "#2374E1" }}
+                                    className="fab fa-facebook"
+                                  ></i>
+                                </a>
+                              </li>
+                            )}
+                            {!isBlank(
+                              data?.empresa?.redesSociais.instagram
+                            ) && (
+                              <li>
+                                <a
+                                  href={`https://www.instagram.com/${data?.empresa?.redesSociais.instagram}`}
+                                  rel="noreferrer"
+                                  target="_blank"
+                                >
+                                  <i
+                                    style={{ color: "deeppink" }}
+                                    className="fab fa-instagram"
+                                  ></i>
+                                </a>
+                              </li>
+                            )}
+                            {!isBlank(data?.empresa?.redesSociais.twitter) && (
+                              <li>
+                                <a
+                                  href={`https://www.twitter.com/${data?.empresa?.redesSociais.twitter}`}
+                                  rel="noreferrer"
+                                  target="_blank"
+                                >
+                                  <i
+                                    style={{ color: "#05bcbc" }}
+                                    className="fab fa-twitter"
+                                  ></i>
+                                </a>
+                              </li>
+                            )}
+                          </ul>
+                        </BoxContent>
+                      </Box>
+                    )}
                 </div>
               </div>
             )}

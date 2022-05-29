@@ -7,6 +7,7 @@ import { TabSelector } from "../../../components/Tabs/TabSelector";
 import { useAuth } from "../../../hooks/useAuth";
 import SettingContaPage from "./conta";
 import { SettingPageStyle } from "./styles";
+import { SettingThemesPage } from "./themes";
 
 export default function SettingsPage() {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -114,7 +115,7 @@ export default function SettingsPage() {
               {selectedTab === "profile" && <SettingContaPage />}
               {selectedTab === "account" && <div>conteudo aqui</div>}
               {selectedTab === "notifications" && <div>Notificações</div>}
-              {selectedTab === "themes" && <div>Temas</div>}
+              {selectedTab === "themes" && <SettingThemesPage/>}
             </div>
           </div>
         )}

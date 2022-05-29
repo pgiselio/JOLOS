@@ -60,4 +60,8 @@ export const FabButton = styled.button<FabButtonProps>`
       transform: scale(1);
     }
   }
+  
+  @media(max-width: 765px){
+    cursor: default;
+  }
 `;

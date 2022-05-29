@@ -89,22 +89,22 @@ export default function SettingContaPage() {
               {
                 op: "replace",
                 path: "/empresa/redesSociais/facebook",
-                value: data.facebook,
+                value: data.facebook.trim(),
               },
               {
                 op: "replace",
                 path: "/empresa/redesSociais/instagram",
-                value: data.instagram,
+                value: data.instagram.trim(),
               },
               {
                 op: "replace",
                 path: "/empresa/redesSociais/linkedin",
-                value: data.linkedin,
+                value: data.linkedin.trim(),
               },
               {
                 op: "replace",
                 path: "/empresa/redesSociais/twitter",
-                value: data.twitter,
+                value: data.twitter.trim(),
               },
               {
                 op: "replace",
@@ -152,7 +152,7 @@ export default function SettingContaPage() {
   return (
     <>
       <div>
-        <ProfilePic style={{ height: "80px" }} />
+        <ProfilePic style={{ height: "100px" }} />
       </div>
       {(auth.userInfo?.aluno?.dadosPessoa.dataNasc ||
         auth.userInfo?.empresa?.dadosPessoa.dataNasc) && (

@@ -73,4 +73,8 @@ export const Button = styled.button`
   &:not(:disabled):active {
     transform: scale(.95);
   }
+  
+  @media (max-width: 768px) {
+    cursor: default;
+  }
 `;

@@ -38,7 +38,8 @@ export const SettingPageStyle = styled.section`
       width: 35px;
       height: 35px;
       background: transparent;
-      border: none;
+      border: 1px solid transparent;
+      transition: 0.1s linear;
 
       i {
         color: var(--text-b);
@@ -48,6 +49,9 @@ export const SettingPageStyle = styled.section`
         i {
           color: var(--text-a);
         }
+      }
+      :active{
+        transform: scale(0.90);
       }
     }
   }
