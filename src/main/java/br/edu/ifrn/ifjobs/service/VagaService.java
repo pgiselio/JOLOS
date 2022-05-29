@@ -247,7 +247,10 @@ public class VagaService {
         Notificacao notificacao = new Notificacao();
         notificacao.setTitulo("Um novo candidato para a vaga " + vaga.getTitulo());
         notificacao.setData(LocalDateTime.now());
-        notificacao.setUsuario(usuario);
+
+        Empresa empresa = vaga.getEmpresa();
+        Usuario usuarioEmpresa = usuarioService.buscaPorEmpresaId(empresa.getId());
+        notificacao.setUsuario(usuarioEmpresa);
         notificacaoService.salva(notificacao);
 
         return vagaAtualizada;
