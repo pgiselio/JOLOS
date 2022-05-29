@@ -30,6 +30,7 @@ import br.edu.ifrn.ifjobs.model.Empresa;
 import br.edu.ifrn.ifjobs.model.Notificacao;
 import br.edu.ifrn.ifjobs.model.Usuario;
 import br.edu.ifrn.ifjobs.model.Vaga;
+import br.edu.ifrn.ifjobs.model.enums.StatusUsuario;
 import br.edu.ifrn.ifjobs.model.enums.StatusVaga;
 import br.edu.ifrn.ifjobs.repository.VagaRepository;
 
@@ -91,6 +92,19 @@ public class VagaService {
             vaga.setStatus(StatusVaga.ATIVO);
             vaga.setDataCriacao(Date.valueOf(LocalDate.now()));
             vagaRepository.save(vaga);
+
+            usuarioService.buscaTodosPorStatus(StatusUsuario.CONCLUIDO)
+                    .stream()
+                    .filter(usuario -> usuario.getAluno() != null &&
+                            usuario.getAluno().getCurso().equalsIgnoreCase(vaga.getCursoAlvo()))
+                    .forEach(aluno -> {
+                        Notificacao notificacao = new Notificacao();
+                        notificacao.setTitulo("Nova vaga disponível");
+                        notificacao.setDescricao("Você pode se candidatar a vaga " + vaga.getTitulo());
+                        notificacao.setData(LocalDateTime.now());
+                        notificacao.setUsuario(aluno);
+                        notificacaoService.salva(notificacao);
+                    });
         });
 
         return vagaOptional.orElseThrow(() -> new VagaNaoCadastradaException("Dados inválidos!!"));
