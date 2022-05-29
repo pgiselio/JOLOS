@@ -23,6 +23,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
+import br.edu.ifrn.ifjobs.dto.DTOConversor;
 import br.edu.ifrn.ifjobs.dto.vaga.VagaGetAllDTO;
 import br.edu.ifrn.ifjobs.dto.vaga.VagaGetDTO;
 import br.edu.ifrn.ifjobs.dto.vaga.VagaInsertDto;
@@ -107,7 +108,7 @@ public class VagaController {
     @PatchMapping("/{vagaId}/addAluno/{alunoId}")
     public ResponseEntity<VagaGetDTO> addAluno(@PathVariable(name = "vagaId") int vagaId,
             @PathVariable(name = "alunoId") int alunoId) {
-        VagaGetDTO vaga;
+        Vaga vaga;
 
         try {
             vaga = vagaService.addAlunoParaVaga(vagaId, alunoId);
@@ -115,7 +116,8 @@ public class VagaController {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
         }
 
-        return ResponseEntity.ok(vaga);
+        VagaGetDTO dto = DTOConversor.convertEntityToDto(vaga, VagaGetDTO.class);
+        return ResponseEntity.ok(dto);
     }
 
     @PatchMapping("/{vagaId}/removeAluno/{alunoId}")
