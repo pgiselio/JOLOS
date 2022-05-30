@@ -36,6 +36,20 @@ public class NotificacaoController {
         return ResponseEntity.ok(notificacoesDTO);
     }
 
+    @GetMapping("/usuario/{email}/visualizada")
+    public ResponseEntity<List<NotificacaoGetDTO>> buscaPorEmailVisualizada(
+            @PathVariable(name = "email") String email) {
+        List<Notificacao> notificacoesVisualizadas;
+        notificacoesVisualizadas = notificacaoService.buscaTodasVisualizadasBaseadaNoEmail(email);
+
+        List<NotificacaoGetDTO> notificacoesDTO = notificacoesVisualizadas.stream()
+                .map(notificacao -> DTOConversor.convertEntityToDto(notificacao, NotificacaoGetDTO.class))
+                .collect(Collectors.toList());
+
+        notificacoesDTO.sort((notificacao1, notificacao2) -> notificacao2.getData().compareTo(notificacao1.getData()));
+        return ResponseEntity.ok(notificacoesDTO);
+    }
+
     @GetMapping("/marcarComoLido/{id}")
     public ResponseEntity<ResponseStatus> visualizar(@PathVariable(name = "id") int id) {
         notificacaoService.marcaComoVisualizada(id);
