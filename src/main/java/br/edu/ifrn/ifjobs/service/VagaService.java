@@ -93,21 +93,25 @@ public class VagaService {
             vaga.setDataCriacao(Date.valueOf(LocalDate.now()));
             vagaRepository.save(vaga);
 
-            usuarioService.buscaTodosPorStatus(StatusUsuario.CONCLUIDO)
-                    .stream()
-                    .filter(usuario -> usuario.getAluno() != null &&
-                            usuario.getAluno().getCurso().equalsIgnoreCase(vaga.getCursoAlvo()))
-                    .forEach(aluno -> {
-                        Notificacao notificacao = new Notificacao();
-                        notificacao.setTitulo("Nova vaga disponível");
-                        notificacao.setDescricao("Você pode se candidatar a vaga " + vaga.getTitulo());
-                        notificacao.setData(LocalDateTime.now());
-                        notificacao.setUsuario(aluno);
-                        notificacaoService.salva(notificacao);
-                    });
+            notificaTodosOsAlunosComOMesmoCursoDaVaga(vaga);
         });
 
         return vagaOptional.orElseThrow(() -> new VagaNaoCadastradaException("Dados inválidos!!"));
+    }
+
+    private void notificaTodosOsAlunosComOMesmoCursoDaVaga(Vaga vaga) {
+        usuarioService.buscaTodosPorStatus(StatusUsuario.CONCLUIDO)
+                .stream()
+                .filter(usuario -> usuario.getAluno() != null &&
+                        usuario.getAluno().getCurso().equalsIgnoreCase(vaga.getCursoAlvo()))
+                .forEach(aluno -> {
+                    final Notificacao notificacao = new Notificacao();
+                    notificacao.setTitulo("Nova vaga disponível");
+                    notificacao.setDescricao("Você pode se candidatar à vaga " + vaga.getTitulo());
+                    notificacao.setData(LocalDateTime.now());
+                    notificacao.setUsuario(aluno);
+                    notificacaoService.salva(notificacao);
+                });
     }
 
     public Vaga buscarPorId(int id) throws VagaNaoEncontradoException {
@@ -262,7 +266,7 @@ public class VagaService {
         }
 
         Notificacao notificacao = new Notificacao();
-        notificacao.setTitulo("Um novo candidato para a vaga " + vaga.getTitulo());
+        notificacao.setTitulo("Um novo candidato em  \"" + vaga.getTitulo() + "\"");
         notificacao.setData(LocalDateTime.now());
 
         Empresa empresa = vaga.getEmpresa();
