@@ -130,9 +130,7 @@ public class UsuarioService {
                 emailService.enviaEmail(usuario, caminhoArquivoEmailAluno, "IF Jobs - Confirmação de cadastro");
                 break;
             case EMPRESA:
-                emailService.enviaEmailComArquivo(usuario, caminhoArquivoEmailEmpresa,
-                        "IF Jobs - Solicitação de cadastro",
-                        new File("src/main/resources/docs/form_cadastro_empresa.docx"));
+                emailService.enviaEmail(usuario, caminhoArquivoEmailEmpresa, "IF Jobs - Confirmação de cadastro");
                 break;
             default:
                 throw new IllegalArgumentException("Tipo de usuário inválido para criação!");
