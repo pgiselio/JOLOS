@@ -55,16 +55,17 @@ export default function ForumPage() {
                 <div className="vaga-forum-info">
                   <h3>Bolsista desenvolvedor de software</h3>
                   <div className="topic-meta">
-                    <span>Nome empresa </span>
+                    <span>Jolos Company </span>
                     <span>- 02/03/2002</span>
                   </div>
                 </div>
                 <div className="last-answer">
                   <i className="fa-solid fa-arrow-turn-up"></i>
+                  
                   <div className="answer-content">
                     <ProfilePic className="candidato-pic" />
                     <span className="pessoa-forum-info">
-                      <span className="name">Alvaro</span>
+                      <span className="name">Alvaro - <span>há 2 min</span></span>
                       <p className="message">
                         Lorem ipsum dolor sit amet, consectetur adipiscing elit.
                         Pellentesque et tortor felis. Duis et metus sodales,

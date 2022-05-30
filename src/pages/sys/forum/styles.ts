@@ -49,10 +49,14 @@ export const Container = styled.section`
     .answer-content {
       display: flex;
       margin-left: 5px;
+      padding: 10px;
+      border-radius: 5px;
+      background-color: #81818111;
+
       .candidato-pic {
-        width: 30px;
-        min-width: 30px;
-        height: 30px;
+        width: 20px;
+        min-width: 20px;
+        height: 20px;
       }
       .pessoa-forum-info {
         display: flex;

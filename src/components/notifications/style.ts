@@ -18,7 +18,7 @@ export const StyledNotifications = styled.div`
   }
 
   .notification-header .buttons button {
-    background: var(--secondary-bg);
+    background: ${"var(--secondary-bg)ef"};
     padding: 5px 15px;
     border: 1px solid var(--outline-color);
     border-right: none;
@@ -63,76 +63,77 @@ export const StyledNotifications = styled.div`
     cursor: pointer;
     border-right: 1px solid var(--outline-color);
     border-left: 1px solid var(--outline-color);
-  }
 
-  .notification-card:hover {
-    background-color: var(--secondary-bg);
-  }
+    &:first-child {
+      border-top-left-radius: 10px;
+      border-top-right-radius: 10px;
+      border-top: 1px solid var(--outline-color);
+    }
+    &:last-child {
+      border-bottom-left-radius: 10px;
+      border-bottom-right-radius: 10px;
+      border-bottom: 1px solid var(--outline-color);
+    }
 
-  .notification-card:first-child {
-    border-top-left-radius: 10px;
-    border-top-right-radius: 10px;
-    border-top: 1px solid var(--outline-color);
+    .message {
+      position: relative;
+      height: 100%;
+      p {
+        word-break: break-all;
+        font-size: 15px;
+        color: var(--text-b);
+      }
+    }
+    .card-date {
+      color: rgb(122, 122, 122);
+      font-size: 13px;
+      font-weight: 500;
+      padding-top: 20px;
+    }
+    .card-options {
+      position: absolute;
+      right: 30px;
+      top: 50%;
+      transform: translateY(-50%);
+      opacity: 0;
+      transition: 0.1s linear;
+      .btn-markasread {
+        border-radius: 100%;
+        width: 35px;
+        height: 35px;
+        border: 1px solid ${(props) => props.theme.colors.outlineColor};
+        background: ${(props) => props.theme.colors.primaryBg + "ef"};
+        color: var(--text-b);
+        cursor: pointer;
+        :hover {
+          border-color: var(--accent-color);
+          color: var(--accent-color);
+        }
+        &::before {
+          content: "\f06e";
+          font-family: "Font Awesome 5 Free";
+          font-weight: 900;
+          -webkit-font-smoothing: antialiased;
+          font-size: 13px;
+        }
+      }
+    }
+    :hover {
+      background-color: var(--secondary-bg);
+      .card-options {
+        opacity: 1;
+      }
+    }
   }
-
-  .notification-card:last-child {
-    border-bottom-left-radius: 10px;
-    border-bottom-right-radius: 10px;
-    border-bottom: 1px solid var(--outline-color);
-  }
-
-  .notification-card .card-date {
-    color: rgb(122, 122, 122);
-    font-size: 13px;
-    font-weight: 500;
-    padding-top: 20px;
-  }
-
-  .notification-card .card-data {
-    position: relative;
-    height: 100%;
-  }
-
-  .notification-card .card-data p {
-    word-break: break-all;
-    font-size: 15px;
-    color: var(--text-b);
-  }
-
-  .notification-card .card-options {
-    position: absolute;
-    right: 30px;
-    top: 50%;
-    transform: translateY(-50%);
-    opacity: 0;
-  }
-
-  .notification-card:hover .card-options {
-    opacity: 1;
-    transition: 0.1s linear;
-  }
-
-  .notification-card .card-options .btn-markasread {
-    border-radius: 100%;
-    width: 35px;
-    height: 35px;
-    border: 2px solid #ccc;
-    background: #f1f1f1ef;
-    color: #666;
-    cursor: pointer;
-  }
-
-  .notification-card .card-options .btn-markasread:hover {
-    border-color: var(--accent-color);
-    color: var(--accent-color);
-  }
-
-  .notification-card .card-options .btn-markasread::before {
-    content: "\f06e";
-    font-family: "Font Awesome 5 Free";
-    font-weight: 900;
-    -webkit-font-smoothing: antialiased;
-    font-size: 13px;
+  .no-notifications {
+    padding: 20px;
+    box-shadow: 0 1px 2px rgb(0 0 0 / 10%);
+    background-color: var(--primary-bg);
+    border-radius: 10px;
+    cursor: default;
+    :hover {
+      background-color: var(--primary-bg);
+    }
   }
   @media (min-width: 766px) {
     .notification-cards::-webkit-scrollbar {

@@ -8,7 +8,7 @@ type NotifyCard = {
 export function NotificationCard(props : NotifyCard){
     return(
         <div className="notification-card">
-            <div className="card-data">
+            <div className="message">
                 <span>{props.title}</span>
                 {props.text && <p>{props.text}</p>}
             </div>

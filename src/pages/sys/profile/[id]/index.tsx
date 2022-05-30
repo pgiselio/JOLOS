@@ -229,7 +229,7 @@ export default function ProfilePage() {
                             </a>
                           </li>
                           <li>
-                            <a href={data?.empresa?.site} target="_blank">
+                            <a href={data?.empresa?.site} rel="noreferrer" target="_blank">
                               <i className="fa-solid fa-link"></i>
                               <span style={{ gap: 8, alignItems: "center" }}>
                                 Visite nosso site
