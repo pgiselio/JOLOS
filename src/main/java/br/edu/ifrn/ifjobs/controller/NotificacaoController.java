@@ -36,7 +36,7 @@ public class NotificacaoController {
         return ResponseEntity.ok(notificacoesDTO);
     }
 
-    @GetMapping("/usuario/{email}/visualizada")
+    @GetMapping("/usuario/{email}/visualizadas")
     public ResponseEntity<List<NotificacaoGetDTO>> buscaPorEmailVisualizada(
             @PathVariable(name = "email") String email) {
         List<Notificacao> notificacoesVisualizadas;
