@@ -216,6 +216,23 @@ public class VagaService {
 
         Vaga vagaConvertida = mapper.treeToValue(patched, Vaga.class);
 
+        if (vagaConvertida.getStatus() == StatusVaga.INATIVO) {
+            Notificacao notificacao = new Notificacao();
+            notificacao.setTitulo("Inscrições encerradas");
+            notificacao.setDescricao(
+                    "A vaga " + vagaConvertida.getTitulo() + " não está mais disponível para candidatura");
+            vagaConvertida.getAlunos().forEach(aluno -> {
+                Usuario usuario;
+                try {
+                    usuario = usuarioService.buscaPorAlunoId(aluno.getId());
+                } catch (UsuarioNaoEncontradoException e) {
+                    throw new RuntimeException(e.getMessage());
+                }
+                notificacao.setUsuario(usuario);
+                notificacaoService.salva(notificacao);
+            });
+        }
+
         return atualizarVaga(vagaConvertida);
 
     }
