@@ -32,6 +32,7 @@ public class NotificacaoController {
                 .map(notificacao -> DTOConversor.convertEntityToDto(notificacao, NotificacaoGetDTO.class))
                 .collect(Collectors.toList());
 
+        notificacoesDTO.sort((notificacao1, notificacao2) -> notificacao2.getData().compareTo(notificacao1.getData()));
         return ResponseEntity.ok(notificacoesDTO);
     }
 
