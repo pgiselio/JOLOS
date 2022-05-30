@@ -85,6 +85,16 @@ public class NotificacaoService {
                 .collect(Collectors.toList());
     }
 
+    public List<Notificacao> buscaTodasVisualizadasBaseadaNoEmail(String email) {
+        List<Notificacao> notificacoes = buscaTodos().stream()
+                .collect(Collectors
+                        .groupingBy(notificacao -> notificacao.getUsuario().getEmail()))
+                .get(email);
+        return notificacoes.stream()
+                .filter(notificacao -> notificacao.isVisualizado())
+                .collect(Collectors.toList());
+    }
+
     public void marcaComoVisualizada(int id) {
         Optional<Notificacao> optionalNotificacao = notificacaoRepository.findById(id);
         optionalNotificacao.ifPresent(notificacao -> notificacao.setVisualizado(true));
