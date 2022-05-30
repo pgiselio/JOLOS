@@ -1,7 +1,6 @@
 package br.edu.ifrn.ifjobs.dto.aluno;
 
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.br.CPF;
@@ -9,7 +8,6 @@ import org.modelmapper.ModelMapper;
 
 import br.edu.ifrn.ifjobs.dto.Dto;
 import br.edu.ifrn.ifjobs.model.Aluno;
-import br.edu.ifrn.ifjobs.model.Curriculo;
 import br.edu.ifrn.ifjobs.model.Pessoa;
 
 public class AlunoInsertDTO implements Dto<Aluno, AlunoInsertDTO> {
