@@ -23,6 +23,7 @@ public class Notificacao implements Serializable {
 
     @Column(nullable = false)
     private String titulo;
+
     private String descricao;
 
     @Column(nullable = false, columnDefinition = "TIMESTAMP")
