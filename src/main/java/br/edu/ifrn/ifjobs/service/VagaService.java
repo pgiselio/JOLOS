@@ -7,6 +7,8 @@ import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 import java.util.function.Supplier;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -16,6 +18,7 @@ import com.github.fge.jsonpatch.JsonPatch;
 import com.github.fge.jsonpatch.JsonPatchException;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
 import br.edu.ifrn.ifjobs.dto.empresa.EmpresaGetDTO;
@@ -33,6 +36,7 @@ import br.edu.ifrn.ifjobs.model.Vaga;
 import br.edu.ifrn.ifjobs.model.enums.StatusUsuario;
 import br.edu.ifrn.ifjobs.model.enums.StatusVaga;
 import br.edu.ifrn.ifjobs.repository.VagaRepository;
+import br.edu.ifrn.ifjobs.utils.builder.VagaSpecificationsBuilder;
 
 @Service
 public class VagaService {
@@ -151,8 +155,18 @@ public class VagaService {
         return convertEntityToDto;
     }
 
-    public List<VagaGetAllDTO> buscaTodasVagas() {
-        List<Vaga> vagas = vagaRepository.findAll();
+    public List<VagaGetAllDTO> buscaTodasVagas(String search) {
+        var builder = new VagaSpecificationsBuilder();
+        Optional.ofNullable(search).ifPresent(s -> {
+            Pattern pattern = Pattern.compile("(\\w+?)(:|<|>)(\\w+?),", Pattern.UNICODE_CHARACTER_CLASS);
+            Matcher matcher = pattern.matcher(search + ",");
+            while (matcher.find()) {
+                builder.with(matcher.group(1), matcher.group(2), matcher.group(3));
+            }
+        });
+
+        Specification<Vaga> spec = builder.build();
+        List<Vaga> vagas = vagaRepository.findAll(spec);
 
         return vagas.stream().map(vaga -> {
             Empresa empresa = vaga.getEmpresa();
