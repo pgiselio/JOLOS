@@ -46,7 +46,9 @@
             <tr><td><br></td></tr>
             
             <tr>
-                <a href="https://forms.gle/QZwczqGgKF6WaGVC7" target="_blank" style="background-color: #4CAF50; padding: 0.5rem; color: white; border-radius: 5px; text-decoration: none;">
+                <a href="https://forms.gle/QZwczqGgKF6WaGVC7" 
+                    target="_blank" 
+                    style="background-color: #4CAF50; padding: 0.5rem; color: white; border-radius: 5px; text-decoration: none;">
                     formulário
                 </a>
             </tr>

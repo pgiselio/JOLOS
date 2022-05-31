@@ -46,7 +46,8 @@
             </tr>
             <tr>
                 <td>
-                    <a href="https://ifjobs.vercel.app/entrar">
+                    <a href="https://ifjobs.vercel.app/entrar" 
+                        target="_blank">
                         <button style="background-color: #4CAF50;
                         border: none;
                         color: white;
