@@ -1,38 +1,37 @@
-import React, { HTMLInputTypeAttribute, InputHTMLAttributes, useState } from "react";
-import { InputContainer, InputPassStyled, InputStyled, ShowPasswordButton } from "./styles";
+import React, {
+  HTMLInputTypeAttribute,
+  InputHTMLAttributes,
+  useState,
+} from "react";
+import {
+  InputContainer,
+  InputPassStyled,
+  InputStyled,
+  ShowPasswordButton,
+} from "./styles";
 
-interface input extends InputHTMLAttributes<HTMLInputElement>{
+interface input extends InputHTMLAttributes<HTMLInputElement> {
   type: HTMLInputTypeAttribute;
   icon?: string;
-};
+}
 
-export const Input = React.forwardRef( function ({ name, type, icon, ...rest }: input, ref: React.ForwardedRef<HTMLInputElement>) {
+export const Input = React.forwardRef(function (
+  { name, type, icon, ...rest }: input,
+  ref: React.ForwardedRef<HTMLInputElement>
+) {
   const [showPassword, setShowPassword] = useState(false);
 
-  if(type.match("text")){
+  if (type.match("password")) {
     return (
-        <InputContainer>
-          <InputStyled 
-          name={name} 
-          type={type}
-          ref={ref}
-          {...rest} 
-          {...icon && {hasIcon: true}}
-          />
-          {icon && <i className={icon}></i>}
-        </InputContainer>
-      );
-  }else if(type.match("password")){
-    return(
-    <InputContainer>
+      <InputContainer>
         <InputPassStyled
-          type={showPassword ? "text" : "password"} 
-          name={name} 
+          type={showPassword ? "text" : "password"}
+          name={name}
           ref={ref}
           {...rest}
-          {...icon && {hasIcon: true}}
+          {...(icon && { hasIcon: true })}
         />
-        {icon && <i className={icon}></i>}        
+        {icon && <i className={icon}></i>}
         <ShowPasswordButton
           tabIndex={-1}
           type="button"
@@ -44,8 +43,18 @@ export const Input = React.forwardRef( function ({ name, type, icon, ...rest }: 
         />
       </InputContainer>
     );
-  }else{
-    return <InputContainer><InputStyled type={type} {...icon && {hasIcon: true}} name={name} ref={ref} {...rest} /> {icon && <i className={icon}></i>}
-    </InputContainer>;
+  } else {
+    return (
+      <InputContainer>
+        <InputStyled
+          type={type}
+          name={name}
+          ref={ref}
+          {...(icon && { hasIcon: true })}
+          {...rest}
+        />
+        {icon && <i className={icon}></i>}
+      </InputContainer>
+    );
   }
-})
+});

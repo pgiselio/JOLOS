@@ -228,18 +228,27 @@ export default function ProfilePage() {
                               <span>{data?.empresa?.telefone}</span>
                             </a>
                           </li>
-                          <li>
-                            <a href={data?.empresa?.site} rel="noreferrer" target="_blank">
-                              <i className="fa-solid fa-link"></i>
-                              <span style={{ gap: 8, alignItems: "center" }}>
-                                Visite nosso site
-                                <i
-                                  className="fa-solid fa-arrow-up-right-from-square"
-                                  style={{ fontSize: 12 }}
-                                ></i>
-                              </span>
-                            </a>
-                          </li>
+                          {data?.empresa?.linkSite &&
+                            !isBlank(data?.empresa?.linkSite) && (
+                              <li>
+                                <a
+                                  href={data?.empresa?.linkSite}
+                                  rel="noreferrer"
+                                  target="_blank"
+                                >
+                                  <i className="fa-solid fa-link"></i>
+                                  <span
+                                    style={{ gap: 8, alignItems: "center" }}
+                                  >
+                                    Visite nosso site
+                                    <i
+                                      className="fa-solid fa-arrow-up-right-from-square"
+                                      style={{ fontSize: 12 }}
+                                    ></i>
+                                  </span>
+                                </a>
+                              </li>
+                            )}
                         </ul>
                       </div>
                     </BoxContent>

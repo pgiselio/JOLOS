@@ -60,7 +60,6 @@ export const StyledNotifications = styled.div`
     display: flex;
     flex-direction: column;
     position: relative;
-    cursor: pointer;
     border-right: 1px solid var(--outline-color);
     border-left: 1px solid var(--outline-color);
 
@@ -78,7 +77,9 @@ export const StyledNotifications = styled.div`
     .message {
       position: relative;
       height: 100%;
+      user-select: none;
       p {
+        user-select: none;
         word-break: break-all;
         font-size: 15px;
         color: var(--text-b);

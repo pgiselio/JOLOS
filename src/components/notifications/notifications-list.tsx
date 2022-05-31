@@ -2,6 +2,8 @@ import { useTabs } from "react-headless-tabs";
 import { useQuery } from "react-query";
 import { useAuth } from "../../hooks/useAuth";
 import { api } from "../../services/api";
+import { queryClient } from "../../services/queryClient";
+import { relativeTimeFromDates } from "../../utils/relativeDate";
 import CircularProgressFluent from "../circular-progress-fluent";
 import { NotificationCard } from "./notification-card";
 import { StyledNotifications } from "./style";
@@ -9,8 +11,8 @@ type notification = {
   id: number;
   titulo: string;
   descricao: string;
-  vizualizado: boolean;
-  data: Date;
+  visualizado: boolean;
+  data: string;
   usuario: {
     id: number;
     email: string;
@@ -20,6 +22,7 @@ type notification = {
 export function Notifications() {
   const auth = useAuth();
   const [selectedTab, setSelectedTab] = useTabs(["new", "read"]);
+
   const { data } = useQuery(
     "notifications-new",
     async () => {
@@ -33,6 +36,7 @@ export function Notifications() {
       refetchInterval: 1000 * 60, // 1 minutes to refetch
     }
   );
+
   const { data: notificationsDataRead } = useQuery(
     "notifications-read",
     async () => {
@@ -46,13 +50,28 @@ export function Notifications() {
       refetchInterval: 1000 * 60, // 1 minutes to refetch
     }
   );
-  function formatDate(date: Date) {
-    return new Intl.DateTimeFormat(undefined, {
-      day: "2-digit",
-      month: "short",
-      year: "numeric",
-    }).format(date.getTime() + Math.abs(date.getTimezoneOffset() * 60000));
+
+  function markAsRead(id: number) {
+    api.patch(`/notificacao/marcarComoLido/${id}`);
+
+    const previousNotifications =
+      queryClient.getQueryData<notification[]>("notifications-new");
+    if (previousNotifications) {
+      const nextNotifications = previousNotifications.map(
+        (notification: notification) => {
+          if (notification && notification.id !== id) {
+            return notification;
+          }
+        }
+      );
+      queryClient.setQueryData(
+        "notifications-new",
+        nextNotifications.filter((value: any) => value !== undefined)
+      );
+    }
+    queryClient.invalidateQueries("notifications-read");
   }
+
   return (
     <StyledNotifications className="notification-container">
       <div className="notification-header">
@@ -85,18 +104,26 @@ export function Notifications() {
               </div>
             ) : (
               data.map((notification: notification) => {
-                if (!notification.vizualizado) {
+                if (notification && !notification.visualizado) {
                   return (
                     <NotificationCard
-                      title={notification.titulo}
-                      text={notification.descricao}
+                      titulo={notification.titulo}
+                      detalhes={notification.descricao}
+                      key={notification.id}
+                      onClick={() => markAsRead(notification.id)}
+                      title="Clique para marcar como lido"
                       date={
-                        new Date(notification.data) + " | " + notification.data
+                        relativeTimeFromDates(
+                          new Date(
+                            Date.parse(notification.data) - 1000 * 60 * 60 * 3
+                          )
+                        ) || ""
                       }
                     />
                   );
+                } else {
+                  return null;
                 }
-                return null;
               })
             )
           ) : (
@@ -128,18 +155,25 @@ export function Notifications() {
               </div>
             ) : (
               notificationsDataRead.map((notification: notification) => {
-                if (!notification.vizualizado) {
+                console.log(notification);
+                if (notification && notification.visualizado) {
                   return (
                     <NotificationCard
-                      title={notification.titulo}
-                      text={notification.descricao}
+                      titulo={notification.titulo}
+                      detalhes={notification.descricao}
+                      key={notification.id}
                       date={
-                        new Date(notification.data) + " | " + notification.data
+                        relativeTimeFromDates(
+                          new Date(
+                            Date.parse(notification.data) - 1000 * 60 * 60 * 3
+                          )
+                        ) || ""
                       }
                     />
                   );
+                } else {
+                  return null;
                 }
-                return null;
               })
             )
           ) : (

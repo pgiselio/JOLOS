@@ -1,19 +1,22 @@
-type NotifyCard = {
-    title : string
-    text? : string
+import { HTMLAttributes } from "react";
+
+
+interface NotifyCard extends HTMLAttributes<HTMLDivElement>{
+    titulo : string
+    detalhes? : string
     date : string
     link? : string
 }
 
-export function NotificationCard(props : NotifyCard){
+export function NotificationCard({titulo, detalhes, date, link, ...rest} : NotifyCard){
     return(
-        <div className="notification-card">
+        <div className="notification-card" {...rest}>
             <div className="message">
-                <span>{props.title}</span>
-                {props.text && <p>{props.text}</p>}
+                <span>{titulo}</span>
+                {detalhes && <p>{detalhes}</p>}
             </div>
             <div className="card-date">
-                <span>{props.date}</span>
+                <span>{date}</span>
             </div>
             <div className="card-options">
                 <button type="button" className="btn-markasread" title="Marcar como visto"></button>

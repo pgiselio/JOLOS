@@ -19,6 +19,7 @@
   align-items: center;
   justify-content: center;
   animation: fade 0.2s ease;
+  z-index: 10000;
 }
 
 [data-reach-alert-dialog-content] {
