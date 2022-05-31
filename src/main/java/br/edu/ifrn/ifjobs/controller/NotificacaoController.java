@@ -6,6 +6,7 @@ import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
@@ -50,7 +51,7 @@ public class NotificacaoController {
         return ResponseEntity.ok(notificacoesDTO);
     }
 
-    @GetMapping("/marcarComoLido/{id}")
+    @PatchMapping("/marcarComoLido/{id}")
     public ResponseEntity<ResponseStatus> visualizar(@PathVariable(name = "id") int id) {
         notificacaoService.marcaComoVisualizada(id);
         return ResponseEntity.ok().build();
