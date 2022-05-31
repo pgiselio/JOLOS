@@ -1,7 +1,10 @@
 package br.edu.ifrn.ifjobs.controller;
 
 import java.util.List;
-import java.util.Map;
+
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.github.fge.jsonpatch.JsonPatch;
+import com.github.fge.jsonpatch.JsonPatchException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheEvict;
@@ -69,14 +72,15 @@ public class MensagemController {
     }
 
     @PatchMapping("/{id}")
-    public ResponseEntity<Mensagem> atualizaCampo(@PathVariable(name = "id") int id,
-            Map<Object, Object> campos) {
+    public ResponseEntity<Mensagem> atualizaCampo(@PathVariable(name = "id") int id, JsonPatch jsonPatch) {
         Mensagem mensagemAtualizada;
 
         try {
-            mensagemAtualizada = mensagemService.atualizaCampos(id, campos);
+            mensagemAtualizada = mensagemService.atualizaCampos(id, jsonPatch);
         } catch (MensagemNaoEncontradaException | MensagemNaoCadastradoException e) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
+        } catch (JsonProcessingException | IllegalArgumentException | JsonPatchException e) {
+            return ResponseEntity.badRequest().build();
         }
 
         return ResponseEntity.ok(mensagemAtualizada);
