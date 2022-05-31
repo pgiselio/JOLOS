@@ -6,6 +6,12 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.function.Supplier;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.github.fge.jsonpatch.JsonPatch;
+import com.github.fge.jsonpatch.JsonPatchException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.ReflectionUtils;
@@ -52,16 +58,32 @@ public class MensagemService {
         mensagemRepository.delete(mensagem);
     }
 
-    public Mensagem atualizaCampos(final int id, Map<Object, Object> campos)
-            throws MensagemNaoEncontradaException, MensagemNaoCadastradoException {
+    public Mensagem atualizaMensagem(Mensagem mensagem) throws MensagemNaoEncontradaException {
+        Optional<Mensagem> mensagemOptional;
+        mensagemOptional = Optional.ofNullable(mensagem);
+
+        Supplier<MensagemNaoEncontradaException> excessao;
+        excessao = () -> new MensagemNaoEncontradaException("Mensagem não encontrada!!");
+
+        mensagemOptional.ifPresent(mensagemRepository::save);
+
+        return mensagemOptional.orElseThrow(excessao);
+    }
+
+    public Mensagem atualizaCampos(final int id, JsonPatch patch)
+            throws MensagemNaoEncontradaException, MensagemNaoCadastradoException, JsonPatchException,
+            JsonProcessingException, IllegalArgumentException {
+        ObjectMapper mapper = new ObjectMapper();
+
         Mensagem mensagemBuscadaPorId = buscarPorId(id);
 
-        campos.forEach((chave, valor) -> {
-            Field campo = ReflectionUtils.findField(Mensagem.class, (String) chave);
-            campo.setAccessible(true);
-            ReflectionUtils.setField(campo, mensagemBuscadaPorId, valor);
-        });
+        JsonNode convertValue;
+        convertValue = mapper.convertValue(mensagemBuscadaPorId, JsonNode.class);
 
-        return salvaMensagem(mensagemBuscadaPorId);
+        JsonNode patched = patch.apply(convertValue);
+
+        Mensagem mensagemConvertida = mapper.treeToValue(patched, Mensagem.class);
+
+        return atualizaMensagem(mensagemConvertida);
     }
 }
