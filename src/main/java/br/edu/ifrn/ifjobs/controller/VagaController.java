@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
@@ -69,8 +70,9 @@ public class VagaController {
     @GetMapping("/")
     @CacheEvict(value = "vagas", allEntries = true)
     @CachePut(value = "vagas")
-    public ResponseEntity<List<VagaGetAllDTO>> buscaTodasVagas() {
-        List<VagaGetAllDTO> vagas = vagaService.buscaTodasVagas();
+    public ResponseEntity<List<VagaGetAllDTO>> buscaTodasVagas(
+            @RequestParam(name = "search", required = false) String search) {
+        List<VagaGetAllDTO> vagas = vagaService.buscaTodasVagas(search);
         return ResponseEntity.ok(vagas);
     }
 
