@@ -2,6 +2,7 @@ import { createContext, useEffect, useRef, useState } from "react";
 import { useQuery } from "react-query";
 import { api } from "../../services/api";
 import { queryClient } from "../../services/queryClient";
+import { notification } from "../../types/notification";
 import { User } from "../../types/user";
 import { IAuthProvider, IContext, IUser } from "./types";
 import { getUserLocalStorage, LoginRequest, setUserLocalStorage } from "./util";
@@ -19,6 +20,22 @@ export function AuthProvider({ children }: IAuthProvider) {
     }
     setLoadingUserFromLocalStorage(false);
   }, []);
+  const { data: notificationNew } = useQuery(
+    "notifications-new",
+    async () => {
+      let user = getUserLocalStorage();
+      const response = await api.get<notification[]>(
+        `/notificacao/usuario/${user.email}`
+      );
+      return response.data;
+    },
+    {
+      enabled: !!user?.token,
+      refetchOnWindowFocus: true,
+      staleTime: 1000 * 1, // 1 second
+      refetchInterval: 1000 * 60 * 1, // 1 minute to refetch automatically
+    }
+  );
 
   const { data: userInfo } = useQuery<User>(
     ["meUser"],
@@ -42,11 +59,11 @@ export function AuthProvider({ children }: IAuthProvider) {
     {
       enabled: !!user?.token,
       refetchOnWindowFocus: true,
-      staleTime: 1000 * 1, // 1 minute
+      staleTime: 1000 * 60, // 1 minute
       refetchInterval: 1000 * 60 * 5, // 5 minutes to refetch automatically
     }
   );
-  
+
   let authorities = useRef<string[]>([]);
   useEffect(() => {
     let authoritiesAux: string[] = [];
@@ -68,6 +85,7 @@ export function AuthProvider({ children }: IAuthProvider) {
     setUser(payload);
     setUserLocalStorage(payload);
   }
+
   function logout() {
     setUser(null);
     setUserLocalStorage(null);
@@ -75,6 +93,7 @@ export function AuthProvider({ children }: IAuthProvider) {
     queryClient.invalidateQueries("meUser");
     queryClient.removeQueries("meUser");
   }
+
   return (
     <AuthContext.Provider
       value={{
@@ -84,6 +103,7 @@ export function AuthProvider({ children }: IAuthProvider) {
         loadingUserFromLocalStorage,
         userInfo,
         authorities: authorities.current,
+        notificationNew
       }}
     >
       {children}

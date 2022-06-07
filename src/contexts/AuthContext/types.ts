@@ -1,3 +1,4 @@
+import { notification } from "../../types/notification";
 import { User } from "../../types/user";
 
 export interface IUser{
@@ -11,6 +12,7 @@ export interface IContext extends IUser {
     loadingUserFromLocalStorage: boolean;
     userInfo?: User;
     authorities?: string[];
+    notificationNew?: notification[];
 }
 
 export interface IAuthProvider {

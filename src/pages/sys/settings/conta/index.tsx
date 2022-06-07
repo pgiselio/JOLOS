@@ -17,6 +17,7 @@ import { useAuth } from "../../../../hooks/useAuth";
 import { api } from "../../../../services/api";
 import { queryClient } from "../../../../services/queryClient";
 import { CurriculoForm } from "./_curriculoForm";
+import { isBlank } from "../../../../utils/isBlank";
 
 export default function SettingContaPage() {
   const auth = useAuth();
@@ -44,6 +45,7 @@ export default function SettingContaPage() {
         auth.userInfo?.empresa?.dadosPessoa?.localizacao.split("/")[0] ||
         auth.userInfo?.aluno?.dadosPessoa?.localizacao.split("/")[0],
       curso: auth.userInfo?.aluno?.curso || "",
+      empresaSite: auth.userInfo?.empresa?.linkSite || "",
     },
   });
   async function onSubmit(data: any) {
@@ -111,6 +113,11 @@ export default function SettingContaPage() {
                 path: "/empresa/telefone",
                 value: data.telefone,
               },
+              {
+                op: "replace",
+                path: "/empresa/linkSite",
+                value: data.empresaSite,
+              },
             ]
           : null
       )
@@ -164,7 +171,9 @@ export default function SettingContaPage() {
               ? getFormattedDate(auth.userInfo?.empresa?.dadosPessoa.dataNasc)
               : ""
           }
-          label={`Data de ${auth.authorities?.includes("ALUNO") ? "nascimento" : "fundação"}:`}
+          label={`Data de ${
+            auth.authorities?.includes("ALUNO") ? "nascimento" : "fundação"
+          }:`}
           icon="fas fa-calendar-day"
         />
       )}
@@ -321,6 +330,27 @@ export default function SettingContaPage() {
                     control={control}
                     render={({ field }) => (
                       <Input type="text" id="telefone" {...field} />
+                    )}
+                  />
+                </AccordionPanel>
+              </AccordionItem>
+
+              <AccordionItem>
+                <AccordionButton className="autohide-sub">
+                  <h4>Site</h4>
+
+                  <span className="subtitle">
+                    {!isBlank(auth.userInfo?.empresa?.linkSite || "")
+                      ? auth.userInfo?.empresa?.linkSite
+                      : "Não informado"}
+                  </span>
+                </AccordionButton>
+                <AccordionPanel>
+                  <Controller
+                    name="empresaSite"
+                    control={control}
+                    render={({ field }) => (
+                      <Input type="text" id="site" {...field} />
                     )}
                   />
                 </AccordionPanel>

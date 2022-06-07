@@ -4,19 +4,17 @@ import { ToastContainer } from "react-toastify";
 import { ThemeProvider } from "styled-components";
 import { Header } from "../../components/header/header";
 import { SidebarList } from "../../components/sidebar/sidebar-list";
+import { useAppOptions } from "../../hooks/useAppOptions";
 import { GlobalStyle } from "../../styles/global";
 import { SysGlobalStyle } from "../../styles/sys";
-import { lightTheme, midnightBlueTheme } from "../../styles/themes";
+import { darkTheme, lightTheme, midnightBlueTheme } from "../../styles/themes";
 
 export default function SystemLayout() {
-  const [theme, setTheme] = useState(localStorage.getItem("theme") || "light");
-  useEffect(() => {
-    const localTheme = window.localStorage.getItem("theme");
-    localTheme && setTheme(localTheme);
-  }, []);
+  const AppOptions = useAppOptions();
   return (
     <>
-      <ThemeProvider theme={theme === "light" ? lightTheme : midnightBlueTheme}>
+      
+      <ThemeProvider theme={AppOptions.theme === "light" ? lightTheme : AppOptions.theme === "midnightBlue" ? midnightBlueTheme : darkTheme}>
         <GlobalStyle />
         <SysGlobalStyle />
         <ToastContainer
@@ -31,7 +29,7 @@ export default function SystemLayout() {
           draggable
           pauseOnHover
         />
-        <Header theme={theme} setTheme={setTheme} />
+        <Header/>
         <div className="sys-grid-container">
           <SidebarList />
           <div className="main">

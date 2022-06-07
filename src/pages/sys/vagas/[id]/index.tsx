@@ -168,14 +168,13 @@ export default function VagaPage() {
                         data-reach-alert-dialog-actions
                       >
                         <Button
-                          className="secondary less-radius"
+                          className="secondary"
                           onClick={desinscreverAluno}
                         >
                           Sim
                         </Button>
                         <br />
                         <Button
-                          className="less-radius"
                           ref={cancelRef}
                           onClick={closeUnsubDialog}
                         >

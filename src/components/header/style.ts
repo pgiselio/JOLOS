@@ -35,38 +35,36 @@ export const HeaderSysStyle = styled.header`
   }
 
   .btn-notify {
-    background: #f1f1f1;
+    background: transparent;
     border: none;
-    width: 35px;
-    height: 35px;
-    border-radius: 5px;
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    border: 1px solid transparent;
     position: relative;
     cursor: pointer;
-  }
-
-  .btn-notify:hover {
-    background: #e4e4e4;
-  }
-
-  .btn-notify:hover span {
-    border-color: #e4e4e4;
-  }
-
-  .btn-notify i {
-    line-height: 35px;
-    font-size: 15px;
-    color: #333;
-  }
-
-  .btn-notify span {
-    background: #d30808;
-    border: 2px solid #f1f1f1;
-    position: absolute;
-    width: 10px;
-    height: 10px;
-    top: 8px;
-    right: 8px;
-    border-radius: 50%;
+    color: var(--text-b);
+    i {
+      line-height: 35px;
+      font-size: 15px;
+    }
+    span {
+      background: #d30808;
+      border: 2px solid var(--navs-bg);
+      position: absolute;
+      width: 10px;
+      height: 10px;
+      top: 8px;
+      right: 8px;
+      border-radius: 50%;
+    }
+    &:hover, &.active {
+      border-color: var(--outline-color);
+      color: var(--text-a);
+    }
+    &.active{
+      background-color: var(--outline-color);
+    }
   }
 
   #btn-collapse-sidemenu {
@@ -85,8 +83,8 @@ export const HeaderSysStyle = styled.header`
     border-radius: 5px;
   }
   .botao-ham span {
-      background-color: var(--text-b);
-    }
+    background-color: var(--text-b);
+  }
   .header-button {
     i {
       color: var(--navs-bg);
@@ -99,8 +97,7 @@ export const HeaderSysStyle = styled.header`
 
   @media (min-width: 766px) {
     #btn-collapse-sidemenu {
-    background: var(--accent-color-opacity);
-
+      background: var(--accent-color-opacity);
     }
     #btn-collapse-sidemenu:hover {
       background: var(--accent-color);

@@ -17,6 +17,7 @@ export const Container = styled.div`
         }
         .title{
             font-size: 16px;
+            font-family: "Roboto", Arial, Helvetica, sans-serif;
         }
     }
 `;

@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 
 import { AuthProvider } from "./contexts/AuthContext";
 
@@ -15,6 +15,7 @@ import "@reach/accordion/styles.css";
 import "@reach/dialog/styles.css";
 import "./styles/reach-ui.css";
 import "react-toastify/dist/ReactToastify.min.css";
+import { AppOptionsProvider } from "./contexts/AppOptionsContext";
 function App() {
   return (
     <>
@@ -22,10 +23,12 @@ function App() {
         <GlobalStyle />
         <AuthProvider>
           <QueryClientProvider client={queryClient}>
+            <AppOptionsProvider>
               <BrowserRouter>
                 <ScrollToTop />
                 <AppRoutes />
               </BrowserRouter>
+            </AppOptionsProvider>
           </QueryClientProvider>
         </AuthProvider>
       </ThemeProvider>

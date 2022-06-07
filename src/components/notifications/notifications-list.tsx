@@ -3,39 +3,15 @@ import { useQuery } from "react-query";
 import { useAuth } from "../../hooks/useAuth";
 import { api } from "../../services/api";
 import { queryClient } from "../../services/queryClient";
+import { notification } from "../../types/notification";
 import { relativeTimeFromDates } from "../../utils/relativeDate";
 import CircularProgressFluent from "../circular-progress-fluent";
 import { NotificationCard } from "./notification-card";
 import { StyledNotifications } from "./style";
-type notification = {
-  id: number;
-  titulo: string;
-  descricao: string;
-  visualizado: boolean;
-  data: string;
-  usuario: {
-    id: number;
-    email: string;
-  };
-};
 
 export function Notifications() {
   const auth = useAuth();
   const [selectedTab, setSelectedTab] = useTabs(["new", "read"]);
-
-  const { data } = useQuery(
-    "notifications-new",
-    async () => {
-      const response = await api.get<notification[]>(
-        `/notificacao/usuario/${auth.email}`
-      );
-      return response.data;
-    },
-    {
-      staleTime: 1000 * 60, // 1 minute to refetch
-      refetchInterval: 1000 * 60, // 1 minutes to refetch
-    }
-  );
 
   const { data: notificationsDataRead } = useQuery(
     "notifications-read",
@@ -61,6 +37,8 @@ export function Notifications() {
         (notification: notification) => {
           if (notification && notification.id !== id) {
             return notification;
+          }else{
+            return undefined;
           }
         }
       );
@@ -97,13 +75,13 @@ export function Notifications() {
       </div>
       <div className="notification-cards">
         {selectedTab === "new" &&
-          (data ? (
-            data.length === 0 ? (
+          (auth.notificationNew ? (
+            auth.notificationNew.length === 0 ? (
               <div className="notification-card no-notifications">
                 No momento você não tem notificações novas!
               </div>
             ) : (
-              data.map((notification: notification) => {
+              auth.notificationNew.map((notification: notification) => {
                 if (notification && !notification.visualizado) {
                   return (
                     <NotificationCard
@@ -155,7 +133,6 @@ export function Notifications() {
               </div>
             ) : (
               notificationsDataRead.map((notification: notification) => {
-                console.log(notification);
                 if (notification && notification.visualizado) {
                   return (
                     <NotificationCard

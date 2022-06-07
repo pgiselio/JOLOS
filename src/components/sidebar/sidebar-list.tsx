@@ -1,32 +1,15 @@
 import { useAuth } from "../../hooks/useAuth";
+import { useAppOptions } from "../../hooks/useAppOptions";
+
 import { ProfilePic } from "../profile-pic/profile-pic";
 import { SidebarItem } from "./sidebar-item";
 import { SidebarAside, SidebarOverlay } from "./style";
 
 export function SidebarList() {
-  function checkSidebarState() {
-    const mq = window.matchMedia("(min-width: 766px)");
-
-    if (mq.matches && localStorage.getItem("toggle-sidemenu") === "yes") {
-      document.body.classList.add("toggle-sidemenu");
-    }
-  }
-  checkSidebarState();
-  function storageSidebarState() {
-    if (document.body.classList.contains("toggle-sidemenu")) {
-      localStorage.setItem("toggle-sidemenu", "yes");
-    } else {
-      localStorage.setItem("toggle-sidemenu", "");
-    }
-  }
-  function CollapseSidebar() {
-    const botaoHam = document.querySelector(".botao-ham");
-    document.body.classList.remove("toggle-sidemenu");
-    botaoHam?.classList.remove("active");
-    storageSidebarState();
-  }
-
+  
   const auth = useAuth();
+  const appOptions = useAppOptions();
+  
   function nomePessoa(): string {
     if (!auth.userInfo?.id) {
       return "Carregando...";
@@ -40,7 +23,7 @@ export function SidebarList() {
   return (
     <>
       <SidebarOverlay
-        onClick={CollapseSidebar}
+        onClick={() => appOptions.toggleSidebar()}
       ></SidebarOverlay>
       <SidebarAside className="side-bar">
         <div className="side-bar-container">

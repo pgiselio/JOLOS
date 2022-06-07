@@ -19,7 +19,7 @@ export const VagaPageStyle = styled.section`
       color: var(--text-a);
       font-weight: 500;
       font-size: 20px;
-      line-height: 30px;      
+      line-height: 30px;
       overflow: hidden;
       word-wrap: break-word;
       text-overflow: ellipsis;
@@ -84,6 +84,104 @@ export const VagaPageStyle = styled.section`
     width: 100%;
   }
 
+  .lista-candidatos .candidato {
+    display: flex;
+    width: 100%;
+    position: relative;
+    margin-top: 5px;
+  }
+
+  .lista-candidatos .candidato button {
+    display: flex;
+    width: 100%;
+    background: transparent;
+    border: none;
+  }
+
+  .candidato-group {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    padding: 10px;
+    padding-left: 50px;
+    position: relative;
+    color: var(--text-b);
+    width: 100%;
+    user-select: none;
+  }
+
+  .candidato-group * {
+    pointer-events: none;
+  }
+
+  #candidato-checkall {
+    margin-right: 10px;
+  }
+
+  .candidato-list-check {
+    display: flex !important;
+    position: absolute !important;
+    z-index: 2 !important;
+    left: 15px !important;
+    top: 50% !important;
+    transform: translateY(-50%) !important;
+  }
+
+  .candidato-list-check:checked ~ .candidato-group {
+    background: #00ff2e12;
+    color: var(--accent-color);
+  }
+
+  .candidato-group:hover {
+    background: var(--secondary-bg);
+  }
+
+  .candidato-pic {
+    height: 50px;
+    width: 50px;
+  }
+
+  .candidato-info {
+    display: flex;
+    text-align: left;
+    flex-direction: column;
+    padding-left: 10px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .candidato-info h3 {
+    font-size: 16px;
+    font-weight: 600;
+    width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .candidato-info span {
+    font-weight: 300;
+    font-size: 12px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .lista-candidatos-actions {
+    padding: 10px;
+    display: flex;
+    justify-content: end;
+  }
+
+  .lista-candidatos-actions > * {
+    margin-right: 5px;
+  }
+  .lista-candidatos-actions .btn-down-curriculo {
+    background: var(--accent-color);
+    color: #fff;
+  }
+
   @media (min-width: 766px) {
     .vaga-page-header {
       padding: 0 40px;
@@ -112,6 +210,14 @@ export const VagaPageStyle = styled.section`
       border-bottom-left-radius: 5px;
       border-bottom-right-radius: 5px;
       max-width: 1280px;
+    }
+
+    .candidato-info h3 {
+      font-size: 18px;
+    }
+
+    .candidato-info span {
+      font-size: 14px;
     }
   }
 `;

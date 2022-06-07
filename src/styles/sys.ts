@@ -96,6 +96,12 @@ body.remove-transbar .three-bars-btn *{
   display: flex;
   flex-direction: column-reverse;
 }
+
+footer {
+  height: 400px;
+  margin-top: 50px;
+  background: var(--navs-bg);
+}
   
 
 @media (min-width: 766px) {
