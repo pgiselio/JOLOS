@@ -1,8 +1,10 @@
+import { Accordion, AccordionButton, AccordionItem } from "@reach/accordion";
 import { useQuery } from "react-query";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { api } from "../../../services/api";
 
 export default function GerenciamentoPage() {
+  const navigate = useNavigate();
   const { data } = useQuery(
     "GerenciamentoUsuariosList",
     async () => {
@@ -15,7 +17,16 @@ export default function GerenciamentoPage() {
   );
   return (
     <div className="content">
-      <Link to="cadastrar/empresa">Cadastrar Nova Empresa</Link>
+      <Accordion>
+        <AccordionItem style={{ marginTop: 14 }}>
+          <AccordionButton
+            className="arrow-right"
+            onClick={() => navigate("cadastrar/empresa")}
+          >
+            <h4>Cadastrar nova empresa</h4>
+          </AccordionButton>
+        </AccordionItem>
+      </Accordion>
     </div>
   );
 }

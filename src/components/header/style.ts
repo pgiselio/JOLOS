@@ -58,12 +58,16 @@ export const HeaderSysStyle = styled.header`
       right: 8px;
       border-radius: 50%;
     }
-    &:hover, &.active {
+    &:hover,
+    &.active {
       border-color: var(--outline-color);
       color: var(--text-a);
     }
-    &.active{
+    &.active {
       background-color: var(--outline-color);
+      span {
+        border-color: var(--outline-color);
+      }
     }
   }
 

@@ -72,6 +72,7 @@ export const StyledAccess = styled.main`
     width: 110px;
     height: 40px;
   }
+  
   .registre-se {
     display: flex;
     font-size: 13px;
@@ -97,6 +98,9 @@ export const StyledAccess = styled.main`
   .logo-signup {
     width: 100%;
     max-width: 100px;
+  }
+  .logo-signup:hover, .logo-login:hover {
+    filter: grayscale(0.5);
   }
   .progress {
     display: flex;

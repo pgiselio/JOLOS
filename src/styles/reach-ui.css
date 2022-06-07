@@ -94,6 +94,9 @@
 [data-reach-accordion-button][aria-expanded="true"]::after {
   transform: rotate(180deg);
 }
+[data-reach-accordion-button].arrow-right::after {
+  transform: rotate(270deg);
+}
 
 [data-reach-accordion-button][disabled] {
   cursor: not-allowed;

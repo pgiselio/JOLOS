@@ -138,22 +138,24 @@ export const StyledNotifications = styled.div`
   }
   @media (min-width: 766px) {
     .notification-cards::-webkit-scrollbar {
-      width: 10px;
-      border-radius: 20px;
-    }
-
-    .notification-cards::-webkit-scrollbar-track {
-      border-radius: 20px;
-      background-color: #0000000a;
+      width: 16px;
     }
 
     .notification-cards::-webkit-scrollbar-thumb {
-      background-color: #dddddd;
+      background-color: #a3a3a3d5;
       border-radius: 20px;
+      -webkit-background-clip: content-box;
+      background-clip: content-box;
+      border: 6px solid transparent;
     }
 
     .notification-cards::-webkit-scrollbar-thumb:hover {
-      background-color: #ccc;
+      background-color: #838383d5;
+      border-width: 4px;
+    }
+    .notification-cards::-webkit-scrollbar-thumb:active {
+      background-color: #707070d5;
+      border-width: 4px;
     }
   }
 `;

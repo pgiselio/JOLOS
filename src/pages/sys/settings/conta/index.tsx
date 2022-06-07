@@ -442,7 +442,7 @@ export default function SettingContaPage() {
         </form>
         {auth.userInfo?.aluno && (
           <AccordionItem style={{ marginTop: 14 }}>
-            <AccordionButton>
+            <AccordionButton className="arrow-right">
               <h4>Currículo</h4>
             </AccordionButton>
             <AccordionPanel>
