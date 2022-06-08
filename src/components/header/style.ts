@@ -46,7 +46,7 @@ export const HeaderSysStyle = styled.header`
     color: var(--text-b);
     i {
       line-height: 35px;
-      font-size: 15px;
+      font-size: 18px;
     }
     span {
       background: #d30808;
@@ -100,6 +100,9 @@ export const HeaderSysStyle = styled.header`
   }
 
   @media (min-width: 766px) {
+    .btn-notify i {
+      font-size: 15px;
+    }
     #btn-collapse-sidemenu {
       background: var(--accent-color-opacity);
     }

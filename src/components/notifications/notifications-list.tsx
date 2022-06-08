@@ -32,20 +32,13 @@ export function Notifications() {
 
     const previousNotifications =
       queryClient.getQueryData<notification[]>("notifications-new");
+
     if (previousNotifications) {
-      const nextNotifications = previousNotifications.map(
-        (notification: notification) => {
-          if (notification && notification.id !== id) {
-            return notification;
-          }else{
-            return undefined;
-          }
-        }
+      const nextNotifications = previousNotifications.filter(
+        (notification: notification) => notification.id !== id
       );
-      queryClient.setQueryData(
-        "notifications-new",
-        nextNotifications.filter((value: any) => value !== undefined)
-      );
+      console.log(nextNotifications)
+      queryClient.setQueryData("notifications-new", nextNotifications);
     }
     queryClient.invalidateQueries("notifications-read");
   }
