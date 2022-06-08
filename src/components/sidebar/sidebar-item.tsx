@@ -1,4 +1,5 @@
 import { NavLink } from "react-router-dom";
+import { useAppOptions } from "../../hooks/useAppOptions";
 
 type Item = {
   to: string;
@@ -10,12 +11,10 @@ type Item = {
 };
 
 export function SidebarItem({ to, icon, label, title, className, end }: Item) {
+  const appOptions = useAppOptions();
   function ToggleSidebar() {
     if (!window.matchMedia("(min-width: 766px)").matches) {
-      const botaoHam = document.querySelector(".botao-ham");
-      document.body.classList.remove("toggle-sidemenu");
-      botaoHam?.classList.toggle("active");
-      localStorage.setItem("toggle-sidemenu", "");
+      appOptions.toggleSidebar();
     }
   }
   return (

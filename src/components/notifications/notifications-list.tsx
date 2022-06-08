@@ -139,6 +139,7 @@ export function Notifications() {
                       titulo={notification.titulo}
                       detalhes={notification.descricao}
                       key={notification.id}
+                      read
                       date={
                         relativeTimeFromDates(
                           new Date(

@@ -103,7 +103,7 @@ export const StyledNotifications = styled.div`
         width: 35px;
         height: 35px;
         border: 1px solid ${(props) => props.theme.colors.outlineColor};
-        background: ${(props) => props.theme.colors.primaryBg + "ef"};
+        background-color: ${(props) => props.theme.colors.primaryBg + "ef"};
         color: var(--text-b);
         cursor: pointer;
         :hover {
@@ -116,6 +116,16 @@ export const StyledNotifications = styled.div`
           font-weight: 900;
           -webkit-font-smoothing: antialiased;
           font-size: 13px;
+        }
+      }
+    }
+    &[data-read="true"] {
+      .card-options {
+        opacity: 1;
+        .btn-markasread {
+          pointer-events: none;
+          border-color: transparent;
+          background-color: transparent;
         }
       }
     }
