@@ -48,10 +48,11 @@
             <tr>
                 <td>
                     <a href="https://ifjobs.vercel.app/cadastro/step2?email=${usuario.email}&codigo=${usuario.codigoAutenticacao}" 
-                    style="background-color: #4CAF50; padding: 0.5rem; color: white; border-radius: 5px; text-decoration: none;">
-                    <strong>
-                        Confirmar Cadastro
-                    </strong>
+                        target="_blank" 
+                        style="background-color: #4CAF50; padding: 0.5rem; color: white; border-radius: 5px; text-decoration: none;">
+                        <strong>
+                            Confirmar Cadastro
+                        </strong>
                     </a>
                 </td>
             </tr>
