@@ -55,7 +55,11 @@ public class NotificacaoService {
         List<Usuario> usuarios = usuarioService.buscaTodosPorStatus(StatusUsuario.PENDENTE);
         usuarios.stream().forEach(usuario -> {
             try {
-                emailService.enviaEmail(usuario, URL_HTML_EMAIL_PENDENTE, ASSUNTO_EMAIL_PENDENTE);
+                if (usuario.getContadorDeNotificacoesDePendencia() <= 3) {
+                    emailService.enviaEmail(usuario, URL_HTML_EMAIL_PENDENTE, ASSUNTO_EMAIL_PENDENTE);
+                    usuario.setContadorDeNotificacoesDePendencia(usuario.getContadorDeNotificacoesDePendencia() + 1);
+                }
+                usuarioService.delete(usuario);
             } catch (MessagingException | IOException | TemplateException e) {
                 throw new RuntimeException(e);
             }
