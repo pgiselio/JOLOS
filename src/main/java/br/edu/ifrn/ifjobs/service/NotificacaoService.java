@@ -94,6 +94,11 @@ public class NotificacaoService {
                 .collect(Collectors
                         .groupingBy(notificacao -> notificacao.getUsuario().getEmail()))
                 .get(email);
+
+        if (notificacoes == null) {
+            return List.of();
+        }
+
         return notificacoes.stream()
                 .filter(notificacao -> notificacao.isVisualizado())
                 .collect(Collectors.toList());
