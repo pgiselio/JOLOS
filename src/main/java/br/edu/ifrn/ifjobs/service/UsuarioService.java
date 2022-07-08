@@ -1,6 +1,5 @@
 package br.edu.ifrn.ifjobs.service;
 
-import java.io.File;
 import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
@@ -223,7 +222,7 @@ public class UsuarioService {
 
     }
 
-    public Usuario delete(Usuario usuario) throws Exception {
+    public Usuario delete(Usuario usuario) {
         Optional<Usuario> usuarioOptional;
         usuarioOptional = Optional.ofNullable(usuario);
 
@@ -232,7 +231,7 @@ public class UsuarioService {
             user = usuarioRepository.save(user);
         });
 
-        return usuarioOptional.orElseThrow(Exception::new);
+        return usuarioOptional.orElseThrow(RuntimeException::new);
     }
 
 }
