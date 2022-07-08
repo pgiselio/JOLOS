@@ -62,6 +62,8 @@ public class Usuario implements UserDetails {
     @Column(name = "codigo_auth")
     private String codigoAutenticacao;
 
+    private int contadorDeNotificacoesDePendencia;
+
     public Usuario() {
         super();
     }
@@ -181,6 +183,14 @@ public class Usuario implements UserDetails {
 
     public String getCodigoAutenticacao() {
         return codigoAutenticacao;
+    }
+
+    public int getContadorDeNotificacoesDePendencia() {
+        return contadorDeNotificacoesDePendencia;
+    }
+
+    public void setContadorDeNotificacoesDePendencia(int contadorDeNotificacoesDePendencia) {
+        this.contadorDeNotificacoesDePendencia = contadorDeNotificacoesDePendencia;
     }
 
     public void setCodigoAutenticacao(String codigoAutenticacao) {
