@@ -239,6 +239,7 @@ public class VagaService {
             notificacao.setTitulo("Inscrições encerradas");
             notificacao.setDescricao(
                     "A vaga " + vagaConvertida.getTitulo() + " não está mais disponível para candidatura");
+            notificacao.setData(LocalDateTime.now());
             vagaConvertida.getAlunos().forEach(aluno -> {
                 Usuario usuario;
                 try {
