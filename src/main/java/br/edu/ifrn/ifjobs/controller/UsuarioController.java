@@ -115,7 +115,7 @@ public class UsuarioController {
         String token;
         try {
             token = usuarioService.validaCodigo(email, codigo);
-        } catch (UsuarioNaoEncontradoException | RuntimeException e) {
+        } catch (UsuarioNaoEncontradoException e) {
             return ResponseEntity.badRequest().body(e.getMessage());
         }
         return ResponseEntity.ok().body(token);
