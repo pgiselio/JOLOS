@@ -19,7 +19,7 @@ public class Arquivo implements Serializable {
     @Column
     private String tipoArquivo;
 
-    @Column(columnDefinition = "CLOB")
+    @Column(columnDefinition = "BLOB")
     private byte[] dados;
 
     public Arquivo() {
