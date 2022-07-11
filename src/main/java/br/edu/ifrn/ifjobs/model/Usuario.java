@@ -6,6 +6,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -43,6 +44,10 @@ public class Usuario implements UserDetails {
 
     @Column(nullable = false)
     private String senha;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @Basic(fetch = FetchType.LAZY)
+    private Imagem fotoPerfil;
 
     @Column(nullable = false, length = 25)
     @Enumerated(EnumType.STRING)
@@ -195,6 +200,14 @@ public class Usuario implements UserDetails {
 
     public void setCodigoAutenticacao(String codigoAutenticacao) {
         this.codigoAutenticacao = codigoAutenticacao;
+    }
+
+    public Imagem getFotoPerfil() {
+        return fotoPerfil;
+    }
+
+    public void setFotoPerfil(Imagem fotoPerfil) {
+        this.fotoPerfil = fotoPerfil;
     }
 
     public void addRole(Role role) {
