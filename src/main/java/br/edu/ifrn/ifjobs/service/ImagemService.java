@@ -26,18 +26,32 @@ public class ImagemService {
             throws IOException, UsuarioNaoCadastradoException {
         Usuario usuario = usuarioService.buscaPorId(usuarioId);
 
-        Arquivo arquivo = new Arquivo();
-        arquivo.setNome("fotoPerfil_" + usuario.getId());
+        var arquivo = new Arquivo();
         arquivo.setDados(multipartFile.getBytes());
         arquivo.setTipoArquivo(multipartFile.getContentType());
 
-        Imagem imagem = new Imagem();
-        imagem.setArquivo(arquivo);
+        Imagem imagem;
+        if (usuario.getFotoPerfil() == null) {
+            arquivo.setNome("fotoPerfil_" + usuario.getId());
+            imagem = _setAquivoEmImagem(arquivo);
+            _salvaImagemNoUsuarioPassado(usuario, imagem);
+        }
 
-        usuario.setFotoPerfil(imagem);
-        usuarioService.atualizaUsuario(usuario);
+        imagem = _setAquivoEmImagem(arquivo);
+        _salvaImagemNoUsuarioPassado(usuario, imagem);
 
         return imagem;
+    }
+
+    private Imagem _setAquivoEmImagem(Arquivo arquivo) {
+        var imagem = new Imagem();
+        imagem.setArquivo(arquivo);
+        return imagem;
+    }
+
+    private void _salvaImagemNoUsuarioPassado(Usuario usuario, Imagem imagem) throws UsuarioNaoCadastradoException {
+        usuario.setFotoPerfil(imagem);
+        usuarioService.atualizaUsuario(usuario);
     }
 
     public List<Imagem> buscaTodas() {
