@@ -32,12 +32,7 @@ public class ImagemService {
 
         Imagem fotoPerfil = foto.map(imagem -> {
             Imagem img = imagemRepository.getById(imagem.getId());
-
-            Arquivo file = img.getArquivo();
-            file.setDados(arquivo.getDados());
-            file.setTipoArquivo(arquivo.getTipoArquivo());
-
-            img.setArquivo(file);
+            img.setArquivo(arquivo);
 
             final Imagem imgPerfil = imagemRepository.save(img);
             _tratamentoParaSalvarImagemEmUsuario(usuario, imgPerfil);
