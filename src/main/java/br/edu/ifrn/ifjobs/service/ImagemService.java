@@ -29,18 +29,18 @@ public class ImagemService {
         Optional<Imagem> foto = Optional.ofNullable(usuario.getFotoPerfil());
 
         Arquivo arquivo = _construcaoBaseDeArquivo(multipartFile);
+        arquivo.setNome("fotoPerfil_" + usuario.getId());
 
         Imagem fotoPerfil = foto.map(imagem -> {
             Arquivo arquivoPresente = imagem.getArquivo();
             arquivoPresente.setDados(arquivo.getDados());
             arquivoPresente.setTipoArquivo(arquivo.getTipoArquivo());
+            arquivoPresente.setNome(arquivo.getNome());
 
             final Imagem imgPerfil = _updateImagem(arquivoPresente);
-            System.out.println("Imagem atualizada: " + imgPerfil.getArquivo().getNome());
             _tratamentoParaSalvarImagemEmUsuario(usuario, imgPerfil);
             return imgPerfil;
         }).orElseGet(() -> {
-            arquivo.setNome("fotoPerfil_" + usuario.getId());
             final Imagem imgPerfil = _updateImagem(arquivo);
             _tratamentoParaSalvarImagemEmUsuario(usuario, imgPerfil);
             return imgPerfil;
