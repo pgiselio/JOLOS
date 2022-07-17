@@ -19,6 +19,7 @@ public class ImagemService {
     @Autowired
     private ImagemRepository imagemRepository;
 
+    @Autowired
     private UsuarioService usuarioService;
 
     public Imagem uploadFotoPerfilUsuario(int usuarioId, MultipartFile multipartFile)
