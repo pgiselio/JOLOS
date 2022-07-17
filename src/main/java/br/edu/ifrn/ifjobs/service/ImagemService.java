@@ -2,6 +2,7 @@ package br.edu.ifrn.ifjobs.service;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -25,31 +26,43 @@ public class ImagemService {
     public Imagem uploadFotoPerfilUsuario(int usuarioId, MultipartFile multipartFile)
             throws IOException, UsuarioNaoCadastradoException {
         Usuario usuario = usuarioService.buscaPorId(usuarioId);
+        Optional<Imagem> foto = Optional.ofNullable(usuario.getFotoPerfil());
 
+        Arquivo arquivo = _construcaoBaseDeArquivo(multipartFile);
+
+        Imagem fotoPerfil = foto.map(imagem -> {
+            Arquivo arquivoPresente = imagem.getArquivo();
+            arquivoPresente.setDados(arquivo.getDados());
+            arquivoPresente.setTipoArquivo(arquivo.getTipoArquivo());
+
+            imagem = _setAquivoEmImagem(arquivo);
+            _tratamentoParaSalvarImagemEmUsuario(usuario, imagem);
+            return imagem;
+        }).orElseGet(() -> {
+            arquivo.setNome("fotoPerfil_" + usuario.getId());
+            Imagem imagem = _setAquivoEmImagem(arquivo);
+            _tratamentoParaSalvarImagemEmUsuario(usuario, imagem);
+            return imagem;
+        });
+
+        return fotoPerfil;
+    }
+
+    private Arquivo _construcaoBaseDeArquivo(MultipartFile multipartFile) throws IOException {
         var arquivo = new Arquivo();
         arquivo.setDados(multipartFile.getBytes());
 
         String extensaoArquivo = DecompositorNomeArquivo.pegaExtensaoArquivo(multipartFile.getOriginalFilename());
         arquivo.setTipoArquivo(extensaoArquivo);
+        return arquivo;
+    }
 
-        if (usuario.getFotoPerfil() != null) {
-            Imagem fotoPerfil = usuario.getFotoPerfil();
-            Arquivo arquivoAntigo = fotoPerfil.getArquivo();
-            arquivoAntigo.setDados(arquivo.getDados());
-            arquivoAntigo.setTipoArquivo(arquivo.getTipoArquivo());
-
-            fotoPerfil.setArquivo(arquivoAntigo);
-            usuario.setFotoPerfil(fotoPerfil);
-            usuarioService.atualizaUsuario(usuario);
-            return fotoPerfil;
+    private void _tratamentoParaSalvarImagemEmUsuario(Usuario usuario, Imagem fotoPerfil) {
+        try {
+            _salvaImagemNoUsuarioPassado(usuario, fotoPerfil);
+        } catch (UsuarioNaoCadastradoException e) {
+            throw new RuntimeException(e);
         }
-
-        arquivo.setNome("fotoPerfil_" + usuario.getId());
-
-        Imagem imagem = _setAquivoEmImagem(arquivo);
-        _salvaImagemNoUsuarioPassado(usuario, imagem);
-
-        return imagem;
     }
 
     private Imagem _setAquivoEmImagem(Arquivo arquivo) {
