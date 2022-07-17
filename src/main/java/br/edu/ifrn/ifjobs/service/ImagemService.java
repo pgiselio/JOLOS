@@ -73,7 +73,9 @@ public class ImagemService {
 
     private void _salvaImagemNoUsuarioPassado(Usuario usuario, Imagem imagem) throws UsuarioNaoCadastradoException {
         usuario.setFotoPerfil(imagem);
-        usuarioService.atualizaUsuario(usuario);
+        System.out.println(usuario);
+        Usuario user = usuarioService.atualizaUsuario(usuario);
+        System.out.println(user);
     }
 
     public List<Imagem> buscaTodas() {
