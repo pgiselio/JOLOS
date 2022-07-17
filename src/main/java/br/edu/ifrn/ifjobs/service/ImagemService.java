@@ -41,11 +41,11 @@ public class ImagemService {
             _tratamentoParaSalvarImagemEmUsuario(usuario, imgPerfil);
             return imgPerfil;
         }).orElseGet(() -> {
-            return criaImagemParaUsuario(usuario, arquivo);
+            return _criaImagemParaUsuario(usuario, arquivo);
         });
     }
 
-    private Imagem criaImagemParaUsuario(Usuario usuario, Arquivo arquivo) {
+    private Imagem _criaImagemParaUsuario(Usuario usuario, Arquivo arquivo) {
         arquivo.setNome("fotoPerfil_" + usuario.getId());
         final Imagem imgPerfil = _updateImagem(arquivo);
         _tratamentoParaSalvarImagemEmUsuario(usuario, imgPerfil);
@@ -97,5 +97,9 @@ public class ImagemService {
 
     public List<Imagem> buscaTodas() {
         return imagemRepository.findAll();
+    }
+
+    public Imagem getFotoPerfil(int idUsuario) throws UsuarioNaoCadastradoException {
+        return usuarioService.buscaPorId(idUsuario).getFotoPerfil();
     }
 }
