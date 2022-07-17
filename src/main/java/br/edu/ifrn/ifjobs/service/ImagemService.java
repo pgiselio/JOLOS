@@ -31,10 +31,13 @@ public class ImagemService {
         Arquivo arquivo = _construcaoBaseDeArquivo(multipartFile);
 
         Imagem fotoPerfil = foto.map(imagem -> {
-            Imagem img = imagemRepository.getById(imagem.getId());
-            img.setArquivo(arquivo);
+            final Imagem img = imagemRepository.getById(imagem.getId());
 
-            final Imagem imgPerfil = imagemRepository.save(img);
+            final Arquivo file = img.getArquivo();
+            file.setDados(arquivo.getDados());
+            file.setTipoArquivo(arquivo.getTipoArquivo());
+
+            final Imagem imgPerfil = imagemRepository.save(_updateImagem(file));
             _tratamentoParaSalvarImagemEmUsuario(usuario, imgPerfil);
             return img;
         }).orElseGet(() -> {
