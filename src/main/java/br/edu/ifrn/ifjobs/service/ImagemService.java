@@ -36,6 +36,7 @@ public class ImagemService {
             arquivoPresente.setTipoArquivo(arquivo.getTipoArquivo());
 
             final Imagem imgPerfil = _updateImagem(arquivoPresente);
+            System.out.println("Imagem atualizada: " + imgPerfil.getArquivo().getNome());
             _tratamentoParaSalvarImagemEmUsuario(usuario, imgPerfil);
             return imgPerfil;
         }).orElseGet(() -> {
