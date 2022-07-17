@@ -28,15 +28,19 @@ public class ImagemService {
 
         var arquivo = new Arquivo();
         arquivo.setDados(multipartFile.getBytes());
-        arquivo.setTipoArquivo(multipartFile.getContentType());
+
+        String extensaoArquivo = DecompositorNomeArquivo.pegaExtensaoArquivo(multipartFile.getOriginalFilename());
+        arquivo.setTipoArquivo(extensaoArquivo);
 
         Imagem imagem;
         if (usuario.getFotoPerfil() == null) {
+            System.out.println("Não tem foto");
             arquivo.setNome("fotoPerfil_" + usuario.getId());
             imagem = _setAquivoEmImagem(arquivo);
             _salvaImagemNoUsuarioPassado(usuario, imagem);
         }
 
+        System.out.println("Tem foto");
         imagem = _setAquivoEmImagem(arquivo);
         _salvaImagemNoUsuarioPassado(usuario, imagem);
 
