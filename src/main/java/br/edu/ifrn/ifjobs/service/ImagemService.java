@@ -26,28 +26,43 @@ public class ImagemService {
     public Imagem uploadFotoPerfilUsuario(int usuarioId, MultipartFile multipartFile)
             throws IOException, UsuarioNaoCadastradoException {
         Usuario usuario = usuarioService.buscaPorId(usuarioId);
-        Optional<Imagem> foto = Optional.ofNullable(usuario.getFotoPerfil());
+        Optional<Imagem> container = Optional.ofNullable(usuario.getFotoPerfil());
 
         Arquivo arquivo = _construcaoBaseDeArquivo(multipartFile);
 
-        Imagem fotoPerfil = foto.map(imagem -> {
-            final Imagem img = imagemRepository.getById(imagem.getId());
-
-            final Arquivo file = img.getArquivo();
-            file.setDados(arquivo.getDados());
-            file.setTipoArquivo(arquivo.getTipoArquivo());
-
-            final Imagem imgPerfil = imagemRepository.save(_updateImagem(file));
-            _tratamentoParaSalvarImagemEmUsuario(usuario, imgPerfil);
-            return img;
-        }).orElseGet(() -> {
-            arquivo.setNome("fotoPerfil_" + usuario.getId());
-            final Imagem imgPerfil = _updateImagem(arquivo);
-            _tratamentoParaSalvarImagemEmUsuario(usuario, imgPerfil);
-            return imgPerfil;
-        });
+        Imagem fotoPerfil = _atualizaOuCriaImagem(usuario, container, arquivo);
 
         return fotoPerfil;
+    }
+
+    private Imagem _atualizaOuCriaImagem(Usuario usuario, Optional<Imagem> foto, Arquivo arquivo) {
+        return foto.map(imagem -> {
+            final Imagem imgPerfil = atualizarImagem(arquivo, imagem);
+            _tratamentoParaSalvarImagemEmUsuario(usuario, imgPerfil);
+            return imgPerfil;
+        }).orElseGet(() -> {
+            return criaImagemParaUsuario(usuario, arquivo);
+        });
+    }
+
+    private Imagem criaImagemParaUsuario(Usuario usuario, Arquivo arquivo) {
+        arquivo.setNome("fotoPerfil_" + usuario.getId());
+        final Imagem imgPerfil = _updateImagem(arquivo);
+        _tratamentoParaSalvarImagemEmUsuario(usuario, imgPerfil);
+        return imgPerfil;
+    }
+
+    private Imagem atualizarImagem(Arquivo arquivo, Imagem imagem) {
+        final Imagem img = imagemRepository.getById(imagem.getId());
+
+        final Arquivo file = img.getArquivo();
+        file.setDados(arquivo.getDados());
+        file.setTipoArquivo(arquivo.getTipoArquivo());
+
+        img.setArquivo(file);
+
+        final Imagem imgPerfil = imagemRepository.save(img);
+        return imgPerfil;
     }
 
     private Arquivo _construcaoBaseDeArquivo(MultipartFile multipartFile) throws IOException {
