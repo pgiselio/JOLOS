@@ -115,6 +115,7 @@ public class UsuarioService {
             otherUser.setEmpresa(user.getEmpresa());
             otherUser.setStatus(user.getStatus());
             otherUser.setCodigoAutenticacao(user.getCodigoAutenticacao());
+            otherUser.setFotoPerfil(user.getFotoPerfil());
 
             usuarioRepository.save(otherUser);
         });
