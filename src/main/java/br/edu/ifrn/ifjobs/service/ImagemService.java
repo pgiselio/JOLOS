@@ -31,17 +31,9 @@ public class ImagemService {
 
         String extensaoArquivo = DecompositorNomeArquivo.pegaExtensaoArquivo(multipartFile.getOriginalFilename());
         arquivo.setTipoArquivo(extensaoArquivo);
+        arquivo.setNome("fotoPerfil_" + usuario.getId());
 
-        Imagem imagem;
-        if (usuario.getFotoPerfil() == null) {
-            System.out.println("Não tem foto");
-            arquivo.setNome("fotoPerfil_" + usuario.getId());
-            imagem = _setAquivoEmImagem(arquivo);
-            _salvaImagemNoUsuarioPassado(usuario, imagem);
-        }
-
-        System.out.println("Tem foto");
-        imagem = _setAquivoEmImagem(arquivo);
+        Imagem imagem = _setAquivoEmImagem(arquivo);
         _salvaImagemNoUsuarioPassado(usuario, imagem);
 
         return imagem;
