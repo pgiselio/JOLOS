@@ -35,14 +35,14 @@ public class ImagemService {
             arquivoPresente.setDados(arquivo.getDados());
             arquivoPresente.setTipoArquivo(arquivo.getTipoArquivo());
 
-            imagem = _setAquivoEmImagem(arquivoPresente);
-            _tratamentoParaSalvarImagemEmUsuario(usuario, imagem);
-            return imagem;
+            final Imagem imgPerfil = _updateImagem(arquivoPresente);
+            _tratamentoParaSalvarImagemEmUsuario(usuario, imgPerfil);
+            return imgPerfil;
         }).orElseGet(() -> {
             arquivo.setNome("fotoPerfil_" + usuario.getId());
-            Imagem imagem = _setAquivoEmImagem(arquivo);
-            _tratamentoParaSalvarImagemEmUsuario(usuario, imagem);
-            return imagem;
+            final Imagem imgPerfil = _updateImagem(arquivo);
+            _tratamentoParaSalvarImagemEmUsuario(usuario, imgPerfil);
+            return imgPerfil;
         });
 
         return fotoPerfil;
@@ -65,7 +65,7 @@ public class ImagemService {
         }
     }
 
-    private Imagem _setAquivoEmImagem(Arquivo arquivo) {
+    private Imagem _updateImagem(Arquivo arquivo) {
         var imagem = new Imagem();
         imagem.setArquivo(arquivo);
         return imagem;
