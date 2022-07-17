@@ -26,6 +26,7 @@ public class ImagemController {
     public ResponseEntity<?> uploadFotoPerfil(@PathVariable(name = "id") int id,
             @RequestParam(name = "arquivo") MultipartFile arquivo) {
         try {
+            System.out.println("id: " + id);
             imagemService.uploadFotoPerfilUsuario(id, arquivo);
         } catch (UsuarioNaoCadastradoException e) {
             ResponseEntity.status(404).body(e);
