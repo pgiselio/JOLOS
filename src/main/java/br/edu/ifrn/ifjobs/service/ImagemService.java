@@ -33,9 +33,15 @@ public class ImagemService {
         arquivo.setTipoArquivo(extensaoArquivo);
 
         if (usuario.getFotoPerfil() != null) {
-            Imagem imagem = _setAquivoEmImagem(arquivo);
-            _salvaImagemNoUsuarioPassado(usuario, imagem);
-            return imagem;
+            Imagem fotoPerfil = usuario.getFotoPerfil();
+            Arquivo arquivoAntigo = fotoPerfil.getArquivo();
+            arquivoAntigo.setDados(arquivo.getDados());
+            arquivoAntigo.setTipoArquivo(arquivo.getTipoArquivo());
+
+            fotoPerfil.setArquivo(arquivoAntigo);
+            usuario.setFotoPerfil(fotoPerfil);
+            usuarioService.atualizaUsuario(usuario);
+            return fotoPerfil;
         }
 
         arquivo.setNome("fotoPerfil_" + usuario.getId());
