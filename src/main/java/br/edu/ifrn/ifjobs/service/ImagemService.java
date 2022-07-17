@@ -31,6 +31,13 @@ public class ImagemService {
 
         String extensaoArquivo = DecompositorNomeArquivo.pegaExtensaoArquivo(multipartFile.getOriginalFilename());
         arquivo.setTipoArquivo(extensaoArquivo);
+
+        if (usuario.getFotoPerfil() != null) {
+            Imagem imagem = _setAquivoEmImagem(arquivo);
+            _salvaImagemNoUsuarioPassado(usuario, imagem);
+            return imagem;
+        }
+
         arquivo.setNome("fotoPerfil_" + usuario.getId());
 
         Imagem imagem = _setAquivoEmImagem(arquivo);
