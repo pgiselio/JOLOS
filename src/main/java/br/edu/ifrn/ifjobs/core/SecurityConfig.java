@@ -43,6 +43,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                                 .and()
                                 .authorizeRequests().antMatchers("/usuario/validacao/**").permitAll()
                                 .and()
+                                .authorizeRequests().antMatchers("/imagem/fotoPerfil/**").permitAll()
+                                .and()
                                 .authorizeRequests().antMatchers("/aluno/**")
                                 .hasAnyAuthority(TipoUsuario.ALUNO.toString(), TipoUsuario.ADMIN.toString())
                                 .and()

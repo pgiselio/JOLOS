@@ -36,7 +36,7 @@ public class ImagemController {
         return ResponseEntity.ok().build();
     }
 
-    @GetMapping("/{idUsuario}/fotoPerfil")
+    @GetMapping("/fotoPerfil/{idUsuario}")
     public ResponseEntity<?> getFotoPerfil(@PathVariable(name = "idUsuario") int idUsuario) {
         var fotoPerfil = new Imagem();
         try {
