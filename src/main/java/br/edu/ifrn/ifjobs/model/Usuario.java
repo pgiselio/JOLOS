@@ -67,6 +67,8 @@ public class Usuario implements UserDetails {
     @Column(name = "codigo_auth")
     private String codigoAutenticacao;
 
+    private String token;
+
     private int contadorDeNotificacoesDePendencia;
 
     public Usuario() {
@@ -208,6 +210,14 @@ public class Usuario implements UserDetails {
 
     public void setFotoPerfil(Imagem fotoPerfil) {
         this.fotoPerfil = fotoPerfil;
+    }
+
+    public String getToken() {
+        return token;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
     }
 
     public void addRole(Role role) {
