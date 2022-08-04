@@ -34,7 +34,7 @@
             <tr><td><br></td></tr>
             <tr>
                 <td>
-                    <a href="https://ifjobs.vercel.app/recuperar-senha?token=${usuario.token.replace('Bearer ', '')}"> 
+                    <a href="https://ifjobs.vercel.app/recuperar-senha?token=${usuario.token}" 
                         target="_blank">
                         <button style="background-color: #4CAF50; padding: 0.5rem; color: white; border-radius: 5px; text-decoration: none; border: none;">
                             Recuperar acesso
@@ -51,7 +51,7 @@
             </tr>
             <tr>
                 <td>
-                    https://ifjobs.vercel.app/recuperar-senha?token=${usuario.token.replace('Bearer ', '')}
+                    https://ifjobs.vercel.app/recuperar-senha?token=${usuario.token}
                 </td>
             </tr>
         </tbody>
