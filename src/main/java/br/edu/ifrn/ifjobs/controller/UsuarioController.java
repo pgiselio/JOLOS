@@ -140,7 +140,7 @@ public class UsuarioController {
         } catch (UsuarioNaoEncontradoException e) {
             return ResponseEntity.notFound().build();
         } catch (IOException | MessagingException | TemplateException e) {
-            return ResponseEntity.badRequest().build();
+            throw new RuntimeException(e);
         }
         return ResponseEntity.ok().build();
     }
