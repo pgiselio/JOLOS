@@ -215,8 +215,9 @@ public class UsuarioService {
     public void recuperaSenha(String email)
             throws UsuarioNaoEncontradoException, IOException, MessagingException, TemplateException {
         Usuario usuario = buscaPorEmail(email);
-        String codigo = geraCodigoVerificacao();
-        usuario.setCodigoAutenticacao(codigo);
+        int dezMinutos = 10 * 60 * 1000;
+        String token = GeradorTokenService.geraToken(email, dezMinutos);
+        usuario.setToken(token);
         usuarioRepository.save(usuario);
 
         emailService.enviaEmail(usuario, caminhoArquivoEmailRecuperacaoSenha, "IF Jobs - Recuperação de senha");
