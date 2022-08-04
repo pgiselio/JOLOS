@@ -41,7 +41,7 @@ public class UsuarioService {
     @Value("${spring.html.CadastroEmpresa}")
     private String caminhoArquivoEmailEmpresa;
 
-    @Value("$spring.html.RecuperacaoSenha}")
+    @Value("${spring.html.RecuperacaoSenha}")
     private String caminhoArquivoEmailRecuperacaoSenha;
 
     @Autowired
