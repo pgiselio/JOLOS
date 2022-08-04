@@ -23,6 +23,7 @@ public class UsuarioEmailDTO implements Dto<Usuario, UsuarioEmailDTO> {
         this.email = usuario.getEmail();
         this.codigoAutenticacao = usuario.getCodigoAutenticacao();
         this.senha = usuario.getSenha();
+        this.token = usuario.getToken();
     }
 
     public String getEmail() {
