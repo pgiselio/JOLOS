@@ -23,7 +23,10 @@ public class UsuarioEmailDTO implements Dto<Usuario, UsuarioEmailDTO> {
         this.email = usuario.getEmail();
         this.codigoAutenticacao = usuario.getCodigoAutenticacao();
         this.senha = usuario.getSenha();
-        this.token = usuario.getToken();
+        if(usuario.getToken() != null) {
+            this.token = usuario.getToken()
+                                .replace("Bearer ", "");
+        }
     }
 
     public String getEmail() {
