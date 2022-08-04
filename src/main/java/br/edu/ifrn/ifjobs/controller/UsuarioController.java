@@ -138,7 +138,7 @@ public class UsuarioController {
         try {
             usuarioService.recuperaSenha(email);
         } catch (UsuarioNaoEncontradoException e) {
-            return ResponseEntity.badRequest().body(e.getMessage());
+            return ResponseEntity.notFound().build();
         } catch (IOException | MessagingException | TemplateException e) {
             return ResponseEntity.badRequest().build();
         }
