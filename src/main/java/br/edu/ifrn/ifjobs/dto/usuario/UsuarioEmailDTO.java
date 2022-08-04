@@ -13,6 +13,7 @@ public class UsuarioEmailDTO implements Dto<Usuario, UsuarioEmailDTO> {
     public String email;
     public String senha;
     public String codigoAutenticacao;
+    public String token;
 
     public UsuarioEmailDTO() {
         super();
