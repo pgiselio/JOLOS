@@ -23,6 +23,7 @@ import org.springframework.stereotype.Service;
 
 import br.edu.ifrn.ifjobs.dto.usuario.UsuarioInsertDTO;
 import br.edu.ifrn.ifjobs.dto.usuario.UsuarioUpdateSenhaDTO;
+import br.edu.ifrn.ifjobs.exception.TokenInvalidoException;
 import br.edu.ifrn.ifjobs.exception.UsuarioNaoCadastradoException;
 import br.edu.ifrn.ifjobs.exception.UsuarioNaoEncontradoException;
 import br.edu.ifrn.ifjobs.model.Role;
@@ -225,7 +226,7 @@ public class UsuarioService {
             usuarioBuscadoPorEmail.setToken(null);
             return atualizaUsuario(usuarioBuscadoPorEmail);
         }
-        throw new RuntimeException("Token inválido!");
+        throw new TokenInvalidoException();
     }
 
     public void recuperaSenha(String email)
