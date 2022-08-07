@@ -22,6 +22,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import br.edu.ifrn.ifjobs.dto.usuario.UsuarioInsertDTO;
+import br.edu.ifrn.ifjobs.dto.usuario.UsuarioUpdateSenhaDTO;
 import br.edu.ifrn.ifjobs.exception.UsuarioNaoCadastradoException;
 import br.edu.ifrn.ifjobs.exception.UsuarioNaoEncontradoException;
 import br.edu.ifrn.ifjobs.model.Role;
@@ -210,6 +211,13 @@ public class UsuarioService {
         Usuario usuarioModificado = mapper.treeToValue(patched, Usuario.class);
 
         return atualizaUsuario(usuarioModificado);
+    }
+
+    public Usuario atualizaSenha(String email, UsuarioUpdateSenhaDTO updateSenhaDto)
+            throws UsuarioNaoEncontradoException, UsuarioNaoCadastradoException {
+        Usuario usuarioBuscadoPorEmail = buscaPorEmail(email);
+        usuarioBuscadoPorEmail.setSenha(updateSenhaDto.getSenha());
+        return atualizaUsuario(usuarioBuscadoPorEmail);
     }
 
     public void recuperaSenha(String email)
