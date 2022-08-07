@@ -30,6 +30,7 @@ import br.edu.ifrn.ifjobs.dto.DTOConversor;
 import br.edu.ifrn.ifjobs.dto.usuario.UsuarioGetDTO;
 import br.edu.ifrn.ifjobs.dto.usuario.UsuarioInsertDTO;
 import br.edu.ifrn.ifjobs.dto.usuario.UsuarioLoginGetDTO;
+import br.edu.ifrn.ifjobs.dto.usuario.UsuarioUpdateSenhaDTO;
 import br.edu.ifrn.ifjobs.exception.UsuarioNaoCadastradoException;
 import br.edu.ifrn.ifjobs.exception.UsuarioNaoEncontradoException;
 import br.edu.ifrn.ifjobs.model.Usuario;
@@ -155,6 +156,25 @@ public class UsuarioController {
         } catch (UsuarioNaoEncontradoException | UsuarioNaoCadastradoException e) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
         } catch (JsonProcessingException | IllegalArgumentException | JsonPatchException e) {
+            throw new ResponseStatusException(HttpStatus.BAD_GATEWAY, e.getMessage());
+        }
+
+        UsuarioGetDTO entidadeParaDTO = DTOConversor.convertEntityToDto(usuarioAtualizado,
+                UsuarioGetDTO.class);
+
+        return ResponseEntity.ok(entidadeParaDTO);
+    }
+
+    @PatchMapping("/senha/{email}")
+    public ResponseEntity<UsuarioGetDTO> atualizaSenha(@PathVariable(name = "email") String email,
+            @RequestBody UsuarioUpdateSenhaDTO dto) {
+        Usuario usuarioAtualizado;
+
+        try {
+            usuarioAtualizado = usuarioService.atualizaSenha(email, dto);
+        } catch (UsuarioNaoEncontradoException | UsuarioNaoCadastradoException e) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
+        } catch (IllegalArgumentException e) {
             throw new ResponseStatusException(HttpStatus.BAD_GATEWAY, e.getMessage());
         }
 
