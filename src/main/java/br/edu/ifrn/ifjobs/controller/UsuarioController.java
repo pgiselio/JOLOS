@@ -31,6 +31,7 @@ import br.edu.ifrn.ifjobs.dto.usuario.UsuarioGetDTO;
 import br.edu.ifrn.ifjobs.dto.usuario.UsuarioInsertDTO;
 import br.edu.ifrn.ifjobs.dto.usuario.UsuarioLoginGetDTO;
 import br.edu.ifrn.ifjobs.dto.usuario.UsuarioUpdateSenhaDTO;
+import br.edu.ifrn.ifjobs.exception.TokenInvalidoException;
 import br.edu.ifrn.ifjobs.exception.UsuarioNaoCadastradoException;
 import br.edu.ifrn.ifjobs.exception.UsuarioNaoEncontradoException;
 import br.edu.ifrn.ifjobs.model.Usuario;
@@ -176,6 +177,8 @@ public class UsuarioController {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
         } catch (IllegalArgumentException e) {
             throw new ResponseStatusException(HttpStatus.BAD_GATEWAY, e.getMessage());
+        } catch (TokenInvalidoException e){
+            throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, e.getMessage());
         }
 
         UsuarioGetDTO entidadeParaDTO = DTOConversor.convertEntityToDto(usuarioAtualizado,
