@@ -218,9 +218,11 @@ public class UsuarioService {
         String emailUsuario = GeradorTokenService.pegaEmailDoToken(updateSenhaDto.getToken());
         Usuario usuarioBuscadoPorEmail = buscaPorEmail(emailUsuario);
         boolean tokenValido = ValidadadorTokenService.validaTempoExpiracao(updateSenhaDto.getToken());
-        if (tokenValido) {
+        boolean tokenIgualDoBanco = usuarioBuscadoPorEmail.getToken().equals(updateSenhaDto.getToken()); 
+        if (tokenValido && tokenIgualDoBanco) {
             String senhaCriptografada = new BCryptPasswordEncoder().encode(updateSenhaDto.getSenha());
             usuarioBuscadoPorEmail.setSenha(senhaCriptografada);
+            usuarioBuscadoPorEmail.setToken(null);
             return atualizaUsuario(usuarioBuscadoPorEmail);
         }
         throw new RuntimeException("Token inválido!");
