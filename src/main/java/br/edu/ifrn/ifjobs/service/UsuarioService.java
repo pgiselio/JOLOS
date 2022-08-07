@@ -213,11 +213,16 @@ public class UsuarioService {
         return atualizaUsuario(usuarioModificado);
     }
 
-    public Usuario atualizaSenha(String email, UsuarioUpdateSenhaDTO updateSenhaDto)
+    public Usuario atualizaSenha(UsuarioUpdateSenhaDTO updateSenhaDto)
             throws UsuarioNaoEncontradoException, UsuarioNaoCadastradoException {
-        Usuario usuarioBuscadoPorEmail = buscaPorEmail(email);
-        usuarioBuscadoPorEmail.setSenha(updateSenhaDto.getSenha());
-        return atualizaUsuario(usuarioBuscadoPorEmail);
+        String emailUsuario = GeradorTokenService.pegaEmailDoToken(updateSenhaDto.getToken());
+        Usuario usuarioBuscadoPorEmail = buscaPorEmail(emailUsuario);
+        boolean tokenValido = ValidadadorTokenService.validaTempoExpiracao(updateSenhaDto.getToken());
+        if (tokenValido) {
+            usuarioBuscadoPorEmail.setSenha(updateSenhaDto.getSenha());
+            return atualizaUsuario(usuarioBuscadoPorEmail);
+        }
+        throw new RuntimeException("Token inválido!");
     }
 
     public void recuperaSenha(String email)
