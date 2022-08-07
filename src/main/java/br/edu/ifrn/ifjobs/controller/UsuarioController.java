@@ -165,13 +165,13 @@ public class UsuarioController {
         return ResponseEntity.ok(entidadeParaDTO);
     }
 
-    @PatchMapping("/senha/{email}")
-    public ResponseEntity<UsuarioGetDTO> atualizaSenha(@PathVariable(name = "email") String email,
+    @PatchMapping("/senha")
+    public ResponseEntity<UsuarioGetDTO> atualizaSenha(
             @RequestBody UsuarioUpdateSenhaDTO dto) {
         Usuario usuarioAtualizado;
 
         try {
-            usuarioAtualizado = usuarioService.atualizaSenha(email, dto);
+            usuarioAtualizado = usuarioService.atualizaSenha(dto);
         } catch (UsuarioNaoEncontradoException | UsuarioNaoCadastradoException e) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
         } catch (IllegalArgumentException e) {
