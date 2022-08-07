@@ -219,7 +219,8 @@ public class UsuarioService {
         Usuario usuarioBuscadoPorEmail = buscaPorEmail(emailUsuario);
         boolean tokenValido = ValidadadorTokenService.validaTempoExpiracao(updateSenhaDto.getToken());
         if (tokenValido) {
-            usuarioBuscadoPorEmail.setSenha(updateSenhaDto.getSenha());
+            String senhaCriptografada = new BCryptPasswordEncoder().encode(updateSenhaDto.getSenha());
+            usuarioBuscadoPorEmail.setSenha(senhaCriptografada);
             return atualizaUsuario(usuarioBuscadoPorEmail);
         }
         throw new RuntimeException("Token inválido!");
