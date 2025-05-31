@@ -6,7 +6,7 @@
         <thead>
             <tr>
                 <td>
-                    <img src="https://ifjobs.vercel.app/images/logo.png" alt="logo ifjobs" height="45"/>
+                    <img src="${webAppURL}/images/logo.png" alt="logo ifjobs" height="45"/>
                 </td>
             </tr>
             <tr>
@@ -47,7 +47,7 @@
             <tr><td><br></td></tr>
             <tr>
                 <td>
-                    <a href="https://ifjobs.vercel.app/cadastro/step2?email=${usuario.email}&codigo=${usuario.codigoAutenticacao}" 
+                    <a href="${webAppURL}/cadastro/step2?email=${usuario.email}&codigo=${usuario.codigoAutenticacao}"
                         target="_blank" 
                         style="background-color: #4CAF50; padding: 0.5rem; color: white; border-radius: 5px; text-decoration: none;">
                         <strong>
@@ -65,7 +65,7 @@
             </tr>
             <tr>
                 <td>
-                    https://ifjobs.vercel.app/cadastro/step2?email=${usuario.email}&codigo=${usuario.codigoAutenticacao}
+                    ${webAppURL}/cadastro/step2?email=${usuario.email}&codigo=${usuario.codigoAutenticacao}
                 </td>
             </tr>
         </tbody>

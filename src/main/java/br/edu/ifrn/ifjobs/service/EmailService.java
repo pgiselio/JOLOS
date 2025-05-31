@@ -37,6 +37,9 @@ public class EmailService {
     @Value("${spring.mail.properties.EnderecoEmailCoex}")
     private String emailCoex;
 
+    @Value("${app.url}")
+    private String url;
+
     public void enviaEmail(Usuario usuario, String nomeArquivoHTML, String assunto)
             throws MessagingException, UnsupportedEncodingException, IOException, TemplateException {
         MimeMessage mimeMessage = envio.createMimeMessage();
@@ -73,6 +76,7 @@ public class EmailService {
         Map<String, Object> model = new HashMap<>();
         UsuarioEmailDTO dto = new UsuarioEmailDTO(usuario);
         model.put("usuario", dto);
+        model.put("webAppURL", url);
         configuration.setDirectoryForTemplateLoading(new File("src/main/resources/template/"));
         freemarker.template.Template template = configuration.getTemplate(nomeArquivo);
         template.process(model, stringWriter);

@@ -6,7 +6,7 @@
         <thead>
             <tr>
                 <td>
-                    <img src="https://ifjobs.vercel.app/images/logo.png" alt="logo ifjobs" height="45"/>
+                    <img src="${webAppURL}/images/logo.png" alt="logo ifjobs" height="45"/>
                 </td>
             </tr>
             <tr>

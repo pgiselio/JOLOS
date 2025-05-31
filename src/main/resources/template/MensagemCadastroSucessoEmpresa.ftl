@@ -7,7 +7,7 @@
         <thead>
             <tr>
                 <td>
-                    <img src="https://ifjobs.vercel.app/images/logo.png" alt="logo ifjobs" height="45"/>
+                    <img src="${webAppURL}/images/logo.png" alt="logo ifjobs" height="45"/>
                 </td>
             </tr>
             <tr>
@@ -46,7 +46,7 @@
             </tr>
             <tr>
                 <td>
-                    <a href="https://ifjobs.vercel.app/entrar" 
+                    <a href="${webAppURL}/entrar"
                         target="_blank">
                         <button style="background-color: #4CAF50;
                         border: none;
@@ -69,7 +69,7 @@
             </tr>
             <tr>
                 <td>
-                    <a href="https://ifjobs.vercel.app/entrar">https://ifjobs.vercel.app/entrar</a>
+                    <a href="${webAppURL}/entrar">${webAppURL}/entrar</a>
                 </td>
             </tr>
         </tbody>
