@@ -14,10 +14,12 @@ import br.edu.ifrn.ifjobs.model.Aluno;
 import br.edu.ifrn.ifjobs.model.Vaga;
 import br.edu.ifrn.ifjobs.repository.AlunoRespository;
 import br.edu.ifrn.ifjobs.repository.VagaRepository;
+import org.springframework.test.context.ActiveProfiles;
 
 @DataJpaTest
 @AutoConfigureTestDatabase(replace = Replace.NONE)
 @Rollback(false)
+@ActiveProfiles("test")
 public class vagaGetDTOTest {
 
     @Autowired

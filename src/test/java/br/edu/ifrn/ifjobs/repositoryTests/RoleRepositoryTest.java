@@ -14,10 +14,12 @@ import org.springframework.test.annotation.Rollback;
 import br.edu.ifrn.ifjobs.model.Role;
 import br.edu.ifrn.ifjobs.model.enums.TipoUsuario;
 import br.edu.ifrn.ifjobs.repository.RoleRepository;
+import org.springframework.test.context.ActiveProfiles;
 
 @DataJpaTest
 @AutoConfigureTestDatabase(replace = Replace.NONE)
 @Rollback(false)
+@ActiveProfiles("test")
 public class RoleRepositoryTest {
 
     @Autowired

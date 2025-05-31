@@ -22,10 +22,12 @@ import br.edu.ifrn.ifjobs.model.enums.StatusVaga;
 import br.edu.ifrn.ifjobs.repository.AlunoRespository;
 import br.edu.ifrn.ifjobs.repository.UsuarioRepository;
 import br.edu.ifrn.ifjobs.repository.VagaRepository;
+import org.springframework.test.context.ActiveProfiles;
 
 @DataJpaTest
 @AutoConfigureTestDatabase(replace = Replace.NONE)
 @Rollback(false)
+@ActiveProfiles("test")
 public class VagaRepositoryTest {
 
     @Autowired

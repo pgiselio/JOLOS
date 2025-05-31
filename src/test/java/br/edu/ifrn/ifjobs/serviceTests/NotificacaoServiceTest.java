@@ -16,9 +16,11 @@ import br.edu.ifrn.ifjobs.model.Usuario;
 import br.edu.ifrn.ifjobs.model.enums.StatusUsuario;
 import br.edu.ifrn.ifjobs.repository.NotificacaoRepository;
 import br.edu.ifrn.ifjobs.repository.UsuarioRepository;
+import org.springframework.test.context.ActiveProfiles;
 
 @SpringBootTest
 @EnableScheduling
+@ActiveProfiles("test")
 class NotificacaoServiceTest {
 
     @Autowired

@@ -17,10 +17,12 @@ import br.edu.ifrn.ifjobs.model.enums.StatusUsuario;
 import br.edu.ifrn.ifjobs.model.enums.TipoUsuario;
 import br.edu.ifrn.ifjobs.repository.RoleRepository;
 import br.edu.ifrn.ifjobs.repository.UsuarioRepository;
+import org.springframework.test.context.ActiveProfiles;
 
 @DataJpaTest
 @AutoConfigureTestDatabase(replace = Replace.NONE)
 @Rollback(false)
+@ActiveProfiles("test")
 public class UsuarioRepositoryTest {
 
     @Autowired
