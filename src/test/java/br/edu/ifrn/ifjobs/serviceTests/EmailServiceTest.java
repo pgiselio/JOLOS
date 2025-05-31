@@ -31,6 +31,9 @@ public class EmailServiceTest {
     @Value("${spring.mail.username}")
     private String emailBase;
 
+    @Value("${spring.mail.password}")
+    private String emailPassword;
+
     @Value("${spring.html.caminhoRaizMensagemCadastroHtml}")
     private String caminhoRaizMensagemCadastroHtml;
 
@@ -39,8 +42,8 @@ public class EmailServiceTest {
 
         mailSender.setHost("smtp.gmail.com");
         mailSender.setPort(587);
-        mailSender.setUsername("ifjobs.contato@gmail.com");
-        mailSender.setPassword("cmeysswoscqkfuil");
+        mailSender.setUsername(emailBase);
+        mailSender.setPassword(emailPassword);
 
         Properties javaMailProperties = new Properties();
         javaMailProperties.put("mail.smtp.starttls.enable", "true");
@@ -57,12 +60,12 @@ public class EmailServiceTest {
     @Test
     void testEnviaEmail() throws MessagingException, IOException {
         Email email = new Email();
-        email.setDestinatario("lucas.jdev2@gmail.com");
+        email.setDestinatario("pgiselio@hotmail.com");
         email.setRemetente(emailBase);
         email.setAssunto("Teste");
         email.setHtml(true);
 
-        File html = new File(caminhoRaizMensagemCadastroHtml);
+        String html = "<html><body><h1>hello world!</h1></body></html>";
         String htmlContent = Jsoup.parse(html, "UTF-8").toString();
 
         email.setMensagem(htmlContent);

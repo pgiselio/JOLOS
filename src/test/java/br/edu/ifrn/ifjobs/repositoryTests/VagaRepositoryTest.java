@@ -37,9 +37,14 @@ public class VagaRepositoryTest {
     @Autowired
     private UsuarioRepository usuarioRepository;
 
+    Usuario usuario;
+
     @Test
     void testCriandoVaga() {
         Date data = Date.valueOf(LocalDate.now());
+
+        Optional<Usuario> user = usuarioRepository.findUsuarioByEmpresaId(1);
+        user.ifPresent(value -> usuario = value);
 
         var vaga = new Vaga();
         vaga.setTitulo("Backend Developer");
@@ -48,6 +53,7 @@ public class VagaRepositoryTest {
         vaga.setLocalizacao("João Câmara - RN");
         vaga.setStatus(StatusVaga.ATIVO);
         vaga.setCursoAlvo("informática");
+        vaga.setEmpresa(usuario.getEmpresa());
 
         Vaga vagaSalva = vagaRepository.save(vaga);
 
@@ -67,6 +73,9 @@ public class VagaRepositoryTest {
     void testAddAlunoParaNovaVaga() {
         Date data = Date.valueOf(LocalDate.now());
 
+        Optional<Usuario> user = usuarioRepository.findUsuarioByEmpresaId(1);
+        user.ifPresent(value -> usuario = value);
+
         var vaga = new Vaga();
         vaga.setTitulo("Frontend Developer");
         vaga.setDescricao("Vaga para desenvolvedor Frontend React...");
@@ -74,6 +83,7 @@ public class VagaRepositoryTest {
         vaga.setLocalizacao("Natal - RN");
         vaga.setStatus(StatusVaga.ATIVO);
         vaga.setCursoAlvo("informática");
+        vaga.setEmpresa(usuario.getEmpresa());
 
         Aluno aluno = alunoRespository.findByCpf("11111111111");
         vaga.addAluno(aluno);
