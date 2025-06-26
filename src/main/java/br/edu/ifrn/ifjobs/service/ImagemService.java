@@ -69,7 +69,7 @@ public class ImagemService {
         var arquivo = new Arquivo();
         arquivo.setDados(multipartFile.getBytes());
 
-        String extensaoArquivo = DecompositorNomeArquivo.pegaExtensaoArquivo(multipartFile.getOriginalFilename());
+        String extensaoArquivo = multipartFile.getContentType();
         arquivo.setTipoArquivo(extensaoArquivo);
         return arquivo;
     }
@@ -90,9 +90,7 @@ public class ImagemService {
 
     private void _salvaImagemNoUsuarioPassado(Usuario usuario, Imagem imagem) throws UsuarioNaoCadastradoException {
         usuario.setFotoPerfil(imagem);
-        System.out.println(usuario);
         Usuario user = usuarioService.atualizaUsuario(usuario);
-        System.out.println(user);
     }
 
     public List<Imagem> buscaTodas() {

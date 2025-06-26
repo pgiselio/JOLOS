@@ -3,6 +3,7 @@ package br.edu.ifrn.ifjobs.controller;
 import java.io.IOException;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -37,14 +38,17 @@ public class ImagemController {
     }
 
     @GetMapping("/fotoPerfil/{idUsuario}")
-    public ResponseEntity<?> getFotoPerfil(@PathVariable(name = "idUsuario") int idUsuario) {
+    public ResponseEntity<byte[]> getFotoPerfil(@PathVariable(name = "idUsuario") int idUsuario) {
         var fotoPerfil = new Imagem();
         try {
             fotoPerfil = imagemService.getFotoPerfil(idUsuario);
         } catch (UsuarioNaoCadastradoException e) {
             ResponseEntity.status(404).body(e);
         }
-        return ResponseEntity.ok(fotoPerfil);
+
+        if(fotoPerfil == null) return ResponseEntity.notFound().build();
+
+        return ResponseEntity.ok().contentType(MediaType.valueOf(fotoPerfil.getArquivo().getTipoArquivo())).body(fotoPerfil.getArquivo().getDados());
     }
 
 }
