@@ -34,7 +34,7 @@
             <tr><td><br></td></tr>
             <tr>
                 <td>
-                    <a href="${webAppURL}/recuperar-senha?token=${usuario.token}"
+                    <a href="${webAppURL}/recuperar-senha/nova-senha?token=${usuario.token}"
                         target="_blank">
                         <button style="background-color: #4CAF50; padding: 0.5rem; color: white; border-radius: 5px; text-decoration: none; border: none;">
                             Recuperar acesso
@@ -46,12 +46,12 @@
             <tr><td><br></td></tr>
             <tr>
                 <td>
-                    caso o botão não funcione, copie e cole o link abaixo no seu navegador:
+                    Caso o botão não funcione, copie e cole o link abaixo no seu navegador:
                 </td>
             </tr>
             <tr>
                 <td>
-                    ${webAppURL}/recuperar-senha?token=${usuario.token}
+                    ${webAppURL}/recuperar-senha/nova-senha?token=${usuario.token}
                 </td>
             </tr>
         </tbody>

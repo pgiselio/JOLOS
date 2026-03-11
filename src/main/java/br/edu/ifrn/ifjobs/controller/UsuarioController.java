@@ -6,6 +6,7 @@ import java.util.List;
 import javax.mail.MessagingException;
 import javax.validation.Valid;
 
+import br.edu.ifrn.ifjobs.service.RecaptchaService;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.github.fge.jsonpatch.JsonPatch;
 import com.github.fge.jsonpatch.JsonPatchException;
@@ -44,6 +45,12 @@ public class UsuarioController {
 
     @Autowired
     private UsuarioService usuarioService;
+
+    private final RecaptchaService recaptchaService;
+
+    public UsuarioController(RecaptchaService recaptchaService) {
+        this.recaptchaService = recaptchaService;
+    }
 
     @CrossOrigin("*")
     @PostMapping("/create")
@@ -135,12 +142,18 @@ public class UsuarioController {
         return ResponseEntity.ok().body(list);
     }
 
-    @GetMapping("/recuperar/{email}")
-    public ResponseEntity<String> recuperarSenha(@PathVariable(name = "email") String email) {
+    @PostMapping("/recuperar/{email}")
+    public ResponseEntity<String> recuperarSenha(@PathVariable(name = "email") String email, @RequestBody String captchaToken) {
+
+        boolean validCaptcha = recaptchaService.isTokenValid(captchaToken, null);
+        if (!validCaptcha) {
+            return ResponseEntity.badRequest().body("Falha na verificação do reCAPTCHA.");
+        }
+
         try {
             usuarioService.recuperaSenha(email);
         } catch (UsuarioNaoEncontradoException e) {
-            return ResponseEntity.notFound().build();
+            return ResponseEntity.badRequest().body("Usuário não encontrado!");
         } catch (IOException | MessagingException | TemplateException e) {
             throw new RuntimeException(e);
         }
