@@ -219,7 +219,7 @@ public class UsuarioService {
         String emailUsuario = GeradorTokenService.pegaEmailDoToken(updateSenhaDto.getToken());
         Usuario usuarioBuscadoPorEmail = buscaPorEmail(emailUsuario);
         boolean tokenValido = ValidadadorTokenService.validaTempoExpiracao(updateSenhaDto.getToken());
-        boolean tokenIgualDoBanco = usuarioBuscadoPorEmail.getToken().equals(updateSenhaDto.getToken()); 
+        boolean tokenIgualDoBanco = usuarioBuscadoPorEmail.getToken() != null && usuarioBuscadoPorEmail.getToken().equals(updateSenhaDto.getToken());
         if (tokenValido && tokenIgualDoBanco) {
             String senhaCriptografada = new BCryptPasswordEncoder().encode(updateSenhaDto.getSenha());
             usuarioBuscadoPorEmail.setSenha(senhaCriptografada);
